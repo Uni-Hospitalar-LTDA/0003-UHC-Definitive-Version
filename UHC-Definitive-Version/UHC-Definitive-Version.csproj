@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Criptografia, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Criptografias.1.0.0\lib\Criptografia.dll</HintPath>
+    </Reference>
     <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
       <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.dll</HintPath>
     </Reference>
@@ -89,6 +92,10 @@
     <Compile Include="App\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\ButtonConfiguration.cs" />
+    <Compile Include="Configuration\Connection.cs" />
+    <Compile Include="Configuration\Cryptography.cs" />
+    <Compile Include="Configuration\Update\WebUpdateSquirrel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -115,7 +122,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Configuration\" />
     <Folder Include="Customization\" />
     <Folder Include="Domain\Entities\Permissionamento\" />
     <Folder Include="Domain\Entities\Users\" />
