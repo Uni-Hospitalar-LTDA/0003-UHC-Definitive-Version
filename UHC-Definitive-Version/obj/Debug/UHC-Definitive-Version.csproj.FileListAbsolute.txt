@@ -1,0 +1,10 @@
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\bin\Debug\UHC3-Definitive-Version.exe.config
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\bin\Debug\UHC3-Definitive-Version.exe
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\bin\Debug\UHC3-Definitive-Version.pdb
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\obj\Debug\UHC-Definitive-Version.csproj.AssemblyReference.cache
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\obj\Debug\UHC-Definitive-Version.csproj.SuggestedBindingRedirects.cache
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\obj\Debug\UHC3_Definitive_Version.Properties.Resources.resources
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\obj\Debug\UHC-Definitive-Version.csproj.GenerateResource.cache
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\obj\Debug\UHC-Definitive-Version.csproj.CoreCompileInputs.cache
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\obj\Debug\UHC3-Definitive-Version.exe
+C:\Users\rafael.silva\Documents\003-Uni-Hospitalar\0003-UHC-Definitive-Version\UHC3-Definitive-Version\obj\Debug\UHC3-Definitive-Version.pdb
