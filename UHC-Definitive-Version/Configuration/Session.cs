@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using UHC3_Definitive_Version.Customization;
 
 namespace UHC3_Definitive_Version.Configuration
 {
     public class Session
     {
-        public static string idUsuario { get; private set; } = "0";
-        public static DateTime HoraLogin { get; private set; } = DateTime.Now;
-        public static string Unidade { get; private set; } = "XX";
-        public static string CodIqvia { get; private set; } = "XXXX";
-        public static string Empresa { get; private set; } = "Rec";
-        public static string pdfLogo { get; private set; } = "";
-        public static string logoEmail { get; private set; } = "";
+        public static string idUsuario { get; set; } = "0";
+        public static DateTime HoraLogin { get; set; } = DateTime.Now;
+        public static string Unidade { get; set; } = "UNI HOSPITALAR";
+        public static string CodIqvia { get; set; } = "XXXX";
+        public static string Empresa { get; set; } = "Uni Hospitalar";
+        public static string pdfLogo { get; set; } = "";
+        public static string logoEmail { get; set; } = "";
 
+        
 
-
-        public static void add(string id, string unidade)
+        public static void add(string id, string unidade = "UNI HOSPITALAR")
         {
             idUsuario = id;
             HoraLogin = DateTime.Now;
@@ -29,9 +30,9 @@ namespace UHC3_Definitive_Version.Configuration
                 logoEmail = "";
             }
         }
-        public async static Task<string> On(string user, string password, string unidade = "PE")
+        public async static Task<string> On(string user, string password,string unidade = "UNI HOSPITALAR")
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("PE"))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(unidade))
             {
                 string result = null;
                 try
@@ -48,6 +49,8 @@ namespace UHC3_Definitive_Version.Configuration
                                                      ,name                                                     
                                                      from [{Connection.dbBase}].dbo.[Users] 
                                              WHERE login like '{user}'";
+                    Console.WriteLine(command.CommandText);
+                    command.CommandTimeout = 60;
                     SqlDataReader reader = await command.ExecuteReaderAsync();
 
                     while (reader.Read())

@@ -185,11 +185,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\Form1.cs">
+    <Compile Include="App\frmLoginNew.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="App\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="App\frmLoginNew.Designer.cs">
+      <DependentUpon>frmLoginNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\frmMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\frmMainMenu.Designer.cs">
+      <DependentUpon>frmMainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration\ButtonConfiguration.cs" />
     <Compile Include="Configuration\Connection.cs" />
@@ -199,6 +205,7 @@
     <Compile Include="Configuration\IEnumerableExtensions.cs" />
     <Compile Include="Configuration\Querys.cs" />
     <Compile Include="Configuration\Session.cs" />
+    <Compile Include="Configuration\UhcEvents.cs" />
     <Compile Include="Configuration\UhcValidation.cs" />
     <Compile Include="Configuration\Update\WebUpdateSquirrel.cs" />
     <Compile Include="Customization\CustomComboBox.cs" />
@@ -215,12 +222,29 @@
     <Compile Include="Customization\CustomToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Domain\Entities\Permissionamento\Action.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Groups.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Groups_Action.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Groups_Module.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Groups_Screen.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Groups_SubModule.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Module.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Permission.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\PermissionsAllowed.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\Screen.cs" />
+    <Compile Include="Domain\Entities\Permissionamento\SubModule.cs" />
     <Compile Include="Domain\Entities\Users\Sector.cs" />
     <Compile Include="Domain\Entities\Users\Users.cs" />
     <Compile Include="Domain\Entities\Users\Users_Groups.cs" />
     <Compile Include="Domain\Log\Logs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="App\frmLoginNew.resx">
+      <DependentUpon>frmLoginNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -229,6 +253,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -245,7 +270,124 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Entities\Permissionamento\" />
+    <None Include="Resources\button_GLPI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_Office_Gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\business.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\finance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\human-resources.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logistic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic-login-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic-login-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic-login-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic-login-4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic-login-5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sales.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cadeado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cadeado-fechado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\christmas-tree.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\click.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ClosedEyes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gift.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\guirlanda-de-natal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_SP_Hospitalar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_SP_HospitalarNatal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_UNI_Ceara.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_UNI_CearaNatal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_UNI_Hospitalar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_UNI_HospitalarNatal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marca-gnre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openEyes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReAgenda.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TelaInicial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TelaInicialNatal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Uni_Hospitalar_Load.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

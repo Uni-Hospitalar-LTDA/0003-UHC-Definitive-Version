@@ -100,6 +100,8 @@ namespace UHC3_Definitive_Version.Configuration
             string pattern = @"^\(\d{2}\)\s\d\s\d{4}-\d{3,4}$";
             return Regex.IsMatch(phoneNumber, pattern);
         }
+
+       
     }
 
 }

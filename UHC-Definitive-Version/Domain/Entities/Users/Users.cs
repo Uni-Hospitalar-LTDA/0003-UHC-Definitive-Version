@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Irony.Ast;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,7 +11,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
 {
     public class Users : Querys<Users>
     {
-        private const string defaultPassword = ("cob123");
+        private const string defaultPassword = ("uni123");
         public string id { get; set; }
         public string login { get; set; }
         public string name { get; set; }
@@ -32,12 +33,13 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
                                     ,[setPassword]
                                     ,[Status]
                                 FROM [{Connection.dbBase}].dbo.[{getClassName()}]
-                               WHERE login = '{userLogin}'";
+                               WHERE login = '{userLogin}'";            
             return await getToClass(query);
         }
         public async static Task<string> getUserCodeAsync(string login)
         {
-            using (SqlConnection conn = new Connection().getConnectionApp("PE"))
+            
+            using (SqlConnection conn = new Connection().getConnectionApp(Session.Unidade))
             {
                 string code = null;
                 try
@@ -45,9 +47,12 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
                     await conn.OpenAsync();
                     SqlCommand command = conn.CreateCommand();
                     command.CommandText = $@"SELECT TOP 1 id
-                                                FROM [{Connection.dbBase}].dbo.[{getClassName()}] 
+                                                FROM [{Connection.dbBase}].dbo.[{Users.getClassName()}] 
                                             WHERE login like '{login}'";
+                    Console.WriteLine(command.CommandText);
                     SqlDataReader reader = await command.ExecuteReaderAsync();
+                    
+                    
 
                     while (await reader.ReadAsync())
                     {
@@ -55,8 +60,9 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
                     }
                     return code;
                 }
-                catch
+                catch (Exception ex) 
                 {
+                    CustomNotification.defaultError(ex.Message);
                     return null;
                 }
                 finally
@@ -90,8 +96,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
 FROM [{Connection.dbBase}].dbo.[{getClassName()}] Usr
 JOIN [{Connection.dbBase}].dbo.[Sector] Setor ON Setor.id = Usr.idSector
 WHERE 
-                                (CONVERT(VARCHAR,Usr.Id) = '{filter}' OR Usr.name LIKE '%{filter}%' OR Usr.login LIKE '%{filter}%') AND Usr.Status IN ({status})";
-            Console.WriteLine(query);
+                                (CONVERT(VARCHAR,Usr.Id) = '{filter}' OR Usr.name LIKE '%{filter}%' OR Usr.login LIKE '%{filter}%') AND Usr.Status IN ({status})";            
             return await getAllToDataTable(query);
         }
         public async static Task<List<Users>> getAllToListBySectorAsync(string idSector)
@@ -129,7 +134,7 @@ WHERE
         /** Updates **/
         public async static Task<string> updateSectorAsync(Users user)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("PE"))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
             {
                 SqlTransaction transaction = null;
                 try
@@ -174,7 +179,7 @@ WHERE
 
                 }
             }
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("PE"))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
             {
                 SqlTransaction transaction = null;
                 try
@@ -233,7 +238,7 @@ WHERE
             if (!user.password.ToString().Trim().Equals(string.Empty))
             {
                 Console.WriteLine($"Alterar a senha usuário {user.login} para {user.password}");
-                using (SqlConnection conn = Connection.getInstancia().getConnectionApp("PE"))
+                using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
                 {
                     SqlTransaction transaction = null;
                     try

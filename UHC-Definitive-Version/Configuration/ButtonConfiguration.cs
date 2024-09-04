@@ -1,6 +1,7 @@
 ﻿using Krypton.Toolkit;
 using System.Windows.Forms;
 using System;
+using UHC3_Definitive_Version.Customization;
 
 namespace UHC3_Definitive_Version.Configuration
 {

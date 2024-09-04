@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.App;
 
 namespace UHC3_Definitive_Version
 {
@@ -16,7 +14,7 @@ namespace UHC3_Definitive_Version
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new frmLoginNew());
         }
     }
 }

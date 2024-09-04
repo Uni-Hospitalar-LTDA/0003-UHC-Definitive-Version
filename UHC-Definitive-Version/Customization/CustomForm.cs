@@ -47,101 +47,101 @@ namespace UHC3_Definitive_Version.Customization
             }
         }
 
-        public async void RunMethodWithProgressBar(Action<Action<int>, CancellationToken> method)
-        {
-            // Cria e exibe o formulário da barra de progresso
-            frmGeneric_ProgressForm frmGeneric_ProgressForm = new frmGeneric_ProgressForm();
-            frmGeneric_ProgressForm.Show();
+        //public async void RunMethodWithProgressBar(Action<Action<int>, CancellationToken> method)
+        //{
+        //    // Cria e exibe o formulário da barra de progresso
+        //    frmGeneric_ProgressForm frmGeneric_ProgressForm = new frmGeneric_ProgressForm();
+        //    frmGeneric_ProgressForm.Show();
 
-            // Cria um CancellationToken para controle de cancelamento
-            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            // Cria um CancellationTokenSource para controle de cancelamento
-            CancellationToken cancellationToken = cancellationTokenSource.Token;
+        //    // Cria um CancellationToken para controle de cancelamento
+        //    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        //    // Cria um CancellationTokenSource para controle de cancelamento
+        //    CancellationToken cancellationToken = cancellationTokenSource.Token;
 
-            // Cria um TaskCompletionSource
-            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+        //    // Cria um TaskCompletionSource
+        //    TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
 
-            // Executa o método em uma nova thread STA
-            Thread staThread = new Thread(() =>
-            {
-                try
-                {
-                    method(frmGeneric_ProgressForm.UpdateProgress, cancellationToken);
-                    tcs.SetResult(null);
-                }
-                catch (OperationCanceledException)
-                {
-                    // A operação foi cancelada pelo usuário
-                    tcs.SetCanceled();
-                }
-                catch (Exception ex)
-                {
-                    // Um erro ocorreu durante a execução do método
-                    tcs.SetException(ex);
-                }
-                finally
-                {
-                    // Fecha o formulário da barra de progresso                    
-                    if (frmGeneric_ProgressForm.IsHandleCreated)
-                    {
-                        frmGeneric_ProgressForm.Invoke(new Action(() => frmGeneric_ProgressForm.Close()));
-                    }
-                    else
-                    {
-                        EventHandler handleCreatedHandler = null;
-                        handleCreatedHandler = new EventHandler((sender, e) =>
-                        {
-                            frmGeneric_ProgressForm.Invoke(new Action(() => frmGeneric_ProgressForm.Close()));
-                            frmGeneric_ProgressForm.HandleCreated -= handleCreatedHandler;
-                        });
+        //    // Executa o método em uma nova thread STA
+        //    Thread staThread = new Thread(() =>
+        //    {
+        //        try
+        //        {
+        //            method(frmGeneric_ProgressForm.UpdateProgress, cancellationToken);
+        //            tcs.SetResult(null);
+        //        }
+        //        catch (OperationCanceledException)
+        //        {
+        //            // A operação foi cancelada pelo usuário
+        //            tcs.SetCanceled();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            // Um erro ocorreu durante a execução do método
+        //            tcs.SetException(ex);
+        //        }
+        //        finally
+        //        {
+        //            // Fecha o formulário da barra de progresso                    
+        //            if (frmGeneric_ProgressForm.IsHandleCreated)
+        //            {
+        //                frmGeneric_ProgressForm.Invoke(new Action(() => frmGeneric_ProgressForm.Close()));
+        //            }
+        //            else
+        //            {
+        //                EventHandler handleCreatedHandler = null;
+        //                handleCreatedHandler = new EventHandler((sender, e) =>
+        //                {
+        //                    frmGeneric_ProgressForm.Invoke(new Action(() => frmGeneric_ProgressForm.Close()));
+        //                    frmGeneric_ProgressForm.HandleCreated -= handleCreatedHandler;
+        //                });
 
-                        frmGeneric_ProgressForm.HandleCreated += handleCreatedHandler;
-                    }
-                    //Form.ActiveForm.Invoke(new Action(() => ActiveForm.Focus()));
-                }
-            });
+        //                frmGeneric_ProgressForm.HandleCreated += handleCreatedHandler;
+        //            }
+        //            //Form.ActiveForm.Invoke(new Action(() => ActiveForm.Focus()));
+        //        }
+        //    });
 
-            staThread.SetApartmentState(ApartmentState.STA);
-            staThread.Start();
+        //    staThread.SetApartmentState(ApartmentState.STA);
+        //    staThread.Start();
 
-            if (frmGeneric_ProgressForm != null)
-            {
-                bool isCanceled = false;
-                bool wasSuccessful = false;
-                frmGeneric_ProgressForm.SetCancellationTokenSource(cancellationTokenSource, () => isCanceled = true);
+        //    if (frmGeneric_ProgressForm != null)
+        //    {
+        //        bool isCanceled = false;
+        //        bool wasSuccessful = false;
+        //        frmGeneric_ProgressForm.SetCancellationTokenSource(cancellationTokenSource, () => isCanceled = true);
 
-                try
-                {
-                    await tcs.Task;
-                    wasSuccessful = true;
-                    isCanceled = false;
+        //        try
+        //        {
+        //            await tcs.Task;
+        //            wasSuccessful = true;
+        //            isCanceled = false;
 
-                }
-                catch (OperationCanceledException)
-                {
-                    CustomNotification.defaultAlert("A exportação foi cancelada.");
+        //        }
+        //        catch (OperationCanceledException)
+        //        {
+        //            CustomNotification.defaultAlert("A exportação foi cancelada.");
 
-                }
-                catch (Exception ex)
-                {
-                    CustomNotification.defaultAlert($"Ocorreu um erro durante a exportação - {ex.Message}");
-                    //MaterialMessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    if (wasSuccessful && !isCanceled)
-                    {
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            CustomNotification.defaultAlert($"Ocorreu um erro durante a exportação - {ex.Message}");
+        //            //MaterialMessageBox.Show(ex.Message);
+        //        }
+        //        finally
+        //        {
+        //            if (wasSuccessful && !isCanceled)
+        //            {
 
-                        this.Invoke((MethodInvoker)delegate
-                        {
-                            //Gambiarra, não sei pq mas só pega assim
-                            CustomNotification.defaultInformation("A operação foi concluída com sucesso!");
-                        });
-                    }
+        //                this.Invoke((MethodInvoker)delegate
+        //                {
+        //                    //Gambiarra, não sei pq mas só pega assim
+        //                    CustomNotification.defaultInformation("A operação foi concluída com sucesso!");
+        //                });
+        //            }
 
-                }
+        //        }
 
-            }
-        }
+        //    }
+        //}
     }
 }
