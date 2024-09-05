@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using System;
+using UHC3_Definitive_Version.Configuration;
 
 namespace UHC3_Definitive_Version.Customization
 {
@@ -19,9 +20,14 @@ namespace UHC3_Definitive_Version.Customization
             this.ResizeRedraw = true;
             this.UpdateStyles();
             this.ShowIcon = true;
-            //this.Icon = Properties.Resources.Integra_Cob_Logo1;
 
+            
+            this.Icon = Properties.Resources.form_iconpe;
 
+            if (Session.Unidade == "UNI CEARÁ")
+                this.Icon = Properties.Resources.form_iconce;
+            if (Session.Unidade == "SP HOSPITALAR")
+                this.Icon = Properties.Resources.form_iconsp;
             this.KeyDown += CustomForm_KeyDown;
         }
 

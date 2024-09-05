@@ -398,7 +398,7 @@
             this.Name = "frmLoginNew";
             this.Palette = this.kryptonPalette;
             this.PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
-            this.Text = "UHC DE";
+            this.Text = "Definitive Edition";
             this.gpbUnidade.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbGallery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_5)).EndInit();

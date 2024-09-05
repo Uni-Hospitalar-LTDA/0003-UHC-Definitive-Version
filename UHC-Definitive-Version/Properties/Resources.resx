@@ -154,6 +154,15 @@
   <data name="finance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\finance.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="form_iconce" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\form-iconce.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="form_iconpe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\form-iconpe.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="form_iconsp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\form-iconsp.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gift" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gift.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

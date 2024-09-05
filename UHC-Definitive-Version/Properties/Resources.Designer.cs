@@ -181,6 +181,36 @@ namespace UHC3_Definitive_Version.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
+        /// </summary>
+        internal static System.Drawing.Icon form_iconce {
+            get {
+                object obj = ResourceManager.GetObject("form_iconce", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
+        /// </summary>
+        internal static System.Drawing.Icon form_iconpe {
+            get {
+                object obj = ResourceManager.GetObject("form_iconpe", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
+        /// </summary>
+        internal static System.Drawing.Icon form_iconsp {
+            get {
+                object obj = ResourceManager.GetObject("form_iconsp", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap gift {

@@ -15,26 +15,26 @@ namespace UHC3_Definitive_Version.Configuration
         {
             form.MaximumSize = new Size(form.Width, form.Height);
             form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "Integra: " + form.Text;
+            form.Text = "UHC: " + form.Text;
             form.MaximizeBox = false;
 
         }
         public static void defaultMaximableForm(this Form form)
         {
             form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "Integra: " + form.Text;
+            form.Text = "UHC: " + form.Text;
         }
         public static void defaultMainMenu(this Form form)
         {
 
             form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "Integra: " + form.Text;
+            form.Text = "UHC: " + form.Text;
         }
 
         public static void defaultModuleScreen(this Form form)
         {
             form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "Integra: " + form.Text;
+            form.Text = "UHC: " + form.Text;
             form.BackgroundImage = Properties.Resources.Background_Office_Gray;
             form.BackgroundImageLayout = ImageLayout.Stretch;
             form.KeyPreview = true;

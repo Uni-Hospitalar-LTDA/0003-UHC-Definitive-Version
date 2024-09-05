@@ -389,6 +389,15 @@
   <ItemGroup>
     <None Include="Resources\user.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\form-iconce.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\form-iconpe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\form-iconsp.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

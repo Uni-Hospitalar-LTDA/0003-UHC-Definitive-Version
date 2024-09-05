@@ -310,6 +310,7 @@ namespace UHC3_Definitive_Version.App
             cbxUnidade.Items.AddRange(new string[] {"UNI HOSPITALAR","UNI CEARÁ", "SP HOSPITALAR" });
             cbxUnidade.SelectedIndex = 0;
         }
+        
 
         /** Configure Picture Box **/
         private void ConfigurPictureBoxEvents()
