@@ -1,9 +1,11 @@
-﻿using UHC3_Definitive_Version.App;
-using UHC3_Definitive_Version.Configuration;
+﻿using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
-using UHC3_Definitive_Version.Domain.Permissionamento;
 using System;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.Domain.Entities.Users;
+using Section = UHC3_Definitive_Version.Configuration.Section;
+using UHC3_Definitive_Version.App.ModAdmistrativo;
+using UHC3_Definitive_Version.App;
 
 namespace UHC3_Definitive_Version
 {
@@ -12,19 +14,23 @@ namespace UHC3_Definitive_Version
         public frmMainMenu()
         {
             InitializeComponent();
+
+            /** Properties **/
             ConfigureFormProperties();
             ConfigurePanelProperties();
             ConfigureButtonProperties();
             ConfigurePictureBoxProperties();
+
+            /** Events **/
             ConfigureFormEvents();
         }
-
-
 
         /** Configure Form **/
         private void ConfigureFormProperties()
         {
             this.defaultMainMenu();
+            this.WindowState = FormWindowState.Maximized;
+            pcbLogo_Click(null,null);
             //pcbLogo.Visible = false;
         }
         private void ConfigureFormEvents()
@@ -34,6 +40,7 @@ namespace UHC3_Definitive_Version
         private void frmMainMenu_Load(object sender, EventArgs e)
         {
             /** Initialize **/
+            ConfigureLabelAttributes();
             ConfigurePictureBoxAttributes();
 
             /** Attributes **/
@@ -56,7 +63,7 @@ namespace UHC3_Definitive_Version
         {            
             //if (PermissionsAllowed.modules.Find(m => m.Name == "Módulo de Cobrança") != null)
             //    btnModCobranca.Enabled = true;            
-            //if (PermissionsAllowed.modules.Find(m => m.Name == "Opções do Sistema") != null || Session.idUsuario == "0")
+            //if (PermissionsAllowed.modules.Find(m => m.Name == "Opções do Sistema") != null || Section.idUsuario == "0")
             //    btnOpcoes.Enabled = true;            
         }
         
@@ -67,21 +74,21 @@ namespace UHC3_Definitive_Version
         }
         private void ConfigurePictureBoxAttributes()
         {            
-            if (Session.Unidade == "UNI HOSPITALAR")
+            if (Section.Unidade == "UNI HOSPITALAR")
             {
                 if (DateTime.Now.Month != 12)                
                     pcbLogo.Image = Properties.Resources.logo_UNI_Hospitalar;
                 else
                     pcbLogo.Image = Properties.Resources.logo_UNI_HospitalarNatal;
             }
-            else if (Session.Unidade == "UNI CEARÁ")
+            else if (Section.Unidade == "UNI CEARÁ")
             {
                 if (DateTime.Now.Month != 12)
                     pcbLogo.Image = Properties.Resources.logo_UNI_Ceara;
                 else
                     pcbLogo.Image = Properties.Resources.logo_UNI_CearaNatal;
             }
-            else if (Session.Unidade == "SP HOSPITALAR")
+            else if (Section.Unidade == "SP HOSPITALAR")
             {
                 if (DateTime.Now.Month != 12)
                     pcbLogo.Image = Properties.Resources.logo_SP_Hospitalar;
@@ -99,24 +106,44 @@ namespace UHC3_Definitive_Version
         }
         private void ConfigureButtonEvents()
         {
-            //btnModCobranca.Click += btnModCobranca_Click;           
+            btnModAdministrativo.Click += btnModAdministrativo_Click;
+            pcbLogo.Click += pcbLogo_Click;
             btnOpcoes.Click += btnOpcoes_Click;
-            btnSair.Click += btnSair_Click;
-        }   
-        private void btnSair_Click(object sender, EventArgs e)
-        {
-            Application.Restart();            
+            
         }
+
+        private void pcbLogo_Click(object sender, EventArgs e)
+        {                
+            FormConfiguration.ShowOrActivateFormInPanel<frmModTelaInicial>(panel, "");
+        }
+
+        private void btnModAdministrativo_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateFormInPanel<frmModAdministrativo>(panel, "");
+        }
+
+        
         private void btnOpcoes_Click(object sender, EventArgs e)
         {
             //FormConfiguration.ShowOrActivateForm<frmOpcoes>();
         }
 
+        /** Configure Label **/
+        private async void ConfigureLabelAttributes()
+        {
+            Users user = new Users();
+            user = await Users.getToClassByIdAsync(Section.idUsuario);
+
+            lblSessao.Text = $"Sessão: {user.name}";
+            lblEmpresa.Text = Section.Empresa;
+        }
         
         /** Configure Panel **/
         private void ConfigurePanelProperties()
         {
             
-        }        
+        }
+
+       
     }
 }

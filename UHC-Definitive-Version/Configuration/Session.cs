@@ -5,7 +5,7 @@ using UHC3_Definitive_Version.Customization;
 
 namespace UHC3_Definitive_Version.Configuration
 {
-    public class Session
+    public class Section
     {
         public static string idUsuario { get; set; } = "0";
         public static DateTime HoraLogin { get; set; } = DateTime.Now;

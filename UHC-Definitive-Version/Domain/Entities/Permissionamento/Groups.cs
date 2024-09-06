@@ -46,7 +46,7 @@ namespace UHC3_Definitive_Version.Domain.Permissionamento
         /** UPDATES **/
         public async static Task updateAsync(Groups group)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 SqlTransaction transaction = null;
                 try

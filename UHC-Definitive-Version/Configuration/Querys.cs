@@ -47,7 +47,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método para obter qualquer campo do banco de dados como string
         public async static Task<string> getString(string query)
         {
-            using (SqlConnection conn = new Connection().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
             {
                 try
                 {
@@ -72,7 +72,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método para obter todos os registros como uma lista de objetos Gen
         public async static Task<List<Gen>> getAllToList(string query)
         {
-            using (SqlConnection conn = new Connection().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
             {
                 try
                 {
@@ -101,7 +101,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método para obter um único registro como um objeto Gen
         public async static Task<Gen> getToClass(string query)
         {
-            using (SqlConnection conn = new Connection().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
             {
                 try
                 {
@@ -126,7 +126,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método para obter todos os registros como um DataTable
         public async static Task<DataTable> getAllToDataTable(string query)
         {
-            using (SqlConnection conn = new Connection().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
             {
                 try
                 {
@@ -162,7 +162,7 @@ namespace UHC3_Definitive_Version.Configuration
         public async static Task<int> getLastCodeAsync()
         {
             int lastCode = 0;
-            using (SqlConnection conn = new Connection().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
             {
                 try
                 {
@@ -201,7 +201,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método privado para inserção        
         private async static Task insertAsync(IEnumerable<Gen> gens)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 await conn.OpenAsync();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -223,7 +223,7 @@ namespace UHC3_Definitive_Version.Configuration
                     Data = DateTime.Now.ToString(),
                     TipoRegistro = typeof(Gen).Name,
                     idRegistro = Convert.ToString(await getLastCodeAsync()),
-                    idUsuario = Session.idUsuario.ToString()
+                    idUsuario = Section.idUsuario.ToString()
                 }
             };
 
@@ -245,7 +245,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método de atualização genérica
         //public async static Task updateAsync(Gen gen)
         //{
-        //    using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+        //    using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
         //    {
         //        await conn.OpenAsync();
         //        SqlTransaction transaction = conn.BeginTransaction();
@@ -282,7 +282,7 @@ namespace UHC3_Definitive_Version.Configuration
         //                    Data = DateTime.Now.ToString(),
         //                    TipoRegistro = typeof(Gen).Name,
         //                    idRegistro = typeof(Gen).GetProperty("Id").GetValue(gen).ToString(),
-        //                    idUsuario = Session.idUsuario.ToString()
+        //                    idUsuario = Section.idUsuario.ToString()
         //                }
         //            };
 
@@ -302,7 +302,7 @@ namespace UHC3_Definitive_Version.Configuration
 
         public async static Task updateAsync<T>(T entity, string primaryKeyName = "Id") where T : class
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 await conn.OpenAsync();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -341,7 +341,7 @@ namespace UHC3_Definitive_Version.Configuration
                             Data = DateTime.Now.ToString(),
                             TipoRegistro = typeof(T).Name,
                             idRegistro = typeof(T).GetProperty(primaryKeyName).GetValue(entity).ToString(),
-                            idUsuario = Session.idUsuario.ToString()
+                            idUsuario = Section.idUsuario.ToString()
                         }
                     };
 
@@ -360,7 +360,7 @@ namespace UHC3_Definitive_Version.Configuration
         }
         public async static Task updateAsync<T>(List<T> entities, string[] primaryKeyNames) where T : class
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 await conn.OpenAsync();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -406,7 +406,7 @@ namespace UHC3_Definitive_Version.Configuration
                         Data = DateTime.Now.ToString(),
                         TipoRegistro = typeof(T).Name,
                         idRegistro = string.Join(",", primaryKeyNames.Select(pk => typeof(T).GetProperty(pk).GetValue(entity).ToString())),
-                        idUsuario = Session.idUsuario.ToString()
+                        idUsuario = Section.idUsuario.ToString()
                     }).ToList();
 
                     await Logs.insertAsync(logs);
@@ -429,7 +429,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método de exclusão genérica
         public async static Task deleteAsync(string parameterName, object id)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 await conn.OpenAsync();
                 SqlTransaction transaction = conn.BeginTransaction();
@@ -462,7 +462,7 @@ namespace UHC3_Definitive_Version.Configuration
                         Data = DateTime.Now.ToString(),
                         TipoRegistro = typeof(Gen).Name,
                         idRegistro = id.ToString(),
-                        idUsuario = Session.idUsuario.ToString()
+                        idUsuario = Section.idUsuario.ToString()
                     }
                 };
 
@@ -490,7 +490,7 @@ namespace UHC3_Definitive_Version.Configuration
         // Método para excluir todos os registros
         public static async Task deleteAllAsync()
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 SqlTransaction transaction = null;
                 try

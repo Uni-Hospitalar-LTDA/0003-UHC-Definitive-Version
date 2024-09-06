@@ -23,7 +23,7 @@ namespace UHC3_Definitive_Version.Domain.Permissionamento
         /** Delete **/
         public async static Task deleteByGroupAsync(string idGroup)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 SqlTransaction transaction = null;
                 try

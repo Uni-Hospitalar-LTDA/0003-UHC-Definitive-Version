@@ -14,7 +14,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
         /** Delete **/
         public async static Task deleteUsersFromGroupAsync(string idGroup)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 SqlTransaction transaction = null;
                 try

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using UHC3_Definitive_Version.App;
+using UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral;
 
 namespace UHC3_Definitive_Version
 {
@@ -14,7 +15,7 @@ namespace UHC3_Definitive_Version
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmLoginNew());
+            Application.Run(new frmLoginNew ());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,6 +10,8 @@ namespace UHC3_Definitive_Version.Customization
 {
     public static class CustomString
     {
+
+        //Métodos Integra
         public static string substituirCaracteresEspeciais(this string palavra)
         {
             string novaPalavra = palavra;
@@ -50,7 +53,6 @@ namespace UHC3_Definitive_Version.Customization
 
             return novaPalavra;
         }
-
         public static string applyDocumentMask(this string document)
         {
             // Remove qualquer caractere não numérico
@@ -73,10 +75,46 @@ namespace UHC3_Definitive_Version.Customization
         {
             return Regex.Replace(cpf, @"(\d{3})(\d{3})(\d{3})(\d{2})", "$1.$2.$3-$4");
         }
-
         private static string ApplyCnpjMask(string cnpj)
         {
             return Regex.Replace(cnpj, @"(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})", "$1.$2.$3/$4-$5");
+        }
+
+        //Métodos UHC 3
+        public static double ConvertPercentageToDouble(this string percentageString)
+        {
+            double percentageValue;
+
+            percentageString = percentageString.Replace("%", "");
+
+            var numberFormat = CultureInfo.CurrentCulture.NumberFormat;
+
+            // Check if percentageString is in the correct format
+            if (double.TryParse(percentageString, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, new CultureInfo("pt-BR"), out percentageValue))
+            {
+                return Math.Round(percentageValue / 100.00, 4);
+            }
+            else
+            {
+                return 0.00;//throw new FormatException("A string fornecida não está no formato correto de porcentagem.");
+            }
+        }
+        public static double ConvertCoinToDouble(this string coinString)
+        {
+            // Removendo o símbolo da moeda
+            string valueString = coinString.Replace("R$", "").Trim();
+
+            double coinValue;
+
+            // Use a cultura correta para analisar a string
+            if (double.TryParse(valueString, NumberStyles.Currency, new CultureInfo("pt-BR"), out coinValue))
+            {
+                return Math.Round(coinValue, 4);
+            }
+            else
+            {
+                return 0.00; // ou você pode escolher lançar uma exceção aqui
+            }
         }
     }
 }

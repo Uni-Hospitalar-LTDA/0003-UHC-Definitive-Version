@@ -20,6 +20,14 @@ namespace UHC3_Definitive_Version.Configuration
         {
             button.Click += questionExit_Click;
         }
+        public static void toDefaultExitButton(this Button button)
+        {
+            button.Click += questionExit_Click;
+        }
+        public static void toDefaultRestartButton(this Button button)
+        {
+            button.Click += questionRestart_Click;
+        }
         private static void close_Click(object sender, EventArgs e)
         {
             Form.ActiveForm.Close();
@@ -31,8 +39,13 @@ namespace UHC3_Definitive_Version.Configuration
         }
         public static void questionExit_Click(object sender, EventArgs e)
         {
-            if (CustomNotification.defaultQuestionAlert("Tem certeza que deseja fechar a tela?") == DialogResult.Yes)
+            if (CustomNotification.defaultQuestionAlert("Tem certeza que deseja fechar a aplicação?") == DialogResult.Yes)
                 Application.Exit();
+        }
+        public static void questionRestart_Click(object sender, EventArgs e)
+        {
+            if (CustomNotification.defaultQuestionAlert("Tem certeza que deseja reiniciar a aplicação?") == DialogResult.Yes)
+                Application.Restart();
         }
     }
 }

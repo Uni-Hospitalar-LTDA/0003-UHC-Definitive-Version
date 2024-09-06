@@ -49,6 +49,7 @@
             this.pcb_1 = new Krypton.Toolkit.KryptonPictureBox();
             this.linkEsqueceuAsenha = new System.Windows.Forms.LinkLabel();
             this.linkMeAjude = new System.Windows.Forms.LinkLabel();
+            this.btnShowPassword = new Krypton.Toolkit.KryptonPictureBox();
             this.gpbUnidade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbGallery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_5)).BeginInit();
@@ -56,6 +57,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcb_3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShowPassword)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonPalette
@@ -301,7 +303,7 @@
             // 
             // pcb_5
             // 
-            this.pcb_5.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.circle_inactive;
+            this.pcb_5.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.i_circle_inactive;
             this.pcb_5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pcb_5.Location = new System.Drawing.Point(307, 348);
             this.pcb_5.Name = "pcb_5";
@@ -311,7 +313,7 @@
             // 
             // pcb_4
             // 
-            this.pcb_4.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.circle_inactive;
+            this.pcb_4.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.i_circle_inactive;
             this.pcb_4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pcb_4.Location = new System.Drawing.Point(276, 348);
             this.pcb_4.Name = "pcb_4";
@@ -321,7 +323,7 @@
             // 
             // pcb_3
             // 
-            this.pcb_3.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.circle_inactive;
+            this.pcb_3.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.i_circle_inactive;
             this.pcb_3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pcb_3.Location = new System.Drawing.Point(245, 348);
             this.pcb_3.Name = "pcb_3";
@@ -331,7 +333,7 @@
             // 
             // pcb_2
             // 
-            this.pcb_2.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.circle_inactive;
+            this.pcb_2.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.i_circle_inactive;
             this.pcb_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pcb_2.Location = new System.Drawing.Point(214, 348);
             this.pcb_2.Name = "pcb_2";
@@ -341,7 +343,7 @@
             // 
             // pcb_1
             // 
-            this.pcb_1.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.circle_inactive;
+            this.pcb_1.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.i_circle_inactive;
             this.pcb_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pcb_1.Location = new System.Drawing.Point(183, 348);
             this.pcb_1.Name = "pcb_1";
@@ -371,12 +373,24 @@
             this.linkMeAjude.TabStop = true;
             this.linkMeAjude.Text = "Estou com dúvidas, me ajude!";
             // 
+            // btnShowPassword
+            // 
+            this.btnShowPassword.BackgroundImage = global::UHC3_Definitive_Version.Properties.Resources.i_ClosedEyes;
+            this.btnShowPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnShowPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnShowPassword.Location = new System.Drawing.Point(922, 246);
+            this.btnShowPassword.Name = "btnShowPassword";
+            this.btnShowPassword.Size = new System.Drawing.Size(25, 23);
+            this.btnShowPassword.TabIndex = 29;
+            this.btnShowPassword.TabStop = false;
+            // 
             // frmLoginNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(969, 414);
+            this.Controls.Add(this.btnShowPassword);
             this.Controls.Add(this.linkMeAjude);
             this.Controls.Add(this.linkEsqueceuAsenha);
             this.Controls.Add(this.gpbUnidade);
@@ -406,6 +420,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcb_3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShowPassword)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -433,5 +448,6 @@
         private System.Windows.Forms.LinkLabel linkEsqueceuAsenha;
         private System.Windows.Forms.LinkLabel linkMeAjude;
         private System.Windows.Forms.ComboBox cbxUnidade;
+        private Krypton.Toolkit.KryptonPictureBox btnShowPassword;
     }
 }

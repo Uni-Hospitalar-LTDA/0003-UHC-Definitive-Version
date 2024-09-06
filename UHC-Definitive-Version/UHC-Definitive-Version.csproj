@@ -197,6 +197,72 @@
     <Compile Include="App\frmMainMenu.Designer.cs">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\frmModTelaInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\frmModTelaInicial.Designer.cs">
+      <DependentUpon>frmModTelaInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador.Designer.cs">
+      <DependentUpon>frmCadastroTransportador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteCidade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteCidade.Designer.cs">
+      <DependentUpon>frmCadastroTransportador_PrctFreteCidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModAdmistrativo\frmModAdministrativo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModAdmistrativo\frmModAdministrativo.Designer.cs">
+      <DependentUpon>frmModAdministrativo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_DetalhesEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_DetalhesEditar.Designer.cs">
+      <DependentUpon>frmContatos_DetalhesEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Editar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Editar.Designer.cs">
+      <DependentUpon>frmContatos_Editar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Inserir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Inserir.Designer.cs">
+      <DependentUpon>frmContatos_Inserir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Visualizar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Visualizar.Designer.cs">
+      <DependentUpon>frmContatos_Visualizar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultaGenerica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultaGenerica.designer.cs">
+      <DependentUpon>frmConsultaGenerica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmGeneric_ConsultaComSelecao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmGeneric_ConsultaComSelecao.Designer.cs">
+      <DependentUpon>frmGeneric_ConsultaComSelecao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmGeneric_ProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmGeneric_ProgressForm.Designer.cs">
+      <DependentUpon>frmGeneric_ProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\ButtonConfiguration.cs" />
     <Compile Include="Configuration\Connection.cs" />
     <Compile Include="Configuration\Cryptography.cs" />
@@ -222,6 +288,12 @@
     <Compile Include="Customization\CustomToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Domain\Entities\City.cs" />
+    <Compile Include="Domain\Entities\Contact.cs" />
+    <Compile Include="Domain\Entities\Contact_Mail.cs" />
+    <Compile Include="Domain\Entities\Contact_Person.cs" />
+    <Compile Include="Domain\Entities\Contact_Phone.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\Transportadores_Externos.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Action.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Groups.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Groups_Action.cs" />
@@ -233,6 +305,9 @@
     <Compile Include="Domain\Entities\Permissionamento\PermissionsAllowed.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Screen.cs" />
     <Compile Include="Domain\Entities\Permissionamento\SubModule.cs" />
+    <Compile Include="Domain\Entities\ShippingPercentageCity.cs" />
+    <Compile Include="Domain\Entities\State.cs" />
+    <Compile Include="Domain\Entities\Transporter_Contact.cs" />
     <Compile Include="Domain\Entities\Users\Sector.cs" />
     <Compile Include="Domain\Entities\Users\Users.cs" />
     <Compile Include="Domain\Entities\Users\Users_Groups.cs" />
@@ -244,6 +319,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\frmMainMenu.resx">
       <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\frmModTelaInicial.resx">
+      <DependentUpon>frmModTelaInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador.resx">
+      <DependentUpon>frmCadastroTransportador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteCidade.resx">
+      <DependentUpon>frmCadastroTransportador_PrctFreteCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModAdmistrativo\frmModAdministrativo.resx">
+      <DependentUpon>frmModAdministrativo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModCadastral\Cadastro\frmContatos_DetalhesEditar.resx">
+      <DependentUpon>frmContatos_DetalhesEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModCadastral\Cadastro\frmContatos_Editar.resx">
+      <DependentUpon>frmContatos_Editar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModCadastral\Cadastro\frmContatos_Inserir.resx">
+      <DependentUpon>frmContatos_Inserir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModCadastral\Cadastro\frmContatos_Visualizar.resx">
+      <DependentUpon>frmContatos_Visualizar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Telas_Genericas\frmConsultaGenerica.resx">
+      <DependentUpon>frmConsultaGenerica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Telas_Genericas\frmGeneric_ConsultaComSelecao.resx">
+      <DependentUpon>frmGeneric_ConsultaComSelecao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Telas_Genericas\frmGeneric_ProgressForm.resx">
+      <DependentUpon>frmGeneric_ProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -398,6 +506,25 @@
   <ItemGroup>
     <None Include="Resources\form-iconsp.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\finance1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sales1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i_dolar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i_contrato.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i_OpenEyes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i_ClosedEyes.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

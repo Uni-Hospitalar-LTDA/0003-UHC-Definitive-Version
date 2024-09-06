@@ -39,7 +39,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
         public async static Task<string> getUserCodeAsync(string login)
         {
             
-            using (SqlConnection conn = new Connection().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
             {
                 string code = null;
                 try
@@ -134,7 +134,7 @@ WHERE
         /** Updates **/
         public async static Task<string> updateSectorAsync(Users user)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 SqlTransaction transaction = null;
                 try
@@ -179,7 +179,7 @@ WHERE
 
                 }
             }
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 SqlTransaction transaction = null;
                 try
@@ -238,7 +238,7 @@ WHERE
             if (!user.password.ToString().Trim().Equals(string.Empty))
             {
                 Console.WriteLine($"Alterar a senha usuário {user.login} para {user.password}");
-                using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+                using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
                 {
                     SqlTransaction transaction = null;
                     try

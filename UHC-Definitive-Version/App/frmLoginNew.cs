@@ -1,4 +1,5 @@
 ﻿
+using Krypton.Toolkit;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -11,10 +12,10 @@ using UHC3_Definitive_Version.Domain.Permissionamento;
 
 namespace UHC3_Definitive_Version.App
 {
-    public partial class frmLoginNew : CustomForm
+    public partial class frmLoginNew : KryptonForm
     {
         //Instance        
-
+        bool showedPassword = false;
         public frmLoginNew()
         {
             InitializeComponent();
@@ -155,7 +156,7 @@ namespace UHC3_Definitive_Version.App
             {
                 pct.BackgroundImage = null; // Descartando a imagem antiga
             }
-            Image image = isActive ? Properties.Resources.circle_active : Properties.Resources.circle_inactive;
+            Image image = isActive ? Properties.Resources.i_circle_active : Properties.Resources.i_circle_inactive;
 
             // Garantir que o novo bitmap corresponda ao tamanho do PictureBox
             Bitmap bmp = new Bitmap(pct.Width, pct.Height);
@@ -191,7 +192,7 @@ namespace UHC3_Definitive_Version.App
                 if (this.Opacity == 0)
                 {
                     frmMainMenu frmMainMenu = new frmMainMenu();                    
-                    await PermissionsAllowed.getUserPermissionsAsync(Session.idUsuario);
+                    await PermissionsAllowed.getUserPermissionsAsync(Section.idUsuario);
                     this.Hide();
                     frmMainMenu.ShowDialog();
                     break;
@@ -203,6 +204,19 @@ namespace UHC3_Definitive_Version.App
         private void ConfigureFormProperties()
         {
             this.defaultFixedForm();
+            // Centralizar na tela e definir algumas configurações básicas
+            StartPosition = FormStartPosition.CenterScreen;
+            KeyPreview = true;
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.ResizeRedraw = true;
+            this.UpdateStyles();
+            this.ShowIcon = true;
+
+            this.Icon = Properties.Resources.form_iconpe;
+            
             this.KeyPreview = false;
         }
         private void ConfigureFormEvents()
@@ -450,8 +464,26 @@ namespace UHC3_Definitive_Version.App
         private void ConfigureButtonEvents()
         {
             btnLogin.Click += btnLogin_Click;
+            btnShowPassword.Click += btnShowPassword_Click;
             
-        }       
+        }
+
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+            if (showedPassword)
+            {
+                btnShowPassword.BackgroundImage = Properties.Resources.i_ClosedEyes;
+                showedPassword = !showedPassword;
+                txtSenha.PasswordChar = '*';
+            }
+            else
+            {
+                btnShowPassword.BackgroundImage = Properties.Resources.i_OpenEyes;
+                showedPassword = !showedPassword;
+                txtSenha.PasswordChar = '\0';
+            }
+        }
+
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             try
@@ -476,12 +508,12 @@ namespace UHC3_Definitive_Version.App
             else
             {
                 btnLogin.Enabled = false;                
-                var resultado = await Session.On(txtLogin.Text, txtSenha.Text, cbxUnidade.SelectedItem?.ToString());
+                var resultado = await Section.On(txtLogin.Text, txtSenha.Text, cbxUnidade.SelectedItem?.ToString());
                 if (resultado.Contains("ACCESS_APPROVED"))
                 {
                     string[] name = resultado.Split(' ');
                     Users user = await Users.getToClassByLoginAsync(txtLogin.Text);
-                    Session.add(user.id,cbxUnidade.SelectedItem?.ToString());
+                    Section.add(user.id,cbxUnidade.SelectedItem?.ToString());
                     CustomNotification.defaultInformation($"Login aprovado: Seja bem vindo ao {Application.ProductName}, {name[1]}. {Environment.NewLine}Tenha um bom trabalho!", "Boas vindas!");
                     await login();
                 }
