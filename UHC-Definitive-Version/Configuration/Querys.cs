@@ -186,6 +186,39 @@ namespace UHC3_Definitive_Version.Configuration
                 }
             }
         }
+        public async static Task<int> getNextCodeAsync()
+        {
+            int nextCode = 0;
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
+            {
+                try
+                {
+                    await conn.OpenAsync();
+                    SqlCommand command = conn.CreateCommand();
+
+                    command.CommandText =
+                    $"SELECT nextCode = iif((SELECT COUNT(*) fROM[UHCDB].dbo.[{typeof(Gen).Name}]) = 0, 1, ident_current('[UHCDB].dbo.[{typeof(Gen).Name}]') + 1)";
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    while (reader.Read())
+                    {
+                        if (reader.HasRows)
+                        {
+                            nextCode = Convert.ToInt32(reader["nextCode"].ToString());
+                        }
+                    }
+
+                    return nextCode;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return 0;
+                }
+            }
+
+        }
 
         // Métodos de inserção (sobrecargas para lista e único objeto)
         public async static Task insertAsync(List<Gen> gens)

@@ -105,7 +105,7 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-            frmContatos_Inserir fmContatos_Inserir = new frmContatos_Inserir();
+            frmContatos_Inserir frmContatos_Inserir = new frmContatos_Inserir();
             frmContatos_Inserir.linkedType = linkedType;
             frmContatos_Inserir.ShowDialog();
             await getContacts();
@@ -115,13 +115,41 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
         {
             if (dgvData.CurrentRow != null)
             {
-                frmContatos_Editar fmContatos_Editar = new frmContatos_Editar();
+                frmContatos_Editar frmContatos_Editar = new frmContatos_Editar();
                 frmContatos_Editar.contactId = dgvData.CurrentRow.Cells[0].Value.ToString();
                 frmContatos_Editar.ShowDialog();
                 await getContacts();
             }
             else
-                CustomMessage.Alert("Selecione um registro para editar.");
+                CustomNotification.defaultAlert("Selecione um registro para editar.");
+        }
+        /** Configure TextBox**/
+
+        private void ConfigureTextBoxEvents()
+        {
+            txtSearch.TextChanged += txtSearch_TextChanged;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            Pesquisar(dgvData, ((TextBox)sender).Text);
+
+        }
+
+        /** Configure DataGridView **/
+
+        private void ConfigureDataGridViewProperties()
+        {
+            dgvData.toDefault();
+        }
+        private void ConfigureDataGridViewEvents()
+        {
+            dgvData.DoubleClick += dgvData_DoubleClick;
+        }
+        private void dgvData_DoubleClick(object sender, EventArgs e)
+        {
+            btnEdit_Click(sender, e);
+
         }
 
         /** Menu Strip Configuration **/

@@ -37,7 +37,17 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
                 description = txtContactDescription.Text,
                 linkedAt = linkedType
             });
-            await Contact.insertAsync(contacts);
+
+            try
+            {
+                await Contact.insertAsync(contacts);
+                CustomNotification.defaultInformation();
+                this.Close();
+            }
+            catch (Exception ex) 
+            {
+                CustomNotification.defaultError(ex.Message);
+            }
 
         }
 
@@ -74,12 +84,7 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
 
             try
             {
-                await save();
-                CustomNotification.defaultInformation();
-                frmContatos_Editar frmContatos_Editar = new frmContatos_Editar();
-                frmContatos_Editar.contactId = (await Contact.getLastCodeAsync()).ToString();
-                frmContatos_Editar.ShowDialog();
-                this.Close();
+                await save();                                                                
             }
             catch
             {

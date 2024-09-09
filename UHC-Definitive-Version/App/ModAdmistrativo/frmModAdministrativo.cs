@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
+using UHC3_Definitive_Version.Domain.Permissionamento;
 
 namespace UHC3_Definitive_Version.App.ModAdmistrativo
 {
@@ -19,6 +21,19 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo
         }
 
 
+        private void blocks()
+        {
+            //Screen
+
+        }
+        private void allows()
+        {
+            //SubModules
+
+            //Screen            
+
+        }
+
         /** Configure Form **/
         private void ConfigureFormProperties()
         {
@@ -26,8 +41,15 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo
         }
         private void ConfigureFormEvents()
         {
-            
+            blocks();
+            allows();
+
+
+            //Events
+            ConfigureButtonsEvents();
         }
+
+       
 
         /** Configure Button **/
         private void ConfigureButtonProperties()
@@ -35,5 +57,18 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo
             btnDeslogar.toDefaultRestartButton();
             btnSair.toDefaultExitButton();
         }
+            
+        private void ConfigureButtonsEvents()
+        {
+            btnInformacoesTransportadora.Click += btnInformacoesTransportadora_Click; ;          
+        }
+
+        private void btnInformacoesTransportadora_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateForm<frmCadastroTransportador>();
+        }
+
+        
+
     }
 }

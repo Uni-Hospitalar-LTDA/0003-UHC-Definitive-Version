@@ -7,6 +7,8 @@ using UHC3_Definitive_Version.Domain.Entities;
 using System.Windows.Forms;
 using System.Drawing;
 using UHC3_Definitive_Version.Domain.Entities.InnmedEntities;
+using UHC3_Definitive_Version.App.ModCadastral.Cadastro;
+using UHC3_Definitive_Version.App.Telas_Genericas;
 
 namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
 {
@@ -139,8 +141,8 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         private async void btnConfigureContacts_Click(object sender, EventArgs e)
         {
             frmContatos_Visualizar frmContatos_Visualizar = new frmContatos_Visualizar();
-            FrmContatos_Visualizar.linkedType = "Transporter";
-            FrmContatos_Visualizar.ShowDialog();
+            frmContatos_Visualizar.linkedType = "Transporter";
+            frmContatos_Visualizar.ShowDialog();
             lsbContatcs.Items.Clear();
             await getContacts();
             listContacts();
@@ -148,7 +150,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         }
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-            frmConsultaGenerica consultarContatos = new frmConsultaGenerica();
+            frmGeneric_ConsultaComSelecao consultarContatos = new frmGeneric_ConsultaComSelecao();
             consultarContatos.consulta = await Contact.getAllToDataTableByTypeAsync("Transporter");
             consultarContatos.elemento = "Contato";
             consultarContatos.ShowDialog();
@@ -173,16 +175,16 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         }
         private void btnConfigureStatePercents_Click(object sender, EventArgs e)
         {
-            if (!string.isnullorempty(txtdescricaotransportador.text))
+            if (!string.IsNullOrEmpty(txtTransportador_Descricao.Text))
             {
-                frmcadastrotransportador_pcrtfreteestado frmcadastrotransportador_pcrtfreteestado = new frmcadastrotransportador_pcrtfreteestado();
-                frmcadastrotransportador_pcrtfreteestado.transporterid = txtcodtransportador.text;
-                frmcadastrotransportador_pcrtfreteestado.transporderdescription = txtdescricaotransportador.text;
-                frmcadastrotransportador_pcrtfreteestado.showdialog();
+                frmCadastroTransportador_PrctFreteEstado frmCadastroTransportador_PrctFreteEstado = new frmCadastroTransportador_PrctFreteEstado();
+                frmCadastroTransportador_PrctFreteEstado.transporterId = txtTransprotador_Codigo.Text;
+                frmCadastroTransportador_PrctFreteEstado.transporderDescription = txtTransportador_Descricao.Text;
+                frmCadastroTransportador_PrctFreteEstado.ShowDialog();
             }
             else
             {
-                custommessage.alert("selecione um transportador.");
+                CustomNotification.defaultAlert("Selecione um transportador.");
             }
         }
 

@@ -215,11 +215,23 @@
     <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteCidade.Designer.cs">
       <DependentUpon>frmCadastroTransportador_PrctFreteCidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteEstado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteEstado.Designer.cs">
+      <DependentUpon>frmCadastroTransportador_PrctFreteEstado.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModAdmistrativo\frmModAdministrativo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="App\ModAdmistrativo\frmModAdministrativo.Designer.cs">
       <DependentUpon>frmModAdministrativo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Detalhes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModCadastral\Cadastro\frmContatos_Detalhes.Designer.cs">
+      <DependentUpon>frmContatos_Detalhes.cs</DependentUpon>
     </Compile>
     <Compile Include="App\ModCadastral\Cadastro\frmContatos_DetalhesEditar.cs">
       <SubType>Form</SubType>
@@ -306,6 +318,7 @@
     <Compile Include="Domain\Entities\Permissionamento\Screen.cs" />
     <Compile Include="Domain\Entities\Permissionamento\SubModule.cs" />
     <Compile Include="Domain\Entities\ShippingPercentageCity.cs" />
+    <Compile Include="Domain\Entities\ShippingPercentageState.cs" />
     <Compile Include="Domain\Entities\State.cs" />
     <Compile Include="Domain\Entities\Transporter_Contact.cs" />
     <Compile Include="Domain\Entities\Users\Sector.cs" />
@@ -329,8 +342,14 @@
     <EmbeddedResource Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteCidade.resx">
       <DependentUpon>frmCadastroTransportador_PrctFreteCidade.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador_PrctFreteEstado.resx">
+      <DependentUpon>frmCadastroTransportador_PrctFreteEstado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="App\ModAdmistrativo\frmModAdministrativo.resx">
       <DependentUpon>frmModAdministrativo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModCadastral\Cadastro\frmContatos_Detalhes.resx">
+      <DependentUpon>frmContatos_Detalhes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModCadastral\Cadastro\frmContatos_DetalhesEditar.resx">
       <DependentUpon>frmContatos_DetalhesEditar.cs</DependentUpon>

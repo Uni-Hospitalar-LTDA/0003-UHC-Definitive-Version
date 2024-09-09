@@ -18,7 +18,7 @@ namespace UHC3_Definitive_Version.Domain.Log
 
         public static async new Task insertAsync(List<Logs> gens)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("PE"))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 await conn.OpenAsync();
                 SqlTransaction transaction = conn.BeginTransaction();

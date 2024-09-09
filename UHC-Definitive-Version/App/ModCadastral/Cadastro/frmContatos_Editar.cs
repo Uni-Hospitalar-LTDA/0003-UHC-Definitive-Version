@@ -14,16 +14,13 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
     {
 
         /** Instance  **/
-        CustomMenuStrip menuStrip = new CustomMenuStrip();
-
-        /** Instance **/
+        CustomMenuStrip menuStrip = new CustomMenuStrip();        
         List<Contact_Mail> mails = new List<Contact_Mail>();
         List<Contact_Person> people = new List<Contact_Person>();
         List<Contact_Phone> phones = new List<Contact_Phone>();
         Contact contact = new Contact();
-
-
         public string contactId { get; set; }
+
 
         public frmContatos_Editar()
         {
@@ -34,6 +31,7 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
             ConfigureButtonProperties();
             ConfigureTextBoxProperties();
             ConfigureListBoxProperties();
+            ConfigureMenuStripProperties();
 
             //Events
             ConfigureFormEvents();
@@ -72,7 +70,6 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
             txtContactName.Text = contact.name;
             txtContactDescription.Text = contact.description;
         }
-
         public async Task getContact_Phones()
         {
             phones = await Contact_Phone.getAllToListByIdAsync(contact.idContact);
@@ -80,14 +77,12 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
             lsbPhoneList.Items.AddRange(phones.Where(p => p.idContact == contact.idContact).Select(p => p.phone).ToArray());
 
         }
-
         public async Task getContact_Mail()
         {
             mails = await Contact_Mail.getAllToListByIdAsync(contact.idContact);
             lsbMailList.Items.Clear();
             lsbMailList.Items.AddRange(mails.Where(m => m.idContact == contact.idContact).Select(m => m.mail).ToArray());
         }
-
         public async Task getContact_People()
         {
             people = await Contact_Person.getAllToListByIdAsync(contact.idContact);
@@ -114,6 +109,7 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
 
             ConfigureButtonEvents();
             ConfigureListBoxEvents();
+            
         }
 
         /** Configure Button **/
@@ -162,6 +158,14 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
             }
         }
 
+        private void btnAddOnPhoneList_Click(object sender, EventArgs e)
+        {
+            menuStrip_AddPhone_Click(sender, e);
+        }
+        private void btnAddOnNameList_Click(object sender, EventArgs e)
+        {
+            menuStrip_AddPerson_Click(sender, e);
+        }
         private async void btnRemOnMailList_Click(object sender, EventArgs e)
         {
             if (CustomNotification.defaultQuestionAlert("Tem certeza que deseja excluir o registro?")
@@ -175,11 +179,6 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
             };
 
         }
-
-        private void btnAddOnPhoneList_Click(object sender, EventArgs e)
-        {
-            menuStrip_AddPhone_Click(sender, e);
-        }
         private async void btnRemOnPhoneList_Click(object sender, EventArgs e)
         {
             if (CustomNotification.defaultQuestionAlert("Tem certeza que deseja excluir o registro?")
@@ -192,10 +191,6 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
                 }
             };
 
-        }
-        private void btnAddOnNameList_Click(object sender, EventArgs e)
-        {
-            menuStrip_AddPerson_Click(sender, e);
         }
         private async void btnRemOnNameList_Click(object sender, EventArgs e)
         {
@@ -324,13 +319,7 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
             lsbMailList.SelectedItem = null;
         }
 
-        /** Configure Menu Strip **/
-        private void ConfigureMenuStrip()
-        {
-            menuStrip_AddMail.Click += menuStrip_AddMail_Click;
-            menuStrip_AddPhone.Click += menuStrip_AddPhone_Click; ;
-            menuStrip_AddPerson.Click += menuStrip_AddPerson_Click; ;
-        }
+        /** Configure Menu Strip **/       
         private async void menuStrip_AddPerson_Click(object sender, EventArgs e)
         {
             frmContatos_Detalhes frmConfigurarContatos_Detalhes = new frmContatos_Detalhes();
@@ -358,21 +347,29 @@ namespace UHC3_Definitive_Version.App.ModCadastral.Cadastro
         /** Menu Strip Configuration **/
         private void ConfigureMenuStripProperties()
         {
-            CustomToolStripMenuItem menuArquivo = new CustomToolStripMenuItem("Arquivo");
-            CustomToolStripMenuItem itemArquivoAbrir = new CustomToolStripMenuItem("Abrir");
-            CustomToolStripMenuItem itemArquivoAbrirExcel = new CustomToolStripMenuItem("Excel");
-            CustomToolStripMenuItem itemArquivoExportar = new CustomToolStripMenuItem("Exportar");
-            CustomToolStripMenuItem itemArquivoExportarExcel = new CustomToolStripMenuItem("Excel");
+            CustomToolStripMenuItem Cadastrar = new CustomToolStripMenuItem("Cadastrar");
+            CustomToolStripMenuItem ExcluirContato = new CustomToolStripMenuItem("Excluir Contato");
+            CustomToolStripMenuItem CadastrarTelefoneParaContato = new CustomToolStripMenuItem("Telefone para Contato");
+            CustomToolStripMenuItem EmailParaNotificacao = new CustomToolStripMenuItem("E-mail para Notificação");
+            CustomToolStripMenuItem PessoasEnvolvidas = new CustomToolStripMenuItem("Pessoas envolvidas");
+            
 
-            itemArquivoAbrirExcel.Click += ItemArquivoAbrirExcel_Click;
-            itemArquivoExportarExcel.Click += ItemArquivoExportarExcel_Click;
 
-            menuArquivo.DropDownItems.Add(itemArquivoAbrir);
-            menuArquivo.DropDownItems.Add(itemArquivoExportar);
-            itemArquivoAbrir.DropDownItems.Add(itemArquivoAbrirExcel);
-            itemArquivoExportar.DropDownItems.Add(itemArquivoExportarExcel);
 
-            menuStrip.Items.Add(menuArquivo);
+            //itemArquivoAbrirExcel.Click += ItemArquivoAbrirExcel_Click;
+            //itemArquivoExportarExcel.Click += ItemArquivoExportarExcel_Click;
+
+            Cadastrar.DropDownItems.Add(CadastrarTelefoneParaContato);
+            Cadastrar.DropDownItems.Add(EmailParaNotificacao);
+            Cadastrar.DropDownItems.Add(PessoasEnvolvidas);            
+            
+            CadastrarTelefoneParaContato.Click += menuStrip_AddPhone_Click;
+            EmailParaNotificacao.Click += menuStrip_AddMail_Click;
+            PessoasEnvolvidas.Click += menuStrip_AddPerson_Click;
+
+            menuStrip.Items.Add(Cadastrar);
+            menuStrip.Items.Add(ExcluirContato);
+
             this.Controls.Add(menuStrip);
         }
        

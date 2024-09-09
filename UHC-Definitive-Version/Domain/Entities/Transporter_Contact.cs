@@ -14,7 +14,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
 
         public async static Task deleteAsync(string idTransporter)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Session.Unidade))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
                 SqlTransaction transaction = null;
                 try
