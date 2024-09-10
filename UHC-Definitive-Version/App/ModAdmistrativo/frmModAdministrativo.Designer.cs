@@ -30,23 +30,22 @@
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gpbCadastral = new System.Windows.Forms.GroupBox();
             this.btnInformacoesTransportadora = new System.Windows.Forms.Button();
-            this.gpbPainelCobranca = new System.Windows.Forms.GroupBox();
-            this.btnAtribuicaoTransacoes = new System.Windows.Forms.Button();
-            this.btnTransacoes = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnTransacoesAtribuidas = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.gpbCanhotos = new System.Windows.Forms.GroupBox();
+            this.btnRelatorioAusencias = new System.Windows.Forms.Button();
+            this.btnControleCanhotos = new System.Windows.Forms.Button();
+            this.gpbFretes = new System.Windows.Forms.GroupBox();
+            this.btnConversorParaLayoutFrete = new System.Windows.Forms.Button();
+            this.btnManutencaoFretes = new System.Windows.Forms.Button();
+            this.btnRelatorioAnaliticoFretes = new System.Windows.Forms.Button();
+            this.btnConferenciaFretes = new System.Windows.Forms.Button();
             this.btnDeslogar = new System.Windows.Forms.Button();
             this.btnSair = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.gpbPainelCobranca.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gpbCadastral.SuspendLayout();
+            this.gpbCanhotos.SuspendLayout();
+            this.gpbFretes.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -65,24 +64,24 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
-            this.flowLayoutPanel1.Controls.Add(this.gpbPainelCobranca);
-            this.flowLayoutPanel1.Controls.Add(this.groupBox2);
+            this.flowLayoutPanel1.Controls.Add(this.gpbCadastral);
+            this.flowLayoutPanel1.Controls.Add(this.gpbCanhotos);
+            this.flowLayoutPanel1.Controls.Add(this.gpbFretes);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 58);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(776, 350);
             this.flowLayoutPanel1.TabIndex = 66;
             // 
-            // groupBox1
+            // gpbCadastral
             // 
-            this.groupBox1.Controls.Add(this.btnInformacoesTransportadora);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(188, 258);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Cadastral";
+            this.gpbCadastral.Controls.Add(this.btnInformacoesTransportadora);
+            this.gpbCadastral.ForeColor = System.Drawing.Color.White;
+            this.gpbCadastral.Location = new System.Drawing.Point(3, 3);
+            this.gpbCadastral.Name = "gpbCadastral";
+            this.gpbCadastral.Size = new System.Drawing.Size(188, 258);
+            this.gpbCadastral.TabIndex = 6;
+            this.gpbCadastral.TabStop = false;
+            this.gpbCadastral.Text = "Cadastral";
             // 
             // btnInformacoesTransportadora
             // 
@@ -94,102 +93,91 @@
             this.btnInformacoesTransportadora.Text = "Informações de Transportadora";
             this.btnInformacoesTransportadora.UseVisualStyleBackColor = true;
             // 
-            // gpbPainelCobranca
+            // gpbCanhotos
             // 
-            this.gpbPainelCobranca.Controls.Add(this.btnAtribuicaoTransacoes);
-            this.gpbPainelCobranca.Controls.Add(this.btnTransacoes);
-            this.gpbPainelCobranca.ForeColor = System.Drawing.Color.White;
-            this.gpbPainelCobranca.Location = new System.Drawing.Point(197, 3);
-            this.gpbPainelCobranca.Name = "gpbPainelCobranca";
-            this.gpbPainelCobranca.Size = new System.Drawing.Size(188, 258);
-            this.gpbPainelCobranca.TabIndex = 5;
-            this.gpbPainelCobranca.TabStop = false;
-            this.gpbPainelCobranca.Text = "Canhotos";
+            this.gpbCanhotos.Controls.Add(this.btnRelatorioAusencias);
+            this.gpbCanhotos.Controls.Add(this.btnControleCanhotos);
+            this.gpbCanhotos.ForeColor = System.Drawing.Color.White;
+            this.gpbCanhotos.Location = new System.Drawing.Point(197, 3);
+            this.gpbCanhotos.Name = "gpbCanhotos";
+            this.gpbCanhotos.Size = new System.Drawing.Size(188, 258);
+            this.gpbCanhotos.TabIndex = 5;
+            this.gpbCanhotos.TabStop = false;
+            this.gpbCanhotos.Text = "Canhotos";
             // 
-            // btnAtribuicaoTransacoes
+            // btnRelatorioAusencias
             // 
-            this.btnAtribuicaoTransacoes.ForeColor = System.Drawing.Color.Black;
-            this.btnAtribuicaoTransacoes.Location = new System.Drawing.Point(8, 64);
-            this.btnAtribuicaoTransacoes.Name = "btnAtribuicaoTransacoes";
-            this.btnAtribuicaoTransacoes.Size = new System.Drawing.Size(170, 39);
-            this.btnAtribuicaoTransacoes.TabIndex = 3;
-            this.btnAtribuicaoTransacoes.Text = "Atribuição de Transações";
-            this.btnAtribuicaoTransacoes.UseVisualStyleBackColor = true;
+            this.btnRelatorioAusencias.ForeColor = System.Drawing.Color.Black;
+            this.btnRelatorioAusencias.Location = new System.Drawing.Point(8, 64);
+            this.btnRelatorioAusencias.Name = "btnRelatorioAusencias";
+            this.btnRelatorioAusencias.Size = new System.Drawing.Size(170, 39);
+            this.btnRelatorioAusencias.TabIndex = 3;
+            this.btnRelatorioAusencias.Text = "Relatório de Ausências";
+            this.btnRelatorioAusencias.UseVisualStyleBackColor = true;
             // 
-            // btnTransacoes
+            // btnControleCanhotos
             // 
-            this.btnTransacoes.ForeColor = System.Drawing.Color.Black;
-            this.btnTransacoes.Location = new System.Drawing.Point(8, 19);
-            this.btnTransacoes.Name = "btnTransacoes";
-            this.btnTransacoes.Size = new System.Drawing.Size(170, 39);
-            this.btnTransacoes.TabIndex = 2;
-            this.btnTransacoes.Text = "Rel. Transações";
-            this.btnTransacoes.UseVisualStyleBackColor = true;
+            this.btnControleCanhotos.ForeColor = System.Drawing.Color.Black;
+            this.btnControleCanhotos.Location = new System.Drawing.Point(8, 19);
+            this.btnControleCanhotos.Name = "btnControleCanhotos";
+            this.btnControleCanhotos.Size = new System.Drawing.Size(170, 39);
+            this.btnControleCanhotos.TabIndex = 2;
+            this.btnControleCanhotos.Text = "Controle de Canhotos";
+            this.btnControleCanhotos.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // gpbFretes
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.btnTransacoesAtribuidas);
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(391, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(188, 258);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Fretes";
+            this.gpbFretes.Controls.Add(this.btnConversorParaLayoutFrete);
+            this.gpbFretes.Controls.Add(this.btnManutencaoFretes);
+            this.gpbFretes.Controls.Add(this.btnRelatorioAnaliticoFretes);
+            this.gpbFretes.Controls.Add(this.btnConferenciaFretes);
+            this.gpbFretes.ForeColor = System.Drawing.Color.White;
+            this.gpbFretes.Location = new System.Drawing.Point(391, 3);
+            this.gpbFretes.Name = "gpbFretes";
+            this.gpbFretes.Size = new System.Drawing.Size(188, 258);
+            this.gpbFretes.TabIndex = 6;
+            this.gpbFretes.TabStop = false;
+            this.gpbFretes.Text = "Fretes";
             // 
-            // button2
+            // btnConversorParaLayoutFrete
             // 
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(8, 155);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(170, 39);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Transações Atribuídas";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnConversorParaLayoutFrete.ForeColor = System.Drawing.Color.Black;
+            this.btnConversorParaLayoutFrete.Location = new System.Drawing.Point(6, 19);
+            this.btnConversorParaLayoutFrete.Name = "btnConversorParaLayoutFrete";
+            this.btnConversorParaLayoutFrete.Size = new System.Drawing.Size(170, 39);
+            this.btnConversorParaLayoutFrete.TabIndex = 6;
+            this.btnConversorParaLayoutFrete.Text = "Conversor para Layout";
+            this.btnConversorParaLayoutFrete.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnManutencaoFretes
             // 
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(9, 200);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(170, 39);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Transações Atribuídas";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnManutencaoFretes.ForeColor = System.Drawing.Color.Black;
+            this.btnManutencaoFretes.Location = new System.Drawing.Point(6, 154);
+            this.btnManutencaoFretes.Name = "btnManutencaoFretes";
+            this.btnManutencaoFretes.Size = new System.Drawing.Size(170, 39);
+            this.btnManutencaoFretes.TabIndex = 6;
+            this.btnManutencaoFretes.Text = "Manutenção de Fretes";
+            this.btnManutencaoFretes.UseVisualStyleBackColor = true;
             // 
-            // btnTransacoesAtribuidas
+            // btnRelatorioAnaliticoFretes
             // 
-            this.btnTransacoesAtribuidas.ForeColor = System.Drawing.Color.Black;
-            this.btnTransacoesAtribuidas.Location = new System.Drawing.Point(8, 109);
-            this.btnTransacoesAtribuidas.Name = "btnTransacoesAtribuidas";
-            this.btnTransacoesAtribuidas.Size = new System.Drawing.Size(170, 39);
-            this.btnTransacoesAtribuidas.TabIndex = 6;
-            this.btnTransacoesAtribuidas.Text = "Transações Atribuídas";
-            this.btnTransacoesAtribuidas.UseVisualStyleBackColor = true;
+            this.btnRelatorioAnaliticoFretes.ForeColor = System.Drawing.Color.Black;
+            this.btnRelatorioAnaliticoFretes.Location = new System.Drawing.Point(6, 109);
+            this.btnRelatorioAnaliticoFretes.Name = "btnRelatorioAnaliticoFretes";
+            this.btnRelatorioAnaliticoFretes.Size = new System.Drawing.Size(170, 39);
+            this.btnRelatorioAnaliticoFretes.TabIndex = 3;
+            this.btnRelatorioAnaliticoFretes.Text = "Relatório Analítico";
+            this.btnRelatorioAnaliticoFretes.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnConferenciaFretes
             // 
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Location = new System.Drawing.Point(8, 64);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(170, 39);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "Atribuição de Transações";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(8, 19);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(170, 39);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "Rel. Transações";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnConferenciaFretes.ForeColor = System.Drawing.Color.Black;
+            this.btnConferenciaFretes.Location = new System.Drawing.Point(6, 64);
+            this.btnConferenciaFretes.Name = "btnConferenciaFretes";
+            this.btnConferenciaFretes.Size = new System.Drawing.Size(170, 39);
+            this.btnConferenciaFretes.TabIndex = 2;
+            this.btnConferenciaFretes.Text = "Conferência de Fretes";
+            this.btnConferenciaFretes.UseVisualStyleBackColor = true;
             // 
             // btnDeslogar
             // 
@@ -231,12 +219,14 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.StateCommon.Border.Width = 5;
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Módulo Administrativo";
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.gpbPainelCobranca.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.gpbCadastral.ResumeLayout(false);
+            this.gpbCanhotos.ResumeLayout(false);
+            this.gpbFretes.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,18 +236,17 @@
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.GroupBox gpbPainelCobranca;
-        private System.Windows.Forms.Button btnAtribuicaoTransacoes;
-        private System.Windows.Forms.Button btnTransacoes;
+        private System.Windows.Forms.GroupBox gpbCanhotos;
+        private System.Windows.Forms.Button btnRelatorioAusencias;
+        private System.Windows.Forms.Button btnControleCanhotos;
         private System.Windows.Forms.Button btnDeslogar;
         private System.Windows.Forms.Button btnSair;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gpbCadastral;
         private System.Windows.Forms.Button btnInformacoesTransportadora;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnTransacoesAtribuidas;
+        private System.Windows.Forms.GroupBox gpbFretes;
+        private System.Windows.Forms.Button btnRelatorioAnaliticoFretes;
+        private System.Windows.Forms.Button btnConferenciaFretes;
+        private System.Windows.Forms.Button btnConversorParaLayoutFrete;
+        private System.Windows.Forms.Button btnManutencaoFretes;
     }
 }

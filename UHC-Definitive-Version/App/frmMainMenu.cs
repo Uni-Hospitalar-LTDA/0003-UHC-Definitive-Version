@@ -6,6 +6,7 @@ using UHC3_Definitive_Version.Domain.Entities.Users;
 using Section = UHC3_Definitive_Version.Configuration.Section;
 using UHC3_Definitive_Version.App.ModAdmistrativo;
 using UHC3_Definitive_Version.App;
+using System.Threading.Tasks;
 
 namespace UHC3_Definitive_Version
 {
@@ -31,6 +32,8 @@ namespace UHC3_Definitive_Version
             this.defaultMainMenu();
             this.WindowState = FormWindowState.Maximized;
             pcbLogo_Click(null,null);
+
+            
             //pcbLogo.Visible = false;
         }
         private void ConfigureFormEvents()
@@ -42,6 +45,7 @@ namespace UHC3_Definitive_Version
             /** Initialize **/
             ConfigureLabelAttributes();
             ConfigurePictureBoxAttributes();
+            Task.Factory.StartNew(() => Section.carregar_Dependencias());
 
             /** Attributes **/
             blocks();

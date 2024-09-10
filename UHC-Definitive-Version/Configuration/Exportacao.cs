@@ -1,10 +1,15 @@
 ﻿using ClosedXML.Excel;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml;
+using UHC3_Definitive_Version.Customization;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace UHC3_Definitive_Version.Configuration
@@ -181,6 +186,260 @@ namespace UHC3_Definitive_Version.Configuration
 
                 workbook.SaveAs(filepath);
             }
+        }
+
+
+
+        /** Inerentes ao envio de e-mails **/
+        public static byte[] toByteExcelFromArchives(List<Archive> archives)
+        {
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                foreach (var archive in archives)
+                {
+                    wb.Worksheets.Add(archive.data, archive.description);
+                }
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
+        }
+        public static byte[] toByteExcelFromArchive(Archive archive)
+        {
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(archive.data, archive.description);
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(memoryStream);
+                    return memoryStream.ToArray();
+                }
+            }
+        }
+
+        /** XML **/
+        public static void toXml(DataGridView dataGridView, string filename)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML File|*.xml";
+            saveFileDialog.Title = "Salvar arquivo XML";
+            saveFileDialog.FileName = filename;
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                XmlWriterSettings settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    IndentChars = "\t",
+                    NewLineChars = Environment.NewLine,
+                    NewLineHandling = NewLineHandling.Replace
+                };
+
+                using (XmlWriter writer = XmlWriter.Create(saveFileDialog.FileName, settings))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("Rows");
+
+                    foreach (DataGridViewRow dataGridViewRow in dataGridView.Rows)
+                    {
+                        if (!dataGridViewRow.IsNewRow) // Ignore the new row used for adding data
+                        {
+                            writer.WriteStartElement("Row");
+
+                            foreach (DataGridViewCell cell in dataGridViewRow.Cells)
+                            {
+                                writer.WriteStartElement(dataGridView.Columns[cell.ColumnIndex].Name);
+                                if (cell.Value != null)
+                                {
+                                    writer.WriteString(cell.Value?.ToString());
+                                }
+                                writer.WriteEndElement();
+                            }
+
+                            writer.WriteEndElement();
+                        }
+                    }
+
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
+            }
+        }
+        public static string toXmlWithPath(DataTable dataTable, string filename)
+        {
+            try
+            {
+                string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), filename + ".xml");
+
+                XmlWriterSettings settings = new XmlWriterSettings
+                {
+                    Indent = true,
+                    IndentChars = "\t",
+                    NewLineChars = Environment.NewLine,
+                    NewLineHandling = NewLineHandling.Replace
+                };
+                using (XmlWriter writer = XmlWriter.Create(path, settings))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("Rows");
+
+
+                    foreach (DataRow dataRow in dataTable.Rows)
+                    {
+                        writer.WriteStartElement("Row");
+
+                        foreach (DataColumn column in dataTable.Columns)
+                        {
+                            writer.WriteStartElement(column.ColumnName.substituirCaracteresEspeciais().Replace(" ", string.Empty));
+                            var cellValue = dataRow[column];
+                            if (cellValue != null)
+                            {
+                                writer.WriteString(cellValue.ToString());
+                            }
+                            writer.WriteEndElement();
+                        }
+
+                        writer.WriteEndElement();
+                    }
+
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
+                return path;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        /** Json **/
+        public static void toJson(DataGridView dataGridView, string filename)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON File|*.json";
+            saveFileDialog.Title = "Salvar arquivo JSON";
+            saveFileDialog.FileName = filename;
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+                Dictionary<string, object> row;
+
+                foreach (DataGridViewRow dataGridViewRow in dataGridView.Rows)
+                {
+                    row = new Dictionary<string, object>();
+                    foreach (DataGridViewCell cell in dataGridViewRow.Cells)
+                    {
+                        row[dataGridView.Columns[cell.ColumnIndex].Name] = cell.Value;
+                    }
+                    rows.Add(row);
+                }
+
+                string json = JsonConvert.SerializeObject(rows, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(saveFileDialog.FileName, json);
+            }
+        }
+        public static string toJsonWithPath(DataTable dataTable, string filename)
+        {
+            string path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), filename + ".json");
+
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                row = new Dictionary<string, object>();
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    row[column.ColumnName] = dataRow[column];
+                }
+                rows.Add(row);
+            }
+
+            string json = JsonConvert.SerializeObject(rows, Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText(path, json);
+            return path;
+        }
+
+
+        /** txt **/
+        /** Método de exportação atualizado **/
+        public static void toTXTseparatedByDotComma(DataGridView _dgv)
+        {
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                FileName = $"{Guid.NewGuid().ToString()}-{DateTime.Now:ddMMyy-hhmmss}.txt",
+                Filter = "Arquivo de texto (*.txt)|*.txt"
+            };
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                    {
+                        foreach (DataGridViewRow dgvRow in _dgv.Rows)
+                        {
+                            if (dgvRow.Cells[10].Value == null || dgvRow.Cells[10].Value is DBNull) continue;
+                            string primaryKey = dgvRow.Cells[10].Value.ToString().Replace("-1", "");
+
+                            if (dgvRow.Cells[11].Value != null && !(dgvRow.Cells[11].Value is DBNull) && dgvRow.Cells[11].Value.ToString().Contains("/"))
+                            {
+                                string[] codes = dgvRow.Cells[11].Value.ToString().Split('/');
+                                double originalValue;
+                                if (double.TryParse(dgvRow.Cells[49].Value?.ToString(), out originalValue))
+                                {
+                                    double valueForEachCode = originalValue / codes.Length;
+
+                                    foreach (var code in codes)
+                                    {
+                                        string line = GenerateLine(primaryKey, code, valueForEachCode);
+                                        sw.WriteLine(line);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                string code = dgvRow.Cells[11].Value == null || dgvRow.Cells[11].Value is DBNull ? string.Empty : dgvRow.Cells[11].Value.ToString();
+                                double value;
+                                if (double.TryParse(dgvRow.Cells[49].Value?.ToString(), out value))
+                                {
+                                    string line = GenerateLine(primaryKey, code, value);
+                                    sw.WriteLine(line);
+                                }
+                            }
+                        }
+                    }
+
+                    // Mensagem de confirmação
+                    CustomNotification.defaultInformation("Exportado com sucesso");
+                }
+                catch (Exception ex)
+                {
+                    CustomNotification.defaultError(ex.Message);
+                }
+            }
+        }
+
+        private static string GenerateLine(string primaryKey, string code, double value)
+        {
+            // Tratamento de valores nulos e conversão para string
+            string primaryKeyStr = primaryKey ?? string.Empty;
+            string codeStr = code ?? string.Empty;
+            string valueStr = value.ToString("F2").Replace(".", ",");
+
+            return $"{primaryKeyStr};;{codeStr};;{valueStr};;";
         }
     }
 }
