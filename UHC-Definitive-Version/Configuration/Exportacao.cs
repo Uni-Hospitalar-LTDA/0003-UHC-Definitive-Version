@@ -1,8 +1,11 @@
 ﻿using ClosedXML.Excel;
+using LiveCharts.WinForms;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -431,7 +434,6 @@ namespace UHC3_Definitive_Version.Configuration
                 }
             }
         }
-
         private static string GenerateLine(string primaryKey, string code, double value)
         {
             // Tratamento de valores nulos e conversão para string
@@ -440,6 +442,61 @@ namespace UHC3_Definitive_Version.Configuration
             string valueStr = value.ToString("F2").Replace(".", ",");
 
             return $"{primaryKeyStr};;{codeStr};;{valueStr};;";
+        }
+
+        /** PNG **/
+        public static void chartToPNG(CartesianChart chart, string filePath)
+        {
+            int width = chart.Width;
+            int height = chart.Height;
+
+            using (var bitmap = new Bitmap(width, height))
+            {
+                try
+                {
+                    chart.DrawToBitmap(bitmap, chart.Bounds);
+                    bitmap.Save(filePath, ImageFormat.Png);
+                }
+                catch (Exception ex)
+                {
+                    CustomNotification.defaultError(ex.Message);
+                }
+                finally
+                {
+                    CustomNotification.defaultInformation();
+                }
+            }
+        }
+        public static void chartToPNG(PieChart chart, string filePath)
+        {
+            int width = chart.Width;
+            int height = chart.Height;
+
+            using (var bitmap = new Bitmap(width, height))
+            {
+                try
+                {
+                    chart.DrawToBitmap(bitmap, chart.Bounds);
+                    bitmap.Save(filePath, ImageFormat.Png);
+                }
+                catch (Exception ex)
+                {
+                    CustomNotification.defaultError(ex.Message);
+                }
+                finally
+                {
+                    CustomNotification.defaultInformation();
+                }
+            }
+        }
+        public static byte[] LoadImageFromResources(string resourceName)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Bitmap image = (Bitmap)Properties.Resources.ResourceManager.GetObject(resourceName);
+                image.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
         }
     }
 }

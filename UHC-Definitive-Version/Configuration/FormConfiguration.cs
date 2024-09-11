@@ -198,5 +198,42 @@ namespace UHC3_Definitive_Version.Configuration
 
             return isValid;
         }
+
+        public static void atribuirAtributosAosLabels(this Form form)
+        {
+            foreach (var obj in form.Controls)
+            {
+                if (obj is GroupBox)
+                {
+                    GroupBox gpb = (GroupBox)obj;
+                    foreach (var obj_gpb in gpb.Controls)
+                    {
+                        if (obj_gpb is Label)
+                        {
+                            Label label = (Label)obj_gpb;
+                            label.MouseHover += defaultMouseHover;
+                            label.MouseLeave += defaultMouseLeave;
+                        }
+                    }
+                }
+            }
+        }
+        private static void defaultMouseHover(object sender, EventArgs e)
+        {
+            Label label = (Label)sender;
+            label.BackColor = Color.Black;
+            label.ForeColor = Color.White;
+            if (Form.ActiveForm != null)
+                Form.ActiveForm.Cursor = Cursors.Hand;
+        }
+        private static void defaultMouseLeave(object sender, EventArgs e)
+        {
+
+            Label label = (Label)sender;
+            label.ForeColor = Color.Black;
+            label.BackColor = Color.Transparent;
+            if (Form.ActiveForm != null)
+                Form.ActiveForm.Cursor = Cursors.Default;
+        }
     }
 }

@@ -7,6 +7,8 @@ using Section = UHC3_Definitive_Version.Configuration.Section;
 using UHC3_Definitive_Version.App.ModAdmistrativo;
 using UHC3_Definitive_Version.App;
 using System.Threading.Tasks;
+using UHC3_Definitive_Version.App.ModContabilFiscal;
+using UHC3_Definitive_Version.App.ModFinanceiro;
 
 namespace UHC3_Definitive_Version
 {
@@ -111,9 +113,21 @@ namespace UHC3_Definitive_Version
         private void ConfigureButtonEvents()
         {
             btnModAdministrativo.Click += btnModAdministrativo_Click;
+            btnModContabilFiscal.Click += btnModContabilFiscal_Click;
+            btnModFinanceiro.Click += btnModFinanceiro_Click;
             pcbLogo.Click += pcbLogo_Click;
             btnOpcoes.Click += btnOpcoes_Click;
             
+        }
+
+        private void btnModFinanceiro_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateFormInPanel<frmModFinanceiro>(panel, "");
+        }
+
+        private void btnModContabilFiscal_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateFormInPanel<frmModContabilFiscal>(panel, "");
         }
 
         private void pcbLogo_Click(object sender, EventArgs e)
@@ -125,7 +139,6 @@ namespace UHC3_Definitive_Version
         {
             FormConfiguration.ShowOrActivateFormInPanel<frmModAdministrativo>(panel, "");
         }
-
         
         private void btnOpcoes_Click(object sender, EventArgs e)
         {

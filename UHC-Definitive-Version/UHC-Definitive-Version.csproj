@@ -92,6 +92,15 @@
     <Reference Include="Krypton.Toolkit, Version=85.24.8.239, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
       <HintPath>packages\Krypton.Toolkit.85.24.8.239\lib\net48\Krypton.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.3.0.0\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
@@ -117,7 +126,11 @@
     <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\squirrel.windows.2.0.1\lib\Net45\NuGet.Squirrel.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot, Version=2.2.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Core.2.2.0\lib\net462\OxyPlot.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="SharpCompress, Version=0.17.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>packages\SharpCompress.0.17.1\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
@@ -193,6 +206,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -202,6 +216,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="XLParser, Version=1.5.2.0, Culture=neutral, PublicKeyToken=63397e1e46bb91b4, processorArchitecture=MSIL">
       <HintPath>packages\XLParser.1.5.2\lib\net461\XLParser.dll</HintPath>
     </Reference>
@@ -315,6 +330,186 @@
     <Compile Include="App\ModCadastral\Cadastro\frmContatos_Visualizar.Designer.cs">
       <DependentUpon>frmContatos_Visualizar.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModContabilFiscal\Configuracoes\frmParametrizacaoFiscalPorUf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModContabilFiscal\Configuracoes\frmParametrizacaoFiscalPorUf.Designer.cs">
+      <DependentUpon>frmParametrizacaoFiscalPorUf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModContabilFiscal\frmModContabilFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModContabilFiscal\frmModContabilFiscal.Designer.cs">
+      <DependentUpon>frmModContabilFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModContabilFiscal\Relatorios\frmRelatorioDifalDevAnalitico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModContabilFiscal\Relatorios\frmRelatorioDifalDevAnalitico.Designer.cs">
+      <DependentUpon>frmRelatorioDifalDevAnalitico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModContabilFiscal\Relatorios\frmRelatorioDifalDevSintetico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModContabilFiscal\Relatorios\frmRelatorioDifalDevSintetico.Designer.cs">
+      <DependentUpon>frmRelatorioDifalDevSintetico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Acompanhamento\frmTitulosVsEmpenho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Acompanhamento\frmTitulosVsEmpenho.Designer.cs">
+      <DependentUpon>frmTitulosVsEmpenho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Cadastral\frmCadastroCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Cadastral\frmCadastroCliente.Designer.cs">
+      <DependentUpon>frmCadastroCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Cadastral\frmSelecionarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Cadastral\frmSelecionarCliente.Designer.cs">
+      <DependentUpon>frmSelecionarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Conferencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Conferencia.Designer.cs">
+      <DependentUpon>frmCI_Conferencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Encaminhamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Encaminhamento.Designer.cs">
+      <DependentUpon>frmCI_Encaminhamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_EncaminhamentoVsCi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_EncaminhamentoVsCi.Designer.cs">
+      <DependentUpon>frmCI_EncaminhamentoVsCi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Encaminhamento_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Encaminhamento_Add.Designer.cs">
+      <DependentUpon>frmCI_Encaminhamento_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Encaminhamento_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Encaminhamento_Edit.Designer.cs">
+      <DependentUpon>frmCI_Encaminhamento_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Responsavel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Responsavel.Designer.cs">
+      <DependentUpon>frmCI_Responsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Responsavel_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Responsavel_Add.Designer.cs">
+      <DependentUpon>frmCI_Responsavel_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Responsavel_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Responsavel_Edit.Designer.cs">
+      <DependentUpon>frmCI_Responsavel_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Visualizar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\CI\frmCI_Visualizar.Designer.cs">
+      <DependentUpon>frmCI_Visualizar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Cobranca\frmParametrosDeCobranca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Cobranca\frmParametrosDeCobranca.Designer.cs">
+      <DependentUpon>frmParametrosDeCobranca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\frmModFinanceiro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\frmModFinanceiro.Designer.cs">
+      <DependentUpon>frmModFinanceiro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\MonitoresFinanceiros\frmMonitores_ExpXmlGnre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\MonitoresFinanceiros\frmMonitores_ExpXmlGnre.Designer.cs">
+      <DependentUpon>frmMonitores_ExpXmlGnre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\MonitoresFinanceiros\frmMonitores_ExpXmlGnre_Obs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\MonitoresFinanceiros\frmMonitores_ExpXmlGnre_Obs.Designer.cs">
+      <DependentUpon>frmMonitores_ExpXmlGnre_Obs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Pagamentos\frmContasPagar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Pagamentos\frmContasPagar.Designer.cs">
+      <DependentUpon>frmContasPagar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmContasReceber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmContasReceber.Designer.cs">
+      <DependentUpon>frmContasReceber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmContasRecebidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmContasRecebidas.Designer.cs">
+      <DependentUpon>frmContasRecebidas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmRecPublicoPrivado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmRecPublicoPrivado.Designer.cs">
+      <DependentUpon>frmRecPublicoPrivado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria.Designer.cs">
+      <DependentUpon>frmControladoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\frmModGerencial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\frmModGerencial.Designer.cs">
+      <DependentUpon>frmModGerencial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmBloqueioDetalhado_IQVIA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmBloqueioDetalhado_IQVIA.Designer.cs">
+      <DependentUpon>frmBloqueioDetalhado_IQVIA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria_Arquivos_IQVIA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria_Arquivos_IQVIA.Designer.cs">
+      <DependentUpon>frmControladoria_Arquivos_IQVIA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmEnvioDeDados_IQVIA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmEnvioDeDados_IQVIA.Designer.cs">
+      <DependentUpon>frmEnvioDeDados_IQVIA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmVisualizarLayout_IQVIA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmVisualizarLayout_IQVIA.Designer.cs">
+      <DependentUpon>frmVisualizarLayout_IQVIA.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\Telas_Genericas\frmConsultaGenerica.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +527,30 @@
     </Compile>
     <Compile Include="App\Telas_Genericas\frmConsultarFabricante.Designer.cs">
       <DependentUpon>frmConsultarFabricante.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarFavorecido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarFavorecido.Designer.cs">
+      <DependentUpon>frmConsultarFavorecido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarFornecedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarFornecedor.Designer.cs">
+      <DependentUpon>frmConsultarFornecedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarNF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarNF.Designer.cs">
+      <DependentUpon>frmConsultarNF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Telas_Genericas\frmConsultarProduto.Designer.cs">
+      <DependentUpon>frmConsultarProduto.cs</DependentUpon>
     </Compile>
     <Compile Include="App\Telas_Genericas\frmConsultarTransportador.cs">
       <SubType>Form</SubType>
@@ -355,11 +574,14 @@
     <Compile Include="Configuration\ButtonConfiguration.cs" />
     <Compile Include="Configuration\Connection.cs" />
     <Compile Include="Configuration\Cryptography.cs" />
+    <Compile Include="Configuration\CustomSerialization.cs" />
     <Compile Include="Configuration\Email.cs" />
     <Compile Include="Configuration\EmailAttributes.cs" />
     <Compile Include="Configuration\Exportacao.cs" />
     <Compile Include="Configuration\FormConfiguration.cs" />
     <Compile Include="Configuration\IEnumerableExtensions.cs" />
+    <Compile Include="Configuration\Iqvia_LineBlock.cs" />
+    <Compile Include="Configuration\ObservableDictionary.cs" />
     <Compile Include="Configuration\Querys.cs" />
     <Compile Include="Configuration\Section.cs" />
     <Compile Include="Configuration\UhcEvents.cs" />
@@ -379,15 +601,46 @@
     <Compile Include="Customization\CustomToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Domain\Entities\ChargingSections.cs" />
     <Compile Include="Domain\Entities\City.cs" />
+    <Compile Include="Domain\Entities\CI_Finances_Obs.cs" />
+    <Compile Include="Domain\Entities\CI_FollowUp.cs" />
+    <Compile Include="Domain\Entities\CI_Header.cs" />
+    <Compile Include="Domain\Entities\CI_Itens.cs" />
+    <Compile Include="Domain\Entities\CI_OriginNF.cs" />
+    <Compile Include="Domain\Entities\CI_Reason.cs" />
+    <Compile Include="Domain\Entities\CI_Responsible.cs" />
+    <Compile Include="Domain\Entities\CI_ReturnNF.cs" />
     <Compile Include="Domain\Entities\Contact.cs" />
     <Compile Include="Domain\Entities\Contact_Mail.cs" />
     <Compile Include="Domain\Entities\Contact_Person.cs" />
     <Compile Include="Domain\Entities\Contact_Phone.cs" />
+    <Compile Include="Domain\Entities\Customer_Contact.cs" />
+    <Compile Include="Domain\Entities\Descricao_IMSCliente.cs" />
+    <Compile Include="Domain\Entities\Descricao_IMSProduto.cs" />
+    <Compile Include="Domain\Entities\Descricao_IMSVendas.cs" />
+    <Compile Include="Domain\Entities\ExternalContrato.cs" />
+    <Compile Include="Domain\Entities\ExternalNF.cs" />
+    <Compile Include="Domain\Entities\FTP.cs" />
+    <Compile Include="Domain\Entities\GNRE_Lote.cs" />
+    <Compile Include="Domain\Entities\GruposClientes_Externos.cs" />
+    <Compile Include="Domain\Entities\Header_IMSCliente.cs" />
+    <Compile Include="Domain\Entities\Header_IMSProduto.cs" />
+    <Compile Include="Domain\Entities\Header_IMSVendas.cs" />
+    <Compile Include="Domain\Entities\IMSCliente.cs" />
+    <Compile Include="Domain\Entities\IMSProduto.cs" />
+    <Compile Include="Domain\Entities\IMSVendas.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Clientes_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Fabricantes_Externos.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\Favorecidos_Externos.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\Fornecedores_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Produtos_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Transportadores_Externos.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\Vendedores_Externos.cs" />
+    <Compile Include="Domain\Entities\Iqvia_Control.cs" />
+    <Compile Include="Domain\Entities\Iqvia_DetailedBlocks.cs" />
+    <Compile Include="Domain\Entities\Iqvia_Panel.cs" />
+    <Compile Include="Domain\Entities\MonitorGnre.cs" />
     <Compile Include="Domain\Entities\NF_Canhotos.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Action.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Groups.cs" />
@@ -404,10 +657,14 @@
     <Compile Include="Domain\Entities\ShippingPercentageCity.cs" />
     <Compile Include="Domain\Entities\ShippingPercentageState.cs" />
     <Compile Include="Domain\Entities\State.cs" />
+    <Compile Include="Domain\Entities\Trailler_IMSCliente.cs" />
+    <Compile Include="Domain\Entities\Trailler_IMSProduto.cs" />
+    <Compile Include="Domain\Entities\Trailler_IMSVendas.cs" />
     <Compile Include="Domain\Entities\Transporter_Contact.cs" />
     <Compile Include="Domain\Entities\Users\Sector.cs" />
     <Compile Include="Domain\Entities\Users\Users.cs" />
     <Compile Include="Domain\Entities\Users\Users_Groups.cs" />
+    <Compile Include="Domain\Entities\FiscalParametersByState.cs" />
     <Compile Include="Domain\Log\Logs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -465,6 +722,96 @@
     <EmbeddedResource Include="App\ModCadastral\Cadastro\frmContatos_Visualizar.resx">
       <DependentUpon>frmContatos_Visualizar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="App\ModContabilFiscal\Configuracoes\frmParametrizacaoFiscalPorUf.resx">
+      <DependentUpon>frmParametrizacaoFiscalPorUf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModContabilFiscal\frmModContabilFiscal.resx">
+      <DependentUpon>frmModContabilFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModContabilFiscal\Relatorios\frmRelatorioDifalDevAnalitico.resx">
+      <DependentUpon>frmRelatorioDifalDevAnalitico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModContabilFiscal\Relatorios\frmRelatorioDifalDevSintetico.resx">
+      <DependentUpon>frmRelatorioDifalDevSintetico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Acompanhamento\frmTitulosVsEmpenho.resx">
+      <DependentUpon>frmTitulosVsEmpenho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Cadastral\frmCadastroCliente.resx">
+      <DependentUpon>frmCadastroCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Cadastral\frmSelecionarCliente.resx">
+      <DependentUpon>frmSelecionarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Conferencia.resx">
+      <DependentUpon>frmCI_Conferencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Encaminhamento.resx">
+      <DependentUpon>frmCI_Encaminhamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_EncaminhamentoVsCi.resx">
+      <DependentUpon>frmCI_EncaminhamentoVsCi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Encaminhamento_Add.resx">
+      <DependentUpon>frmCI_Encaminhamento_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Encaminhamento_Edit.resx">
+      <DependentUpon>frmCI_Encaminhamento_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Responsavel.resx">
+      <DependentUpon>frmCI_Responsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Responsavel_Add.resx">
+      <DependentUpon>frmCI_Responsavel_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Responsavel_Edit.resx">
+      <DependentUpon>frmCI_Responsavel_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\CI\frmCI_Visualizar.resx">
+      <DependentUpon>frmCI_Visualizar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Cobranca\frmParametrosDeCobranca.resx">
+      <DependentUpon>frmParametrosDeCobranca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\frmModFinanceiro.resx">
+      <DependentUpon>frmModFinanceiro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\MonitoresFinanceiros\frmMonitores_ExpXmlGnre.resx">
+      <DependentUpon>frmMonitores_ExpXmlGnre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\MonitoresFinanceiros\frmMonitores_ExpXmlGnre_Obs.resx">
+      <DependentUpon>frmMonitores_ExpXmlGnre_Obs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Pagamentos\frmContasPagar.resx">
+      <DependentUpon>frmContasPagar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmContasReceber.resx">
+      <DependentUpon>frmContasReceber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmContasRecebidas.resx">
+      <DependentUpon>frmContasRecebidas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmRecPublicoPrivado.resx">
+      <DependentUpon>frmRecPublicoPrivado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\frmModGerencial.resx">
+      <DependentUpon>frmModGerencial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmBloqueioDetalhado_IQVIA.resx">
+      <DependentUpon>frmBloqueioDetalhado_IQVIA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmControladoria.resx">
+      <DependentUpon>frmControladoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmControladoria_Arquivos_IQVIA.resx">
+      <DependentUpon>frmControladoria_Arquivos_IQVIA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmEnvioDeDados_IQVIA.resx">
+      <DependentUpon>frmEnvioDeDados_IQVIA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmVisualizarLayout_IQVIA.resx">
+      <DependentUpon>frmVisualizarLayout_IQVIA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="App\Telas_Genericas\frmConsultaGenerica.resx">
       <DependentUpon>frmConsultaGenerica.cs</DependentUpon>
     </EmbeddedResource>
@@ -473,6 +820,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\Telas_Genericas\frmConsultarFabricante.resx">
       <DependentUpon>frmConsultarFabricante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Telas_Genericas\frmConsultarFavorecido.resx">
+      <DependentUpon>frmConsultarFavorecido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Telas_Genericas\frmConsultarFornecedor.resx">
+      <DependentUpon>frmConsultarFornecedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Telas_Genericas\frmConsultarNF.resx">
+      <DependentUpon>frmConsultarNF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Telas_Genericas\frmConsultarProduto.resx">
+      <DependentUpon>frmConsultarProduto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\Telas_Genericas\frmConsultarTransportador.resx">
       <DependentUpon>frmConsultarTransportador.cs</DependentUpon>
@@ -493,6 +852,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Domain\Entities\ChargingParameters.cs" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -661,5 +1021,7 @@
       <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\squirrel.windows.2.0.1\build\squirrel.windows.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\squirrel.windows.2.0.1\build\squirrel.windows.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets'))" />
   </Target>
+  <Import Project="packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets" Condition="Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets')" />
 </Project>

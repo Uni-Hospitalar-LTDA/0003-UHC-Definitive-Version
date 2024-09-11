@@ -157,7 +157,34 @@ namespace UHC3_Definitive_Version.Configuration
             Type type = instance.GetType();
             return type.Name;
         }
+        public static List<Gen> getAllToListS(string query)
+        {
+            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand command = conn.CreateCommand();
+                    command.CommandText = query;
 
+                    Querys<Gen> resultsMapper = new Querys<Gen>();
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<Gen> results = resultsMapper.MapResultsToObject(reader);
+                    return results;
+                }
+                catch (Exception ex)
+                {
+                    CustomNotification.defaultError(ex.Message);
+                    return null;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
         // Método para obter o último código inserido na tabela Gen
         public async static Task<int> getLastCodeAsync()
         {

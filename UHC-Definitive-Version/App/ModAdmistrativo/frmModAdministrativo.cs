@@ -50,21 +50,21 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo
                 gpbFretes.Enabled = true;
 
             //Screen            
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Informações de Transportadora") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Informações de Transportadora") != null)
                 btnInformacoesTransportadora.Enabled = true;
 
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Controle de Canhotos") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Controle de Canhotos") != null)
                 btnControleCanhotos.Enabled = true;
             if (PermissionsAllowed.subModules?.Find(m => m.Name == "Relatório de Ausências") != null)
                 btnRelatorioAusencias.Enabled = true;
 
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Conversor para Layout") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Conversor para Layout") != null)
                 btnConversorParaLayoutFrete.Enabled = true;
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Conferência de Fretes") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Conferência de Fretes") != null)
                 btnConferenciaFretes.Enabled = true;
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Relatório Analítico") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Relatório Analítico") != null)
                 btnRelatorioAnaliticoFretes.Enabled = true;
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Manutenção de Fretes") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Manutenção de Fretes") != null)
                 btnManutencaoFretes.Enabled = true;
 
         }

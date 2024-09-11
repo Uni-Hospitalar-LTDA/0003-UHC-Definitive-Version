@@ -34,12 +34,27 @@ namespace UHC3_Definitive_Version.Configuration
             idUsuario = id;
             HoraLogin = DateTime.Now;
             Unidade = unidade;
-            if (unidade == "PE")
+            if (unidade == "UNI HOSPITALAR")
             {
-                CodIqvia = "";
-                Empresa = "REC";
-                pdfLogo = "";
-                logoEmail = "";
+                CodIqvia = "5295";
+                Empresa = "Uni Hospitalar LTDA";
+                pdfLogo = "logo_UNI_Hospitalar";
+                logoEmail = "https://i.imgur.com/CTeGKCP.png";
+            }
+            else if (unidade == "UNI CEARÁ")
+            {
+                CodIqvia = "0638";
+                Empresa = "Uni Hospitalar Ceará";
+                pdfLogo = "logo_UNI_Ceara";
+                logoEmail = "https://i.imgur.com/Sz2NLr3.png";
+            }
+            else if (unidade == "SP HOSPITALAR")
+            {
+                CodIqvia = "9894";
+                Empresa = "SP Hospitalar";
+                pdfLogo = "logo_SP_Hospitalar";
+                logoEmail = "https://i.imgur.com/cp5UGaO.png";
+
             }
         }
         public async static Task<string> On(string user, string password,string unidade = "UNI HOSPITALAR")

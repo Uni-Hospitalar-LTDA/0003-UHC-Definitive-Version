@@ -116,5 +116,12 @@ namespace UHC3_Definitive_Version.Customization
                 return 0.00; // ou você pode escolher lançar uma exceção aqui
             }
         }
+        public static string ConvertToCNPJ(this string CNPJ)
+        {
+            if (CNPJ?.Length == 14)
+                return Convert.ToUInt64(CNPJ).ToString(@"00\.000\.000\/0000\-00");
+            else
+                return null;
+        }
     }
 }
