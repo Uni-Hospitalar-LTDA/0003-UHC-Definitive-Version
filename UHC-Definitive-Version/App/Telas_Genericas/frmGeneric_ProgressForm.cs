@@ -11,19 +11,29 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
         private Action onCancel;
         public CancellationTokenSource cancellationTokenSource { get; private set; } = new CancellationTokenSource();
         public bool IsCancelled { get; private set; } = false;
+        public string chargeText { get; set; } = "Exportando...";
+
 
         public frmGeneric_ProgressForm()
         {
             InitializeComponent();
 
+            //Properties
+            ConfigureFormProperties();
+            ConfigureLabelProperties();
             //Events
             ConfigureFormEvents();            
         }
 
-        private void ConfigureFormEvents()
+        private void ConfigureLabelProperties()
         {
-            //Properties
-            ConfigureFormProperties();
+            lblCarregando.Text = chargeText;
+        }
+
+        private void ConfigureFormEvents()
+        {            
+            
+            
 
             //Events
             ConfigureButtonEvents();

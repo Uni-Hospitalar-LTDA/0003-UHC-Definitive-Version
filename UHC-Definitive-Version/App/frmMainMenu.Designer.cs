@@ -35,7 +35,7 @@
             this.btnOpcoes = new System.Windows.Forms.Button();
             this.llblINeedHelp = new System.Windows.Forms.LinkLabel();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnModVendas = new System.Windows.Forms.Button();
             this.pcbModLogistica = new System.Windows.Forms.PictureBox();
             this.btnModLogistica = new System.Windows.Forms.Button();
             this.pcbModLicitacao = new System.Windows.Forms.PictureBox();
@@ -80,7 +80,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.btnOpcoes);
             this.splitContainer1.Panel1.Controls.Add(this.llblINeedHelp);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBox7);
-            this.splitContainer1.Panel1.Controls.Add(this.button6);
+            this.splitContainer1.Panel1.Controls.Add(this.btnModVendas);
             this.splitContainer1.Panel1.Controls.Add(this.pcbModLogistica);
             this.splitContainer1.Panel1.Controls.Add(this.btnModLogistica);
             this.splitContainer1.Panel1.Controls.Add(this.pcbModLicitacao);
@@ -167,15 +167,15 @@
             this.pictureBox7.TabIndex = 32;
             this.pictureBox7.TabStop = false;
             // 
-            // button6
+            // btnModVendas
             // 
-            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button6.Location = new System.Drawing.Point(15, 478);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(247, 44);
-            this.button6.TabIndex = 31;
-            this.button6.Text = "Módulo de Vendas";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnModVendas.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnModVendas.Location = new System.Drawing.Point(15, 478);
+            this.btnModVendas.Name = "btnModVendas";
+            this.btnModVendas.Size = new System.Drawing.Size(247, 44);
+            this.btnModVendas.TabIndex = 31;
+            this.btnModVendas.Text = "Módulo de Vendas";
+            this.btnModVendas.UseVisualStyleBackColor = true;
             // 
             // pcbModLogistica
             // 
@@ -376,7 +376,7 @@
         private System.Windows.Forms.PictureBox pcbModAdministrativo;
         private System.Windows.Forms.Button btnModAdministrativo;
         private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnModVendas;
         private System.Windows.Forms.PictureBox pcbModLogistica;
         private System.Windows.Forms.Button btnModLogistica;
         private System.Windows.Forms.PictureBox pcbModLicitacao;

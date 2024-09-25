@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this._HelpMeDGV = new System.Windows.Forms.Label();
             this.btnSalvar = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
             this.btnPesquisar = new System.Windows.Forms.Button();
@@ -37,52 +38,61 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
+            // _HelpMeDGV
+            // 
+            this._HelpMeDGV.AutoSize = true;
+            this._HelpMeDGV.Location = new System.Drawing.Point(9, 338);
+            this._HelpMeDGV.Name = "_HelpMeDGV";
+            this._HelpMeDGV.Size = new System.Drawing.Size(297, 13);
+            this._HelpMeDGV.TabIndex = 15;
+            this._HelpMeDGV.Text = "Dê dois cliques na tela para selecionar o Fabricante desejado";
+            // 
             // btnSalvar
             // 
             this.btnSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalvar.Location = new System.Drawing.Point(593, 319);
+            this.btnSalvar.Location = new System.Drawing.Point(550, 341);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvar.TabIndex = 25;
+            this.btnSalvar.TabIndex = 13;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             // 
             // btnFechar
             // 
             this.btnFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFechar.Location = new System.Drawing.Point(674, 319);
+            this.btnFechar.Location = new System.Drawing.Point(631, 341);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 26;
+            this.btnFechar.TabIndex = 14;
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(312, 22);
+            this.btnPesquisar.Location = new System.Drawing.Point(310, 22);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btnPesquisar.TabIndex = 27;
+            this.btnPesquisar.TabIndex = 9;
             this.btnPesquisar.Text = "Pesquisar";
             this.btnPesquisar.UseVisualStyleBackColor = true;
             // 
             // lblPesquisar
             // 
             this.lblPesquisar.AutoSize = true;
-            this.lblPesquisar.Location = new System.Drawing.Point(11, 9);
+            this.lblPesquisar.Location = new System.Drawing.Point(9, 9);
             this.lblPesquisar.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPesquisar.Name = "lblPesquisar";
-            this.lblPesquisar.Size = new System.Drawing.Size(88, 13);
-            this.lblPesquisar.TabIndex = 28;
-            this.lblPesquisar.Text = "Pesquisar Cliente";
+            this.lblPesquisar.Size = new System.Drawing.Size(106, 13);
+            this.lblPesquisar.TabIndex = 11;
+            this.lblPesquisar.Text = "Pesquisar Fabricante";
             // 
             // txtPesquisar
             // 
-            this.txtPesquisar.Location = new System.Drawing.Point(11, 24);
+            this.txtPesquisar.Location = new System.Drawing.Point(9, 24);
             this.txtPesquisar.Margin = new System.Windows.Forms.Padding(2);
             this.txtPesquisar.Name = "txtPesquisar";
             this.txtPesquisar.Size = new System.Drawing.Size(296, 20);
-            this.txtPesquisar.TabIndex = 23;
+            this.txtPesquisar.TabIndex = 8;
             // 
             // dgvData
             // 
@@ -90,19 +100,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Location = new System.Drawing.Point(14, 47);
+            this.dgvData.Location = new System.Drawing.Point(9, 47);
             this.dgvData.Margin = new System.Windows.Forms.Padding(2);
             this.dgvData.Name = "dgvData";
             this.dgvData.RowHeadersWidth = 51;
             this.dgvData.RowTemplate.Height = 24;
-            this.dgvData.Size = new System.Drawing.Size(735, 259);
-            this.dgvData.TabIndex = 24;
+            this.dgvData.Size = new System.Drawing.Size(697, 289);
+            this.dgvData.TabIndex = 12;
             // 
             // frmConsultarFabricante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 354);
+            this.ClientSize = new System.Drawing.Size(715, 369);
+            this.Controls.Add(this._HelpMeDGV);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.btnPesquisar);
@@ -131,6 +142,7 @@
 
         #endregion
 
+        private System.Windows.Forms.Label _HelpMeDGV;
         private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Button btnPesquisar;

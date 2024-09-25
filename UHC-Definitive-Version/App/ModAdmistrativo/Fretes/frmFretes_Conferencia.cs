@@ -19,6 +19,16 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Fretes
         public frmFretes_Conferencia()
         {
             InitializeComponent();
+
+            ConfigureFormProperties(); 
+            ConfigureButtonProperties();
+            ConfigureDataGridViewProperties();
+            ConfigureTextBoxProperties();
+            ConfigureListBoxProperties();
+            ConfigureLabelProperties();
+
+            ConfigureFormEvents();
+            
         }
 
 

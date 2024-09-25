@@ -39,7 +39,7 @@ namespace UHC3_Definitive_Version.Domain.IMS
 		                     _010Tipo_de_Registro =  '{6}'
 		                    ,_020Fixo = '{0}'
 		                    ,_030Seu_Código_IQVIA = '{Section.CodIqvia}'
-		                    ,_040Total_de_Registros = '{totalGeral+2}'
+		                    ,_040Total_de_Registros = '{totalGeral}'
 		                    ,_050Total_unidades = '{totalUnidades}'
 		                    ,_060Total_de_Unidades_devolucoes = '{totalUnidadesDevolucao}' 
 		                    ,_070Controle_interno_IQVIA = '{"imsbrven6"}'

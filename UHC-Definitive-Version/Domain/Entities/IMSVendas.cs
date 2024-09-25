@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using UHC3_Definitive_Version.Configuration;
 
 namespace UHC3_Definitive_Version.Domain.IMS
 {
-    public class IMSVendas  
+    public class IMSVendas
     {
-        public static async Task<string> writeIMSVendas(DateTime date,string id)
+        public static async Task<string> writeIMSVendas(DateTime date, string id)
         {
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + $@"\{Application.ResourceAssembly.FullName}\Iqvia";
             string archiveName = $"V{Section.CodIqvia}M{date.ToString("MM")}.D{date.ToString("dd")}";
-
             string filePath = $@"{folder}\{archiveName}";
 
             if (!Directory.Exists(folder))
@@ -27,33 +27,62 @@ namespace UHC3_Definitive_Version.Domain.IMS
                 File.Delete(filePath);
             }
 
-
-            StreamWriter writer = new StreamWriter($@"{folder}\{archiveName}");
-
-
-            await writer.WriteLineAsync(await Header_IMSVendas.getHeaderAsync(date));
-            var description = await Descricao_IMSVendas.getDescricao(date,id);
-            
-
-
-            // Verifica se description.Item1 é nulo
-            if (description.Item1 == null)
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                writer.Close();
-                File.Delete(filePath);
-                return null;
+                await writer.WriteLineAsync(await Header_IMSVendas.getHeaderAsync(date));
+                var description = await Descricao_IMSVendas.getDescricao(date, id);
+
+                // Verifica se description.Item1 é nulo
+                if (description.Item1 == null)
+                {
+                    writer.Close();
+                    File.Delete(filePath);
+                    return null;
+                }
+
+                string str = RemoveEmptyLinesFromString(description.Item1);                
+                await writer.WriteLineAsync(str);                
+                await writer.WriteAsync(await Trailer_IMSVendas.getTraillerAsync(CountLinesInString(str)+2, description.Item3, description.Item4));
             }
 
-            await writer.WriteLineAsync(description.Item1);
-            await writer.WriteAsync(await Trailer_IMSVendas.getTraillerAsync(description.Item2, description.Item3, description.Item4));
-            writer.Close();
+            // Após escrever o arquivo, remover as linhas vazias
+            
 
-            return $@"{folder}\{archiveName}";
+            return filePath;
         }
 
-        public static async Task<Tuple<List<Descricao_IMSVendas>, List<Descricao_IMSVendas>>> getDescriptionsAsync(DateTime date,string id)
+
+        private static int CountLinesInString(string input, bool countEmptyLines = true)
         {
-            return await Descricao_IMSVendas.getAllTolistAsync(date,id);
+            // Dividir a string em linhas
+            var lines = input.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            if (countEmptyLines)
+            {
+                // Retorna o número total de linhas
+                return lines.Length;
+            }
+            else
+            {
+                // Retorna o número de linhas não vazias
+                return lines.Count(line => !string.IsNullOrWhiteSpace(line));
+            }
+        }
+
+        private static string RemoveEmptyLinesFromString(string input)
+        {
+            // Dividir a string em linhas, filtrar as não vazias e juntar as linhas novamente
+            var lines = input.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                             .Where(line => !string.IsNullOrWhiteSpace(line))
+                             .ToArray();
+            return string.Join(Environment.NewLine, lines);
+        }
+
+
+        public static async Task<Tuple<List<Descricao_IMSVendas>, List<Descricao_IMSVendas>>> getDescriptionsAsync(DateTime date, string id)
+        {
+            return await Descricao_IMSVendas.getAllTolistAsync(date, id);
         }
     }
+
 }

@@ -22,7 +22,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
         public string Status { get; set; } = "1";
 
         /** Gets **/
-        public async static Task<Users> getToClassByLoginAsync(string userLogin)
+        public async static Task<Users> getToClassByLoginAsync(string userLogin,string unidade)
         {
             string query = $@"SELECT [id] 
                                     ,[login]
@@ -34,7 +34,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
                                     ,[Status]
                                 FROM [{Connection.dbBase}].dbo.[{getClassName()}]
                                WHERE login = '{userLogin}'";            
-            return await getToClass(query);
+            return await getToClass(query,unidade);
         }
         public async static Task<string> getUserCodeAsync(string login)
         {
@@ -169,7 +169,7 @@ WHERE
         }
         public async static Task<string> updateAsync(Users user)
         {
-            Users us = await getToClassByLoginAsync(user.login);
+            Users us = await getToClassByLoginAsync(user.login,Section.Unidade);
             if (!string.IsNullOrEmpty(us?.ToString()))
             {
                 if (us?.id != user.id && us.login?.ToUpper() == user.login.ToUpper())

@@ -20,9 +20,9 @@ namespace UHC3_Definitive_Version.Configuration
             if (unidade == "UNI HOSPITALAR")
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-                ($@"Server=localhost;Database={dbBase}");                
+                ($@"Server=10.5.1.42;Database={dbBase}");                
                 builder.UserID = "sa";
-                builder.Password = "rfds3142365.";
+                builder.Password = "vls021130";
                 //builder.Password = "rfds3142365.";
                 conn = builder.ConnectionString;
                 return new SqlConnection(conn);
@@ -30,9 +30,9 @@ namespace UHC3_Definitive_Version.Configuration
             else if (unidade == "UNI CEARÁ")
                 {
                     SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-                    ($@"Server=localhost;Database={dbBase}");
+                    ($@"Server=10.5.1.23;Database={dbBase}");
                 builder.UserID = "sa";
-                builder.Password = "rfds3142365.";
+                builder.Password = "vls021130";
                 //builder.Password = "rfds3142365.";
                 conn = builder.ConnectionString;
                 return new SqlConnection(conn);
@@ -40,9 +40,9 @@ namespace UHC3_Definitive_Version.Configuration
             else if (unidade == "SP HOSPITALAR")
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-               ($@"Server=localhost;Database={dbBase}");
+               ($@"Server=10.5.1.30;Database={dbBase}");
                 builder.UserID = "sa";
-                builder.Password = "rfds3142365.";
+                builder.Password = "vls021130";
                 //builder.Password = "rfds3142365.";                
                 conn = builder.ConnectionString;
                 return new SqlConnection(conn);

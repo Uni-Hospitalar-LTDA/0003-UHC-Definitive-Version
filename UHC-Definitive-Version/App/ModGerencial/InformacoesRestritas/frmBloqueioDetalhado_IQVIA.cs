@@ -3,12 +3,8 @@ using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC3_Definitive_Version.Domain.Entities.InnmedEntities;
@@ -180,7 +176,7 @@ namespace UHC3_Definitive_Version.ModGerencial.Controladoria
         }
 
 
-        /** Configurations Components **/
+        /** Configurations Components **/       
         private void dataGridView_configurationDefault(DataGridView _dgv)
         {
             _dgv.toDefault();
@@ -394,35 +390,7 @@ namespace UHC3_Definitive_Version.ModGerencial.Controladoria
         {
             if (CustomNotification.defaultQuestionAlert() == DialogResult.Yes) this.Close();
         }
-
-
-        private void dataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (!(sender is DataGridView))
-            {
-                return;
-            }
-
-            DataGridView dataGridView = sender as DataGridView;
-
-            if (e.ColumnIndex == dataGridView.Columns[0].Index) // Verifica se a coluna é a que você deseja validar
-            {
-                if (string.IsNullOrEmpty(e.FormattedValue.ToString())) // Verifica se o valor inserido é uma string vazia
-                {
-                    CustomNotification.defaultAlert("Valor não pode ser vazio"); // Define a mensagem de erro
-                    e.Cancel = true; // Cancela a edição da célula
-                }
-                else
-                {
-                    double value;
-                    if (!double.TryParse(e.FormattedValue.ToString(), out value)) // Verifica se o valor inserido é numérico
-                    {
-                        CustomNotification.defaultAlert("Valor deve ser numérico");  // Define a mensagem de erro
-                        e.Cancel = true; // Cancela a edição da célula
-                    }
-                }
-            }
-        }
+      
     }
 }
 

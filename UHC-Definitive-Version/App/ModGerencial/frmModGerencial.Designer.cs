@@ -34,11 +34,14 @@
             this.btnControladoriaDaInformacao = new System.Windows.Forms.Button();
             this.gpbEnvioDados = new System.Windows.Forms.GroupBox();
             this.btnArquivosIqvia = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMargemCompraVenda = new System.Windows.Forms.Button();
             this.btnDeslogar = new System.Windows.Forms.Button();
             this.btnSair = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.gpbInformacoesRestritas.SuspendLayout();
             this.gpbEnvioDados.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblGerencial
@@ -53,16 +56,19 @@
             this.lblGerencial.Size = new System.Drawing.Size(300, 46);
             this.lblGerencial.TabIndex = 21;
             this.lblGerencial.Text = "Área Gerencial";
+            this.lblGerencial.Click += new System.EventHandler(this.lblGerencial_Click);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel1.Controls.Add(this.gpbInformacoesRestritas);
             this.flowLayoutPanel1.Controls.Add(this.gpbEnvioDados);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(18, 52);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(764, 347);
             this.flowLayoutPanel1.TabIndex = 67;
+            
             // 
             // gpbInformacoesRestritas
             // 
@@ -106,6 +112,27 @@
             this.btnArquivosIqvia.Text = "Arquivos IQVIA";
             this.btnArquivosIqvia.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnMargemCompraVenda);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(391, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(188, 258);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Envio de Dados";
+            // 
+            // btnMargemCompraVenda
+            // 
+            this.btnMargemCompraVenda.ForeColor = System.Drawing.Color.Black;
+            this.btnMargemCompraVenda.Location = new System.Drawing.Point(6, 19);
+            this.btnMargemCompraVenda.Name = "btnMargemCompraVenda";
+            this.btnMargemCompraVenda.Size = new System.Drawing.Size(170, 39);
+            this.btnMargemCompraVenda.TabIndex = 13;
+            this.btnMargemCompraVenda.Text = "Margem de Compra / Venda";
+            this.btnMargemCompraVenda.UseVisualStyleBackColor = true;
+            // 
             // btnDeslogar
             // 
             this.btnDeslogar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -115,6 +142,7 @@
             this.btnDeslogar.TabIndex = 78;
             this.btnDeslogar.Text = "Deslogar";
             this.btnDeslogar.UseVisualStyleBackColor = true;
+            this.btnDeslogar.Click += new System.EventHandler(this.btnDeslogar_Click);
             // 
             // btnSair
             // 
@@ -125,6 +153,7 @@
             this.btnSair.TabIndex = 77;
             this.btnSair.Text = "Sair";
             this.btnSair.UseVisualStyleBackColor = true;
+            this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // frmModGerencial
             // 
@@ -148,10 +177,11 @@
             this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.Text = "frmModGerencial";
+            this.Text = "Módulo Gerencial";            
             this.flowLayoutPanel1.ResumeLayout(false);
             this.gpbInformacoesRestritas.ResumeLayout(false);
             this.gpbEnvioDados.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +197,7 @@
         private System.Windows.Forms.Button btnArquivosIqvia;
         private System.Windows.Forms.Button btnDeslogar;
         private System.Windows.Forms.Button btnSair;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnMargemCompraVenda;
     }
 }

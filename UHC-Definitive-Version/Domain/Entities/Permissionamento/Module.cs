@@ -46,6 +46,7 @@ namespace UHC3_Definitive_Version.Domain.Permissionamento
                               JOIN [{Connection.dbBase}].dbo.[Groups_Module] ON Groups_Module.idGroups = Groups.id
                               JOIN [{Connection.dbBase}].dbo.[Module] ON Module.id = Groups_Module.idModule
                               WHERE idUsers = {idUsers}";
+            Console.WriteLine(query);
             return await getAllToList(query);
         }
 
@@ -53,7 +54,7 @@ namespace UHC3_Definitive_Version.Domain.Permissionamento
         /** UPDATES **/
         public static async Task updateAsync(Module module)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("PE"))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("UNI HOSPITALAR"))
             {
                 SqlTransaction transaction = null;
                 try

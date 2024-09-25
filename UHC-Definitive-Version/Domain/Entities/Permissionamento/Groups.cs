@@ -31,7 +31,7 @@ namespace UHC3_Definitive_Version.Domain.Permissionamento
                                 G.Id	
                                 ,G.Name
                                 ,G.Status";
-
+            Console.WriteLine(query);
             return await getAllToDataTable(query);
         }
         public async static Task<Groups> getToClassAsync(string idGroup)

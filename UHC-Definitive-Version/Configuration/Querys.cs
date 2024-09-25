@@ -99,9 +99,9 @@ namespace UHC3_Definitive_Version.Configuration
         }
 
         // Método para obter um único registro como um objeto Gen
-        public async static Task<Gen> getToClass(string query)
+        public async static Task<Gen> getToClass(string query,string unidade = null)
         {
-            using (SqlConnection conn = new Connection().getConnectionApp(Section.Unidade))
+            using (SqlConnection conn = new Connection().getConnectionApp(unidade == null ?Section.Unidade: unidade))
             {
                 try
                 {
@@ -137,6 +137,34 @@ namespace UHC3_Definitive_Version.Configuration
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
                     return dataTable;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public async static Task<DataTable> getAllToDataTableMultiFilter(string query, string Unidade = "UNI HOSPITALAR")
+        {
+            using (SqlConnection conn = new Connection().getConnectionApp(Unidade))
+            {
+                try
+                {
+                    await conn.OpenAsync();
+
+                    SqlCommand command = conn.CreateCommand();
+                    command.CommandText = query;
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    return dataTable;
+
                 }
                 catch (Exception ex)
                 {
@@ -252,7 +280,6 @@ namespace UHC3_Definitive_Version.Configuration
         {
             await insertAsync(gens.AsEnumerable());
         }
-
         public async static Task insertAsync(Gen gen)
         {
             await insertAsync(new List<Gen> { gen });
@@ -300,7 +327,37 @@ namespace UHC3_Definitive_Version.Configuration
                 }
             }
         }
+        public async static Task insertMultiUnityAsync(List<Gen> gens, string session)
+        {
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(session))
+            {
+                await conn.OpenAsync();
+                SqlTransaction transaction = conn.BeginTransaction();
 
+                using (var bulkCopy = new SqlBulkCopy(conn, SqlBulkCopyOptions.Default, transaction))
+                {
+                    bulkCopy.BatchSize = 100;
+                    bulkCopy.DestinationTableName = $"[{Connection.dbBase}].dbo.[{typeof(Gen).Name}]";
+                    try
+                    {
+                        await bulkCopy.WriteToServerAsync(gens.AsDataTable());
+                        Console.WriteLine(gens.AsDataTable());
+
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomNotification.defaultError(ex.Message);
+                        transaction.Rollback();
+                        conn.Close();
+                    }
+                    finally
+                    {
+                        transaction.Commit();
+                        conn.Close();
+                    }
+                }
+            }
+        }
 
         // Método de atualização genérica
         //public async static Task updateAsync(Gen gen)
@@ -605,6 +662,33 @@ namespace UHC3_Definitive_Version.Configuration
                 table.Columns.Add(prop.Name, prop.PropertyType);
             }
             return table;
+        }
+
+
+        // execu;'oes
+
+        public async static Task execAsync(string query, string Unidade = "UNI HOSPITALAR")
+        {
+            using (SqlConnection conn = new Connection().getConnectionApp(Unidade))
+            {
+                try
+                {
+                    await conn.OpenAsync();
+
+                    SqlCommand command = conn.CreateCommand();
+                    command.CommandText = query;                    
+                    command.ExecuteNonQuery();                    
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);                    
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
     }
 }

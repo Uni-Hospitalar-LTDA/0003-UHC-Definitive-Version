@@ -53,7 +53,7 @@ namespace UHC3_Definitive_Version.Domain.Permissionamento
         /** UPDATES **/
         public static async Task updateAsync(SubModule subModule)
         {
-            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("PE"))
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp("UNI HOSPITALAR"))
             {
                 SqlTransaction transaction = null;
                 try

@@ -73,5 +73,37 @@ namespace UHC3_Definitive_Version.Customization
                 return;
             }
         }
+
+
+        //UHC 3 methods
+        public static void readOnlyAll(Form form, bool condition)
+        {
+            foreach (var control in form.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox txt = (TextBox)control;
+                    txt.ReadOnly = condition;
+                }
+            }
+        }
+        public static void clearAll()
+        {
+            try
+            {
+                foreach (var control in Form.ActiveForm.Controls)
+                {
+                    if (control is TextBox)
+                    {
+                        TextBox txt = (TextBox)control;
+                        txt.Text = String.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomNotification.defaultError("Function CustomTextBox.clearAll() " + ex.Message);
+            }
+        }
     }
 }

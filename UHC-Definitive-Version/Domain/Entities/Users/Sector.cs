@@ -16,7 +16,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
         //Gets
         public async static Task<Sector> getToClassAsync(string id)
         {
-            string query = $@"SELECT * FROM [{Connection.dbBase}].dbo.[{getClassName()}] WHERE id = {id}";
+            string query = $@"SELECT * FROM [{Connection.dbBase}].dbo.[{Sector.getClassName()}] WHERE id = {id}";
             return await getToClass(query);
         }
         public async static Task<DataTable> getAllToDataTableAsync(string filter, string status)

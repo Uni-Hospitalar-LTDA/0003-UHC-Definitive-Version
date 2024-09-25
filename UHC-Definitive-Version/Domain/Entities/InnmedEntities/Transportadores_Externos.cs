@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using UHC3_Definitive_Version.Configuration;
@@ -23,6 +24,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.InnmedEntities
 
         public async static Task<DataTable> getToDataTableAsync(string text)
         {
+            
             string query = $@"SELECT
                                      Codigo [Código]
                               	    ,Razao_Social [Razão Social]	
@@ -30,6 +32,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.InnmedEntities
                               FROM [DMD].dbo.[TRANS] Transportador
                               WHERE (Razao_Social LIKE '%{text}%' 
                                      OR CAST(Cgc_Cpf AS VARCHAR) LIKE '%{text}%')";
+            Console.WriteLine(query);
             return await getAllToDataTable(query);
         }
 

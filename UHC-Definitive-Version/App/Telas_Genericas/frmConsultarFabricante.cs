@@ -3,55 +3,57 @@ using System;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities.InnmedEntities;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace UHC3_Definitive_Version.App.Telas_Genericas
 {
     public partial class frmConsultarFabricante : CustomForm
     {
-
-        /**Instance **/
-        public string extendedCode { get; private set; }
-
-
         public frmConsultarFabricante()
         {
             InitializeComponent();
-
-            //Properties
-            ConfigureFormProperties();
-
-            //Events
-            ConfigureFormEvents();
-        }
-
-        /** Form Configuration **/
-        private void ConfigureFormProperties()
-        {
             this.defaultFixedForm();
+            //txtPesquisar.TextChanged += btnPesquisar_Click;
+            this.Load += frmConsultarFabricante_Load;
+
+            txtPesquisar.KeyDown += txtPesquisar_KeyDown;
+            dgvData.DoubleClick += dgvData_DoubleClick;
+            dgvData.KeyDown += dgvData_KeyDown;
+            btnPesquisar.Click += btnPesquisar_Click;
+            btnFechar.Click += btnFechar_Click;
+            btnSalvar.Click += btnSalvar_Click;
+
         }
-        private void ConfigureFormEvents()
+
+        /** Instance **/
+        public string extendedCode;
+        //private CancellationTokenSource cancellationTokenSource;
+
+
+        /** Load do form**/
+        private void frmConsultarFabricante_Load(object sender, EventArgs e)
         {
-            this.Load += frmConsultarFabricante_Load; ;
+           
+
+           
+            carregarFabricantes(txtPesquisar.Text.ToUpper());
         }
-
-        private void frmConsultarFabricante_Load(object sender, System.EventArgs e)
-        {
-            //pré load
-            carregar(txtPesquisar.Text.ToUpper(), dgvData);
+       
 
 
-            //Events
-            ConfigureButtonEvents();
-            ConfigureDataGridViewEvents();
-            ConfigureTextBoxEvents();
-        }
 
-        //Sync task
-        private void carregar(string text, DataGridView dgvData)
+        /** Função de carga **/
+        private void carregarFabricantes(string text)
         {
             try
             {
-                dgvData.DataSource = Fabricantes_Externos.getAllToDataTable(text);
+                if (Fabricantes_Externos.fabricantes.Count == 0)
+                {                    
+                    dgvData.DataSource = Fabricantes_Externos.getToDataTable(text);
+                }
+                else
+                    dgvData.DataSource = Fabricantes_Externos.getToDataTable(text);
             }
             catch (Exception ex)
             {
@@ -63,27 +65,16 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
                 dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             }
         }
-        /** TextBox Configuration **/
-        private void ConfigureTextBoxEvents()
-        {
-            txtPesquisar.KeyDown += txtPesquisar_KeyDown;
-        }
+     
 
+        /**Funções dos componentes internos**/
         private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                carregar(txtPesquisar.Text.ToUpper(), dgvData);
+                carregarFabricantes(txtPesquisar.Text.ToUpper());
             }
         }
-
-        /** DataGridView Configuration **/
-        private void ConfigureDataGridViewEvents()
-        {
-            dgvData.DoubleClick += dgvData_DoubleClick;
-            dgvData.KeyDown += dgvData_KeyDown;
-        }
-
         private void dgvData_DoubleClick(object sender, EventArgs e)
         {
             if (dgvData.CurrentRow != null)
@@ -91,6 +82,7 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
                 extendedCode = dgvData.CurrentRow.Cells[0].Value.ToString();
                 this.Close();
             }
+
         }
         private void dgvData_KeyDown(object sender, KeyEventArgs e)
         {
@@ -104,12 +96,17 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
             }
         }
 
-        /** Button Configuration  **/
 
-        private void ConfigureButtonEvents()
+
+        /** Buttons **/
+        private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            btnSalvar.Click += btnSalvar_Click;
-            btnPesquisar.Click += btnPesquisar_Click;
+            carregarFabricantes(txtPesquisar.Text.ToUpper());
+        }
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            extendedCode = "0";
+            this.Close();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -120,9 +117,7 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
             }
             this.Close();
         }
-        private void btnPesquisar_Click(object sender, EventArgs e)
-        {
-            carregar(txtPesquisar.Text.ToUpper(), dgvData);
-        }
+
+
     }
 }

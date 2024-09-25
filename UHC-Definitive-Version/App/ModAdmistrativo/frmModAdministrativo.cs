@@ -55,7 +55,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo
 
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Controle de Canhotos") != null)
                 btnControleCanhotos.Enabled = true;
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Relatório de Ausências") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Relatório de Ausências") != null)
                 btnRelatorioAusencias.Enabled = true;
 
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Conversor para Layout") != null)
@@ -76,8 +76,8 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo
         }
         private void ConfigureFormEvents()
         {
-            //blocks();
-            //allows();
+            blocks();
+            allows();
 
 
             //Events

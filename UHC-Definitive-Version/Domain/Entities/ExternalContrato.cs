@@ -19,7 +19,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
         public string cod_produto { get; set; }
         public string produto { get; set; }
         public string nmgenerico_produto { get; set; }
-
+        public string Preco_Compra { get; set; }
         public string Preco_unitario { get; set; }
         public string fabricanteFantasia { get; set; }
         public string qtd_pedido { get; set; }
@@ -51,6 +51,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
                             	,Produto.Descricao [produto]
                             	,Produto.Des_NomGen [nmgenerico_produto]
                                 ,Contrato_Itens.Prc_Unitario [Preco_unitario]
+                                ,iif(dc.Preco_Compra_Digitado is null,Produto.Prc_UltEnt, dc.preco_compra_digitado) [Preco_Compra]
                             	,Fabricante.Fantasia [fabricanteFantasia]
                             	,Contrato_Itens.Qtd_Pedido 
                             	,Contrato_Itens.Qtd_Faturada 
@@ -71,6 +72,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
                             JOIN [DMD].dbo.[CTRIT] Contrato_Itens ON Contrato_Itens.Cod_Contrato = Contrato.Cod_Contrato
                             JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = Contrato_Itens.Cod_Produto
                             JOIN [DMD].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
+                            LEFT JOIN [UHCDB].dbo.[DetalhamentoContratos] DC ON dc.cod_contrato = Contrato.Cod_Contrato
                             WHERE Qtd_Pedido > 0 ";
 
             return await getAllToList(query);
@@ -102,6 +104,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
                             	,Produto.Descricao [Produto]
                             	,Produto.Des_NomGen [Nome Genérico]
                                 ,Contrato_Itens.Prc_Unitario [Preco_unitario]
+                                ,iif(dc.Preco_Compra_Digitado is null,Produto.Prc_UltEnt, dc.preco_compra_digitado) [Preco_Compra]
                             	,Fabricante.Fantasia [Fabricante]
                             	,Contrato_Itens.Qtd_Pedido [Qtd. Contrato]
                             	,Contrato_Itens.Qtd_Faturada [Qtd. Faturada]
@@ -123,6 +126,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
                             JOIN [DMD].dbo.[CTRIT] Contrato_Itens ON Contrato_Itens.Cod_Contrato = Contrato.Cod_Contrato
                             JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = Contrato_Itens.Cod_Produto
                             JOIN [DMD].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
+                            LEFT JOIN [UHCDB].dbo.[DetalhamentoContratos] DC ON dc.cod_contrato = Contrato.Cod_Contrato
                             WHERE Qtd_Pedido > 0 
                             AND(Contrato.Dat_InicioCtr >= '{dateInicial.ToString("yyyyMMdd")}' AND Contrato.Dat_InicioCtr <= '{dateFinal.ToString("yyyyMMdd")}')
                             AND Produto.Descricao LIKE '%{produto}%'

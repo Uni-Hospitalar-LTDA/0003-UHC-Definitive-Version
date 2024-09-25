@@ -1,11 +1,12 @@
-﻿using _0009_Integra_Cob.Configuration;
-using _0009_Integra_Cob.Customization;
+﻿
 using Krypton.Toolkit;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.Configuration;
+using UHC3_Definitive_Version.Customization;
 
-namespace _0009_Integra_Cob.App
+namespace UHC_DEFINITIVE_VERSION.App
 {
     public partial class frmRedefinirSenha : CustomForm
     {                

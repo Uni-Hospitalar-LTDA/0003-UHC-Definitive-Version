@@ -17,7 +17,23 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         {
             InitializeComponent();
             this.defaultMaximableForm();
+
+            this.Load += frmControladoria_ArquivosIMS_Load;
+            btnGerarArquivosEnvio.Click += btnGerarArquivosEnvio_Click;
+            txtNArquivos.Click += txtNArquivos_Leave;
+            dtpDataFinal.ValueChanged += dtp_ValueChanged;
+            dtpDataInicial.ValueChanged += dtp_ValueChanged;
+            btnVerificarArquivo.Click += btnVerificarArquivo_Click;
+            btnBloqueioDetalhado.Click += btnBloqueioDetalhado_Click;
+            btnRemoverBloqueios.Click += btnRemoverBloqueios_Click;
+            btnRefresh.Click += btnRefresh_Click;
+            btnCancelar.Click += btnCancelar_Click;
+            btnSalvar.Click += btnSalvar_Click;
+            dgvData.DoubleClick += dgvData_DoubleClick;
         }
+
+       
+
         Iqvia_Control persistent = new Iqvia_Control();
 
         /** Event Load **/

@@ -24,6 +24,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             this.defaultMaximableForm();
 
             btnFechar.toDefaultCloseButton();
+            this.Load += frmVisualizarLayoutIqvia_Load;
 
 
         }
@@ -586,11 +587,18 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 
             await loadDescription(tipo);
 
+            ConfigureSystemEvents();
+            ConfigureDataGridsViewEvents();
 
         }
 
 
         /** DataGridView event **/
+        private void ConfigureDataGridsViewEvents()
+        {
+            dgvData.CellValidating += dgvData_CellValidating;
+            dgvData.CellValueChanged += dgvData_CellValueChanged;
+        }
         private void dgvData_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -661,7 +669,15 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 
 
         /** System Buttons **/
-
+        private void ConfigureSystemEvents()
+        {
+            btnPesquisar.Click += btnPesquisar_Click;
+            txtPesquisar.KeyDown += txtPesquisar_KeyDown;
+            btnBloqueioDeLinha.Click += btnBloqueioDeLinha_Click;
+            btnRemoverBloqueio.Click += btnRemoverBloqueio_Click;
+            btnCancelar.Click += btnCancelar_Click;
+            btnRefresh.Click += btnRefresh_Click;
+        }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             pesquisarDados(txtPesquisar.Text);
@@ -718,7 +734,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             if (DialogResult.Yes == CustomNotification.defaultQuestionAlert("Esta ação irá cancelar todas as alterações feitas, deseja continuar"))
                 frmVisualizarLayoutIqvia_Load(this, e);
         }
-
         private async void btnRefresh_Click(object sender, EventArgs e)
         {
             clearData();

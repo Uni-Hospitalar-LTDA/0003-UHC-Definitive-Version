@@ -153,8 +153,9 @@ namespace UHC3_Definitive_Version.Domain.Entities
 FROM [{Connection.dbDMD}].dbo.[NFSCB] NF_Saida
 CROSS JOIN [{Connection.dbDMD}].dbo.[EMPRE] Empresa
 JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
-LEFT JOIN [{Connection.dbBase}].dbo.City municipioEmitente ON municipioEmitente.description = Empresa.Cidade  collate Latin1_General_CI_AS
-LEFT JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
+INNER JOIN [{Connection.dbBase}].dbo.City municipioEmitente ON municipioEmitente.description = Empresa.Cidade  collate Latin1_General_CI_AS
+INNER JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
+inner JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinatario.idIBGE = municipioDestinatario.idIBGE_State AND estadoDestinatario.uf = Cliente.Cod_Estado collate Latin1_General_CI_AS
                                            WHERE NUM_NOTA = {nf}";
                         Console.WriteLine(command.CommandText);
                         SqlDataReader reader;

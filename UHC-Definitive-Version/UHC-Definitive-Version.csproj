@@ -55,6 +55,30 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Logo-UHC-Base.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D658F5E43F80ADF066F4C60DEE86B4CBB2EFDAEF</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>UHC-Definitive-Version_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.102.3.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
       <HintPath>packages\ClosedXML.0.102.3\lib\netstandard2.0\ClosedXML.dll</HintPath>
@@ -70,6 +94,12 @@
     </Reference>
     <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
       <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
+    </Reference>
+    <Reference Include="DK.Standard, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DK.Standard.4.137.4070.201115155\lib\net471\DK.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="DK.WshRuntime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DK.WshRuntime.4.1.3.201115164\lib\net471\DK.WshRuntime.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.16.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>packages\DocumentFormat.OpenXml.2.16.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
@@ -100,6 +130,9 @@
     </Reference>
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IO.RecyclableMemoryStream.3.0.0\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
@@ -144,6 +177,9 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
@@ -157,8 +193,17 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.IO.Packaging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.Packaging.6.0.0\lib\net461\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Async, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>packages\System.Linq.Async.4.1.1\lib\net461\System.Linq.Async.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
@@ -206,6 +251,15 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Threading.Channels, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Channels.4.7.0\lib\netstandard2.0\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Dataflow.4.11.0\lib\netstandard2.0\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -222,6 +276,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\AplicacoesParceiras\frmKairos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\AplicacoesParceiras\frmKairos.Designer.cs">
+      <DependentUpon>frmKairos.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\frmLoginNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +299,18 @@
     </Compile>
     <Compile Include="App\frmModTelaInicial.Designer.cs">
       <DependentUpon>frmModTelaInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\frmRedefinirSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\frmRedefinirSenha.Designer.cs">
+      <DependentUpon>frmRedefinirSenha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\frmUpdateScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\frmUpdateScreen.Designer.cs">
+      <DependentUpon>frmUpdateScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador.cs">
       <SubType>Form</SubType>
@@ -498,10 +570,10 @@
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria_Arquivos_IQVIA.Designer.cs">
       <DependentUpon>frmControladoria_Arquivos_IQVIA.cs</DependentUpon>
     </Compile>
-    <Compile Include="App\ModGerencial\InformacoesRestritas\frmEnvioDeDados_IQVIA.cs">
+    <Compile Include="App\ModGerencial\Arquivos IQVIA\frmEnvioDeDados_IQVIA.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="App\ModGerencial\InformacoesRestritas\frmEnvioDeDados_IQVIA.Designer.cs">
+    <Compile Include="App\ModGerencial\Arquivos IQVIA\frmEnvioDeDados_IQVIA.Designer.cs">
       <DependentUpon>frmEnvioDeDados_IQVIA.cs</DependentUpon>
     </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmVisualizarLayout_IQVIA.cs">
@@ -509,6 +581,306 @@
     </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmVisualizarLayout_IQVIA.Designer.cs">
       <DependentUpon>frmVisualizarLayout_IQVIA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\Informativo\frmMargemCompraVenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\Informativo\frmMargemCompraVenda.Designer.cs">
+      <DependentUpon>frmMargemCompraVenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\AnaliseVendas\frmInformativoDeProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\AnaliseVendas\frmInformativoDeProdutos.Designer.cs">
+      <DependentUpon>frmInformativoDeProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\AnaliseVendas\frmInformativoDeProdutos_detail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\AnaliseVendas\frmInformativoDeProdutos_detail.Designer.cs">
+      <DependentUpon>frmInformativoDeProdutos_detail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmCadastrarJustificativasDeParticipacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmCadastrarJustificativasDeParticipacao.Designer.cs">
+      <DependentUpon>frmCadastrarJustificativasDeParticipacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmCadastrarPlataformas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmCadastrarPlataformas.Designer.cs">
+      <DependentUpon>frmCadastrarPlataformas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmEditarPlataforma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmEditarPlataforma.Designer.cs">
+      <DependentUpon>frmEditarPlataforma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmPlataformas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Cadastro\frmPlataformas.Designer.cs">
+      <DependentUpon>frmPlataformas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Contratos\frmDetalhamentoDeContratos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Contratos\frmDetalhamentoDeContratos.Designer.cs">
+      <DependentUpon>frmDetalhamentoDeContratos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\frmModLicitacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\frmModLicitacao.Designer.cs">
+      <DependentUpon>frmModLicitacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmCriarAgenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmCriarAgenda.Designer.cs">
+      <DependentUpon>frmCriarAgenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmEditarAgenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmEditarAgenda.Designer.cs">
+      <DependentUpon>frmEditarAgenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmListaAgenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmListaAgenda.Designer.cs">
+      <DependentUpon>frmListaAgenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmProcGenDashboardPorResponsavel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmProcGenDashboardPorResponsavel.Designer.cs">
+      <DependentUpon>frmProcGenDashboardPorResponsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmProcGenDashboardPorResponsavel_Visualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmProcGenDashboardPorResponsavel_Visualizer.Designer.cs">
+      <DependentUpon>frmProcGenDashboardPorResponsavel_Visualizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmProcGenDashboardPorTempo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmProcGenDashboardPorTempo.Designer.cs">
+      <DependentUpon>frmProcGenDashboardPorTempo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmReagenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLicitacao\Processos\frmReagenda.Designer.cs">
+      <DependentUpon>frmReagenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Conferencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Conferencia.Designer.cs">
+      <DependentUpon>frmCI_Conferencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_ConferenciaProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_ConferenciaProdutos.Designer.cs">
+      <DependentUpon>frmCI_ConferenciaProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Conferencia_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Conferencia_Add.Designer.cs">
+      <DependentUpon>frmCI_Conferencia_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Conferencia_Editar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Conferencia_Editar.Designer.cs">
+      <DependentUpon>frmCI_Conferencia_Editar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Motivos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Motivos.Designer.cs">
+      <DependentUpon>frmCI_Motivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Motivos_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Motivos_Add.Designer.cs">
+      <DependentUpon>frmCI_Motivos_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Motivos_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\CI\frmCI_Motivos_Edit.Designer.cs">
+      <DependentUpon>frmCI_Motivos_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModLogistica\frmModLogistica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModLogistica\frmModLogistica.Designer.cs">
+      <DependentUpon>frmModLogistica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmAnaliseDebitoCreditoAche.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmAnaliseDebitoCreditoAche.designer.cs">
+      <DependentUpon>frmAnaliseDebitoCreditoAche.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos.Designer.cs">
+      <DependentUpon>frmConsultaDePrecos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos_DetalhamentoProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos_DetalhamentoProduto.Designer.cs">
+      <DependentUpon>frmConsultaDePrecos_DetalhamentoProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos_Lotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos_Lotes.Designer.cs">
+      <DependentUpon>frmConsultaDePrecos_Lotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDeprecos_NewDetalhamentoProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultaDeprecos_NewDetalhamentoProduto.Designer.cs">
+      <DependentUpon>frmConsultaDeprecos_NewDetalhamentoProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoCliente.Designer.cs">
+      <DependentUpon>frmConsultarPedidoCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoOL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoOL.Designer.cs">
+      <DependentUpon>frmConsultarPedidoOL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\Cadastro\frmVendas_DataIngestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\Cadastro\frmVendas_DataIngestion.designer.cs">
+      <DependentUpon>frmVendas_DataIngestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\frmModVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\frmModVendas.Designer.cs">
+      <DependentUpon>frmModVendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\frmOpcoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\frmOpcoes.Designer.cs">
+      <DependentUpon>frmOpcoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmLiberarUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmLiberarUpdate.Designer.cs">
+      <DependentUpon>frmLiberarUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmOpcoesDesenvolvedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmOpcoesDesenvolvedor.Designer.cs">
+      <DependentUpon>frmOpcoesDesenvolvedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmPermissoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmPermissoes.Designer.cs">
+      <DependentUpon>frmPermissoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmPermissoes_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmPermissoes_Add.Designer.cs">
+      <DependentUpon>frmPermissoes_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao.Designer.cs">
+      <DependentUpon>frmGruposPermissao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Add.Designer.cs">
+      <DependentUpon>frmGruposPermissao_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Editar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Editar.Designer.cs">
+      <DependentUpon>frmGruposPermissao_Editar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Usuarios.Designer.cs">
+      <DependentUpon>frmGruposPermissao_Usuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSelecionarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSelecionarUsuario.Designer.cs">
+      <DependentUpon>frmSelecionarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor.Designer.cs">
+      <DependentUpon>frmSetor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor_Add.Designer.cs">
+      <DependentUpon>frmSetor_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor_Editar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor_Editar.Designer.cs">
+      <DependentUpon>frmSetor_Editar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor_Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmSetor_Usuarios.Designer.cs">
+      <DependentUpon>frmSetor_Usuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario.Designer.cs">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_Add.Designer.cs">
+      <DependentUpon>frmUsuario_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_Editar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_Editar.Designer.cs">
+      <DependentUpon>frmUsuario_Editar.cs</DependentUpon>
     </Compile>
     <Compile Include="App\Telas_Genericas\frmConsultaGenerica.cs">
       <SubType>Form</SubType>
@@ -580,7 +952,9 @@
     <Compile Include="Configuration\Exportacao.cs" />
     <Compile Include="Configuration\FormConfiguration.cs" />
     <Compile Include="Configuration\IEnumerableExtensions.cs" />
+    <Compile Include="Configuration\IntUpdate.cs" />
     <Compile Include="Configuration\Iqvia_LineBlock.cs" />
+    <Compile Include="Configuration\MemoryManager.cs" />
     <Compile Include="Configuration\ObservableDictionary.cs" />
     <Compile Include="Configuration\Querys.cs" />
     <Compile Include="Configuration\Section.cs" />
@@ -601,6 +975,7 @@
     <Compile Include="Customization\CustomToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Domain\Entities\DebitosAche.cs" />
     <Compile Include="Domain\Entities\ChargingSections.cs" />
     <Compile Include="Domain\Entities\City.cs" />
     <Compile Include="Domain\Entities\CI_Finances_Obs.cs" />
@@ -616,9 +991,11 @@
     <Compile Include="Domain\Entities\Contact_Person.cs" />
     <Compile Include="Domain\Entities\Contact_Phone.cs" />
     <Compile Include="Domain\Entities\Customer_Contact.cs" />
+    <Compile Include="Domain\Entities\DataIngestion.cs" />
     <Compile Include="Domain\Entities\Descricao_IMSCliente.cs" />
     <Compile Include="Domain\Entities\Descricao_IMSProduto.cs" />
     <Compile Include="Domain\Entities\Descricao_IMSVendas.cs" />
+    <Compile Include="Domain\Entities\DetalhamentoContratos.cs" />
     <Compile Include="Domain\Entities\ExternalContrato.cs" />
     <Compile Include="Domain\Entities\ExternalNF.cs" />
     <Compile Include="Domain\Entities\FTP.cs" />
@@ -640,6 +1017,8 @@
     <Compile Include="Domain\Entities\Iqvia_Control.cs" />
     <Compile Include="Domain\Entities\Iqvia_DetailedBlocks.cs" />
     <Compile Include="Domain\Entities\Iqvia_Panel.cs" />
+    <Compile Include="Domain\Entities\Kairos.cs" />
+    <Compile Include="Domain\Entities\logProcess_Scheduler.cs" />
     <Compile Include="Domain\Entities\MonitorGnre.cs" />
     <Compile Include="Domain\Entities\NF_Canhotos.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Action.cs" />
@@ -653,6 +1032,9 @@
     <Compile Include="Domain\Entities\Permissionamento\PermissionsAllowed.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Screen.cs" />
     <Compile Include="Domain\Entities\Permissionamento\SubModule.cs" />
+    <Compile Include="Domain\Entities\Platform.cs" />
+    <Compile Include="Domain\Entities\ProcessScheduleJustify.cs" />
+    <Compile Include="Domain\Entities\rollbackActivated.cs" />
     <Compile Include="Domain\Entities\ShippingConference.cs" />
     <Compile Include="Domain\Entities\ShippingPercentageCity.cs" />
     <Compile Include="Domain\Entities\ShippingPercentageState.cs" />
@@ -665,9 +1047,15 @@
     <Compile Include="Domain\Entities\Users\Users.cs" />
     <Compile Include="Domain\Entities\Users\Users_Groups.cs" />
     <Compile Include="Domain\Entities\FiscalParametersByState.cs" />
+    <Compile Include="Domain\Entities\LicCustomer.cs" />
+    <Compile Include="Domain\Entities\LicUser.cs" />
     <Compile Include="Domain\Log\Logs.cs" />
+    <Compile Include="Domain\Entities\ProcessScheduler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="App\AplicacoesParceiras\frmKairos.resx">
+      <DependentUpon>frmKairos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="App\frmLoginNew.resx">
       <DependentUpon>frmLoginNew.cs</DependentUpon>
     </EmbeddedResource>
@@ -676,6 +1064,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\frmModTelaInicial.resx">
       <DependentUpon>frmModTelaInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\frmRedefinirSenha.resx">
+      <DependentUpon>frmRedefinirSenha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\frmUpdateScreen.resx">
+      <DependentUpon>frmUpdateScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModAdmistrativo\Cadastral\frmCadastroTransportador.resx">
       <DependentUpon>frmCadastroTransportador.cs</DependentUpon>
@@ -806,11 +1200,161 @@
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmControladoria_Arquivos_IQVIA.resx">
       <DependentUpon>frmControladoria_Arquivos_IQVIA.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmEnvioDeDados_IQVIA.resx">
+    <EmbeddedResource Include="App\ModGerencial\Arquivos IQVIA\frmEnvioDeDados_IQVIA.resx">
       <DependentUpon>frmEnvioDeDados_IQVIA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmVisualizarLayout_IQVIA.resx">
       <DependentUpon>frmVisualizarLayout_IQVIA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\Informativo\frmMargemCompraVenda.resx">
+      <DependentUpon>frmMargemCompraVenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\AnaliseVendas\frmInformativoDeProdutos.resx">
+      <DependentUpon>frmInformativoDeProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\AnaliseVendas\frmInformativoDeProdutos_detail.resx">
+      <DependentUpon>frmInformativoDeProdutos_detail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Cadastro\frmCadastrarJustificativasDeParticipacao.resx">
+      <DependentUpon>frmCadastrarJustificativasDeParticipacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Cadastro\frmCadastrarPlataformas.resx">
+      <DependentUpon>frmCadastrarPlataformas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Cadastro\frmEditarPlataforma.resx">
+      <DependentUpon>frmEditarPlataforma.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Cadastro\frmPlataformas.resx">
+      <DependentUpon>frmPlataformas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Contratos\frmDetalhamentoDeContratos.resx">
+      <DependentUpon>frmDetalhamentoDeContratos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\frmModLicitacao.resx">
+      <DependentUpon>frmModLicitacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Processos\frmCriarAgenda.resx">
+      <DependentUpon>frmCriarAgenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Processos\frmEditarAgenda.resx">
+      <DependentUpon>frmEditarAgenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Processos\frmListaAgenda.resx">
+      <DependentUpon>frmListaAgenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Processos\frmProcGenDashboardPorResponsavel.resx">
+      <DependentUpon>frmProcGenDashboardPorResponsavel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Processos\frmProcGenDashboardPorResponsavel_Visualizer.resx">
+      <DependentUpon>frmProcGenDashboardPorResponsavel_Visualizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Processos\frmProcGenDashboardPorTempo.resx">
+      <DependentUpon>frmProcGenDashboardPorTempo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLicitacao\Processos\frmReagenda.resx">
+      <DependentUpon>frmReagenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\CI\frmCI_Conferencia.resx">
+      <DependentUpon>frmCI_Conferencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\CI\frmCI_ConferenciaProdutos.resx">
+      <DependentUpon>frmCI_ConferenciaProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\CI\frmCI_Conferencia_Add.resx">
+      <DependentUpon>frmCI_Conferencia_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\CI\frmCI_Conferencia_Editar.resx">
+      <DependentUpon>frmCI_Conferencia_Editar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\CI\frmCI_Motivos.resx">
+      <DependentUpon>frmCI_Motivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\CI\frmCI_Motivos_Add.resx">
+      <DependentUpon>frmCI_Motivos_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\CI\frmCI_Motivos_Edit.resx">
+      <DependentUpon>frmCI_Motivos_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModLogistica\frmModLogistica.resx">
+      <DependentUpon>frmModLogistica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmAnaliseDebitoCreditoAche.resx">
+      <DependentUpon>frmAnaliseDebitoCreditoAche.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos.resx">
+      <DependentUpon>frmConsultaDePrecos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos_DetalhamentoProduto.resx">
+      <DependentUpon>frmConsultaDePrecos_DetalhamentoProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmConsultaDePrecos_Lotes.resx">
+      <DependentUpon>frmConsultaDePrecos_Lotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmConsultaDeprecos_NewDetalhamentoProduto.resx">
+      <DependentUpon>frmConsultaDeprecos_NewDetalhamentoProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoCliente.resx">
+      <DependentUpon>frmConsultarPedidoCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoOL.resx">
+      <DependentUpon>frmConsultarPedidoOL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\Cadastro\frmVendas_DataIngestion.resx">
+      <DependentUpon>frmVendas_DataIngestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\frmModVendas.resx">
+      <DependentUpon>frmModVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\frmOpcoes.resx">
+      <DependentUpon>frmOpcoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmLiberarUpdate.resx">
+      <DependentUpon>frmLiberarUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmOpcoesDesenvolvedor.resx">
+      <DependentUpon>frmOpcoesDesenvolvedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmPermissoes.resx">
+      <DependentUpon>frmPermissoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmPermissoes_Add.resx">
+      <DependentUpon>frmPermissoes_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmGruposPermissao.resx">
+      <DependentUpon>frmGruposPermissao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Add.resx">
+      <DependentUpon>frmGruposPermissao_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Editar.resx">
+      <DependentUpon>frmGruposPermissao_Editar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmGruposPermissao_Usuarios.resx">
+      <DependentUpon>frmGruposPermissao_Usuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmSelecionarUsuario.resx">
+      <DependentUpon>frmSelecionarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmSetor.resx">
+      <DependentUpon>frmSetor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmSetor_Add.resx">
+      <DependentUpon>frmSetor_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmSetor_Editar.resx">
+      <DependentUpon>frmSetor_Editar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmSetor_Usuarios.resx">
+      <DependentUpon>frmSetor_Usuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmUsuario.resx">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmUsuario_Add.resx">
+      <DependentUpon>frmUsuario_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmUsuario_Editar.resx">
+      <DependentUpon>frmUsuario_Editar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\Telas_Genericas\frmConsultaGenerica.resx">
       <DependentUpon>frmConsultaGenerica.cs</DependentUpon>
@@ -854,6 +1398,7 @@
     </Compile>
     <Compile Include="Domain\Entities\ChargingParameters.cs" />
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -863,6 +1408,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="UHC-Definitive-Version_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -1014,7 +1560,35 @@
   <ItemGroup>
     <None Include="Resources\i_ClosedEyes.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App\ModLicitacao\Resultados\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WSHControllerLibrary">
+      <Guid>{563DC060-B09A-11D2-A24D-00104BD35090}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo-UHC-Base.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo-UHC-Base.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

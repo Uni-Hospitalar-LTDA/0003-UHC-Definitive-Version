@@ -76,6 +76,7 @@ GROUP BY CLIEN.Cod_Estado, Dat_Caixa,CTREC.Cod_Cliente,CLIEN.Razao_Social,VENDE.
             ConfigureComboBoxProperties();
             ConfigureButtonProperties();
             ConfigureFormEvents();
+            ConfigureMenuStripProperties();
             ConfigureDataGridViewProperties();
         }
 
@@ -204,9 +205,11 @@ GROUP BY CLIEN.Cod_Estado, Dat_Caixa,CTREC.Cod_Cliente,CLIEN.Razao_Social,VENDE.
                     {
                         this.Cursor = Cursors.WaitCursor;
                         frmGeneric_ProgressForm chargeForm = new frmGeneric_ProgressForm();
+                        chargeForm.chargeText = "Carregando...";
                         chargeForm.Show();
                         await Task.Factory.StartNew(() => getReport());
                         chargeForm.Close();
+                        CustomNotification.defaultInformation();
                         this.Cursor = Cursors.Default;
                     }
                     catch (Exception ex)
@@ -240,6 +243,7 @@ GROUP BY CLIEN.Cod_Estado, Dat_Caixa,CTREC.Cod_Cliente,CLIEN.Razao_Social,VENDE.
             {
                 this.Cursor = Cursors.WaitCursor;
                 frmGeneric_ProgressForm chargeForm = new frmGeneric_ProgressForm();
+                chargeForm.chargeText = "Carregando...";
                 chargeForm.Show();
                 await Task.Factory.StartNew(() => getReport());
                 chargeForm.Close();

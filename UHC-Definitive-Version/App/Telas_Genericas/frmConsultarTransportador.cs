@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
@@ -6,51 +7,44 @@ using UHC3_Definitive_Version.Domain.Entities.InnmedEntities;
 
 namespace UHC3_Definitive_Version.App.Telas_Genericas
 {
-   
+
 
     public partial class frmConsultarTransportador : CustomForm
     {
-        /**Instance **/
-        public string extendedCode { get; private set; }
-
         public frmConsultarTransportador()
         {
             InitializeComponent();
-            //Properties
-            ConfigureFormProperties();
-
-            //Events
-            ConfigureFormEvents();
-        }
-
-        /** Form Configuration **/
-        private void ConfigureFormProperties()
-        {
             this.defaultFixedForm();
-        }
-        private void ConfigureFormEvents()
-        {
+
             this.Load += frmConsultarTransportador_Load;
+
+            txtPesquisar.KeyDown += txtPesquisar_KeyDown;
+
+
+            btnPesquisar.Click += btnPesquisar_Click;
+            btnFechar.Click += btnFechar_Click;
+            btnSalvar.Click += btnSalvar_Click;
+
+            dgvData.DoubleClick += dgvData_DoubleClick;
+
         }
 
-        private void frmConsultarTransportador_Load(object sender, System.EventArgs e)
+        /** Instance **/
+        public string extendedCode;
+
+        /** Load do form**/
+        private async void frmConsultarTransportador_Load(object sender, EventArgs e)
         {
-            //pré load
-            carregar(txtPesquisar.Text.ToUpper(), dgvData);
-
-
-            //Events
-            ConfigureButtonEvents();
-            ConfigureDataGridViewEvents();
-            ConfigureTextBoxEvents();
+            //this.configureHelp();
+            await carregarTransportadores(txtPesquisar.Text.ToUpper());
         }
 
-        //Sync task
-        private void carregar(string text, DataGridView dgvData)
+        /** Função de carga **/
+        private async Task carregarTransportadores(string text)
         {
             try
             {
-                dgvData.DataSource = Transportadores_Externos.getAllToDataTable(text);
+                dgvData.DataSource = await Transportadores_Externos.getToDataTableAsync(text);
             }
             catch (Exception ex)
             {
@@ -62,27 +56,15 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
                 dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             }
         }
-        /** TextBox Configuration **/
-        private void ConfigureTextBoxEvents()
-        {
-            txtPesquisar.KeyDown += txtPesquisar_KeyDown;
-        }
 
-        private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
+        /**Funções dos componentes internos**/
+        private async void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                carregar(txtPesquisar.Text.ToUpper(), dgvData);
+                await carregarTransportadores(txtPesquisar.Text.ToUpper());
             }
         }
-
-        /** DataGridView Configuration **/
-        private void ConfigureDataGridViewEvents()
-        {
-            dgvData.DoubleClick += dgvData_DoubleClick;
-            dgvData.KeyDown += dgvData_KeyDown;
-        }
-
         private void dgvData_DoubleClick(object sender, EventArgs e)
         {
             if (dgvData.CurrentRow != null)
@@ -90,27 +72,19 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
                 extendedCode = dgvData.CurrentRow.Cells[0].Value.ToString();
                 this.Close();
             }
+
         }
-        private void dgvData_KeyDown(object sender, KeyEventArgs e)
+
+        /** Buttons **/
+        private async void btnPesquisar_Click(object sender, EventArgs e)
         {
-            if (dgvData.CurrentRow != null)
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    extendedCode = dgvData.CurrentRow.Cells[0].Value.ToString();
-                    this.Close();
-                }
-            }
+            await carregarTransportadores(txtPesquisar.Text.ToUpper());
         }
-
-        /** Button Configuration  **/
-
-        private void ConfigureButtonEvents()
+        private void btnFechar_Click(object sender, EventArgs e)
         {
-            btnSalvar.Click += btnSalvar_Click;
-            btnPesquisar.Click += btnPesquisar_Click;
+            extendedCode = "0";
+            this.Close();
         }
-
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             if (dgvData.CurrentRow != null)
@@ -119,9 +93,6 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
             }
             this.Close();
         }
-        private void btnPesquisar_Click(object sender, EventArgs e)
-        {
-            carregar(txtPesquisar.Text.ToUpper(), dgvData);
-        }
+
     }
 }

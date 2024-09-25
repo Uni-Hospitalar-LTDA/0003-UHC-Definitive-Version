@@ -10,9 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.App.Telas_Genericas;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities;
+using UHC3_Definitive_Version.Domain.Entities.InnmedEntities;
 using static UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros.frmMonitores_ExpXmlGnre_Obs;
 
 namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
@@ -291,11 +293,13 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
             // Cria o item de menu "Copiar"
             ToolStripMenuItem item1 = new ToolStripMenuItem("Exportar itens selecionados");
             ToolStripMenuItem item2 = new ToolStripMenuItem("Bloquear itens selecionados");
+            ToolStripMenuItem item4 = new ToolStripMenuItem("Reiniciar itens selecionados");
             ToolStripMenuItem item3 = new ToolStripMenuItem("Gerar manual itens selecionados");
             item1.Click += new EventHandler(itensExportar_Click); // define o evento de clique
-
+            item4.Click += new EventHandler(itensReiniciar_Click);
             // Adiciona o item de menu ao ContextMenuStrip
             menu.Items.Add(item1);
+            menu.Items.Add(item4);
 
             // Atribui o ContextMenuStrip ao DataGridView
             dgvData.ContextMenuStrip = menu;
@@ -341,6 +345,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
             cbxExportados.SelectedItem = "Todos";
 
             txtCod_Cliente.KeyDown += pesquisarComEnter_KeyDown;
+            
             txtUF.KeyDown += pesquisarComEnter_KeyDown;
             txtUF.TextChanged += txtUF_TextChanged;
             dtpDtInicial.KeyDown += pesquisarComEnter_KeyDown;
@@ -350,14 +355,53 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
             lsbExportar.DoubleClick += lsbExportar_DoubleClick;
 
 
+            ConfigureTextBoxEvents();
+
             ConfigureLinklabelEvents();
+        }
+
+        private async void itensReiniciar_Click(object sender, EventArgs e)
+        {
+            if (dgvData.SelectedCells.Count > 0)
+            {
+                if (CustomNotification.defaultQuestionAlert() == DialogResult.Yes)
+                {
+                    //CustomNotification.defaultAlert(dgvData.SelectedCells.Count.ToString());
+                    foreach (DataGridViewCell cell in dgvData.SelectedCells)
+                    {
+                        DataGridViewRow row = dgvData.Rows[cell.RowIndex];
+                        await MonitorGnre.reiniciarAsync(row.Cells["Num_Nota"].Value.ToString());
+
+                    }
+                    btnPesquisar_Click(null, null);
+                }
+                
+            }
+            else
+            {
+                return;
+            }
+
         }
 
         private async void txtUF_TextChanged(object sender, EventArgs e)
         {
             txtUFDesc.Text = await MonitorGnre.getEstadoAsync(txtUF.Text);
         }
-
+        private void txtCustomerId_TextChanged(object sender, System.EventArgs e)
+        {
+            txtCliente.Text = Clientes_Externos.getDescripionByCode(txtCod_Cliente.Text);
+        }
+        private void txtCustomer_DoubleClick(object sender, EventArgs e)
+        {
+            btnMoreCustomer_Click(sender, e);
+        }
+        private void btnMoreCustomer_Click(object sender, EventArgs e)
+        {
+            frmConsultarCliente frmConsultarCliente = new frmConsultarCliente();
+            frmConsultarCliente.ShowDialog();
+            txtCod_Cliente.Text = frmConsultarCliente.extendedCode;
+        }
         private void lsbExportar_DoubleClick(object sender, EventArgs e)
         {
             if (lsbExportar.SelectedItem != null)
@@ -374,7 +418,11 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
             txtNaoExportadas.ReadOnly();
             txtObservacao.ReadOnly();
         }
-
+        private void ConfigureTextBoxEvents()
+        {
+            txtCod_Cliente.TextChanged += txtCustomerId_TextChanged;
+            txtCliente.DoubleClick += txtCustomer_DoubleClick;
+        }
 
         /** DataGridView Configuration **/
         private void ConfigureDataGridViewProperties()

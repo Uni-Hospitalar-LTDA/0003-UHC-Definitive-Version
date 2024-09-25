@@ -315,6 +315,7 @@ order by [Sld. Receber] DESC
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             frmGeneric_ProgressForm chargeForm = new frmGeneric_ProgressForm();
+            chargeForm.chargeText = "Carregando...";
             chargeForm.Show();
             string customerId = string.IsNullOrEmpty(txtCustomerDescription.Text) ? string.Empty : txtCustomerId.Text;
             string customerGroupId = string.IsNullOrEmpty(txtCustomerGroupDescription.Text) ? string.Empty : txtCustomerGroupId.Text;

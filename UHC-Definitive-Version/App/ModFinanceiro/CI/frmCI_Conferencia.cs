@@ -258,10 +258,6 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.CI
 
         }
 
-        private void txtCustomerId_TextChanged(object sender, System.EventArgs e)
-        {
-            txtCustomer.Text = Clientes_Externos.getDescripionByCode(txtCustomerId.Text);
-        }
         private async void txtTransporterId_TextChanged(object sender, EventArgs e)
         {
             txtTransporter.Text = await Transportadores_Externos.getDescriptionByCode(txtTransporterId.Text);
@@ -269,6 +265,10 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.CI
         private void txtTransporter_DoubleClick(object sender, EventArgs e)
         {
             btnMoreTransporter_Click(sender, e);
+        }
+        private void txtCustomerId_TextChanged(object sender, System.EventArgs e)
+        {
+            txtCustomer.Text = Clientes_Externos.getDescripionByCode(txtCustomerId.Text);
         }
         private void txtCustomer_DoubleClick(object sender, EventArgs e)
         {

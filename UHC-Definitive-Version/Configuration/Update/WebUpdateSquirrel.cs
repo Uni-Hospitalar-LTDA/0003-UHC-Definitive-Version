@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.Customization;
 
 namespace UHC3_Definitive_Version.Configuration.Update
 {
@@ -13,66 +14,68 @@ namespace UHC3_Definitive_Version.Configuration.Update
         public static string _updateUrlWeb = @"https://github.com/Uni-Hospitalar-LTDA/0003-UHC-Definitive-Version-Publisher";
 
 
-        public static async Task<string> CheckForUpdates()
+        
+        public async static Task rollbackAsync(string rollbackTag = "1.0.0")
         {
-            bool update = false;
+            CustomNotification.defaultAlert("Rollback detectado! A aplicação passará por reparos automáticos. Aguarde a tela de login.");
+            string url = _updateUrlWeb + $@"/releases/download/{rollbackTag}/Setup.exe";
+            string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MyApp", "Setup.exe");
+
+
+
+
+            //var updates = await CheckVersionAsync();
+            //if (updates == Application.ProductVersion)
+            //{
+            //CustomNotification.defaultInformation(updates);
+            //return;
+            //}
+
             try
             {
-                using (var gitHubManager = await UpdateManager.GitHubUpdateManager(_updateUrlWeb))
+                // Verifica e cria a pasta de destino
+                string folderPath = Path.GetDirectoryName(outputPath);
+                if (!Directory.Exists(folderPath))
                 {
-                    var releaseEntry = await gitHubManager.UpdateApp();
-                    if (releaseEntry != null)
-                    {
-                        MessageBox.Show("Atualizando para a versão mais recente!");
-                        update = true;
-                        return gitHubManager.CurrentlyInstalledVersion() + " => " + releaseEntry.Version;
-                    }
-                    return gitHubManager.CurrentlyInstalledVersion().ToString();
+                    Directory.CreateDirectory(folderPath);
                 }
-            }
-            catch (Exception e)
-            {
-                if (e.Message != "Update.exe not found, not a Squirrel-installed app?")
+
+                // Baixa o arquivo
+                using (var httpClient = new HttpClient())
                 {
-                    MessageBox.Show("Failed to update: " + e.Message);
-                    return "1.0.0";
-                }
-            }
-            finally
-            {
-                if (update)
-                    UpdateManager.RestartApp();
-            }
-
-            return "1.0.0";
-        }
-        public static async Task rollbackAsync(string rollbackTag = "Rollback")
-        {
-            string url = _updateUrlWeb + $@"/releases/download/{rollbackTag}/Setup.exe";
-
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(url))
-                {
-                    response.EnsureSuccessStatusCode();
-                    byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
-
-                    string outputPath = Path.GetTempFileName();
-                    outputPath = Path.ChangeExtension(outputPath, Path.GetExtension(url));
-
-                    try
+                    using (var response = await httpClient.GetAsync(url))
                     {
+                        response.EnsureSuccessStatusCode();
+                        byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+
+                        // Escreve o arquivo na pasta de destino
                         File.WriteAllBytes(outputPath, fileBytes);
-                        Process.Start(outputPath);
+                        Console.WriteLine(outputPath);
+                        // Verifica integridade do arquivo (opcional)
+                        // string checksum = CalculateSHA256(outputPath); // Implemente essa função se necessário.
+
+                        // Executa o arquivo baixado
+                        var process = new Process
+                        {
+                            StartInfo = new ProcessStartInfo
+                            {
+                                FileName = outputPath,
+                                UseShellExecute = true, // Necessário para garantir a execução correta
+                                Verb = "runas" // Solicita privilégios elevados para instalar o arquivo
+                            }
+                        };
+                        process.Start();
                         Environment.Exit(0);
-
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
                 }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                MessageBox.Show($"Erro ao baixar o arquivo: {httpEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro inesperado: {ex.Message}");
             }
         }
         public static async Task<string> CheckForUpdatesAsync()
@@ -147,8 +150,9 @@ namespace UHC3_Definitive_Version.Configuration.Update
                 using (var gitHubManager = await UpdateManager.GitHubUpdateManager(_updateUrlWeb))
                 {
                     var releaseEntry = await gitHubManager.CheckForUpdate();
+                    
                     if (releaseEntry != null)
-                    {
+                    {                                             
                         return releaseEntry.FutureReleaseEntry.Version.ToString();
                     }
                     return null;

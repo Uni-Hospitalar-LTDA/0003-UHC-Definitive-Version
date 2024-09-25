@@ -1,4 +1,4 @@
-﻿namespace _0009_Integra_Cob.App
+﻿namespace UHC_DEFINITIVE_VERSION.App
 {
     partial class frmRedefinirSenha
     {

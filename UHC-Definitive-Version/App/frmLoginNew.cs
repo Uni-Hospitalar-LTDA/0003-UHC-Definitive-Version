@@ -502,18 +502,21 @@ namespace UHC3_Definitive_Version.App
             {
                 CustomNotification.defaultInformation($"Login Autorizado! Seja bem vindo ao sistema {Application.ProductName}.");
                 frmMainMenu frmMainMenu = new frmMainMenu();
+                Section.Unidade = cbxUnidade.SelectedItem?.ToString();
                 frmMainMenu.Show();
                 this.Hide();
             }
             else
             {
-                btnLogin.Enabled = false;                
-                var resultado = await Section.On(txtLogin.Text, txtSenha.Text, cbxUnidade.SelectedItem?.ToString());
+                btnLogin.Enabled = false;
+                string unidade = cbxUnidade.SelectedItem?.ToString();
+                var resultado = await Section.On(txtLogin.Text, txtSenha.Text, unidade);
+                
                 if (resultado.Contains("ACCESS_APPROVED"))
                 {
                     string[] name = resultado.Split(' ');
-                    Users user = await Users.getToClassByLoginAsync(txtLogin.Text);
-                    Section.add(user.id,cbxUnidade.SelectedItem?.ToString());
+                    Users user = await Users.getToClassByLoginAsync(txtLogin.Text,unidade);
+                    Section.add(user.id, unidade);
                     CustomNotification.defaultInformation($"Login aprovado: Seja bem vindo ao {Application.ProductName}, {name[1]}. {Environment.NewLine}Tenha um bom trabalho!", "Boas vindas!");
                     await login();
                 }

@@ -133,7 +133,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnSair.StateTracking.Border.Rounding = 18F;
             this.btnSair.StateTracking.Border.Width = 1;
-            this.btnSair.TabIndex = 24;
+            this.btnSair.TabIndex = 3;
             this.btnSair.Values.Text = "Sair";
             // 
             // btnLogin
@@ -188,7 +188,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnLogin.StateTracking.Border.Rounding = 18F;
             this.btnLogin.StateTracking.Border.Width = 1;
-            this.btnLogin.TabIndex = 23;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Values.Text = "Login";
             // 
             // label1
@@ -224,7 +224,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.txtSenha.StateCommon.Border.Rounding = 16F;
-            this.txtSenha.TabIndex = 9;
+            this.txtSenha.TabIndex = 1;
             this.txtSenha.Text = "********";
             // 
             // txtLogin
@@ -237,7 +237,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.txtLogin.StateCommon.Border.Rounding = 16F;
-            this.txtLogin.TabIndex = 8;
+            this.txtLogin.TabIndex = 0;
             this.txtLogin.Text = "nome.usuario";
             // 
             // lblSenha

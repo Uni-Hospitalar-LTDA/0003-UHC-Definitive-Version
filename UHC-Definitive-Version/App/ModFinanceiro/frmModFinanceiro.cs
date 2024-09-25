@@ -57,7 +57,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro
             //SubModules
             if (PermissionsAllowed.subModules?.Find(m => m.Name == "Acompanhamento") != null)
                 gpbAcompanhamento.Enabled = true;
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "C.I.") != null)
+            if (PermissionsAllowed.subModules?.Find(m => m.Name == "CI") != null)
                 gpbCI.Enabled = true;
             if (PermissionsAllowed.subModules?.Find(m => m.Name == "Cadastral") != null)
                 gpbCadastral.Enabled = true;
@@ -71,22 +71,33 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro
                 gpbRecebimento.Enabled = true;
 
             //Screens
-            if (PermissionsAllowed.screens?.Find(m => m.Name == "Títulos Vs Empenho") != null)
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Títulos Vs Empenho") != null) // 1
                 btnTitulosVsEmpenhos.Enabled = true;
-            if (PermissionsAllowed.screens?.Find(m => m.Name == "Conferência de C.I.") != null)
+
+            //2
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Conferência de CI") != null) 
                 btnConferenciaCi.Enabled = true;
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Encaminhamentos") != null)
                 btnEncaminhamentos.Enabled = true;
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Responsáveis") != null)
                 btnResponsaveis.Enabled = true;
+
+            //3
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Contatos do Cliente") != null)
                 btnContatosDoCliente.Enabled = true;
+            //4
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Parâmetros de Cobrança") != null)
                 btnParametrosCobranca.Enabled = true;
+
+            //5
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Monitor GNRE") != null)
                 btnMonitorGnre.Enabled = true;
+
+            //6
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Contas a Pagar") != null)
                 btnContasPagarAnalitico.Enabled = true;
+
+            //7
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Contas a Receber") != null)
                 btnContasReceberAnalitico.Enabled = true;
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Contas Recebidas") != null)

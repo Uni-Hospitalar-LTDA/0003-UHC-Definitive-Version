@@ -29,8 +29,8 @@ namespace UHC3_Definitive_Version.Configuration
      
 
 
-        public static void add(string id, string unidade = "UNI HOSPITALAR")
-        {
+        public static void add(string id, string unidade)
+        {            
             idUsuario = id;
             HoraLogin = DateTime.Now;
             Unidade = unidade;

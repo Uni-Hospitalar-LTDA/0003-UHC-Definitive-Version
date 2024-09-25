@@ -1,13 +1,13 @@
-﻿using _0009_Integra_Cob.App;
-using _0009_Integra_Cob.Configuration;
-using _0009_Integra_Cob.Configuration.Update;
-using _0009_Integra_Cob.Customization;
-using System;
-using System.IO;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.App;
+using UHC3_Definitive_Version.Configuration;
+using UHC3_Definitive_Version.Configuration.Update;
+using UHC3_Definitive_Version.Customization;
+using UHC3_Definitive_Version.Domain.Entities;
 
-namespace _0009_Integra_Cob.App
+namespace UHC_DEFINITIVE_VERSION.App
 {
     public partial class frmUpdateScreen : CustomForm
     {
@@ -18,7 +18,8 @@ namespace _0009_Integra_Cob.App
             //Properties 
             ConfigurePictureBoxProperties();
             ConfigureFormProperties();
-
+            ConfigureTextBoxProperties();
+            
             //Events
             ConfigureFormEvents();
         }
@@ -29,24 +30,28 @@ namespace _0009_Integra_Cob.App
 
             //Checking Version
             var version = await WebUpdateSquirrel.CheckVersionAsync();
-            Console.WriteLine(version);
+            
             if (version == Application.ProductVersion)
             {
-
+                Console.WriteLine($"{version} = {Application.ProductVersion}");
                 updateCheckComplete();
                 return;
             }
             else if (version == "Version not identified")
             {
+                Console.WriteLine($"{"Version not identified (Laço)"}");
                 updateCheckComplete();
                 return;
             }
 
-            this.Opacity = 100;
 
             //Checking for Update
-            var update = await WebUpdateSquirrel.CheckForUpdatesAsync();
+            
 
+
+            var update = await WebUpdateSquirrel.CheckForUpdatesAsync();
+            this.Opacity = 100;
+            this.BringToFront();
 
 
             if (update.Contains("detected"))
@@ -99,19 +104,52 @@ namespace _0009_Integra_Cob.App
         }
         private async void frmUpdateScreen_Load(object sender, EventArgs e)
         {
+            var update = (await IntUpdate.getLastToClassAsync());
+            txtInfo.Text = update.Description;
+            RollBackInfo rollback = new RollBackInfo();
+            rollback = await RollBackInfo.getToClasAsync();
 
-            /** async Tasks **/
-            await updateAsync();
+
+            ///** async Tasks **/
+           
+                if (rollback.rollbackActivated == "1" && update.Version != Application.ProductVersion)
+                    await WebUpdateSquirrel.rollbackAsync();
+                await updateAsync();
+            
+            
+
+
+
+            ConfigureLabelEvents();
 
         }
 
+        private void ConfigureLabelEvents()
+        {
+            lblQueroSaber.Click += lblQueroSaber_Click;
+        }
+
+        private void lblQueroSaber_Click(object sender, EventArgs e)
+        {
+            txtInfo.Visible = true;
+        }
+
         /** PictureBox  Configuration **/
+        
         private void ConfigurePictureBoxProperties()
         {
             progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Blocks;
             progressBar1.Maximum = 100;
-            progressBar1.Value = 30;
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            progressBar1.Value = 30;            
         }
+
+        /** TextBox Configuration **/
+        private void ConfigureTextBoxProperties()
+        {
+            txtInfo.ReadOnly();
+            txtInfo.Visible = false;
+            txtInfo.ScrollBars = ScrollBars.Vertical;            
+        }
+        
     }
 }

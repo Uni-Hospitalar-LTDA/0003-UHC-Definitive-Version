@@ -18,35 +18,21 @@ namespace UHC3_Definitive_Version.App.ModGerencial
         /** Screen Permission **/
         public frmControladoria()
         {
-            InitializeComponent();            
+            InitializeComponent();
 
-            btnClose.toDefaultCloseButton();
+            //Proprties
+            ConfigureFormProperties(); 
+            ConfigureButtonProperties();
+
+            //Events
+            ConfigureFormEvents();
         }
-
-
-        /** Event Load **/
-        private async void frmControladoria_Load(object sender, EventArgs e)
-        {
-            await Section.carregar_Dependencias();
-            this.BackgroundImage = Properties.Resources.Background_Office_Gray;
-            this.BackgroundImageLayout = ImageLayout.Stretch;
-            
-
-            //Configurando botões
-            this.atribuirAtributosAosLabels();
-
-
-
-            //blocks();
-            //allows();
-        }
-
 
         /** Allows and Blocks **/
         private void blocks()
-        {            
+        {
             //Screens
-            lblArquivosIMS.Enabled = false;
+            //lblArquivosIMS.Enabled = false;
         }
         private void allows()
         {
@@ -64,10 +50,44 @@ namespace UHC3_Definitive_Version.App.ModGerencial
             //    lblPermissoes.Enabled = true;
         }
 
+        /**Form Configuration **/
+        private void ConfigureFormProperties()
+        {
+            this.atribuirAtributosAosLabels();
+            //this.BackgroundImage = Properties.Resources.Background_Office_Gray;
+            //this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.defaultFixedForm();
+        }
+        private void ConfigureFormEvents()
+        {
+            this.Load += frmControladoria_Load;            
+        }
+        
+        private async void frmControladoria_Load(object sender, EventArgs e)
+        {
+            blocks();
+            allows();
 
-        /** System Buttons **/
+            //Pré load events
+            await Section.carregar_Dependencias();
+            ConfigureLabelEvents();
+        }
+
+        /** Button Configuration **/
+        private void ConfigureButtonProperties()
+        {
+            btnClose.toDefaultCloseButton();
+        }   
+
+        /** Label Configuration **/       
+        private void ConfigureLabelEvents()
+        {
+            lblArquivosIMS.Click += lblArquivosIMS_Click;
+        }                
         private void lblArquivosIMS_Click(object sender, EventArgs e)
         {
+
+            
             frmControladoria_Arquivos_IQVIA frmControladoria_ArquivosIMS = new frmControladoria_Arquivos_IQVIA();
             frmControladoria_ArquivosIMS.ShowDialog();
         }

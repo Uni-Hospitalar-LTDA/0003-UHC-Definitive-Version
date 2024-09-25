@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,38 +12,47 @@ namespace UHC3_Definitive_Version.Configuration
 {
     public static class FormConfiguration
     {
+        private static Bitmap cachedBackgroundImage = null;  // Armazena a imagem de fundo para reutilização
+
         public static void defaultFixedForm(this Form form)
         {
             form.MaximumSize = new Size(form.Width, form.Height);
-            form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "UHC: " + form.Text;
+            form.MinimumSize = new Size(form.Width, form.Height);            
+            form.Text = $"{Section.Unidade}: " + form.Text;
             form.MaximizeBox = false;
 
         }
         public static void defaultMaximableForm(this Form form)
         {
             form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "UHC: " + form.Text;
+            form.Text = $"{Section.Unidade}: " + form.Text;
         }
         public static void defaultMainMenu(this Form form)
         {
 
             form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "UHC: " + form.Text;
+            form.Text = $"UHC: " + form.Text;
         }
 
         public static void defaultModuleScreen(this Form form)
         {
             form.MinimumSize = new Size(form.Width, form.Height);
-            form.Text = "UHC: " + form.Text;
-            form.BackgroundImage = Properties.Resources.Background_Office_Gray;
+            form.Text = $"{Section.Unidade}: " + form.Text;
+
+            // Carregar a imagem de fundo apenas uma vez
+            if (cachedBackgroundImage == null)
+            {
+                cachedBackgroundImage = new Bitmap(Properties.Resources.Background_Office_Gray);  // Carrega a imagem de fundo apenas uma vez
+            }
+
+            form.BackgroundImage = cachedBackgroundImage;  // Reutiliza a imagem carregada
             form.BackgroundImageLayout = ImageLayout.Stretch;
             form.KeyPreview = true;
         }
 
-        public static void ShowOrActivateFormInPanel<T>(Panel panel, string formName) where T : Form, new()
+        public static void ShowOrActivateFormInPanel<T>(Panel panel, string formName = "SubModule") where T : Form, new()
         {
-
+            
             SuspendDrawing(panel);  // Suspend drawing
             panel.SuspendLayout();
 

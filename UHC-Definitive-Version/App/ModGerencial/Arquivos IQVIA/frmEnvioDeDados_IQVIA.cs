@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.WebRequestMethods;
 using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities;
 using UHC3_Definitive_Version.Configuration;
+using UHC3_Definitive_Version.Domain.IMS;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
@@ -21,6 +18,12 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             InitializeComponent();
             this.defaultFixedForm();
             progressBar1.Visible = false;
+
+            this.Load += frmEnvioDeDados_IMS_Load;
+            dtpInicial.ValueChanged += dtp_ValueChanged;
+            dtpFinal.ValueChanged += dtp_ValueChanged;
+            btnCancelar.Click += btnCancelar_Click;
+            btnEnviar.Click += btnEnviar_Click;
         }
 
         /** System Lists **/
@@ -49,7 +52,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         {
             iPanel = await Iqvia_Panel.getAllToListAsync(dateInicial, dateFinal);
         }
-
 
         private async void btnEnviar_Click(object sender, EventArgs e)
         {
@@ -117,7 +119,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                                 }
                                 catch (Exception ex)
                                 {
-                                    CustomMessage.Error("Enviar FTP - Produtos: " + ex.Message);
+                                    CustomNotification.defaultError("Enviar FTP - Produtos: " + ex.Message);
                                     break;
                                 }
                                 finally
@@ -144,7 +146,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                                 }
                                 catch (Exception ex)
                                 {
-                                    CustomMessage.Error("Enviar FTP - Vendas: " + ex.Message);
+                                    CustomNotification.defaultError("Enviar FTP - Vendas: " + ex.Message);
                                     break;
                                 }
                                 finally
@@ -159,12 +161,12 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             }
             catch (Exception ex)
             {
-                CustomMessage.Error("Enviar FTP: " + ex.Message);
+                CustomNotification.defaultError("Enviar FTP: " + ex.Message);
             }
             finally
             {
                 progressBar1.Value = 100;
-                CustomMessage.Sucess();
+                CustomNotification.defaultInformation();
                 foreach (var id in idSent)
                 {
                     try
@@ -173,7 +175,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                     }
                     catch (Exception ex)
                     {
-                        CustomMessage.Error("Atualizar status de envio: " + ex.Message);
+                        CustomNotification.defaultError("Atualizar status de envio: " + ex.Message);
                     }
                 }
                 this.Cursor = Cursors.Default;
@@ -196,7 +198,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            CustomApplication.closeForm();
+            this.Close();
         }
     }
 }
