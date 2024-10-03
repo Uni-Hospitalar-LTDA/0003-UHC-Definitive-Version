@@ -31,6 +31,7 @@
             this.btnLiberarUpdate = new System.Windows.Forms.Button();
             this.btnPermissoes = new System.Windows.Forms.Button();
             this.btnAtivarRollBack = new System.Windows.Forms.Button();
+            this.btnBasesSwagger = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLiberarUpdate
@@ -63,11 +64,22 @@
             this.btnAtivarRollBack.Text = "Ativar rollback";
             this.btnAtivarRollBack.UseVisualStyleBackColor = true;
             // 
+            // btnBasesSwagger
+            // 
+            this.btnBasesSwagger.ForeColor = System.Drawing.Color.Black;
+            this.btnBasesSwagger.Location = new System.Drawing.Point(188, 57);
+            this.btnBasesSwagger.Name = "btnBasesSwagger";
+            this.btnBasesSwagger.Size = new System.Drawing.Size(170, 39);
+            this.btnBasesSwagger.TabIndex = 6;
+            this.btnBasesSwagger.Text = "Bases Swagger";
+            this.btnBasesSwagger.UseVisualStyleBackColor = true;
+            // 
             // frmOpcoesDesenvolvedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnBasesSwagger);
             this.Controls.Add(this.btnAtivarRollBack);
             this.Controls.Add(this.btnPermissoes);
             this.Controls.Add(this.btnLiberarUpdate);
@@ -94,5 +106,6 @@
         private System.Windows.Forms.Button btnLiberarUpdate;
         private System.Windows.Forms.Button btnPermissoes;
         private System.Windows.Forms.Button btnAtivarRollBack;
+        private System.Windows.Forms.Button btnBasesSwagger;
     }
 }

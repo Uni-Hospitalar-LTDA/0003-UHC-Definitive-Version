@@ -786,6 +786,24 @@
     <Compile Include="App\Opcoes\frmOpcoes.Designer.cs">
       <DependentUpon>frmOpcoes.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger.Designer.cs">
+      <DependentUpon>frmBasesSwagger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger_Add.Designer.cs">
+      <DependentUpon>frmBasesSwagger_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger_Edit.Designer.cs">
+      <DependentUpon>frmBasesSwagger_Edit.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\Opcoes\OpcoesDeDesenvolvedor\frmLiberarUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -958,6 +976,9 @@
     <Compile Include="Configuration\Exportacao.cs" />
     <Compile Include="Configuration\FormConfiguration.cs" />
     <Compile Include="Configuration\IEnumerableExtensions.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\Distribuidor.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\Item.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\Pedido.cs" />
     <Compile Include="Configuration\IntUpdate.cs" />
     <Compile Include="Configuration\Iqvia_LineBlock.cs" />
     <Compile Include="Configuration\MemoryManager.cs" />
@@ -981,6 +1002,7 @@
     <Compile Include="Customization\CustomToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Domain\Entities\CredenciaisSwagger.cs" />
     <Compile Include="Domain\Entities\DebitosAche.cs" />
     <Compile Include="Domain\Entities\ChargingSections.cs" />
     <Compile Include="Domain\Entities\City.cs" />
@@ -1313,6 +1335,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\Opcoes\frmOpcoes.resx">
       <DependentUpon>frmOpcoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger.resx">
+      <DependentUpon>frmBasesSwagger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger_Add.resx">
+      <DependentUpon>frmBasesSwagger_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmBasesSwagger_Edit.resx">
+      <DependentUpon>frmBasesSwagger_Edit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\Opcoes\OpcoesDeDesenvolvedor\frmLiberarUpdate.resx">
       <DependentUpon>frmLiberarUpdate.cs</DependentUpon>
