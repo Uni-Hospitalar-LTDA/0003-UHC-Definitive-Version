@@ -19,7 +19,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.Users
         public string password { get; set; } = Cryptography.crypt(defaultPassword);
         public string idSector { get; set; }
         public string setPassword { get; set; } = "0";
-        public string Status { get; set; } = "1";
+        public string Status { get; set; } = "1";        
 
         /** Gets **/
         public async static Task<Users> getToClassByLoginAsync(string userLogin,string unidade)
@@ -233,12 +233,12 @@ WHERE
                 }
             }
         }
-        public async static Task changePasswordAsync(Users user)
+        public async static Task changePasswordAsync(Users user,string unidade)
         {
             if (!user.password.ToString().Trim().Equals(string.Empty))
             {
                 Console.WriteLine($"Alterar a senha usuário {user.login} para {user.password}");
-                using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
+                using (SqlConnection conn = Connection.getInstancia().getConnectionApp(unidade))
                 {
                     SqlTransaction transaction = null;
                     try

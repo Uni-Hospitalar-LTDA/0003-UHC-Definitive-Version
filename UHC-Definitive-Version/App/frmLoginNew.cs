@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UHC_DEFINITIVE_VERSION.App;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities.Users;
@@ -533,12 +534,16 @@ namespace UHC3_Definitive_Version.App
                 }
                 else if (resultado.Contains("CHANGE_PASSWORD"))
                 {
-                    //frmRedefinirSenha frmRedefinirSenha = new frmRedefinirSenha();
-                    //frmRedefinirSenha.ShowDialog();
-                    //Users user = new Users { login = txtLogin.Text, password = frmRedefinirSenha.senha };
-                    //await Users.changePasswordAsync(user);
-                    //txtSenha.Text = user.password;
+                    frmRedefinirSenha frmRedefinirSenha = new frmRedefinirSenha();
+                    frmRedefinirSenha.ShowDialog();
+                    
+                    Users user = new Users { login = txtLogin.Text, password = frmRedefinirSenha.senha };
+                    
+                    await Users.changePasswordAsync(user, unidade);
+                    Section.add(user.id, unidade);
+                    txtSenha.Text = user.password;
                     string[] name = resultado.Split(' ');
+                    
                     CustomNotification.defaultInformation($"Senha alterada com sucesso: Seja bem vindo ao {Application.ProductName}, {name[1]}. Tenha um bom trabalho!", "Boas vindas!");
                     await login();
                 }

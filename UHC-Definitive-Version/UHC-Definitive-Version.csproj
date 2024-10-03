@@ -876,6 +876,12 @@
     <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_Add.Designer.cs">
       <DependentUpon>frmUsuario_Add.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_BoasVindas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_BoasVindas.Designer.cs">
+      <DependentUpon>frmUsuario_BoasVindas.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\Opcoes\PainelDeControle\frmUsuario_Editar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1353,6 +1359,9 @@
     <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmUsuario_Add.resx">
       <DependentUpon>frmUsuario_Add.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmUsuario_BoasVindas.resx">
+      <DependentUpon>frmUsuario_BoasVindas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="App\Opcoes\PainelDeControle\frmUsuario_Editar.resx">
       <DependentUpon>frmUsuario_Editar.cs</DependentUpon>
     </EmbeddedResource>
@@ -1588,6 +1597,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo-UHC-Base.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\site.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skype.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\local.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\telefone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\planet-earth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\danger.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

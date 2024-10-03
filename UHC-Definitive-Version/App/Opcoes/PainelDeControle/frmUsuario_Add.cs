@@ -50,10 +50,6 @@ namespace _0009_Integra_Cob.App.Opcoes.PainelDeControle
         private async Task saveAsync()
         {
             this.Cursor = Cursors.WaitCursor;
-
-
-
-
             Users us = await Users.getToClassByLoginAsync(txtDescUsuario.Text,Section.Unidade);
             if (!string.IsNullOrEmpty(us?.ToString()))
             {

@@ -39,6 +39,7 @@
             this.chkAtivos = new System.Windows.Forms.CheckBox();
             this.txtPesquisar = new System.Windows.Forms.TextBox();
             this.lblPesquisar = new System.Windows.Forms.Label();
+            this.btnBoasVindas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             this.gpbFilters.SuspendLayout();
             this.gpbStatus.SuspendLayout();
@@ -152,17 +153,39 @@
             this.lblPesquisar.TabIndex = 11;
             this.lblPesquisar.Text = "Filtro Genérico (Id / Nome / Login)";
             // 
+            // btnBoasVindas
+            // 
+            this.btnBoasVindas.Location = new System.Drawing.Point(510, 75);
+            this.btnBoasVindas.Name = "btnBoasVindas";
+            this.btnBoasVindas.Size = new System.Drawing.Size(148, 23);
+            this.btnBoasVindas.TabIndex = 14;
+            this.btnBoasVindas.Text = "Boas vindas ao Usuário!";
+            this.btnBoasVindas.UseVisualStyleBackColor = true;
+            // 
             // frmUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 353);
+            this.Controls.Add(this.btnBoasVindas);
             this.Controls.Add(this.gpbFilters);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.dgvDados);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdicionar);
             this.Name = "frmUsuario";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Usuário";
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).EndInit();
             this.gpbFilters.ResumeLayout(false);
@@ -185,5 +208,6 @@
         private System.Windows.Forms.CheckBox chkAtivos;
         private System.Windows.Forms.TextBox txtPesquisar;
         private System.Windows.Forms.Label lblPesquisar;
+        private System.Windows.Forms.Button btnBoasVindas;
     }
 }

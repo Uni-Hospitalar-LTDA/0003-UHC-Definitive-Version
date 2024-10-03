@@ -59,6 +59,7 @@ namespace UHC3_Definitive_Version.Configuration
         }
         public async static Task<string> On(string user, string password,string unidade = "UNI HOSPITALAR")
         {
+            Section.add("0", unidade);
             using (SqlConnection conn = Connection.getInstancia().getConnectionApp(unidade))
             {
                 string result = null;
