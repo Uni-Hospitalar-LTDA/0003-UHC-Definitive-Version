@@ -146,67 +146,76 @@ namespace UHC3_Definitive_Version.Configuration
         public static bool requiredInformationValidation(this Form form)
         {
             bool isValid = true;
-            StringBuilder errorMessages = new StringBuilder();
-
-            void ValidateControl(Control control)
+            try
             {
-                // Verifica se o controle é um contêiner que pode conter outros controles
-                if (control is Panel || control is GroupBox || control is TabPage || control is TableLayoutPanel || control is FlowLayoutPanel || control is SplitContainer)
+                
+                StringBuilder errorMessages = new StringBuilder();
+
+                void ValidateControl(Control control)
                 {
-                    // Caso seja um SplitContainer, verificamos os controles nos dois painéis
-                    if (control is SplitContainer splitContainer)
+                    // Verifica se o controle é um contêiner que pode conter outros controles
+                    if (control is Panel || control is GroupBox || control is TabPage || control is TableLayoutPanel || control is FlowLayoutPanel || control is SplitContainer)
                     {
-                        ValidateControl(splitContainer.Panel1);
-                        ValidateControl(splitContainer.Panel2);
+                        // Caso seja um SplitContainer, verificamos os controles nos dois painéis
+                        if (control is SplitContainer splitContainer)
+                        {
+                            ValidateControl(splitContainer.Panel1);
+                            ValidateControl(splitContainer.Panel2);
+                        }
+                        else
+                        {
+                            // Itera sobre os controles filhos do contêiner
+                            foreach (Control subControl in control.Controls)
+                            {
+                                ValidateControl(subControl);
+                            }
+                        }
                     }
                     else
                     {
-                        // Itera sobre os controles filhos do contêiner
-                        foreach (Control subControl in control.Controls)
+                        // Verifica se o controle atual é um Label obrigatório
+                        if (control is Label label && label.Name.StartsWith("lbl") && label.Text.EndsWith("*"))
                         {
-                            ValidateControl(subControl);
-                        }
-                    }
-                }
-                else
-                {
-                    // Verifica se o controle atual é um Label obrigatório
-                    if (control is Label label && label.Name.StartsWith("lbl") && label.Text.EndsWith("*"))
-                    {
-                        string baseName = label.Name.Substring(3); // Remove o prefixo "lbl"
-                        Control parent = label.Parent;
+                            string baseName = label.Name.Substring(3); // Remove o prefixo "lbl"
+                            Control parent = label.Parent;
 
-                        if (parent != null)
-                        {
-                            // Encontra o TextBox correspondente com o prefixo "txt"
-                            Control correspondingTextBox = parent.Controls.Find("txt" + baseName, false).FirstOrDefault();
-
-                            if (correspondingTextBox is TextBox textBox)
+                            if (parent != null)
                             {
-                                // Verifica se o TextBox está vazio
-                                if (string.IsNullOrEmpty(textBox.Text))
+                                // Encontra o TextBox correspondente com o prefixo "txt"
+                                Control correspondingTextBox = parent.Controls.Find("txt" + baseName, false).FirstOrDefault();
+
+                                if (correspondingTextBox is TextBox textBox)
                                 {
-                                    isValid = false;
-                                    errorMessages.AppendLine($"- O campo '{label.Text.TrimEnd('*')}' é obrigatório.");
+                                    // Verifica se o TextBox está vazio
+                                    if (string.IsNullOrEmpty(textBox.Text))
+                                    {
+                                        isValid = false;
+                                        errorMessages.AppendLine($"- O campo '{label.Text.TrimEnd('*')}' é obrigatório.");
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            // Inicia a validação a partir dos controles do formulário principal
-            foreach (Control control in form.Controls)
+                // Inicia a validação a partir dos controles do formulário principal
+                foreach (Control control in form.Controls)
+                {
+                    ValidateControl(control);
+                }
+
+                if (!isValid)
+                {
+                    CustomNotification.defaultAlert(errorMessages.ToString(), "Validação");
+                }
+                return isValid;
+            }
+            catch (Exception ex)
             {
-                ValidateControl(control);
+                CustomNotification.defaultError("Sem parâmetros definidos para validação: " + ex.Message);
+                return isValid;
             }
-
-            if (!isValid)
-            {
-                CustomNotification.defaultAlert(errorMessages.ToString(), "Validação");
-            }
-
-            return isValid;
+            
         }
 
         public static void atribuirAtributosAosLabels(this Form form)

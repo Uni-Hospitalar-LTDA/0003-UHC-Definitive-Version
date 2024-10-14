@@ -4,8 +4,8 @@
     {
         public string Ean { get; set; }
         public int Quantidade { get; set; }
-        public decimal Preco { get; set; }
-        public decimal Desconto { get; set; }
+        public double Preco { get; set; }
+        public double Desconto { get; set; }
         public string Lote { get; set; }
     }
 }

@@ -65,13 +65,14 @@ LEFT JOIN [UHCDB].dbo.[Iqvia_DetailedBlocks] Cliente_Dblocks ON Cliente_Dblocks.
 LEFT JOIN [UHCDB].dbo.[Iqvia_DetailedBlocks] Fabricante_Dblocks ON Fabricante_Dblocks.ID_Panel = {id} AND Fabricante_Dblocks.TypeBlock = 'F' AND Fabricante_Dblocks.External_Code = Fabricante.Codigo
 LEFT JOIN [UHCDB].dbo.[Iqvia_DetailedBlocks] NF_Saida_Itens_Dblocks ON NF_Saida_Itens_Dblocks.ID_Panel = {id} AND NF_Saida_Itens_Dblocks.TypeBlock = 'N' AND NF_Saida_Itens_Dblocks.External_Code = NF_Saida_Itens.Num_Nota
 WHERE 
-/** Condicional Temporária **/
+{(Section.Unidade == "SP HOSPITALAR" ? "" : $@"/** Condicional Temporária **/
 								NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
 								AND
 								/** Fim Condicional Temporária **/
+                                ")}
 STATUS = 'F' 
     AND (NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}')
-    AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D')
+    AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
     AND CFOP.Descricao NOT LIKE '%CONSIG%'
 	AND lineBlock.qtdProduto <> 0
     and (NOT (Produto_Dblocks.External_Code IS NOT NULL OR Cliente_Dblocks.External_Code IS NOT NULL OR Fabricante_Dblocks.External_Code IS NOT NULL OR NF_Saida_Itens_Dblocks.External_Code IS NOT NULL ))
@@ -124,13 +125,14 @@ LEFT JOIN [UHCDB].dbo.[Iqvia_DetailedBlocks] Cliente_Dblocks ON Cliente_Dblocks.
 LEFT JOIN [UHCDB].dbo.[Iqvia_DetailedBlocks] Fabricante_Dblocks ON Fabricante_Dblocks.ID_Panel = {id} AND Fabricante_Dblocks.TypeBlock = 'F' AND Fabricante_Dblocks.External_Code = Fabricante.Codigo
 LEFT JOIN [UHCDB].dbo.[Iqvia_DetailedBlocks] NF_Saida_Itens_Dblocks ON NF_Saida_Itens_Dblocks.ID_Panel = {id} AND NF_Saida_Itens_Dblocks.TypeBlock = 'N' AND NF_Saida_Itens_Dblocks.External_Code = NF_Saida_Itens.Num_Nota
 WHERE
-/** Condicional Temporária **/
+{(Section.Unidade == "SP HOSPITALAR" ? "": $@"/** Condicional Temporária **/
 								NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
 								AND
 								/** Fim Condicional Temporária **/
+                                ")}
 STATUS = 'F' 
     AND (NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}')
-    AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D')
+    AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
     AND CFOP.Descricao NOT LIKE '%CONSIG%'
 GROUP BY 
  NF_Saida.Num_Nota
@@ -180,7 +182,7 @@ END
 							JOIN [DMD].dbo.[CLIEN] as Cliente on Cliente.Codigo = NF_Saida.Cod_Cliente	
                             WHERE STATUS = 'F' 
                             AND (NF_Saida.Dat_Emissao =  '{date.ToString("yyyyMMdd")}')
-                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida  ='D' )
+                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
                             AND (CFOP.Descricao NOT LIKE '%CONSIG%')																				
 							AND 
 							(
@@ -242,7 +244,7 @@ END
 							JOIN [DMD].dbo.[CLIEN] as Cliente on Cliente.Codigo = NF_Saida.Cod_Cliente	
                             WHERE STATUS = 'F' 
                             AND (NF_Saida.Dat_Emissao =  '20230303')
-                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida  ='D' )
+                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
                             AND (CFOP.Descricao NOT LIKE '%CONSIG%')																				
 							AND 
 							(
@@ -275,7 +277,7 @@ END
 								(0 = (IIF((SELECT External_Code 
 										FROM [UHCDB].dbo.[Iqvia_DetailedBlocks] iBlocks
 										JOIN [DMD].dbo.[NFSIT] iNF_Saida_Itens ON iNF_Saida_Itens.Num_Nota = iBlocks.External_Code
-										WHERE TypeBlock = 'N' AND id_Panel = 135
+										WHERE TypeBlock = 'N' AND id_Panel = {id}
 										AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo
 									) IS NOT NULL,1,0)))
                                 AND 
@@ -283,7 +285,7 @@ END
 									0 = (IIF((SELECT External_Code 
 									FROM [UHCDB].dbo.[Iqvia_DetailedBlocks] iBlocks
 									JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iBlocks.External_Code
-									WHERE TypeBlock = 'N' AND id_Panel = 135 
+									WHERE TypeBlock = 'N' AND id_Panel = {id} 
 									AND iNF_Saida.Cod_Cliente = Cliente.Codigo
 	
 									) IS NOT NULL,1,0))))                                
@@ -309,7 +311,7 @@ END
 							JOIN [DMD].dbo.[CLIEN] as Cliente on Cliente.Codigo = NF_Saida.Cod_Cliente	
                             WHERE STATUS = 'F' 
                             AND (NF_Saida.Dat_Emissao =  '{date.ToString("yyyyMMdd")}')
-                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida  ='D' )
+                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
                             AND (CFOP.Descricao NOT LIKE '%CONSIG%')																				
 							AND 
 							(
@@ -401,7 +403,7 @@ WHERE
 								/** Fim Condicional Temporária **/
 STATUS = 'F' 
     AND (NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}')
-    AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D')
+    AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
     AND CFOP.Descricao NOT LIKE '%CONSIG%'
 GROUP BY 
  NF_Saida.Num_Nota

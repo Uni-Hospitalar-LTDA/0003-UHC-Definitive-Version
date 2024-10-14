@@ -23,7 +23,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
 
             string folderPath = @"C:\kairos";
             string caminhoDoArquivo = Path.Combine(folderPath, $"{mesvalor}{ano}.jar");
-            string link = $"http://www.rgrpublicacoes.com.br/download/{mesvalor}{ano}%20java.jar";
+            string link = $"http://www.rgrpublicacoes.com.br/download/{mesvalor}{ano}x%20java.jar";
 
             // Crie a pasta se ela não existir
             Directory.CreateDirectory(folderPath);

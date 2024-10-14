@@ -98,14 +98,16 @@ namespace UHC3_Definitive_Version.Domain.IMS
 						JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
 						JOIN [DMD].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
                         WHERE 
-                                /** Condicional Temporária **/
+                                {(Section.Unidade == "SP HOSPITALAR" ? "" : $@"/** Condicional Temporária **/
 								NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
 								AND
 								/** Fim Condicional Temporária **/
+                                ")}
+
 						/*Condicional Data*/
 						NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
 						/*Condicional tipo de saída*/
-                        AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D')
+                        AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
 						/*Condicionais de Bloqueio*/
 
 						AND 
@@ -212,14 +214,15 @@ namespace UHC3_Definitive_Version.Domain.IMS
 						JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
 						JOIN [DMD].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
                         WHERE 
-                                /** Condicional Temporária **/
+                             {(Section.Unidade == "SP HOSPITALAR" ? "" : $@"/** Condicional Temporária **/
 								NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
 								AND
 								/** Fim Condicional Temporária **/
+                                ")}
 						/*Condicional Data*/
 						NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
 						/*Condicional tipo de saída*/
-                        AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D')
+                        AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
 						/*Condicionais de Bloqueio*/
 
 						AND 

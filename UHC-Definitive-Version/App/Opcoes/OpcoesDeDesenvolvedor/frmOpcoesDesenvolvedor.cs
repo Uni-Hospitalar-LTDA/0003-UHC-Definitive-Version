@@ -69,9 +69,14 @@ namespace UHC3_Definitive_Version.App.Opcoes.OpcoesDeDesenvolvedor
             btnPermissoes.Click += btnPermissoes_Click;
             btnLiberarUpdate.Click += btnLiberarUpdate_Click;
             btnAtivarRollBack.Click += btnAtivarRollBack_Click;
+            btnBasesSwagger.Click += btnBasesSwagger_Click;
         }
 
-        
+        private void btnBasesSwagger_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateForm<frmBasesSwagger>();
+        }
+
         private async void btnAtivarRollBack_Click(object sender, EventArgs e)
         {
 

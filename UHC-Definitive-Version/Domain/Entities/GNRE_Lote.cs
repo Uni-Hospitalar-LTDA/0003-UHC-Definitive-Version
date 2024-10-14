@@ -70,7 +70,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
                         CamposExtras camposExtras = new CamposExtras();
                         List<CampoExtra> campoExtra = new List<CampoExtra>();
                         ContribuinteDestinatario contribuinteDestinatario = new ContribuinteDestinatario();
-                        //MessageBox.Show(Session.Unidade + " " + nf);
+
                         conn.Open();
                         SqlCommand command = conn.CreateCommand();
                         command.CommandText = $@" SELECT 
@@ -155,7 +155,7 @@ CROSS JOIN [{Connection.dbDMD}].dbo.[EMPRE] Empresa
 JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
 INNER JOIN [{Connection.dbBase}].dbo.City municipioEmitente ON municipioEmitente.description = Empresa.Cidade  collate Latin1_General_CI_AS
 INNER JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
-inner JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinatario.idIBGE = municipioDestinatario.idIBGE_State AND estadoDestinatario.uf = Cliente.Cod_Estado collate Latin1_General_CI_AS
+INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinatario.idIBGE = municipioDestinatario.idIBGE_State AND estadoDestinatario.uf = Cliente.Cod_Estado collate Latin1_General_CI_AS
                                            WHERE NUM_NOTA = {nf}";
                         Console.WriteLine(command.CommandText);
                         SqlDataReader reader;
@@ -192,7 +192,7 @@ inner JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
                                 {
                                     item.Produto = reader["Produto"].ToString();
                                 }
-                                //Variável
+
                                 if (!string.IsNullOrEmpty(reader["documentoOrigem_Tipo_Text"].ToString()))
                                 {
                                     string[] doc = reader["documentoOrigem_Tipo_Text"].ToString().Split(',');
@@ -221,34 +221,41 @@ inner JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
                                 valor.Tipo = val[0];
                                 valor.Text = val[1];
 
-                                item.ContribuinteDestinatario = contribuinteDestinatario;
-                                contribuinteDestinatario.Identificacao = identificacaoDestinatario;
-                                identificacaoDestinatario.CNPJ = reader["cnpjDestinatario"].ToString();
-                                contribuinteDestinatario.RazaoSocial = reader["razaoSocialDestinatario"].ToString();
-                                contribuinteDestinatario.Municipio = reader["municipioDestinatario"].ToString().Trim();
+                                // Verificação do CNPJ do destinatário
+                                string cnpjDestinatario = reader["cnpjDestinatario"].ToString();
+                                if (cnpjDestinatario.Length == 11)
+                                {
+                                    // CNPJ possui 11 caracteres, os campos do contribuinte destinatário são mantidos vazios
+                                    contribuinteDestinatario = new ContribuinteDestinatario(); // Recria vazio
+                                    identificacaoDestinatario = new Identificacao(); // Recria vazio
+                                }
+                                else
+                                {
+                                    // CNPJ válido, preenche normalmente os dados do destinatário
+                                    item.ContribuinteDestinatario = contribuinteDestinatario;
+                                    contribuinteDestinatario.Identificacao = identificacaoDestinatario;
+                                    identificacaoDestinatario.CNPJ = cnpjDestinatario;
+                                    contribuinteDestinatario.RazaoSocial = reader["razaoSocialDestinatario"].ToString();
+                                    contribuinteDestinatario.Municipio = reader["municipioDestinatario"].ToString().Trim();
+                                }
 
                                 if (!string.IsNullOrEmpty(reader["camposExta_campoExtra1_codigo_valor"].ToString()))
                                 {
                                     item.CamposExtras = camposExtras;
                                     camposExtras.CampoExtra = campoExtra;
-                                    //variável
                                     string[] campo1 = reader["camposExta_campoExtra1_codigo_valor"].ToString().Split(',');
                                     campoExtra.Add(new CampoExtra { Codigo = campo1[0], Valor = campo1[1] });
                                 }
-                                //campoExtra.Add(new CampoExtra { Codigo = "119", Valor = "163812" });
+
                                 dadosGNRE.ValorGNRE = reader["valor"].ToString().Replace(",", ".");
                                 dadosGNRE.DataPagamento = DateTime.Now.ToString("yyyy-MM-dd");
 
-                                if (!string.IsNullOrEmpty(reader["valorFCP"].ToString())
-                                    && Convert.ToDouble(reader["valorFCP"]?.ToString()) != 0)
+                                if (!string.IsNullOrEmpty(reader["valorFCP"].ToString()) && Convert.ToDouble(reader["valorFCP"].ToString()) != 0)
                                 {
-                                    TDadosGNRE dados = new TDadosGNRE();
-                                    dados = dadosGNRE.Clone();
+                                    TDadosGNRE dados = dadosGNRE.Clone();
                                     dados.ValorGNRE = reader["valorFCP"].ToString().Replace(",", ".");
 
-                                    Valor valor2 = new Valor();
-                                    valor2 = valor.Clone();
-
+                                    Valor valor2 = valor.Clone();
                                     string[] val2 = reader["valorFCP_Principal"].ToString().Split(',');
                                     dados.ItensGNRE.Item.Valor.Text = val2[1];
                                     dados.ItensGNRE.Item.Receita = "100129";
@@ -256,22 +263,18 @@ inner JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
 
                                     valor2.Text = val2[1];
 
-
-
                                     dadosGNREs.Add(dados);
-
-
                                 }
+
+                                dadosGNREs.Add(dadosGNRE);
                             }
                         }
-                        dadosGNREs.Add(dadosGNRE);
                     }
                 }
                 return dadosGNREs;
             }
             catch (Exception ex)
             {
-
                 CustomNotification.defaultError("Erro na função " + ex.Message);
                 return null;
             }
@@ -280,6 +283,8 @@ inner JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
                 //CustomMessage.Sucess();
             }
         }
+
+
 
 
 

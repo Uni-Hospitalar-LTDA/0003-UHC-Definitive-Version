@@ -726,6 +726,12 @@
     <Compile Include="App\ModLogistica\frmModLogistica.Designer.cs">
       <DependentUpon>frmModLogistica.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmAdicionarProdutoAoPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmAdicionarProdutoAoPedido.Designer.cs">
+      <DependentUpon>frmAdicionarProdutoAoPedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModVendas\AnaliseVendas\frmAnaliseDebitoCreditoAche.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -767,6 +773,18 @@
     </Compile>
     <Compile Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoOL.Designer.cs">
       <DependentUpon>frmConsultarPedidoOL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmInstanciaDePedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmInstanciaDePedidos.Designer.cs">
+      <DependentUpon>frmInstanciaDePedidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmPedidoPfizerInterplayers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmPedidoPfizerInterplayers.Designer.cs">
+      <DependentUpon>frmPedidoPfizerInterplayers.cs</DependentUpon>
     </Compile>
     <Compile Include="App\ModVendas\Cadastro\frmVendas_DataIngestion.cs">
       <SubType>Form</SubType>
@@ -976,9 +994,18 @@
     <Compile Include="Configuration\Exportacao.cs" />
     <Compile Include="Configuration\FormConfiguration.cs" />
     <Compile Include="Configuration\IEnumerableExtensions.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\Credentials.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\DadoPedido.cs" />
     <Compile Include="Configuration\InterplayersWebApi\Distribuidor.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\Interplayers_Pfizer_Pedido.cs" />
     <Compile Include="Configuration\InterplayersWebApi\Item.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\ItemDetalhado.cs" />
     <Compile Include="Configuration\InterplayersWebApi\Pedido.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\Data.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\PedidoDetalhado.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\PedidoDetalhadoResposta.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\PedidoResposta.cs" />
+    <Compile Include="Configuration\InterplayersWebApi\Token.cs" />
     <Compile Include="Configuration\IntUpdate.cs" />
     <Compile Include="Configuration\Iqvia_LineBlock.cs" />
     <Compile Include="Configuration\MemoryManager.cs" />
@@ -1306,6 +1333,9 @@
     <EmbeddedResource Include="App\ModLogistica\frmModLogistica.resx">
       <DependentUpon>frmModLogistica.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\Pedidos\frmAdicionarProdutoAoPedido.resx">
+      <DependentUpon>frmAdicionarProdutoAoPedido.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmAnaliseDebitoCreditoAche.resx">
       <DependentUpon>frmAnaliseDebitoCreditoAche.cs</DependentUpon>
     </EmbeddedResource>
@@ -1326,6 +1356,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModVendas\AnaliseVendas\frmConsultarPedidoOL.resx">
       <DependentUpon>frmConsultarPedidoOL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\Pedidos\frmInstanciaDePedidos.resx">
+      <DependentUpon>frmInstanciaDePedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\Pedidos\frmPedidoPfizerInterplayers.resx">
+      <DependentUpon>frmPedidoPfizerInterplayers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModVendas\Cadastro\frmVendas_DataIngestion.resx">
       <DependentUpon>frmVendas_DataIngestion.cs</DependentUpon>
@@ -1602,6 +1638,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App\ModLicitacao\Resultados\" />
+    <Folder Include="Configuration\Swagger\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">

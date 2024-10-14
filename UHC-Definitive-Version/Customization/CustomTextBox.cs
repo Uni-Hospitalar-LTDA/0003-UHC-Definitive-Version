@@ -10,10 +10,10 @@ namespace UHC3_Definitive_Version.Customization
         {
             textBox.KeyDown += blockBackSpace_KeyDown;
         }
-        public static void ReadOnly(this TextBox textBox)
+        public static void ReadOnly(this TextBox textBox, bool isReadOnly = true)
         {
-            textBox.ReadOnly = true;
-            textBox.TabStop = false;
+            textBox.ReadOnly = isReadOnly;
+            textBox.TabStop = !isReadOnly;
         }
         public static void JustNumbers(this TextBox textBox)
         {
