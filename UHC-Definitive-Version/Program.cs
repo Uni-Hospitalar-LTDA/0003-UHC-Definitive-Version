@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC_DEFINITIVE_VERSION.App;
+using UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas;
 using UHC3_Definitive_Version.App.ModVendas.AnaliseVendas;
 using UHC3_Definitive_Version.App.ModVendas.Pedidos;
 using UHC3_Definitive_Version.App.Opcoes.OpcoesDeDesenvolvedor;

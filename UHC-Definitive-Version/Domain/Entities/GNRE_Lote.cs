@@ -13,26 +13,30 @@ namespace UHC3_Definitive_Version.Domain.Entities
     {
         public static void exportar(string path, List<string> nfs)
         {
-            //default
+            // Cria o objeto TLote_GNRE com guias
             TLote_GNRE lote = new TLote_GNRE();
             Guias guias = new Guias();
             guias.TDadosGNRE = getGNRElote2_0(nfs);
-
             lote.Guias = guias;
+
+            // Configuração correta do namespace e schema para o cabeçalho
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             ns.Add("", "http://www.gnre.pe.gov.br");
+            ns.Add("xsd", "http://www.w3.org/2001/XMLSchema");
+            ns.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 
-
-
-            // Verifica se o diretório já existe
+            // Verifica e cria diretório se necessário
             if (!Directory.Exists(path))
             {
-                // Cria o diretório
                 Directory.CreateDirectory(path);
             }
 
-
-            CustomSerialization<TLote_GNRE>.SerializeToXml(path + gerarNomeArquivoLoteGnre(), lote);
+            // Serializa o objeto para XML com o namespace correto
+            XmlSerializer serializer = new XmlSerializer(typeof(TLote_GNRE));
+            using (StreamWriter writer = new StreamWriter(path + gerarNomeArquivoLoteGnre()))
+            {
+                serializer.Serialize(writer, lote, ns);
+            }
         }
 
         public static string gerarNomeArquivoLoteGnre()
@@ -66,14 +70,13 @@ namespace UHC3_Definitive_Version.Domain.Entities
                         Item item = new Item();
                         DocumentoOrigem documentoOrigem = new DocumentoOrigem();
                         Referencia referencia = new Referencia();
-                        Valor valor = new Valor();
                         CamposExtras camposExtras = new CamposExtras();
                         List<CampoExtra> campoExtra = new List<CampoExtra>();
                         ContribuinteDestinatario contribuinteDestinatario = new ContribuinteDestinatario();
 
                         conn.Open();
                         SqlCommand command = conn.CreateCommand();
-                        command.CommandText = $@" SELECT 
+                        command.CommandText = $@"SELECT 
   [ufFavorecida] = NF_Saida.Estado
  ,[tipoGnre] = '0'
  ,[receita] = '100102'
@@ -157,113 +160,94 @@ INNER JOIN [{Connection.dbBase}].dbo.City municipioEmitente ON municipioEmitente
 INNER JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
 INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinatario.idIBGE = municipioDestinatario.idIBGE_State AND estadoDestinatario.uf = Cliente.Cod_Estado collate Latin1_General_CI_AS
                                            WHERE NUM_NOTA = {nf}";
-                        Console.WriteLine(command.CommandText);
-                        SqlDataReader reader;
-                        reader = command.ExecuteReader();
+
+                        SqlDataReader reader = command.ExecuteReader();
+
                         while (reader.Read())
                         {
+                            // Preencher o emitente
+                            dadosGNRE.UfFavorecida = reader["ufFavorecida"].ToString();
+                            dadosGNRE.TipoGnre = reader["tipoGnre"].ToString();
+                            contribuinteEmitente.Identificacao = identificacaoEmitente;
+                            identificacaoEmitente.CNPJ = reader["cnpjEmitente"].ToString();
+                            contribuinteEmitente.RazaoSocial = reader["razaoSocialEmitente"].ToString();
+                            contribuinteEmitente.Endereco = reader["enderecoEmitente"].ToString();
+                            contribuinteEmitente.Municipio = reader["municipioEmitente"].ToString().Trim();
+                            contribuinteEmitente.Uf = reader["ufEmitente"].ToString();
+                            contribuinteEmitente.Cep = reader["cepEmitente"].ToString();
+                            contribuinteEmitente.Telefone = reader["telefoneEmitente"].ToString();
+                            dadosGNRE.ContribuinteEmitente = contribuinteEmitente;
 
-                            if (reader["ufFavorecida"] != null)
+                            // Preencher o documento de origem
+                            string[] doc = reader["documentoOrigem_Tipo_Text"].ToString().Split(',');
+                            documentoOrigem.Tipo = doc[0];
+                            documentoOrigem.Text = doc[1];
+                            item.DocumentoOrigem = documentoOrigem;
+
+                            item.Receita = reader["receita"].ToString();
+                            item.DataVencimento = DateTime.Now.ToString("yyyy-MM-dd");
+
+                            string[] val = reader["valor_Tipo_Text"].ToString().Split(',');
+                            Valor valor = new Valor { Tipo = val[0], Text = val[1] };
+
+                            // Preenche destinatário
+                            string cnpjDestinatario = reader["cnpjDestinatario"].ToString();
+                            identificacaoDestinatario.CNPJ = cnpjDestinatario;
+                            contribuinteDestinatario.Identificacao = identificacaoDestinatario;
+                            contribuinteDestinatario.RazaoSocial = reader["razaoSocialDestinatario"].ToString();
+                            contribuinteDestinatario.Municipio = reader["municipioDestinatario"].ToString().Trim();
+                            item.ContribuinteDestinatario = contribuinteDestinatario;
+
+                            // Preencher campos extras
+                            string[] campo1 = reader["camposExta_campoExtra1_codigo_valor"].ToString().Split(',');
+                            campoExtra.Add(new CampoExtra { Codigo = campo1[0], Valor = campo1[1] });
+                            camposExtras.CampoExtra = campoExtra;
+                            item.CamposExtras = camposExtras;
+
+                            // Lógica para RJ
+                            if (reader["ufFavorecida"].ToString() == "RJ")
                             {
-                                dadosGNRE.UfFavorecida = reader["ufFavorecida"].ToString();
-                                /**Checar depois se esse campo é variável**/
+                                // Criar valor tipo 12
+                                Valor valorTipo12 = new Valor
+                                {
+                                    Tipo = "12",
+                                    Text = reader["valorFCP_Principal"].ToString().Split(',')[1]
+                                };
 
-                                dadosGNRE.TipoGnre = reader["tipoGnre"].ToString();
+                                // Adiciona ambos os valores ao item
+                                item.Valores = new List<Valor> { valor, valorTipo12 };
 
-                                dadosGNRE.ContribuinteEmitente = contribuinteEmitente;
-                                contribuinteEmitente.Identificacao = identificacaoEmitente;
-                                identificacaoEmitente.CNPJ = reader["cnpjEmitente"].ToString();
-                                contribuinteEmitente.RazaoSocial = reader["razaoSocialEmitente"].ToString();
-                                contribuinteEmitente.Endereco = reader["enderecoEmitente"].ToString();
-                                contribuinteEmitente.Municipio = reader["municipioEmitente"].ToString().Trim();
-                                contribuinteEmitente.Uf = reader["ufEmitente"].ToString();
-                                contribuinteEmitente.Cep = reader["cepEmitente"].ToString();
-                                contribuinteEmitente.Telefone = reader["telefoneEmitente"].ToString();
-                                dadosGNRE.ItensGNRE = itensGNRE;
+                                // Adiciona o item ao GNRE
                                 itensGNRE.Item = item;
-                                item.Receita = reader["receita"].ToString();
+                                dadosGNRE.ItensGNRE = itensGNRE;
 
-                                if (!string.IsNullOrEmpty(reader["DetalhamentoReceita"].ToString()))
-                                    item.DetalhamentoReceita = reader["DetalhamentoReceita"].ToString();
-
-                                item.DocumentoOrigem = documentoOrigem;
-
-                                if (!string.IsNullOrEmpty(reader["Produto"].ToString()))
-                                {
-                                    item.Produto = reader["Produto"].ToString();
-                                }
-
-                                if (!string.IsNullOrEmpty(reader["documentoOrigem_Tipo_Text"].ToString()))
-                                {
-                                    string[] doc = reader["documentoOrigem_Tipo_Text"].ToString().Split(',');
-                                    documentoOrigem.Tipo = doc[0];
-                                    documentoOrigem.Text = doc[1];
-                                }
-
-                                if (!string.IsNullOrEmpty(reader["referencia"].ToString()))
-                                {
-                                    string[] refer = reader["referencia"].ToString().Split(',');
-                                    if (!string.IsNullOrEmpty(refer[0]))
-                                        referencia.Periodo = refer[0];
-
-                                    referencia.Mes = Convert.ToInt32(refer[1]).ToString("D2");
-                                    referencia.Ano = refer[2];
-                                    if (!string.IsNullOrEmpty(refer[3]))
-                                        referencia.parcela = refer[3];
-
-                                    item.Referencia = referencia;
-                                }
-
-                                item.DataVencimento = DateTime.Now.ToString("yyyy-MM-dd");
-                                item.Valor = valor;
-
-                                string[] val = reader["valor_Tipo_Text"].ToString().Split(',');
-                                valor.Tipo = val[0];
-                                valor.Text = val[1];
-
-                                // Verificação do CNPJ do destinatário
-                                string cnpjDestinatario = reader["cnpjDestinatario"].ToString();
-                                if (cnpjDestinatario.Length == 11)
-                                {
-                                    // CNPJ possui 11 caracteres, os campos do contribuinte destinatário são mantidos vazios
-                                    contribuinteDestinatario = new ContribuinteDestinatario(); // Recria vazio
-                                    identificacaoDestinatario = new Identificacao(); // Recria vazio
-                                }
-                                else
-                                {
-                                    // CNPJ válido, preenche normalmente os dados do destinatário
-                                    item.ContribuinteDestinatario = contribuinteDestinatario;
-                                    contribuinteDestinatario.Identificacao = identificacaoDestinatario;
-                                    identificacaoDestinatario.CNPJ = cnpjDestinatario;
-                                    contribuinteDestinatario.RazaoSocial = reader["razaoSocialDestinatario"].ToString();
-                                    contribuinteDestinatario.Municipio = reader["municipioDestinatario"].ToString().Trim();
-                                }
-
-                                if (!string.IsNullOrEmpty(reader["camposExta_campoExtra1_codigo_valor"].ToString()))
-                                {
-                                    item.CamposExtras = camposExtras;
-                                    camposExtras.CampoExtra = campoExtra;
-                                    string[] campo1 = reader["camposExta_campoExtra1_codigo_valor"].ToString().Split(',');
-                                    campoExtra.Add(new CampoExtra { Codigo = campo1[0], Valor = campo1[1] });
-                                }
-
-                                dadosGNRE.ValorGNRE = reader["valor"].ToString().Replace(",", ".");
+                                
+                                dadosGNRE.ValorGNRE = (Convert.ToDecimal(valor.Text.Replace(".",",")) + Convert.ToDecimal(valorTipo12.Text.Replace(".",","))).ToString("N2").Replace(".","").Replace(",",".");
                                 dadosGNRE.DataPagamento = DateTime.Now.ToString("yyyy-MM-dd");
 
+                                dadosGNREs.Add(dadosGNRE);  // Apenas uma guia para RJ com ambos os valores
+                            }
+                            else
+                            {
+                                // Lógica para outros estados
+                                item.Valores = new List<Valor> { valor };  // Usa apenas um valor para outros estados
+
+                                itensGNRE.Item = item;
+                                dadosGNRE.ItensGNRE = itensGNRE;
+                                dadosGNRE.ValorGNRE = valor.Text;
+                                dadosGNRE.DataPagamento = DateTime.Now.ToString("yyyy-MM-dd");
+
+                                // Clona e adiciona os dados para FCP se aplicável
                                 if (!string.IsNullOrEmpty(reader["valorFCP"].ToString()) && Convert.ToDouble(reader["valorFCP"].ToString()) != 0)
                                 {
-                                    TDadosGNRE dados = dadosGNRE.Clone();
-                                    dados.ValorGNRE = reader["valorFCP"].ToString().Replace(",", ".");
-
-                                    Valor valor2 = valor.Clone();
-                                    string[] val2 = reader["valorFCP_Principal"].ToString().Split(',');
-                                    dados.ItensGNRE.Item.Valor.Text = val2[1];
-                                    dados.ItensGNRE.Item.Receita = "100129";
-                                    dados.ItensGNRE.Item.DetalhamentoReceita = "000079";
-
-                                    valor2.Text = val2[1];
-
-                                    dadosGNREs.Add(dados);
+                                    TDadosGNRE dadosClone = dadosGNRE.Clone();
+                                    dadosClone.ValorGNRE = reader["valorFCP"].ToString().Replace(",", ".");
+                                    Valor valorFCP = valor.Clone();
+                                    valorFCP.Text = reader["valorFCP"].ToString();
+                                    dadosClone.ItensGNRE.Item.Valores = new List<Valor> { valorFCP };
+                                    dadosClone.ItensGNRE.Item.Receita = "100129";
+                                    dadosClone.ItensGNRE.Item.DetalhamentoReceita = "000079";
+                                    dadosGNREs.Add(dadosClone);
                                 }
 
                                 dadosGNREs.Add(dadosGNRE);
@@ -278,11 +262,10 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
                 CustomNotification.defaultError("Erro na função " + ex.Message);
                 return null;
             }
-            finally
-            {
-                //CustomMessage.Sucess();
-            }
         }
+
+
+
 
 
 
@@ -448,50 +431,42 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
             [XmlElement(ElementName = "campoExtra", Namespace = "http://www.gnre.pe.gov.br")]
             public List<CampoExtra> CampoExtra { get; set; }
         }
-
+        
         [XmlRoot(ElementName = "item", Namespace = "http://www.gnre.pe.gov.br")]
         public class Item
         {
-            private string v;
-
-            public Item()
-            {
-            }
-
-            public Item(string v)
-            {
-                this.v = v;
-            }
+            public Item() { }
 
             [XmlElement(ElementName = "receita", Namespace = "http://www.gnre.pe.gov.br")]
             public string Receita { get; set; }
+
             [XmlElement(ElementName = "detalhamentoReceita", Namespace = "http://www.gnre.pe.gov.br")]
             public string DetalhamentoReceita { get; set; }
 
             [XmlElement(ElementName = "documentoOrigem", Namespace = "http://www.gnre.pe.gov.br")]
             public DocumentoOrigem DocumentoOrigem { get; set; }
 
-
             [XmlElement(ElementName = "produto", Namespace = "http://www.gnre.pe.gov.br")]
             public string Produto { get; set; }
 
             [XmlElement(ElementName = "referencia", Namespace = "http://www.gnre.pe.gov.br")]
             public Referencia Referencia { get; set; }
+
             [XmlElement(ElementName = "dataVencimento", Namespace = "http://www.gnre.pe.gov.br")]
             public string DataVencimento { get; set; }
 
-
-
             [XmlElement(ElementName = "valor", Namespace = "http://www.gnre.pe.gov.br")]
-            public Valor Valor { get; set; }
+            public List<Valor> Valores { get; set; }  // Propriedade que falta e está causando o erro
+
             [XmlElement(ElementName = "contribuinteDestinatario", Namespace = "http://www.gnre.pe.gov.br")]
             public ContribuinteDestinatario ContribuinteDestinatario { get; set; }
+
             [XmlElement(ElementName = "camposExtras", Namespace = "http://www.gnre.pe.gov.br")]
             public CamposExtras CamposExtras { get; set; }
 
             public Item Clone()
             {
-                var clone = new Item
+                return new Item
                 {
                     Receita = this.Receita,
                     DetalhamentoReceita = this.DetalhamentoReceita,
@@ -499,17 +474,13 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
                     Produto = this.Produto,
                     Referencia = this.Referencia,
                     DataVencimento = this.DataVencimento,
-                    Valor = this.Valor?.Clone(),
+                    Valores = this.Valores?.Select(v => v.Clone()).ToList(),  // Clona a lista de valores
                     ContribuinteDestinatario = this.ContribuinteDestinatario,
                     CamposExtras = this.CamposExtras
                 };
-
-                return clone;
             }
-
-
-
         }
+
 
         [XmlRoot(ElementName = "itensGNRE", Namespace = "http://www.gnre.pe.gov.br")]
         public class Referencia

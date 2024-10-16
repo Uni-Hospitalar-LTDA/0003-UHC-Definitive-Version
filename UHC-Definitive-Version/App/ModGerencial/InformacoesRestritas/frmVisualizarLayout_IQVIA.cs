@@ -68,8 +68,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                 if (tipo.Equals("P"))
                 {
                     var descriptions = await IMSProduto.getDescriptionsAsync(date, id);
-                    Produtos_descriptionsAllowed = descriptions.Item1;
-                    Produtos_descriptionsDenied = descriptions.Item2;
+                    //Produtos_descriptionsAllowed = descriptions.Item1;
+                    //Produtos_descriptionsDenied = descriptions.Item2;
                     dgvData.Columns.Add("codigo", "Cód. Produto");
                     dgvData.Columns.Add("description", "Produto");
                     dgvData.Columns.Add("cod_barras", "Cód. Barras");

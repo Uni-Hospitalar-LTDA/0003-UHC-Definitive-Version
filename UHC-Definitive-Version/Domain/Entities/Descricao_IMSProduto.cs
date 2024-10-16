@@ -24,168 +24,148 @@ namespace UHC3_Definitive_Version.Domain.IMS
         public string _140Data_do_cadastro { get; set; }
         public string _150Controle_Interno_IQVIA { get; set; }
 
-		public static Tuple<string,string> getLayoutQueries(DateTime date, string id)
-		{
-			string queryAllow = $@"SELECT       distinct                                          
-                             _010Tipo_de_Registro = '{8}'
-                            ,_020Embalagem = ''
-                            ,_030Fixo = '{0}'
-                            ,_040Codigo_do_produto = produto.Codigo
-                            ,_050Fixo = '{0}'
-                            ,_060Codigo_de_barras = isnull(Produto.Cod_EAN,'')
-                            ,_070Flag = '{1}'
-                            ,_080Nome_do_produto_apresentacao = Produto.Descricao
-                            ,_090Filler = ''
-                            ,_100Fabricante = fabricante.Fantasia
-                            ,_110Preco_fabrica = CONVERT(NUMERIC(14,2),ROUND(Produto.Prc_CustoMedio,2))
-                            ,_120Tipo_de_Produto = '{"MEDICAMENTOS"}'
-                            ,_130Classificacao_fiscal = Produto.Cod_ClaFis
-                            ,_140Data_do_cadastro =  isnull(Produto.Dat_Cadastro,'')
-                            ,_150Controle_Interno_IQVIA = 'P'                                                   
-						FROM [DMD].dbo.[NFSCB] NF_Saida
-						JOIN [DMD].dbo.[NFSIT] NF_Saida_Itens ON NF_Saida_Itens.Num_Nota = NF_Saida.Num_Nota
-						JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
-						JOIN [DMD].dbo.[FABRI] Fabricante ON Produto.Cod_Fabricante = Fabricante.Codigo						
-						JOIN [DMD].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente	
-                        WHERE         								
+        public static Tuple<string, string> getLayoutQueries(DateTime date, string id)
+        {
+            string queryAllow = $@"SELECT       distinct                                          
+                         _010Tipo_de_Registro = '{8}'
+                        ,_020Embalagem = ''
+                        ,_030Fixo = '{0}'
+                        ,_040Codigo_do_produto = produto.Codigo
+                        ,_050Fixo = '{0}'
+                        ,_060Codigo_de_barras = isnull(Produto.Cod_EAN,'')
+                        ,_070Flag = '{1}'
+                        ,_080Nome_do_produto_apresentacao = Produto.Descricao
+                        ,_090Filler = ''
+                        ,_100Fabricante = fabricante.Fantasia
+                        ,_110Preco_fabrica = CONVERT(NUMERIC(14,2),ROUND(Produto.Prc_CustoMedio,2))
+                        ,_120Tipo_de_Produto = '{"MEDICAMENTOS"}'
+                        ,_130Classificacao_fiscal = Produto.Cod_ClaFis
+                        ,_140Data_do_cadastro =  isnull(Produto.Dat_Cadastro,'')
+                        ,_150Controle_Interno_IQVIA = 'P'                                                   
+                    FROM [DMD].dbo.[NFSCB] NF_Saida
+                    JOIN [DMD].dbo.[NFSIT] NF_Saida_Itens ON NF_Saida_Itens.Num_Nota = NF_Saida.Num_Nota
+                    JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
+                    JOIN [DMD].dbo.[FABRI] Fabricante ON Produto.Cod_Fabricante = Fabricante.Codigo						
+                    JOIN [DMD].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente	
+                    WHERE         								
 
 {(Section.Unidade == "SP HOSPITALAR" ? "" : $@"/** Condicional Temporária **/
-								NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
-								AND
-								/** Fim Condicional Temporária **/
-                                ")}
+                            NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
+                            AND
+                            /** Fim Condicional Temporária **/
+                            ")}
 
 
-                                /*Condicional Data*/
-								NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'                               
-								/*Condicional tipo de saída*/
-								AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))					    																
-								AND (
-									 (0 = (IIF((SELECT distinct external_Code
-												FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-												WHERE typeBlock = 'P'
-												AND id_Panel = {id}  
-												AND external_Code = Produto.Codigo) IS NOT NULL
-									      ,1,0))
-								     )
-								AND 
+                            /*Condicional Data*/
+                            NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'                               
+                            /*Condicional tipo de saída*/
+                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))					    																
+                            AND (
+                                0 = (IIF(EXISTS(SELECT 1
+                                                FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
+                                                WHERE typeBlock = 'P'
+                                                AND id_Panel = {id}  
+                                                AND external_Code = Produto.Codigo),1,0))
+                                )
+                            AND 
 
-									  /*Bloqueio secundário por Clientes*/
-									(0 =(SELECT 
-									(IIF(
-								     (SELECT Count(*) 
-									  FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
-									  JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota
-									  WHERE iNF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
-											AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo) 											
-											=								  
-	   								 (SELECT count(*)
-								      FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-								      WHERE (typeBlock = 'C' AND id_Panel = {id} )
-									         AND 1 = (IIF((SELECT Cod_Cliente
-																   FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
-																   JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota
-																   WHERE iNF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
-																   AND iNF_Saida.Cod_Cliente = external_code
-																   AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo) is not null,1,0)))																		    
-								,1,0))))
-								AND 
-								/*Bloqueio secundário por Fornecedor*/
-								(0 = (IIF((SELECT distinct external_Code 
-									       FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-									       WHERE TypeBlock = 'F'
-									       AND id_Panel = {id} 
-										   AND external_Code = Produto.Cod_Fabricante) is not null,1,0)))		
-								AND
-								/*Bloqueio de Produto por NF*/
-								(0 = (IIF((SELECT distinct External_Code 
-										FROM [UHCDB].dbo.[Iqvia_DetailedBlocks] iBlocks
-										JOIN [DMD].dbo.[NFSIT] iNF_Saida_Itens ON iNF_Saida_Itens.Num_Nota = iBlocks.External_Code
-										WHERE TypeBlock = 'N' AND id_Panel = {id}
-										AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo
-									) IS NOT NULL,1,0)))
-								)
-                        ";
-			string queryDeny = $@"SELECT            distinct                                     
-                             _010Tipo_de_Registro = '{8}'
-                            ,_020Embalagem = ''
-                            ,_030Fixo = '{0}'
-                            ,_040Codigo_do_produto = produto.Codigo
-                            ,_050Fixo = '{0}'
-                            ,_060Codigo_de_barras = isnull(Produto.Cod_EAN,'')
-                            ,_070Flag = '{1}'
-                            ,_080Nome_do_produto_apresentacao = Produto.Descricao
-                            ,_090Filler = ''
-                            ,_100Fabricante = fabricante.Fantasia
-                            ,_110Preco_fabrica = CONVERT(NUMERIC(14,2),ROUND(Produto.Prc_CustoMedio,2))
-                            ,_120Tipo_de_Produto = ''
-                            ,_130Classificacao_fiscal = Produto.Cod_ClaFis
-                            ,_140Data_do_cadastro =  isnull(Produto.Dat_Cadastro,'')
-                            ,_150Controle_Interno_IQVIA = 'P'                                                   
-						FROM [DMD].dbo.[NFSCB] NF_Saida
-						JOIN [DMD].dbo.[NFSIT] NF_Saida_Itens ON NF_Saida_Itens.Num_Nota = NF_Saida.Num_Nota
-						JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
-						JOIN [DMD].dbo.[FABRI] Fabricante ON Produto.Cod_Fabricante = Fabricante.Codigo						
-						JOIN [DMD].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente	
-                        WHERE                       
-								{(Section.Unidade == "SP HOSPITALAR" ? "" : $@"/** Condicional Temporária **/
-								NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
-								AND
-								/** Fim Condicional Temporária **/
-                                ")}
-                                /*Condicional Data*/
-								NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'                               
-								/*Condicional tipo de saída*/
-								AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))					    																
-								AND (
-									 (1 = (IIF((SELECT distinct external_Code
-												FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-												WHERE typeBlock = 'P'
-												AND id_Panel = {id}  
-												AND external_Code = Produto.Codigo) IS NOT NULL
-									      ,1,0))
-								     )
-								OR 
+                              /*Bloqueio secundário por Clientes*/
+                              0 = (IIF(EXISTS(
+                                  SELECT 1
+                                  FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
+                                  JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota
+                                  WHERE iNF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
+                                  AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo),1,0)
+                              )
+                              AND 
+                              /*Bloqueio secundário por Fornecedor*/
+                              0 = (IIF(EXISTS(
+                                  SELECT 1
+                                  FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
+                                  WHERE TypeBlock = 'F'
+                                  AND id_Panel = {id} 
+                                  AND external_Code = Produto.Cod_Fabricante),1,0))
+                              AND
+                              /*Bloqueio de Produto por NF*/
+                              0 = (IIF(EXISTS(
+                                  SELECT 1 
+                                  FROM [UHCDB].dbo.[Iqvia_DetailedBlocks] iBlocks
+                                  JOIN [DMD].dbo.[NFSIT] iNF_Saida_Itens ON iNF_Saida_Itens.Num_Nota = iBlocks.External_Code
+                                  WHERE TypeBlock = 'N' AND id_Panel = {id}
+                                  AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo),1,0))
+                    ";
 
-									  /*Bloqueio secundário por Clientes*/
-									(1 =(SELECT 
-									(IIF(
-								     (SELECT Count(*) 
-									  FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
-									  JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota
-									  WHERE iNF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
-											AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo) 											
-											=								  
-	   								 (SELECT count(*)
-								      FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-								      WHERE (typeBlock = 'C' AND id_Panel = {id} )
-									         AND 1 = (IIF((SELECT Cod_Cliente
-																   FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
-																   JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota
-																   WHERE iNF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
-																   AND iNF_Saida.Cod_Cliente = external_code
-																   AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo) is not null,1,0)))																		    
-								,1,0))))
-								OR 
-								/*Bloqueio secundário por Fornecedor*/
-								(1 = (IIF((SELECT distinct external_Code 
-									       FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-									       WHERE TypeBlock = 'F'
-									       AND id_Panel = {id} 
-										   AND external_Code = Produto.Cod_Fabricante) is not null,1,0)))		
-								OR
-								/*Bloqueio de Produto por NF*/
-								(1 = (IIF((SELECT distinct External_Code 
-										FROM [UHCDB].dbo.[Iqvia_DetailedBlocks] iBlocks
-										JOIN [DMD].dbo.[NFSIT] iNF_Saida_Itens ON iNF_Saida_Itens.Num_Nota = iBlocks.External_Code
-										WHERE TypeBlock = 'N' AND id_Panel = {id}
-										AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo
-									) IS NOT NULL,1,0)))
-								)
-                        ";
+            string queryDeny = $@"SELECT            distinct                                     
+                         _010Tipo_de_Registro = '{8}'
+                        ,_020Embalagem = ''
+                        ,_030Fixo = '{0}'
+                        ,_040Codigo_do_produto = produto.Codigo
+                        ,_050Fixo = '{0}'
+                        ,_060Codigo_de_barras = isnull(Produto.Cod_EAN,'')
+                        ,_070Flag = '{1}'
+                        ,_080Nome_do_produto_apresentacao = Produto.Descricao
+                        ,_090Filler = ''
+                        ,_100Fabricante = fabricante.Fantasia
+                        ,_110Preco_fabrica = CONVERT(NUMERIC(14,2),ROUND(Produto.Prc_CustoMedio,2))
+                        ,_120Tipo_de_Produto = ''
+                        ,_130Classificacao_fiscal = Produto.Cod_ClaFis
+                        ,_140Data_do_cadastro =  isnull(Produto.Dat_Cadastro,'')
+                        ,_150Controle_Interno_IQVIA = 'P'                                                   
+                    FROM [DMD].dbo.[NFSCB] NF_Saida
+                    JOIN [DMD].dbo.[NFSIT] NF_Saida_Itens ON NF_Saida_Itens.Num_Nota = NF_Saida.Num_Nota
+                    JOIN [DMD].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
+                    JOIN [DMD].dbo.[FABRI] Fabricante ON Produto.Cod_Fabricante = Fabricante.Codigo						
+                    JOIN [DMD].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente	
+                    WHERE                       
 
-			return new Tuple<string, string>(queryAllow, queryDeny);
-		}
+{(Section.Unidade == "SP HOSPITALAR" ? "" : $@"/** Condicional Temporária **/
+                            NOT (Fabricante.Fantasia LIKE '%EUROFARMA%' AND Tipo_Consumidor IN ('P','M','E'))
+                            AND
+                            /** Fim Condicional Temporária **/
+                            ")}
+
+                            /*Condicional Data*/
+                            NF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'                               
+                            /*Condicional tipo de saída*/
+                            AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))					    																
+                            AND (
+                                1 = (IIF(EXISTS(SELECT 1
+                                                FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
+                                                WHERE typeBlock = 'P'
+                                                AND id_Panel = {id}  
+                                                AND external_Code = Produto.Codigo),1,0))
+                                )
+                            OR 
+
+                              /*Bloqueio secundário por Clientes*/
+                              1 = (IIF(EXISTS(
+                                  SELECT 1
+                                  FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
+                                  JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota
+                                  WHERE iNF_Saida.Dat_Emissao = '{date.ToString("yyyyMMdd")}'
+                                  AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo),1,0)
+                              )
+                              OR 
+                              /*Bloqueio secundário por Fornecedor*/
+                              1 = (IIF(EXISTS(
+                                  SELECT 1
+                                  FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
+                                  WHERE TypeBlock = 'F'
+                                  AND id_Panel = {id} 
+                                  AND external_Code = Produto.Cod_Fabricante),1,0))
+                              OR
+                              /*Bloqueio de Produto por NF*/
+                              1 = (IIF(EXISTS(
+                                  SELECT 1 
+                                  FROM [UHCDB].dbo.[Iqvia_DetailedBlocks] iBlocks
+                                  JOIN [DMD].dbo.[NFSIT] iNF_Saida_Itens ON iNF_Saida_Itens.Num_Nota = iBlocks.External_Code
+                                  WHERE TypeBlock = 'N' AND id_Panel = {id}
+                                  AND iNF_Saida_Itens.Cod_Produto = Produto.Codigo),1,0))
+                    ";
+
+            return new Tuple<string, string>(queryAllow, queryDeny);
+        }
+
 
         private static string getDescricao(List<Descricao_IMSProduto> descricao)
         {
@@ -235,9 +215,11 @@ namespace UHC3_Definitive_Version.Domain.IMS
         public async static Task<Tuple<List<Descricao_IMSProduto>,List<Descricao_IMSProduto>>> getAllTolistAsync(DateTime date,string id)
         {
             var queries = getLayoutQueries(date,id);
+			Console.WriteLine(queries.Item1);
+            Console.WriteLine(queries.Item2);
             List<Descricao_IMSProduto> Alloweds = await getAllToList(queries.Item1);
-            List<Descricao_IMSProduto> Denieds = await getAllToList(queries.Item2);
-            return new Tuple<List<Descricao_IMSProduto>, List<Descricao_IMSProduto>>(Alloweds,Denieds);
+			List<Descricao_IMSProduto> Denieds = await getAllToList(queries.Item2);
+			return new Tuple<List<Descricao_IMSProduto>, List<Descricao_IMSProduto>>(Alloweds,Denieds);
         }
 
 
