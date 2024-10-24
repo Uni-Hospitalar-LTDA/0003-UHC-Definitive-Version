@@ -14,6 +14,21 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Canhotos
 {
     public partial class frmControleCanhotos : CustomForm
     {
+
+        public frmControleCanhotos()
+        {
+            InitializeComponent();
+
+            //Properties 
+            ConfigureCheckedListBoxProperties();
+            ConfigureFormProperties();
+            ConfigureTextBoxProperties();
+
+            //Events 
+            ConfigureFormEvents();
+        }
+
+
         /** Instance **/
         List<NF_Canhotos> Canhotos = new List<NF_Canhotos>();
 
@@ -75,18 +90,7 @@ WHERE NF_Entrada.Numero = {NF}";
             }
         }
 
-        public frmControleCanhotos()
-        {
-            InitializeComponent();
-
-            //Properties 
-            ConfigureCheckedListBoxProperties();
-            ConfigureFormProperties();
-            ConfigureTextBoxProperties();
-
-            //Events 
-            ConfigureFormEvents();
-        }
+     
         /** Async Tasks**/
         private async Task getCanhotosFromDB(DateTime dt1, DateTime dt2, string codCliente = null, string codTransportador = null)
         {
@@ -165,6 +169,7 @@ WHERE NF_Entrada.Numero = {NF}";
             await getCanhotosFromDB(dtpDtInicial.Value, dtpDtFinal.Value);
             putNFsOnCheckedListBox(clbNotas);
 
+            //Buttons Configure
             ConfigureButtonsEvents();
             ConfigureCheckedListBoxEvents();
             ConfigureTextBoxEvents();
@@ -204,7 +209,7 @@ WHERE NF_Entrada.Numero = {NF}";
             txtStatusInfo.Text = Info.Status;
             txtUfInfo.Text = Info.Estado;
             txtCfopInfo.Text = Info.CFOP;
-            txtDatColetaInfo.Text = Convert.ToDateTime(Info.Dat_Coleta).ToShortDateString();
+            txtDatColetaInfo.Text = Info.Dat_Coleta != null ? Convert.ToDateTime(Info.Dat_Coleta).ToShortDateString() : "Não há data de coleta";
             txtClienteInfo_Codigo.Text = Info.Cod_Cliente;
             txtClienteInfo_Descricao.Text = Info.Cliente;
             txtTransportadorInfo_Codigo.Text = Info.Cod_Transportadora;
@@ -231,6 +236,10 @@ WHERE NF_Entrada.Numero = {NF}";
         {
             btnPesquisar.Click += btnPesquisar_Click;
             btnConfirmar.Click += btnConfirmar_Click;
+
+            // Transportador e Clientes buttons
+            btnMoreCustomers.Click += btnMoreCustomersQuery;
+            btnMoreTransporters.Click += btnMoreTransportersQuery;
         }
         private async void btnPesquisar_Click(object sender, EventArgs e)
         {
@@ -330,5 +339,34 @@ WHERE NF_Entrada.Numero = {NF}";
             txtCliente_Descricao.Text = Clientes_Externos.getDescripionByCode(txtCliente_Codigo.Text);
         }
 
+        private void chkMarcarTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            bool marcar = chkMarcarTodos.Checked;
+
+            for (int i = 0; i < clbNotas.Items.Count; i++)
+            {
+                clbNotas.SetItemChecked(i, marcar);
+            }
+        }
+
+
+   
+
+
+        private void btnMoreTransportersQuery(object sender, EventArgs e)
+        {
+            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
+            frmConsultarTransportador.ShowDialog();
+            txtTransportador_Codigo.Text = frmConsultarTransportador.extendedCode;
+        }
+
+        private void btnMoreCustomersQuery(object sender, EventArgs e)
+        {
+            frmConsultarCliente frmConsultarCliente = new frmConsultarCliente();
+            frmConsultarCliente.ShowDialog();
+            txtCliente_Codigo.Text = frmConsultarCliente.extendedCode;
+        }
+
+      
     }
 }

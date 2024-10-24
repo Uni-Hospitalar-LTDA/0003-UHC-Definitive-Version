@@ -14,6 +14,26 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Canhotos
 
     public partial class frmRelatorioAusencias : CustomForm
     {
+
+        public frmRelatorioAusencias()
+        {
+            InitializeComponent();
+
+            //Properties
+            ConfigureMenuStripProperties();
+            ConfigureFormProperties();
+            ConfigureTextBoxProperties();
+            ConfigureComboBoxProperties();
+            ConfigureDataGridViewProperties();
+            ConfiguteButtonsProperties();
+            ConfigureProgressBarProperties();
+
+            //Events 
+            ConfigureFormEvents();
+        }
+
+
+
         /** Instance **/
         CustomMenuStrip menuStrip = new CustomMenuStrip();
         List<Contact_Mail> contacts = new List<Contact_Mail>();
@@ -134,23 +154,7 @@ ORDER BY [NF]";
                 return await getAllToDataTable(query);
             }
         }
-        public frmRelatorioAusencias()
-        {
-            InitializeComponent();
 
-            //Properties
-            ConfigureMenuStripProperties();
-            ConfigureFormProperties();
-            ConfigureLinkLabelProperties();
-            ConfigureTextBoxProperties();
-            ConfigureComboBoxProperties();
-            ConfigureDataGridViewProperties();
-            ConfiguteButtonsProperties();
-            ConfigureProgressBarProperties();
-
-            //Events 
-            ConfigureFormEvents();
-        }
 
         /** Async Tasks **/
         private async Task getReport()
@@ -197,8 +201,7 @@ ORDER BY [NF]";
 
             //Events 
             ConfigureTextBoxEvents();
-            ConfigureButtonsEvents();
-            ConfigureLinkLabelEvents();            
+            ConfigureButtonsEvents();         
         }
 
         private void ConfigureFormProperties()
@@ -246,18 +249,9 @@ ORDER BY [NF]";
             dgvData.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom;
         }
 
-        /** Configure Link Label**/
-        private void ConfigureLinkLabelProperties()
-        {
-            linklblNotifyByMail.Visible = false;
-        }
-        private void ConfigureLinkLabelEvents()
-        {
-            linklblNotifyByMail.Click += linklblNotifyByMail_Click;
-        }
-        private async void linklblNotifyByMail_Click(object sender, EventArgs e)
-        {
 
+        private async void NotifyByMail(object sender, EventArgs e)
+        {
             if (dgvData.Rows.Count > 0)
             {
                 /** Get Contacts **/
@@ -315,7 +309,7 @@ ORDER BY [NF]";
                     this.Cursor = Cursors.Default;
                     progressBar1.Visible = false;
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     CustomNotification.defaultAlert("Alerta: Verifique se existem contatos cadastrados para a transportadora.");
                 }
@@ -324,23 +318,25 @@ ORDER BY [NF]";
             {
                 CustomNotification.defaultAlert("Não existem dados para realizar a notificação.");
             }
-
         }
-
         /** Configure Buttons **/
         private void ConfiguteButtonsProperties()
         {
             btnFechar.toDefaultCloseButton();
 
+            //Visual properties
+            btnNotifyByMail.Visible = false;
+            btnNotifyByMail.Cursor = Cursors.Hand;
+
         }
         private void ConfigureButtonsEvents()
         {
             btnPesquisar.Click += btnPesquisar_Click;
+            btnNotifyByMail.Click += NotifyByMail; 
         }
         private async void btnPesquisar_Click(object sender, EventArgs e)
         {
             await getReport();
-
         }
 
         /** Configure TextBoxes **/
@@ -369,11 +365,20 @@ ORDER BY [NF]";
         }
         private async void txtTransportadora_TextChanged(object sender, EventArgs e)
         {
+            btnNotifyByMail.Text = "Enviar notificação por e-mail";
+
             await getReport();
             if (!string.IsNullOrEmpty(((TextBox)sender).Text))
-                linklblNotifyByMail.Visible = true;
+            {
+                btnNotifyByMail.Visible = true;
+            }
             else
-                linklblNotifyByMail.Visible = false;
+            {
+                btnNotifyByMail.Visible = false;
+            }
+
+
+
         }
 
         /** Menu Strip Configuration **/
@@ -434,5 +439,16 @@ ORDER BY [NF]";
                 }
             }
         }
+
+        private void btnMoreTransporter_Click(object sender, EventArgs e)
+        {
+            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
+            frmConsultarTransportador.ShowDialog();
+            txtCodTransportadora.Text = frmConsultarTransportador.extendedCode;
+        }
+
+
     }
+
+
 }

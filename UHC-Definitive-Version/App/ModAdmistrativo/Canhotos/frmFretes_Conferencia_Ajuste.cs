@@ -24,6 +24,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Canhotos
             ConfiguraDataGridViewProperties();
             ConfigureButtonProperties();
 
+
             //Events
             ConfigureFormEvents();
         }
@@ -126,6 +127,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Canhotos
             ConfigureDataGridViewCollumnsProperties();
 
 
+            // ** Events ** //
             ConfigureButtonEvents();
             ConfigureTextBoxEvents();
             ConfigureDataGridViewEvents();
@@ -211,8 +213,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Canhotos
         private void ConfigureTextBoxEvents()
         {
             txtTransporterId.TextChanged += txtCodTransportador_TextChanged;
-            txtTransporterDescription.TextChanged += txtDescricaoTransportador_TextChanged;
-            txtTransporterDescription.DoubleClick += txtDescricaoTransportador_DoubleClick;
+
 
             txtTransporterId.KeyDown += GenericSearch_KeyDown;
             dtpInitialDate.KeyDown += GenericSearch_KeyDown;
@@ -231,12 +232,6 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Canhotos
             {
                 await getConferenceListAsync();
             }
-        }
-        private void txtDescricaoTransportador_DoubleClick(object sender, EventArgs e)
-        {
-            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
-            frmConsultarTransportador.ShowDialog();
-            txtTransporterId.Text = frmConsultarTransportador.extendedCode;
         }
 
         /** Button Configuration**/
@@ -266,5 +261,13 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Canhotos
             txtEditObservation.Text = string.Empty;
             gpbEdit.Text = "Campos Editáveis";
         }
+
+        private void btnMoreTransporter_Click(object sender, EventArgs e)
+        {
+            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
+            frmConsultarTransportador.ShowDialog();
+            txtTransporterId.Text = frmConsultarTransportador.extendedCode;
+        }
+
     }
 }

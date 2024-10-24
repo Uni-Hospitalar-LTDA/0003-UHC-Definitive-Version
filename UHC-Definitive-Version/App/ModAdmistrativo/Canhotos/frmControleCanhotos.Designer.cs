@@ -49,6 +49,8 @@
             this.lblDatEmissao = new System.Windows.Forms.Label();
             this.lblNota = new System.Windows.Forms.Label();
             this.gpbFiltros = new System.Windows.Forms.GroupBox();
+            this.btnMoreCustomers = new System.Windows.Forms.Button();
+            this.btnMoreTransporters = new System.Windows.Forms.Button();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtNF = new System.Windows.Forms.TextBox();
             this.txtTransportador_Descricao = new System.Windows.Forms.TextBox();
@@ -64,6 +66,7 @@
             this.dtpDtInicial = new System.Windows.Forms.DateTimePicker();
             this.lblCodCliente = new System.Windows.Forms.Label();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.chkMarcarTodos = new System.Windows.Forms.CheckBox();
             this.gpbInfo.SuspendLayout();
             this.gpbFiltros.SuspendLayout();
             this.SuspendLayout();
@@ -72,15 +75,15 @@
             // 
             this.clbNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.clbNotas.FormattingEnabled = true;
-            this.clbNotas.Location = new System.Drawing.Point(12, 36);
+            this.clbNotas.Location = new System.Drawing.Point(12, 51);
             this.clbNotas.Name = "clbNotas";
-            this.clbNotas.Size = new System.Drawing.Size(142, 439);
+            this.clbNotas.Size = new System.Drawing.Size(160, 424);
             this.clbNotas.TabIndex = 59;
             // 
             // lblListaNfs
             // 
             this.lblListaNfs.AutoSize = true;
-            this.lblListaNfs.Location = new System.Drawing.Point(12, 20);
+            this.lblListaNfs.Location = new System.Drawing.Point(12, 35);
             this.lblListaNfs.Name = "lblListaNfs";
             this.lblListaNfs.Size = new System.Drawing.Size(66, 13);
             this.lblListaNfs.TabIndex = 60;
@@ -105,9 +108,9 @@
             this.gpbInfo.Controls.Add(this.lblStatus);
             this.gpbInfo.Controls.Add(this.lblDatEmissao);
             this.gpbInfo.Controls.Add(this.lblNota);
-            this.gpbInfo.Location = new System.Drawing.Point(160, 36);
+            this.gpbInfo.Location = new System.Drawing.Point(178, 36);
             this.gpbInfo.Name = "gpbInfo";
-            this.gpbInfo.Size = new System.Drawing.Size(702, 150);
+            this.gpbInfo.Size = new System.Drawing.Size(726, 150);
             this.gpbInfo.TabIndex = 61;
             this.gpbInfo.TabStop = false;
             this.gpbInfo.Text = "Informações";
@@ -250,6 +253,8 @@
             // 
             // gpbFiltros
             // 
+            this.gpbFiltros.Controls.Add(this.btnMoreCustomers);
+            this.gpbFiltros.Controls.Add(this.btnMoreTransporters);
             this.gpbFiltros.Controls.Add(this.btnPesquisar);
             this.gpbFiltros.Controls.Add(this.txtNF);
             this.gpbFiltros.Controls.Add(this.txtTransportador_Descricao);
@@ -264,12 +269,32 @@
             this.gpbFiltros.Controls.Add(this.dtpDtFinal);
             this.gpbFiltros.Controls.Add(this.dtpDtInicial);
             this.gpbFiltros.Controls.Add(this.lblCodCliente);
-            this.gpbFiltros.Location = new System.Drawing.Point(160, 192);
+            this.gpbFiltros.Location = new System.Drawing.Point(178, 192);
             this.gpbFiltros.Name = "gpbFiltros";
-            this.gpbFiltros.Size = new System.Drawing.Size(702, 168);
+            this.gpbFiltros.Size = new System.Drawing.Size(726, 168);
             this.gpbFiltros.TabIndex = 62;
             this.gpbFiltros.TabStop = false;
             this.gpbFiltros.Text = "Filtros";
+            // 
+            // btnMoreCustomers
+            // 
+            this.btnMoreCustomers.Location = new System.Drawing.Point(693, 42);
+            this.btnMoreCustomers.Name = "btnMoreCustomers";
+            this.btnMoreCustomers.Size = new System.Drawing.Size(24, 23);
+            this.btnMoreCustomers.TabIndex = 71;
+            this.btnMoreCustomers.Text = "...";
+            this.btnMoreCustomers.UseVisualStyleBackColor = true;
+          
+            // 
+            // btnMoreTransporters
+            // 
+            this.btnMoreTransporters.Location = new System.Drawing.Point(693, 81);
+            this.btnMoreTransporters.Name = "btnMoreTransporters";
+            this.btnMoreTransporters.Size = new System.Drawing.Size(24, 23);
+            this.btnMoreTransporters.TabIndex = 70;
+            this.btnMoreTransporters.Text = "...";
+            this.btnMoreTransporters.UseVisualStyleBackColor = true;
+     
             // 
             // btnPesquisar
             // 
@@ -395,18 +420,30 @@
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.Location = new System.Drawing.Point(752, 452);
+            this.btnConfirmar.Location = new System.Drawing.Point(794, 452);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(95, 23);
             this.btnConfirmar.TabIndex = 70;
             this.btnConfirmar.Text = "Fechar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
             // 
+            // chkMarcarTodos
+            // 
+            this.chkMarcarTodos.AutoSize = true;
+            this.chkMarcarTodos.Location = new System.Drawing.Point(84, 31);
+            this.chkMarcarTodos.Name = "chkMarcarTodos";
+            this.chkMarcarTodos.Size = new System.Drawing.Size(88, 17);
+            this.chkMarcarTodos.TabIndex = 71;
+            this.chkMarcarTodos.Text = "Marcar todos";
+            this.chkMarcarTodos.UseVisualStyleBackColor = true;
+            this.chkMarcarTodos.CheckedChanged += new System.EventHandler(this.chkMarcarTodos_CheckedChanged);
+            // 
             // frmControleCanhotos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 491);
+            this.ClientSize = new System.Drawing.Size(916, 491);
+            this.Controls.Add(this.chkMarcarTodos);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.gpbFiltros);
             this.Controls.Add(this.gpbInfo);
@@ -473,5 +510,8 @@
         private System.Windows.Forms.DateTimePicker dtpDtInicial;
         private System.Windows.Forms.Label lblCodCliente;
         private System.Windows.Forms.Button btnConfirmar;
+        private System.Windows.Forms.CheckBox chkMarcarTodos;
+        private System.Windows.Forms.Button btnMoreTransporters;
+        private System.Windows.Forms.Button btnMoreCustomers;
     }
 }

@@ -43,6 +43,7 @@
             this.txtTransporterDescription = new System.Windows.Forms.TextBox();
             this.lblTransporter = new System.Windows.Forms.Label();
             this.txtTransporterId = new System.Windows.Forms.TextBox();
+            this.btnMoreTransporter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -172,11 +173,22 @@
             this.txtTransporterId.Size = new System.Drawing.Size(62, 20);
             this.txtTransporterId.TabIndex = 84;
             // 
+            // btnMoreTransporter
+            // 
+            this.btnMoreTransporter.Location = new System.Drawing.Point(511, 51);
+            this.btnMoreTransporter.Name = "btnMoreTransporter";
+            this.btnMoreTransporter.Size = new System.Drawing.Size(24, 23);
+            this.btnMoreTransporter.TabIndex = 99;
+            this.btnMoreTransporter.Text = "...";
+            this.btnMoreTransporter.UseVisualStyleBackColor = true;
+            this.btnMoreTransporter.Click += new System.EventHandler(this.btnMoreTransporter_Click);
+            // 
             // frmFretes_RelatorioAnalitico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnMoreTransporter);
             this.Controls.Add(this.lblCteFilter);
             this.Controls.Add(this.txtCteFilter);
             this.Controls.Add(this.lblNfFilter);
@@ -193,6 +205,18 @@
             this.Controls.Add(this.lblTransporter);
             this.Controls.Add(this.txtTransporterId);
             this.Name = "frmFretes_RelatorioAnalitico";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Relatório Analítico de Frete";
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.ResumeLayout(false);
@@ -217,5 +241,6 @@
         private System.Windows.Forms.TextBox txtTransporterDescription;
         private System.Windows.Forms.Label lblTransporter;
         private System.Windows.Forms.TextBox txtTransporterId;
+        private System.Windows.Forms.Button btnMoreTransporter;
     }
 }
