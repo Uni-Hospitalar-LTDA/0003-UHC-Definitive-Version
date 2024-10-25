@@ -22,7 +22,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             InitializeComponent();
 
             //Events
-            ConfigureFormProperties();            
+            ConfigureFormProperties();
             ConfigureButtonsProperties();
             ConfigureTextBoxProperties();
             this.defaultMainMenu();
@@ -107,7 +107,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             btnRemove.BackColor = Color.FromArgb(230, 135, 142); // Rosa suave
             btnRemove.ForeColor = Color.White; // Texto branco
 
-            btnSave.Visible = false;
+            btnSave.Enabled = false;
 
 
             // btnFechar
@@ -122,6 +122,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
 
             btnConfigureStatePercents.Click += btnConfigureStatePercents_Click;
             btnConfigureCityPercents.Click += btnConfigureCityPercents_Click;
+            btnMoreTransporter.Click += btnMoreTransporter_Click;
 
         }
         private void btnConfigureCityPercents_Click(object sender, EventArgs e)
@@ -148,6 +149,14 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             listContacts();
 
         }
+
+        private void btnMoreTransporter_Click(object sender, EventArgs e)
+        {
+            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
+            frmConsultarTransportador.ShowDialog();
+            txtTransprotador_Codigo.Text = frmConsultarTransportador.extendedCode;
+        }
+
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             frmGeneric_ConsultaComSelecao consultarContatos = new frmGeneric_ConsultaComSelecao();
@@ -211,13 +220,13 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             var txt = (TextBox)sender;
             if (!string.IsNullOrEmpty(txt.Text.Trim()))
             {
-                btnSave.Visible = true;
+                btnSave.Enabled = true;
                 await getContacts();
                 listContacts();
             }
             else
             {
-                btnSave.Visible = false;
+                btnSave.Enabled = false;
                 lsbContatcs.Items.Clear();
             }
         }

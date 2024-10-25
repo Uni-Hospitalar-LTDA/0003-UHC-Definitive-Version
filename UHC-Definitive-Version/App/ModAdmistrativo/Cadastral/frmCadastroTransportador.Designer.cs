@@ -39,21 +39,23 @@
             this.lsbContatcs = new System.Windows.Forms.ListBox();
             this.txtTransportador_Descricao = new System.Windows.Forms.TextBox();
             this.txtTransprotador_Codigo = new System.Windows.Forms.TextBox();
-            this.lblTransportador = new System.Windows.Forms.Label();
+            this.cbxTransportadora = new System.Windows.Forms.GroupBox();
+            this.btnMoreTransporter = new System.Windows.Forms.Button();
+            this.cbxTransportadora.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConfigureCityPercents
             // 
-            this.btnConfigureCityPercents.Location = new System.Drawing.Point(385, 97);
+            this.btnConfigureCityPercents.Location = new System.Drawing.Point(218, 57);
             this.btnConfigureCityPercents.Name = "btnConfigureCityPercents";
-            this.btnConfigureCityPercents.Size = new System.Drawing.Size(187, 23);
+            this.btnConfigureCityPercents.Size = new System.Drawing.Size(190, 23);
             this.btnConfigureCityPercents.TabIndex = 29;
             this.btnConfigureCityPercents.Text = "Config. Percentuais para Cidade";
             this.btnConfigureCityPercents.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(416, 284);
+            this.btnSave.Location = new System.Drawing.Point(511, 484);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 26);
             this.btnSave.TabIndex = 33;
@@ -62,36 +64,36 @@
             // 
             // btnConfigureContacts
             // 
-            this.btnConfigureContacts.Location = new System.Drawing.Point(385, 126);
+            this.btnConfigureContacts.Location = new System.Drawing.Point(414, 57);
             this.btnConfigureContacts.Name = "btnConfigureContacts";
-            this.btnConfigureContacts.Size = new System.Drawing.Size(187, 23);
+            this.btnConfigureContacts.Size = new System.Drawing.Size(205, 23);
             this.btnConfigureContacts.TabIndex = 30;
             this.btnConfigureContacts.Text = "Configurar Contatos";
             this.btnConfigureContacts.UseVisualStyleBackColor = true;
             // 
             // btnRemove
             // 
-            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(50, 283);
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.Location = new System.Drawing.Point(348, 434);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(29, 27);
+            this.btnRemove.Size = new System.Drawing.Size(169, 27);
             this.btnRemove.TabIndex = 32;
-            this.btnRemove.Text = "-";
+            this.btnRemove.Text = "Remover Contato";
             this.btnRemove.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(15, 283);
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(173, 434);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(29, 27);
+            this.btnAdd.Size = new System.Drawing.Size(169, 27);
             this.btnAdd.TabIndex = 31;
-            this.btnAdd.Text = "+";
+            this.btnAdd.Text = "Adicionar Contato";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(497, 284);
+            this.btnClose.Location = new System.Drawing.Point(592, 484);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 26);
             this.btnClose.TabIndex = 34;
@@ -100,9 +102,9 @@
             // 
             // btnConfigureStatePercents
             // 
-            this.btnConfigureStatePercents.Location = new System.Drawing.Point(385, 68);
+            this.btnConfigureStatePercents.Location = new System.Drawing.Point(6, 57);
             this.btnConfigureStatePercents.Name = "btnConfigureStatePercents";
-            this.btnConfigureStatePercents.Size = new System.Drawing.Size(187, 23);
+            this.btnConfigureStatePercents.Size = new System.Drawing.Size(206, 23);
             this.btnConfigureStatePercents.TabIndex = 28;
             this.btnConfigureStatePercents.Text = "Config. Percentuais para Estado";
             this.btnConfigureStatePercents.UseVisualStyleBackColor = true;
@@ -110,7 +112,7 @@
             // lblContatcts
             // 
             this.lblContatcts.AutoSize = true;
-            this.lblContatcts.Location = new System.Drawing.Point(12, 52);
+            this.lblContatcts.Location = new System.Drawing.Point(12, 148);
             this.lblContatcts.Name = "lblContatcts";
             this.lblContatcts.Size = new System.Drawing.Size(118, 13);
             this.lblContatcts.TabIndex = 37;
@@ -119,33 +121,48 @@
             // lsbContatcs
             // 
             this.lsbContatcs.FormattingEnabled = true;
-            this.lsbContatcs.Location = new System.Drawing.Point(15, 68);
+            this.lsbContatcs.Location = new System.Drawing.Point(12, 164);
             this.lsbContatcs.Name = "lsbContatcs";
-            this.lsbContatcs.Size = new System.Drawing.Size(365, 212);
+            this.lsbContatcs.Size = new System.Drawing.Size(655, 264);
             this.lsbContatcs.TabIndex = 36;
             // 
             // txtTransportador_Descricao
             // 
-            this.txtTransportador_Descricao.Location = new System.Drawing.Point(64, 26);
+            this.txtTransportador_Descricao.Location = new System.Drawing.Point(54, 19);
             this.txtTransportador_Descricao.Name = "txtTransportador_Descricao";
-            this.txtTransportador_Descricao.Size = new System.Drawing.Size(503, 20);
+            this.txtTransportador_Descricao.Size = new System.Drawing.Size(565, 20);
             this.txtTransportador_Descricao.TabIndex = 27;
             // 
             // txtTransprotador_Codigo
             // 
-            this.txtTransprotador_Codigo.Location = new System.Drawing.Point(15, 26);
+            this.txtTransprotador_Codigo.Location = new System.Drawing.Point(6, 19);
             this.txtTransprotador_Codigo.Name = "txtTransprotador_Codigo";
             this.txtTransprotador_Codigo.Size = new System.Drawing.Size(44, 20);
             this.txtTransprotador_Codigo.TabIndex = 26;
             // 
-            // lblTransportador
+            // cbxTransportadora
             // 
-            this.lblTransportador.AutoSize = true;
-            this.lblTransportador.Location = new System.Drawing.Point(12, 9);
-            this.lblTransportador.Name = "lblTransportador";
-            this.lblTransportador.Size = new System.Drawing.Size(79, 13);
-            this.lblTransportador.TabIndex = 35;
-            this.lblTransportador.Text = "Transportadora";
+            this.cbxTransportadora.Controls.Add(this.btnMoreTransporter);
+            this.cbxTransportadora.Controls.Add(this.txtTransprotador_Codigo);
+            this.cbxTransportadora.Controls.Add(this.btnConfigureCityPercents);
+            this.cbxTransportadora.Controls.Add(this.txtTransportador_Descricao);
+            this.cbxTransportadora.Controls.Add(this.btnConfigureStatePercents);
+            this.cbxTransportadora.Controls.Add(this.btnConfigureContacts);
+            this.cbxTransportadora.Location = new System.Drawing.Point(12, 12);
+            this.cbxTransportadora.Name = "cbxTransportadora";
+            this.cbxTransportadora.Size = new System.Drawing.Size(655, 133);
+            this.cbxTransportadora.TabIndex = 38;
+            this.cbxTransportadora.TabStop = false;
+            this.cbxTransportadora.Text = "Transportadora";
+            // 
+            // btnMoreTransporter
+            // 
+            this.btnMoreTransporter.Location = new System.Drawing.Point(625, 17);
+            this.btnMoreTransporter.Name = "btnMoreTransporter";
+            this.btnMoreTransporter.Size = new System.Drawing.Size(24, 23);
+            this.btnMoreTransporter.TabIndex = 100;
+            this.btnMoreTransporter.Text = "...";
+            this.btnMoreTransporter.UseVisualStyleBackColor = true;
             // 
             // frmCadastroTransportador
             // 
@@ -153,19 +170,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(579, 316);
-            this.Controls.Add(this.btnConfigureCityPercents);
+            this.ClientSize = new System.Drawing.Size(683, 522);
+            this.Controls.Add(this.cbxTransportadora);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnConfigureContacts);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnConfigureStatePercents);
             this.Controls.Add(this.lblContatcts);
             this.Controls.Add(this.lsbContatcs);
-            this.Controls.Add(this.txtTransportador_Descricao);
-            this.Controls.Add(this.txtTransprotador_Codigo);
-            this.Controls.Add(this.lblTransportador);
             this.Name = "frmCadastroTransportador";
             this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -180,6 +192,8 @@
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Cadastro do Transportador";
+            this.cbxTransportadora.ResumeLayout(false);
+            this.cbxTransportadora.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,6 +212,7 @@
         private System.Windows.Forms.ListBox lsbContatcs;
         private System.Windows.Forms.TextBox txtTransportador_Descricao;
         private System.Windows.Forms.TextBox txtTransprotador_Codigo;
-        private System.Windows.Forms.Label lblTransportador;
+        private System.Windows.Forms.GroupBox cbxTransportadora;
+        private System.Windows.Forms.Button btnMoreTransporter;
     }
 }
