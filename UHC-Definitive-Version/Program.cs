@@ -21,8 +21,8 @@ namespace UHC3_Definitive_Version
             Task.Factory.StartNew(() => Section.carregar_Dependencias());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmUpdateScreen());
-            //Application.Run(new frmPedidoPfizerInterplayers());
+            //Application.Run(new frmUpdateScreen());
+            Application.Run(new frmBasesSwagger());
         }
     }
 }

@@ -546,6 +546,12 @@
     <Compile Include="App\ModFinanceiro\Recebimento\frmRecPublicoPrivado.Designer.cs">
       <DependentUpon>frmRecPublicoPrivado.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.Designer.cs">
+      <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1245,6 +1251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\frmModGerencial.resx">
       <DependentUpon>frmModGerencial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.resx">
+      <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmBloqueioDetalhado_IQVIA.resx">
       <DependentUpon>frmBloqueioDetalhado_IQVIA.cs</DependentUpon>

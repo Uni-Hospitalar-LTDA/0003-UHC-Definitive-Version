@@ -49,6 +49,7 @@ BEGIN
     _070Flag_produto = '{1}',
     _080Flag_venda = CASE
                         WHEN NF_Saida.Tip_Saida = 'V' THEN 'N'
+                        WHEN Cod_Cfo1 in (5910,6910) THEN 'N'
                         ELSE 'D'
                     END,
     _090Quantidade = SUM(ISNULL(lineBlock.qtdProduto, 0)),
@@ -143,8 +144,9 @@ GROUP BY
 ,NF_Saida.Tip_Saida
 ,Produto_Dblocks.External_Code 
 ,Cliente_Dblocks.External_Code
-,Fabricante_Dblocks.External_Code,
-NF_Saida_Itens_Dblocks.External_Code 
+,Fabricante_Dblocks.External_Code
+,Cod_CFO1
+,NF_Saida_Itens_Dblocks.External_Code 
 ORDER BY NF_Saida.Cod_Cliente ASC, NF_Saida_iTENS.Cod_Produto ASC		
 END
 ";
@@ -170,6 +172,7 @@ END
                               ,_070Flag_produto = '{1}'
                               ,_080Flag_venda = CASE
 													WHEN NF_Saida.Tip_Saida  = 'V' THEN 'N'
+                                                    WHEN Cod_Cfo1 in (5910,6910) THEN 'N'
 													ELSE 'D'
 												END												
                               ,_090Quantidade = isnull(NF_Saida_Itens.Qtd_Produto,'')
@@ -243,14 +246,14 @@ END
 							JOIN [DMD].dbo.[FABRI] as Fabricante on Produto.Cod_Fabricante = Fabricante.Codigo						
 							JOIN [DMD].dbo.[CLIEN] as Cliente on Cliente.Codigo = NF_Saida.Cod_Cliente	
                             WHERE STATUS = 'F' 
-                            AND (NF_Saida.Dat_Emissao =  '20230303')
+                            AND (NF_Saida.Dat_Emissao =  '{date.ToString("yyyyMMdd")}')
                             AND (NF_Saida.Tip_Saida = 'V' OR NF_Saida.Tip_Saida = 'D' OR NF_Saida.Cod_CFO1 in (5910,6910))
                             AND (CFOP.Descricao NOT LIKE '%CONSIG%')																				
 							AND 
 							(
 								(0 = (IIF(((SELECT external_Code 
 										   FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-										   WHERE ID_Panel = 135 AND TypeBlock = 'P'
+										   WHERE ID_Panel = {id} AND TypeBlock = 'P'
 										   and external_code = Produto.codigo										   
 										   )
 										   IS NOT NULL),1,0))
@@ -258,7 +261,7 @@ END
 								AND
 								(0 = (IIF(((SELECT external_Code 
 										   FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]
-										   WHERE ID_Panel = 135 AND TypeBlock = 'C'
+										   WHERE ID_Panel = {id} AND TypeBlock = 'C'
 										   and external_Code = Cliente.Codigo
 										   )
 										   IS NOT NULL),1,0))
@@ -267,7 +270,7 @@ END
 								(0 = (IIF(((SELECT top 1 external_Code 
 										    FROM [UHCDB].dbo.[Iqvia_DetailedBlocks]										    
 										    WHERE 
-												ID_Panel =135 AND TypeBlock = 'F'
+												ID_Panel ={id} AND TypeBlock = 'F'
 												and external_Code = Fabricante.Codigo
 										   )
 										   IS NOT NULL),1,0))
@@ -299,6 +302,7 @@ END
                               ,_070Flag_produto = '{1}'
                               ,_080Flag_venda = CASE
 													WHEN NF_Saida.Tip_Saida  = 'V' THEN 'N'
+                                                    WHEN Cod_Cfo1 in (5910,6910) THEN 'N'
 													ELSE 'D'
 												END												
                               ,_090Quantidade = isnull(NF_Saida_Itens.Qtd_Produto,'')
@@ -382,6 +386,7 @@ END
     _070Flag_produto = '{1}',
     _080Flag_venda = CASE
                         WHEN NF_Saida.Tip_Saida = 'V' THEN 'N'
+                        WHEN Cod_Cfo1 in (5910,6910) THEN 'N'
                         ELSE 'D'
                     END,
     _090Quantidade = ISNULL(NF_Saida_Itens.Qtd_Produto, ''),
@@ -414,8 +419,9 @@ GROUP BY
 ,NF_Saida.Tip_Saida
 ,Produto_Dblocks.External_Code 
 ,Cliente_Dblocks.External_Code
-,Fabricante_Dblocks.External_Code,
-NF_Saida_Itens_Dblocks.External_Code 
+,Fabricante_Dblocks.External_Code
+,NF_Saida_Itens_Dblocks.External_Code 
+,Cod_Cfo1
 ORDER BY NF_Saida.Cod_Cliente ASC, NF_Saida_iTENS.Cod_Produto ASC												"
                       ;
             

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC3_Definitive_Version.App.Telas_Genericas;
@@ -52,7 +53,7 @@ namespace UHC3_Definitive_Version.App.ModVendas.AnaliseVendas
             Pedido pedido = new Pedido();
 
             // Busca o cliente pelo código
-            var ce = Clientes_Externos.getClienteByCode(txtCustomerId.Text);
+            var ce = Clientes_Externos.getClienteByCode(txtFornecedorId.Text);
 
             // Valida se o cliente foi encontrado
             if (ce == null)
@@ -62,12 +63,14 @@ namespace UHC3_Definitive_Version.App.ModVendas.AnaliseVendas
             }
 
             // Atribui o CNPJ do cliente
-            pedido.CnpjCliente = ce.cgc_cpf;
+            pedido.CnpjCliente = Section.Cnpj;
+
+            var fornecedores = await Fornecedores_Externos.getToListAsync();
 
             // Inicializa a lista Distribuidores, caso esteja nula
             pedido.Distribuidores = new List<Distribuidor>
     {
-        new Distribuidor { CNPJ = Section.Cnpj, Ordem = 0 }
+        new Distribuidor { CNPJ = fornecedores.Where(forn => forn.codigo == txtFornecedorId.Text.ToString()).FirstOrDefault().cnpj, Ordem = 0 }
     };
 
             // Atribui as outras informações do pedido
@@ -250,7 +253,7 @@ namespace UHC3_Definitive_Version.App.ModVendas.AnaliseVendas
 
         private void ConfigureButtonEvents()
         {
-            btnMoreCustomers.Click += btnMoreCustomer_Click;
+            btnMoreFornecedores.Click += btnMoreFornecedores_Click;
             btnAdd.Click += btnAdd_Click;
             btnRemover.Click += btnRemover_Click;
             btnPostarPedido.Click += btnPostarPedido_Click;
@@ -284,33 +287,33 @@ namespace UHC3_Definitive_Version.App.ModVendas.AnaliseVendas
                     );
             }
         }
-        private void btnMoreCustomer_Click(object sender, EventArgs e)
+        private void btnMoreFornecedores_Click(object sender, EventArgs e)
         {
-            frmConsultarCliente frmConsultarCliente = new frmConsultarCliente();
-            frmConsultarCliente.ShowDialog();
-            txtCustomerId.Text = frmConsultarCliente.extendedCode;
+            frmConsultarFornecedor frmConsultarFornecedor = new frmConsultarFornecedor();
+            frmConsultarFornecedor.ShowDialog();
+            txtFornecedorId.Text = frmConsultarFornecedor.extendedCode;
         }
 
 
         /** TextBox Configuration **/
         private void ConfigureTextBoxProperties()
         {
-            txtCustomer.ReadOnly();
-            txtCustomerId.JustNumbers();
+            txtFornecedor.ReadOnly();
+            txtFornecedorId.JustNumbers();
         }
         private void ConfigureTextBoxEvents()
         {
-            txtCustomerId.TextChanged += txtCustomerId_TextChanged;
-            txtCustomer.DoubleClick += txtCustomer_DoubleClick;
+            txtFornecedorId.TextChanged += txtFornecedorId_TextChanged;
+            txtFornecedor.DoubleClick += txtFornecedor_DoubleClick;
         }
-        private void txtCustomerId_TextChanged(object sender, System.EventArgs e)
+        private async void txtFornecedorId_TextChanged(object sender, System.EventArgs e)
         {
-            Clientes_Externos ce = Clientes_Externos.getClienteByCode(txtCustomerId.Text);
-            txtCustomer.Text = ce != null ? $"{ce?.razao_social} ({ce?.cgc_cpf.ConvertToCNPJ()})" : string.Empty;
+            Fornecedores_Externos fe = await Fornecedores_Externos.getFornecedorByCodeAsync(txtFornecedorId.Text);
+            txtFornecedor.Text = fe != null ? $"{fe?.razaoSocial} ({fe?.cnpj.ConvertToCNPJ()})" : string.Empty;
         }
-        private void txtCustomer_DoubleClick(object sender, EventArgs e)
+        private void txtFornecedor_DoubleClick(object sender, EventArgs e)
         {
-            btnMoreCustomer_Click(null, null);
+            btnMoreFornecedores_Click(null, null);
         }
 
 
