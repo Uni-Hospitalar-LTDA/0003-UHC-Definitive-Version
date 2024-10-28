@@ -40,26 +40,30 @@
             this.txtValorBuscado = new System.Windows.Forms.TextBox();
             this.lblValorBuscado = new System.Windows.Forms.Label();
             this.btnSugestoes = new System.Windows.Forms.Button();
+            this.lblUnidade = new System.Windows.Forms.Label();
+            this.cbxUnidade = new System.Windows.Forms.ComboBox();
             this.gpFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
             // gpFiltros
             // 
+            this.gpFiltros.Controls.Add(this.cbxUnidade);
+            this.gpFiltros.Controls.Add(this.lblUnidade);
             this.gpFiltros.Controls.Add(this.btnFiltrar);
             this.gpFiltros.Controls.Add(this.lblIntervaloDeDatas);
             this.gpFiltros.Controls.Add(this.dtpDataFinal);
             this.gpFiltros.Controls.Add(this.dtpDataInicial);
             this.gpFiltros.Location = new System.Drawing.Point(12, 29);
             this.gpFiltros.Name = "gpFiltros";
-            this.gpFiltros.Size = new System.Drawing.Size(299, 71);
+            this.gpFiltros.Size = new System.Drawing.Size(222, 104);
             this.gpFiltros.TabIndex = 0;
             this.gpFiltros.TabStop = false;
             this.gpFiltros.Text = "Filtros";
             // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(214, 32);
+            this.btnFiltrar.Location = new System.Drawing.Point(133, 71);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
             this.btnFiltrar.TabIndex = 3;
@@ -94,9 +98,9 @@
             // dgvData
             // 
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Location = new System.Drawing.Point(12, 106);
+            this.dgvData.Location = new System.Drawing.Point(12, 139);
             this.dgvData.Name = "dgvData";
-            this.dgvData.Size = new System.Drawing.Size(891, 379);
+            this.dgvData.Size = new System.Drawing.Size(891, 346);
             this.dgvData.TabIndex = 1;
             // 
             // btnFechar
@@ -111,7 +115,7 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(317, 29);
+            this.lblTotal.Location = new System.Drawing.Point(237, 31);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(64, 13);
             this.lblTotal.TabIndex = 3;
@@ -119,14 +123,14 @@
             // 
             // txtQtdsTotais
             // 
-            this.txtQtdsTotais.Location = new System.Drawing.Point(320, 45);
+            this.txtQtdsTotais.Location = new System.Drawing.Point(240, 47);
             this.txtQtdsTotais.Name = "txtQtdsTotais";
             this.txtQtdsTotais.Size = new System.Drawing.Size(111, 20);
             this.txtQtdsTotais.TabIndex = 4;
             // 
             // txtValorBuscado
             // 
-            this.txtValorBuscado.Location = new System.Drawing.Point(437, 45);
+            this.txtValorBuscado.Location = new System.Drawing.Point(357, 47);
             this.txtValorBuscado.Name = "txtValorBuscado";
             this.txtValorBuscado.Size = new System.Drawing.Size(111, 20);
             this.txtValorBuscado.TabIndex = 5;
@@ -134,7 +138,7 @@
             // lblValorBuscado
             // 
             this.lblValorBuscado.AutoSize = true;
-            this.lblValorBuscado.Location = new System.Drawing.Point(434, 29);
+            this.lblValorBuscado.Location = new System.Drawing.Point(354, 31);
             this.lblValorBuscado.Name = "lblValorBuscado";
             this.lblValorBuscado.Size = new System.Drawing.Size(75, 13);
             this.lblValorBuscado.TabIndex = 6;
@@ -142,12 +146,29 @@
             // 
             // btnSugestoes
             // 
-            this.btnSugestoes.Location = new System.Drawing.Point(554, 43);
+            this.btnSugestoes.Location = new System.Drawing.Point(474, 45);
             this.btnSugestoes.Name = "btnSugestoes";
             this.btnSugestoes.Size = new System.Drawing.Size(31, 23);
             this.btnSugestoes.TabIndex = 4;
             this.btnSugestoes.Text = "...";
             this.btnSugestoes.UseVisualStyleBackColor = true;
+            // 
+            // lblUnidade
+            // 
+            this.lblUnidade.AutoSize = true;
+            this.lblUnidade.Location = new System.Drawing.Point(6, 57);
+            this.lblUnidade.Name = "lblUnidade";
+            this.lblUnidade.Size = new System.Drawing.Size(47, 13);
+            this.lblUnidade.TabIndex = 4;
+            this.lblUnidade.Text = "Unidade";
+            // 
+            // cbxUnidade
+            // 
+            this.cbxUnidade.FormattingEnabled = true;
+            this.cbxUnidade.Location = new System.Drawing.Point(9, 73);
+            this.cbxUnidade.Name = "cbxUnidade";
+            this.cbxUnidade.Size = new System.Drawing.Size(115, 21);
+            this.cbxUnidade.TabIndex = 5;
             // 
             // frmAnaliseIqviaSintetico
             // 
@@ -198,5 +219,7 @@
         private System.Windows.Forms.TextBox txtValorBuscado;
         private System.Windows.Forms.Label lblValorBuscado;
         private System.Windows.Forms.Button btnSugestoes;
+        private System.Windows.Forms.Label lblUnidade;
+        private System.Windows.Forms.ComboBox cbxUnidade;
     }
 }

@@ -552,6 +552,12 @@
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.Designer.cs">
       <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico_Parametrizacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico_Parametrizacao.Designer.cs">
+      <DependentUpon>frmAnaliseIqviaSintetico_Parametrizacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1254,6 +1260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.resx">
       <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico_Parametrizacao.resx">
+      <DependentUpon>frmAnaliseIqviaSintetico_Parametrizacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmBloqueioDetalhado_IQVIA.resx">
       <DependentUpon>frmBloqueioDetalhado_IQVIA.cs</DependentUpon>
