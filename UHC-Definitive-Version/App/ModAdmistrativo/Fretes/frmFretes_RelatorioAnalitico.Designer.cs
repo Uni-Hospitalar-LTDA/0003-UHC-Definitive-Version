@@ -175,7 +175,7 @@
             // 
             // btnMoreTransporter
             // 
-            this.btnMoreTransporter.Location = new System.Drawing.Point(511, 51);
+            this.btnMoreTransporter.Location = new System.Drawing.Point(511, 49);
             this.btnMoreTransporter.Name = "btnMoreTransporter";
             this.btnMoreTransporter.Size = new System.Drawing.Size(24, 23);
             this.btnMoreTransporter.TabIndex = 99;

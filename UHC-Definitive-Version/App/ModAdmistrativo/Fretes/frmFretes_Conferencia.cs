@@ -515,6 +515,14 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Fretes
             }
         }
 
+
+        private void btnMoreTransporter_Click(object sender, EventArgs e)
+        {
+            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
+            frmConsultarTransportador.ShowDialog();
+            txtTransporterId.Text = frmConsultarTransportador.extendedCode;
+        }
+
         /** Configure Form **/
         private void ConfigureFormProperties()
         {
@@ -730,6 +738,10 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Fretes
             btnImportLayout.Click += btnImportLayout_Click;
             btnSearch.Click += btnSearch_Click;
             btnSave.Click += btnSave_Click;
+
+
+            //botão transportador
+            btnMoreTransporter.Click += btnMoreTransporter_Click;
         }
         private void ConfigureButtonProperties()
         {

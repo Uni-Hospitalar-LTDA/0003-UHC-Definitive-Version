@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gpbFilters = new System.Windows.Forms.GroupBox();
+            this.txtNF = new System.Windows.Forms.TextBox();
             this.btnImportLayout = new System.Windows.Forms.LinkLabel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.lblNF = new System.Windows.Forms.Label();
@@ -87,7 +88,7 @@
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.txtNF = new System.Windows.Forms.TextBox();
+            this.btnMoreTransporter = new System.Windows.Forms.Button();
             this.gpbFilters.SuspendLayout();
             this.gpbCalc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
@@ -95,6 +96,7 @@
             // 
             // gpbFilters
             // 
+            this.gpbFilters.Controls.Add(this.btnMoreTransporter);
             this.gpbFilters.Controls.Add(this.txtNF);
             this.gpbFilters.Controls.Add(this.btnImportLayout);
             this.gpbFilters.Controls.Add(this.btnSearch);
@@ -108,10 +110,17 @@
             this.gpbFilters.Controls.Add(this.txtTransporterId);
             this.gpbFilters.Location = new System.Drawing.Point(12, 12);
             this.gpbFilters.Name = "gpbFilters";
-            this.gpbFilters.Size = new System.Drawing.Size(393, 102);
+            this.gpbFilters.Size = new System.Drawing.Size(426, 102);
             this.gpbFilters.TabIndex = 1;
             this.gpbFilters.TabStop = false;
             this.gpbFilters.Text = "Filtros";
+            // 
+            // txtNF
+            // 
+            this.txtNF.Location = new System.Drawing.Point(213, 71);
+            this.txtNF.Name = "txtNF";
+            this.txtNF.Size = new System.Drawing.Size(93, 20);
+            this.txtNF.TabIndex = 60;
             // 
             // btnImportLayout
             // 
@@ -303,9 +312,9 @@
             this.gpbCalc.Controls.Add(this.btnCalc_2);
             this.gpbCalc.Controls.Add(this.btnCalc_1);
             this.gpbCalc.Controls.Add(this.txtCalc_Display);
-            this.gpbCalc.Location = new System.Drawing.Point(424, 12);
+            this.gpbCalc.Location = new System.Drawing.Point(444, 12);
             this.gpbCalc.Name = "gpbCalc";
-            this.gpbCalc.Size = new System.Drawing.Size(404, 213);
+            this.gpbCalc.Size = new System.Drawing.Size(384, 213);
             this.gpbCalc.TabIndex = 97;
             this.gpbCalc.TabStop = false;
             this.gpbCalc.Text = "Calculadora";
@@ -326,7 +335,7 @@
             this.txtCalc_Log.Location = new System.Drawing.Point(246, 19);
             this.txtCalc_Log.Multiline = true;
             this.txtCalc_Log.Name = "txtCalc_Log";
-            this.txtCalc_Log.Size = new System.Drawing.Size(150, 177);
+            this.txtCalc_Log.Size = new System.Drawing.Size(132, 177);
             this.txtCalc_Log.TabIndex = 79;
             // 
             // btnCalc_Mult
@@ -671,12 +680,14 @@
             this.btnClose.Text = "Fechar";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
-            // txtNF
+            // btnMoreTransporter
             // 
-            this.txtNF.Location = new System.Drawing.Point(213, 71);
-            this.txtNF.Name = "txtNF";
-            this.txtNF.Size = new System.Drawing.Size(93, 20);
-            this.txtNF.TabIndex = 60;
+            this.btnMoreTransporter.Location = new System.Drawing.Point(393, 30);
+            this.btnMoreTransporter.Name = "btnMoreTransporter";
+            this.btnMoreTransporter.Size = new System.Drawing.Size(24, 23);
+            this.btnMoreTransporter.TabIndex = 117;
+            this.btnMoreTransporter.Text = "...";
+            this.btnMoreTransporter.UseVisualStyleBackColor = true;
             // 
             // frmFretes_Conferencia
             // 
@@ -798,5 +809,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtNF;
+        private System.Windows.Forms.Button btnMoreTransporter;
     }
 }
