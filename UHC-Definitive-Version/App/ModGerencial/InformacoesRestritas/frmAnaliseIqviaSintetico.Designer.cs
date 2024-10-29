@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gpFiltros = new System.Windows.Forms.GroupBox();
+            this.cbxUnidade = new System.Windows.Forms.ComboBox();
+            this.lblUnidade = new System.Windows.Forms.Label();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.lblIntervaloDeDatas = new System.Windows.Forms.Label();
             this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
@@ -40,8 +42,6 @@
             this.txtValorBuscado = new System.Windows.Forms.TextBox();
             this.lblValorBuscado = new System.Windows.Forms.Label();
             this.btnSugestoes = new System.Windows.Forms.Button();
-            this.lblUnidade = new System.Windows.Forms.Label();
-            this.cbxUnidade = new System.Windows.Forms.ComboBox();
             this.gpFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +60,23 @@
             this.gpFiltros.TabIndex = 0;
             this.gpFiltros.TabStop = false;
             this.gpFiltros.Text = "Filtros";
+            // 
+            // cbxUnidade
+            // 
+            this.cbxUnidade.FormattingEnabled = true;
+            this.cbxUnidade.Location = new System.Drawing.Point(9, 73);
+            this.cbxUnidade.Name = "cbxUnidade";
+            this.cbxUnidade.Size = new System.Drawing.Size(115, 21);
+            this.cbxUnidade.TabIndex = 5;
+            // 
+            // lblUnidade
+            // 
+            this.lblUnidade.AutoSize = true;
+            this.lblUnidade.Location = new System.Drawing.Point(6, 57);
+            this.lblUnidade.Name = "lblUnidade";
+            this.lblUnidade.Size = new System.Drawing.Size(47, 13);
+            this.lblUnidade.TabIndex = 4;
+            this.lblUnidade.Text = "Unidade";
             // 
             // btnFiltrar
             // 
@@ -152,23 +169,6 @@
             this.btnSugestoes.TabIndex = 4;
             this.btnSugestoes.Text = "...";
             this.btnSugestoes.UseVisualStyleBackColor = true;
-            // 
-            // lblUnidade
-            // 
-            this.lblUnidade.AutoSize = true;
-            this.lblUnidade.Location = new System.Drawing.Point(6, 57);
-            this.lblUnidade.Name = "lblUnidade";
-            this.lblUnidade.Size = new System.Drawing.Size(47, 13);
-            this.lblUnidade.TabIndex = 4;
-            this.lblUnidade.Text = "Unidade";
-            // 
-            // cbxUnidade
-            // 
-            this.cbxUnidade.FormattingEnabled = true;
-            this.cbxUnidade.Location = new System.Drawing.Point(9, 73);
-            this.cbxUnidade.Name = "cbxUnidade";
-            this.cbxUnidade.Size = new System.Drawing.Size(115, 21);
-            this.cbxUnidade.TabIndex = 5;
             // 
             // frmAnaliseIqviaSintetico
             // 

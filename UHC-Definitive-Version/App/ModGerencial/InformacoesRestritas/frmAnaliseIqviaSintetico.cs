@@ -29,7 +29,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             }
             public static async Task<DataTable> getRelatorioIqviaAnaliticoToDataTableAsync(DateTime data)
             {
-                string query = $@"  DECLARE @DATA DATE = '{data}';
+                string query = $@"  DECLARE @DATA DATE = '{data.ToString("yyyyMMdd")}';
                                                                    
                             SELECT
 	  NF_Saida.Num_Nota [NF]
@@ -81,10 +81,11 @@ ORDER BY [Qtd. Produto] DESC
                 if (string.IsNullOrEmpty(q))
                 {
                     CustomNotification.defaultAlert("Query não registrada");
+                    return null;
                 }
 
-                string query = $@"  DECLARE @DATA1 DATE = '{dt0}';
-                                    DECLARE @DATA2 DATE = '{dtf}';                                
+                string query = $@"  DECLARE @DATA1 DATE = '{dt0.ToString("yyyyMMdd")}';
+                                    DECLARE @DATA2 DATE = '{dtf.ToString("yyyyMMdd")}';                                
                     {q}";
                 Console.Write(query);
                 return await getAllToDataTable(query);
@@ -104,6 +105,7 @@ ORDER BY [Qtd. Produto] DESC
             ConfigureMenuStripProperties();
             ConfigureButtonProperties();
             ConfigureComboBoxProperties();
+            ConfigureTextBoxProperties();
             ConfigureDataGridViewProperties();
 
 
@@ -116,10 +118,14 @@ ORDER BY [Qtd. Produto] DESC
         {
             
             Section.Unidade = cbxUnidade.SelectedItem?.ToString();
-            dgvData.DataSource = await RelatorioAnaliseIqvia.getRelatorioIqviaSinteticoToDataTableAsync(dtpDataInicial.Value,dtpDataFinal.Value);
-            dgvData.Columns[0].ValueType = typeof(DateTime);
-            dgvData.Columns[dgvData.Columns.Count-1].ValueType = typeof(int);
-            dgvData.Columns[dgvData.Columns.Count - 1].DefaultCellStyle.Format = "N0";
+            DataTable dt = new DataTable();
+            dt = await RelatorioAnaliseIqvia.getRelatorioIqviaSinteticoToDataTableAsync(dtpDataInicial.Value, dtpDataFinal.Value);
+            if (dt != null) {
+                dgvData.DataSource =  dt;
+                dgvData.Columns[0].ValueType = typeof(DateTime);
+                dgvData.Columns[dgvData.Columns.Count - 1].ValueType = typeof(int);
+                dgvData.Columns[dgvData.Columns.Count - 1].DefaultCellStyle.Format = "N0";
+            }
 
 
             int sum = 0;
@@ -130,35 +136,34 @@ ORDER BY [Qtd. Produto] DESC
             txtQtdsTotais.Text = sum.ToString("N0");
 
         }
-
-        public DataTable FiltrarPossibilidades(DataTable dataTable, string[] grupos, string[] fabricantes, int qtdAlvo)
+        public DataTable FiltrarPossibilidades(DataTable dataTable, string[] grupos, string[] fabricantes, string[] consumidores, int qtdAlvo)
         {
             // DataTable para armazenar os resultados
             DataTable resultadoTable = new DataTable();
             resultadoTable.Columns.Add("ID", typeof(int));
-            resultadoTable.Columns.Add("Cliente", typeof(string));
+            resultadoTable.Columns.Add("Grupo", typeof(string));
+            resultadoTable.Columns.Add("Fabricante", typeof(string));
+            resultadoTable.Columns.Add("Consumidor", typeof(string));
+            resultadoTable.Columns.Add("Produto", typeof(string));
+            resultadoTable.Columns.Add("NF", typeof(int));
             resultadoTable.Columns.Add("Qtd. Produto", typeof(int));
-            resultadoTable.Columns.Add("Probabilidade", typeof(string));
-
             int indice = 1;
 
-            // Primeiro, tentamos filtrar usando os parâmetros específicos (grupos e fabricantes)
-            Console.WriteLine("Tentando encontrar combinações com parâmetros específicos...");
-            var linhasFiltradas = FiltrarLinhasEspecificas(dataTable, grupos, fabricantes);
+            // Primeiro, tentamos filtrar usando os parâmetros específicos (grupo, fabricante, consumidor)
+            Console.WriteLine("Tentando encontrar combinações com parâmetros específicos (grupo, fabricante, consumidor)...");
+            var linhasFiltradas = FiltrarLinhasEspecificas(dataTable, grupos, fabricantes, consumidores);
 
             if (!linhasFiltradas.Any())
             {
-                // Caso não tenha encontrado resultados específicos, fazemos uma busca geral
                 Console.WriteLine("Nenhuma combinação específica encontrada, buscando combinações gerais...");
                 linhasFiltradas = dataTable.AsEnumerable().ToList();
             }
 
             // Obter as quantidades de produtos
-            var quantidades = linhasFiltradas.Select(row => row.Field<int>("Qtd. Produto")).ToList();
+            var quantidades = linhasFiltradas.Select(row => Convert.ToInt32(row["Qtd. Produto"])).ToList();
 
             // Encontrar combinações de soma
             var combinacoesEncontradas = EncontrarCombinacoesSoma(quantidades, qtdAlvo);
-
             Console.WriteLine($"Total de combinações encontradas: {combinacoesEncontradas.Count}");
 
             // Calcular a relevância para cada combinação e obter as 500 melhores
@@ -169,24 +174,26 @@ ORDER BY [Qtd. Produto] DESC
                     Relevancia = CalcularRelevancia(combinacao, qtdAlvo)
                 })
                 .OrderByDescending(x => x.Relevancia)
-                .Take(500) // Limitando a 500 recomendações mais relevantes
+                .Take(500)
                 .ToList();
 
             foreach (var item in combinacoesRelevantes)
             {
                 foreach (var qtd in item.Combinacao)
                 {
-                    var linha = linhasFiltradas.FirstOrDefault(r => r.Field<int>("Qtd. Produto") == qtd);
+                    var linha = linhasFiltradas.FirstOrDefault(r => Convert.ToInt32(r["Qtd. Produto"]) == qtd);
                     if (linha != null)
                     {
-                        string cliente = linha.Field<string>("Cliente");
                         resultadoTable.Rows.Add(
                             indice,
-                            cliente,
-                            linha.Field<int>("Qtd. Produto"),
-                            item.Relevancia > 0.8 ? "Alta" : item.Relevancia > 0.4 ? "Média" : "Baixa"
+                            linha["Grupo"],
+                            linha["Fabricante"],
+                            linha["Consumidor"],
+                            linha["Produto"],
+                            linha["NF"],
+                            linha["Qtd. Produto"]
                         );
-                        Console.WriteLine($"Adicionando linha Cliente: {cliente}, Qtd. Produto: {linha.Field<int>("Qtd. Produto")}, Relevância: {item.Relevancia}");
+                        Console.WriteLine($"Adicionando linha Grupo: {linha["Grupo"]}, Fabricante: {linha["Fabricante"]}, Consumidor: {linha["Consumidor"]}, Produto: {linha["Produto"]}, NF: {linha["NF"]}, Qtd. Produto: {linha["Qtd. Produto"]}");
                     }
                 }
                 indice++;
@@ -196,28 +203,58 @@ ORDER BY [Qtd. Produto] DESC
             return resultadoTable;
         }
 
-        // Função para filtrar linhas específicas com base em grupos e fabricantes
-        private List<DataRow> FiltrarLinhasEspecificas(DataTable dataTable, string[] grupos, string[] fabricantes)
+        // Função para filtrar linhas específicas com base em grupo, fabricante e consumidor
+        private List<DataRow> FiltrarLinhasEspecificas(DataTable dataTable, string[] grupos, string[] fabricantes, string[] consumidores)
         {
             return dataTable.AsEnumerable()
                 .Where(row =>
                 {
-                    bool grupoMatch = grupos.Length == 0 || AproximaGrupoOuCliente(row, grupos);
-                    bool fabricanteMatch = fabricantes.Length == 0 || AproximaFabricante(row, fabricantes);
+                    bool grupoMatch = grupos.Length == 0 || AproximaGrupo(row, grupos);
+                    bool fabricanteConsumidorMatch = (fabricantes.Length == 0 && consumidores.Length == 0) || AproximaFabricanteConsumidor(row, fabricantes, consumidores);
 
-                    Console.WriteLine($"Linha ID: {row.Field<int>("NF")} - Grupo Match: {grupoMatch}, Fabricante Match: {fabricanteMatch}");
-                    return grupoMatch && fabricanteMatch;
+                    Console.WriteLine($"Linha ID: {row.Field<int>("NF")} - Grupo Match: {grupoMatch}, Fabricante+Consumidor Match: {fabricanteConsumidorMatch}");
+                    return grupoMatch || fabricanteConsumidorMatch;
                 })
                 .ToList();
         }
 
-        // Função para encontrar combinações de quantidades que somam ao alvo
+        // Função para calcular a relevância da combinação
+        private double CalcularRelevancia(List<int> combinacao, int alvo)
+        {
+            double soma = combinacao.Sum();
+            double similaridade = 1 - Math.Abs(soma - alvo) / (double)alvo;
+            return Math.Max(0, similaridade); // Relevância varia entre 0 e 1
+        }
+
+        // Função para verificar correspondência aproximada por grupo
+        private bool AproximaGrupo(DataRow row, string[] grupos)
+        {
+            string grupo = row.Field<string>("Grupo");
+            bool resultado = grupos.Any(g => DistanciaLevenshtein(g, grupo) <= 2);
+            Console.WriteLine($"Comparação AproximaGrupo - Grupo: {grupo}, Resultado: {resultado}");
+            return resultado;
+        }
+
+        // Função para verificar correspondência aproximada por fabricante e consumidor
+        private bool AproximaFabricanteConsumidor(DataRow row, string[] fabricantes, string[] consumidores)
+        {
+            string fabricante = row.Field<string>("Fabricante");
+            string consumidor = row.Field<string>("Consumidor");
+
+            bool fabricanteMatch = fabricantes.Any(f => DistanciaLevenshtein(f, fabricante) <= 2);
+            bool consumidorMatch = consumidores.Any(c => DistanciaLevenshtein(c, consumidor) <= 2);
+
+            bool resultado = fabricanteMatch && consumidorMatch;
+            Console.WriteLine($"Comparação AproximaFabricanteConsumidor - Fabricante: {fabricante}, Consumidor: {consumidor}, Resultado: {resultado}");
+            return resultado;
+        }
+
+        // Função auxiliar para encontrar combinações de quantidades que somam ao alvo
         private List<List<int>> EncontrarCombinacoesSoma(List<int> valores, int alvo)
         {
             List<List<int>> resultado = new List<List<int>>();
             Console.WriteLine("Iniciando busca de combinações de soma...");
 
-            // Função recursiva para buscar combinações
             void Backtrack(int start, int somaAtual, List<int> caminho)
             {
                 if (somaAtual == alvo)
@@ -241,52 +278,6 @@ ORDER BY [Qtd. Produto] DESC
             return resultado;
         }
 
-        // Função para calcular a relevância da combinação
-        private double CalcularRelevancia(List<int> combinacao, int alvo)
-        {
-            double soma = combinacao.Sum();
-            double similaridade = 1 - Math.Abs(soma - alvo) / (double)alvo;
-            return Math.Max(0, similaridade); // Relevância varia entre 0 e 1
-        }
-
-        private bool AproximaGrupoOuCliente(DataRow row, string[] grupos)
-        {
-            string cliente = row.Field<string>("Cliente");
-            string grupo = row.Field<string>("Grupo");
-
-            bool resultado = grupos.Any(g => DistanciaLevenshtein(g, cliente) <= 2 || DistanciaLevenshtein(g, grupo) <= 2);
-            Console.WriteLine($"Comparação AproximaGrupoOuCliente - Cliente: {cliente}, Grupo: {grupo}, Resultado: {resultado}");
-            return resultado;
-        }
-
-        private bool AproximaFabricante(DataRow row, string[] fabricantes, bool matchAll = false)
-        {
-            string fabricante = row.Field<string>("Fabricante");
-
-            if (matchAll)
-            {
-                return ContainsAll(fabricante, fabricantes);
-            }
-            else
-            {
-                return ContainsAny(fabricante, fabricantes);
-            }
-        }
-
-        private bool ContainsAny(string source, string[] substrings)
-        {
-            bool result = substrings.Any(substring => source.IndexOf(substring, StringComparison.OrdinalIgnoreCase) >= 0);
-            Console.WriteLine($"ContainsAny - Fonte: {source}, Substrings: {string.Join(", ", substrings)}, Resultado: {result}");
-            return result;
-        }
-
-        private bool ContainsAll(string source, string[] substrings)
-        {
-            bool result = substrings.All(substring => source.IndexOf(substring, StringComparison.OrdinalIgnoreCase) >= 0);
-            Console.WriteLine($"ContainsAll - Fonte: {source}, Substrings: {string.Join(", ", substrings)}, Resultado: {result}");
-            return result;
-        }
-
         // Função para calcular a distância de Levenshtein
         private int DistanciaLevenshtein(string s, string t)
         {
@@ -306,6 +297,9 @@ ORDER BY [Qtd. Produto] DESC
 
             return d[s.Length, t.Length];
         }
+
+
+
 
 
 
@@ -386,14 +380,15 @@ ORDER BY [Qtd. Produto] DESC
             {
                 var sugestoes = await RelatorioAnaliseIqvia.getRelatorioIqviaAnaliticoToDataTableAsync(Convert.ToDateTime(dgvData.CurrentRow.Cells[0].Value));
 
-                string[] grupos = {"Farmacia","Drogaria"};
-                string[] fabricantes = { "Eurofarma"};
+                string[] grupos = { "DISTRIBUIDORES", "FARMÁCIAS E DROGARIAS" };
+                string[] fabricantes = { "EUROFARMA / SP" };
+                string[] esfera = { "Público" };
                 frmConsultaGenerica frmConsultaGenerica = new frmConsultaGenerica();
                 this.Cursor = Cursors.WaitCursor;
                 frmGeneric_ProgressForm frmGeneric_ProgressForm = new frmGeneric_ProgressForm();
                 frmGeneric_ProgressForm.chargeText = "Calculando... ";
                 frmGeneric_ProgressForm.Show();
-                frmConsultaGenerica.consulta = FiltrarPossibilidades(sugestoes,grupos,fabricantes, Convert.ToInt32(txtValorBuscado.Text));
+                frmConsultaGenerica.consulta = FiltrarPossibilidades(sugestoes,grupos,fabricantes, esfera,Convert.ToInt32(txtValorBuscado.Text));
                 frmGeneric_ProgressForm.Close();
                 this.Cursor = Cursors.Default;
                 CustomNotification.defaultInformation();
