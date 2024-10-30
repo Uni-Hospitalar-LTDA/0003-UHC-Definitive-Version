@@ -324,6 +324,7 @@ ORDER BY [Qtd. Produto] DESC
         private void frmAnaliseIqviaSintetico_Load(object sender, EventArgs e)
         {
             //Pre events
+            ConfigureTextBoxAttributes();
             ConfigureDateTimePickerAttributes();
 
             ConfigureButtonEvents();
@@ -335,11 +336,18 @@ ORDER BY [Qtd. Produto] DESC
         }
 
         /** TextBox Configuration **/
+        private void ConfigureTextBoxAttributes()
+        {
+            txtGrupos.Text = "DISTRIBUIDORES,FARMÁCIAS E DROGARIAS";
+            txtFabricantes.Text = "EUROFARMA / SP";
+            txtEsfera.Text = "Público";
+        }
         private void ConfigureTextBoxProperties()
         {
             txtQtdsTotais.ReadOnly();
             txtValorBuscado.JustNumbers();
         }
+        
 
         /** DateTimePicker configuration **/
         private void ConfigureDateTimePickerAttributes()
@@ -380,9 +388,11 @@ ORDER BY [Qtd. Produto] DESC
             {
                 var sugestoes = await RelatorioAnaliseIqvia.getRelatorioIqviaAnaliticoToDataTableAsync(Convert.ToDateTime(dgvData.CurrentRow.Cells[0].Value));
 
-                string[] grupos = { "DISTRIBUIDORES", "FARMÁCIAS E DROGARIAS" };
-                string[] fabricantes = { "EUROFARMA / SP" };
-                string[] esfera = { "Público" };
+                string[] grupos = txtGrupos.Text.Split(',');
+                    
+                    //{ "DISTRIBUIDORES", "FARMÁCIAS E DROGARIAS" };
+                string[] fabricantes = txtFabricantes.Text.Split(',');
+                string[] esfera = txtEsfera.Text.Split(',');
                 frmConsultaGenerica frmConsultaGenerica = new frmConsultaGenerica();
                 this.Cursor = Cursors.WaitCursor;
                 frmGeneric_ProgressForm frmGeneric_ProgressForm = new frmGeneric_ProgressForm();

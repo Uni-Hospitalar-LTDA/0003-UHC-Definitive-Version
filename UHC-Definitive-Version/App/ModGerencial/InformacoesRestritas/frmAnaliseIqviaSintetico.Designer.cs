@@ -42,6 +42,12 @@
             this.txtValorBuscado = new System.Windows.Forms.TextBox();
             this.lblValorBuscado = new System.Windows.Forms.Label();
             this.btnSugestoes = new System.Windows.Forms.Button();
+            this.txtGrupos = new System.Windows.Forms.TextBox();
+            this.lblGrupos = new System.Windows.Forms.Label();
+            this.lblFabricantes = new System.Windows.Forms.Label();
+            this.txtFabricantes = new System.Windows.Forms.TextBox();
+            this.lblEsfera = new System.Windows.Forms.Label();
+            this.txtEsfera = new System.Windows.Forms.TextBox();
             this.gpFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
@@ -67,7 +73,7 @@
             this.cbxUnidade.Location = new System.Drawing.Point(9, 73);
             this.cbxUnidade.Name = "cbxUnidade";
             this.cbxUnidade.Size = new System.Drawing.Size(115, 21);
-            this.cbxUnidade.TabIndex = 5;
+            this.cbxUnidade.TabIndex = 2;
             // 
             // lblUnidade
             // 
@@ -125,14 +131,14 @@
             this.btnFechar.Location = new System.Drawing.Point(828, 491);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 2;
+            this.btnFechar.TabIndex = 6;
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(237, 31);
+            this.lblTotal.Location = new System.Drawing.Point(237, 27);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(64, 13);
             this.lblTotal.TabIndex = 3;
@@ -140,22 +146,22 @@
             // 
             // txtQtdsTotais
             // 
-            this.txtQtdsTotais.Location = new System.Drawing.Point(240, 47);
+            this.txtQtdsTotais.Location = new System.Drawing.Point(240, 43);
             this.txtQtdsTotais.Name = "txtQtdsTotais";
             this.txtQtdsTotais.Size = new System.Drawing.Size(111, 20);
-            this.txtQtdsTotais.TabIndex = 4;
+            this.txtQtdsTotais.TabIndex = 1;
             // 
             // txtValorBuscado
             // 
-            this.txtValorBuscado.Location = new System.Drawing.Point(357, 47);
+            this.txtValorBuscado.Location = new System.Drawing.Point(357, 43);
             this.txtValorBuscado.Name = "txtValorBuscado";
             this.txtValorBuscado.Size = new System.Drawing.Size(111, 20);
-            this.txtValorBuscado.TabIndex = 5;
+            this.txtValorBuscado.TabIndex = 2;
             // 
             // lblValorBuscado
             // 
             this.lblValorBuscado.AutoSize = true;
-            this.lblValorBuscado.Location = new System.Drawing.Point(354, 31);
+            this.lblValorBuscado.Location = new System.Drawing.Point(354, 27);
             this.lblValorBuscado.Name = "lblValorBuscado";
             this.lblValorBuscado.Size = new System.Drawing.Size(75, 13);
             this.lblValorBuscado.TabIndex = 6;
@@ -163,18 +169,75 @@
             // 
             // btnSugestoes
             // 
-            this.btnSugestoes.Location = new System.Drawing.Point(474, 45);
+            this.btnSugestoes.Location = new System.Drawing.Point(474, 41);
             this.btnSugestoes.Name = "btnSugestoes";
             this.btnSugestoes.Size = new System.Drawing.Size(31, 23);
             this.btnSugestoes.TabIndex = 4;
             this.btnSugestoes.Text = "...";
             this.btnSugestoes.UseVisualStyleBackColor = true;
             // 
+            // txtGrupos
+            // 
+            this.txtGrupos.Location = new System.Drawing.Point(240, 83);
+            this.txtGrupos.Multiline = true;
+            this.txtGrupos.Name = "txtGrupos";
+            this.txtGrupos.Size = new System.Drawing.Size(189, 50);
+            this.txtGrupos.TabIndex = 3;
+            // 
+            // lblGrupos
+            // 
+            this.lblGrupos.AutoSize = true;
+            this.lblGrupos.Location = new System.Drawing.Point(240, 67);
+            this.lblGrupos.Name = "lblGrupos";
+            this.lblGrupos.Size = new System.Drawing.Size(41, 13);
+            this.lblGrupos.TabIndex = 8;
+            this.lblGrupos.Text = "Grupos";
+            // 
+            // lblFabricantes
+            // 
+            this.lblFabricantes.AutoSize = true;
+            this.lblFabricantes.Location = new System.Drawing.Point(435, 67);
+            this.lblFabricantes.Name = "lblFabricantes";
+            this.lblFabricantes.Size = new System.Drawing.Size(62, 13);
+            this.lblFabricantes.TabIndex = 10;
+            this.lblFabricantes.Text = "Fabricantes";
+            // 
+            // txtFabricantes
+            // 
+            this.txtFabricantes.Location = new System.Drawing.Point(435, 83);
+            this.txtFabricantes.Multiline = true;
+            this.txtFabricantes.Name = "txtFabricantes";
+            this.txtFabricantes.Size = new System.Drawing.Size(189, 50);
+            this.txtFabricantes.TabIndex = 4;
+            // 
+            // lblEsfera
+            // 
+            this.lblEsfera.AutoSize = true;
+            this.lblEsfera.Location = new System.Drawing.Point(630, 67);
+            this.lblEsfera.Name = "lblEsfera";
+            this.lblEsfera.Size = new System.Drawing.Size(37, 13);
+            this.lblEsfera.TabIndex = 12;
+            this.lblEsfera.Text = "Esfera";
+            // 
+            // txtEsfera
+            // 
+            this.txtEsfera.Location = new System.Drawing.Point(630, 83);
+            this.txtEsfera.Multiline = true;
+            this.txtEsfera.Name = "txtEsfera";
+            this.txtEsfera.Size = new System.Drawing.Size(189, 50);
+            this.txtEsfera.TabIndex = 5;
+            // 
             // frmAnaliseIqviaSintetico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 521);
+            this.Controls.Add(this.lblEsfera);
+            this.Controls.Add(this.txtEsfera);
+            this.Controls.Add(this.lblFabricantes);
+            this.Controls.Add(this.txtFabricantes);
+            this.Controls.Add(this.lblGrupos);
+            this.Controls.Add(this.txtGrupos);
             this.Controls.Add(this.btnSugestoes);
             this.Controls.Add(this.lblValorBuscado);
             this.Controls.Add(this.txtValorBuscado);
@@ -221,5 +284,11 @@
         private System.Windows.Forms.Button btnSugestoes;
         private System.Windows.Forms.Label lblUnidade;
         private System.Windows.Forms.ComboBox cbxUnidade;
+        private System.Windows.Forms.TextBox txtGrupos;
+        private System.Windows.Forms.Label lblGrupos;
+        private System.Windows.Forms.Label lblFabricantes;
+        private System.Windows.Forms.TextBox txtFabricantes;
+        private System.Windows.Forms.Label lblEsfera;
+        private System.Windows.Forms.TextBox txtEsfera;
     }
 }
