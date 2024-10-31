@@ -27,8 +27,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Fretes
             ConfigureListBoxProperties();
             ConfigureLabelProperties();
 
-            ConfigureFormEvents();
-            
+            ConfigureFormEvents();            
         }
 
 
