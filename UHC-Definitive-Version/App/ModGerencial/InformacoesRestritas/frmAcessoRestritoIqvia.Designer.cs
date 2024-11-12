@@ -29,29 +29,27 @@
         private void InitializeComponent()
         {
             this.gpbFilters = new System.Windows.Forms.GroupBox();
+            this.lblIntervaloDatas = new System.Windows.Forms.Label();
+            this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.gpbStatus = new System.Windows.Forms.GroupBox();
             this.chkInativos = new System.Windows.Forms.CheckBox();
             this.chkAtivos = new System.Windows.Forms.CheckBox();
             this.txtPesquisar = new System.Windows.Forms.TextBox();
             this.lblPesquisar = new System.Windows.Forms.Label();
-            this.dtpDataInicial = new System.Windows.Forms.DateTimePicker();
-            this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
-            this.lblIntervaloDatas = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvData = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
             this.btnAdicionar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.gpbFilters.SuspendLayout();
             this.gpbStatus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
             // gpbFilters
             // 
             this.gpbFilters.Controls.Add(this.lblIntervaloDatas);
             this.gpbFilters.Controls.Add(this.dtpDataFinal);
-            this.gpbFilters.Controls.Add(this.dtpDataInicial);
             this.gpbFilters.Controls.Add(this.btnPesquisar);
             this.gpbFilters.Controls.Add(this.gpbStatus);
             this.gpbFilters.Controls.Add(this.txtPesquisar);
@@ -62,6 +60,23 @@
             this.gpbFilters.TabIndex = 1;
             this.gpbFilters.TabStop = false;
             this.gpbFilters.Text = "Filtros";
+            // 
+            // lblIntervaloDatas
+            // 
+            this.lblIntervaloDatas.AutoSize = true;
+            this.lblIntervaloDatas.Location = new System.Drawing.Point(154, 59);
+            this.lblIntervaloDatas.Name = "lblIntervaloDatas";
+            this.lblIntervaloDatas.Size = new System.Drawing.Size(23, 13);
+            this.lblIntervaloDatas.TabIndex = 14;
+            this.lblIntervaloDatas.Text = "Dia";
+            // 
+            // dtpDataFinal
+            // 
+            this.dtpDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataFinal.Location = new System.Drawing.Point(157, 73);
+            this.dtpDataFinal.Name = "dtpDataFinal";
+            this.dtpDataFinal.Size = new System.Drawing.Size(97, 20);
+            this.dtpDataFinal.TabIndex = 13;
             // 
             // btnPesquisar
             // 
@@ -123,38 +138,13 @@
             this.lblPesquisar.TabIndex = 11;
             this.lblPesquisar.Text = "Filtro Genérico";
             // 
-            // dtpDataInicial
+            // dgvData
             // 
-            this.dtpDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataInicial.Location = new System.Drawing.Point(154, 73);
-            this.dtpDataInicial.Name = "dtpDataInicial";
-            this.dtpDataInicial.Size = new System.Drawing.Size(97, 20);
-            this.dtpDataInicial.TabIndex = 12;
-            // 
-            // dtpDataFinal
-            // 
-            this.dtpDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataFinal.Location = new System.Drawing.Point(257, 73);
-            this.dtpDataFinal.Name = "dtpDataFinal";
-            this.dtpDataFinal.Size = new System.Drawing.Size(97, 20);
-            this.dtpDataFinal.TabIndex = 13;
-            // 
-            // lblIntervaloDatas
-            // 
-            this.lblIntervaloDatas.AutoSize = true;
-            this.lblIntervaloDatas.Location = new System.Drawing.Point(154, 59);
-            this.lblIntervaloDatas.Name = "lblIntervaloDatas";
-            this.lblIntervaloDatas.Size = new System.Drawing.Size(94, 13);
-            this.lblIntervaloDatas.TabIndex = 14;
-            this.lblIntervaloDatas.Text = "Intervalo de Datas";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 133);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(776, 281);
-            this.dataGridView1.TabIndex = 2;
+            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.Location = new System.Drawing.Point(12, 133);
+            this.dgvData.Name = "dgvData";
+            this.dgvData.Size = new System.Drawing.Size(776, 281);
+            this.dgvData.TabIndex = 2;
             // 
             // btnFechar
             // 
@@ -191,7 +181,7 @@
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAdicionar);
             this.Controls.Add(this.btnFechar);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvData);
             this.Controls.Add(this.gpbFilters);
             this.Name = "frmAcessoRestritoIqvia";
             this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -211,7 +201,7 @@
             this.gpbFilters.PerformLayout();
             this.gpbStatus.ResumeLayout(false);
             this.gpbStatus.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -221,14 +211,13 @@
         private System.Windows.Forms.GroupBox gpbFilters;
         private System.Windows.Forms.Label lblIntervaloDatas;
         private System.Windows.Forms.DateTimePicker dtpDataFinal;
-        private System.Windows.Forms.DateTimePicker dtpDataInicial;
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.GroupBox gpbStatus;
         private System.Windows.Forms.CheckBox chkInativos;
         private System.Windows.Forms.CheckBox chkAtivos;
         private System.Windows.Forms.TextBox txtPesquisar;
         private System.Windows.Forms.Label lblPesquisar;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.Button btnAdicionar;
         private System.Windows.Forms.Button btnEditar;

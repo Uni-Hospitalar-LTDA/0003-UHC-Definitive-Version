@@ -17,7 +17,7 @@
 --CREATE TABLE IqviaRestrictionItens
 --(
 --	Id INT IDENTITY(1,1) PRIMARY KEY,	
---	Observation VARCHAR(MAX),
+--	Observation VARCHAR(500),
 --	Type VARCHAR(50),
 --	KeyItem VARCHAR(255)
 --)

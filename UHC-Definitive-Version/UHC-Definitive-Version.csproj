@@ -576,6 +576,12 @@
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestritoIqvia_Historico.Designer.cs">
       <DependentUpon>frmAcessoRestritoIqvia_Historico.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestritoIqvia_AddItens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestritoIqvia_AddItens.Designer.cs">
+      <DependentUpon>frmAcessoRestritoIqvia_AddItens.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1104,10 +1110,15 @@
     <Compile Include="Domain\Entities\IMSCliente.cs" />
     <Compile Include="Domain\Entities\IMSProduto.cs" />
     <Compile Include="Domain\Entities\IMSVendas.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\ClienteInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Clientes_Externos.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\FabricanteInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Fabricantes_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Favorecidos_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Fornecedores_Externos.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\GrupoClienteInnmed.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\NotaFiscalInnmed.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\ProdutoInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Produtos_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Transportadores_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Vendedores_Externos.cs" />
@@ -1117,6 +1128,8 @@
     <Compile Include="Domain\Entities\Kairos.cs" />
     <Compile Include="Domain\Entities\logProcess_Scheduler.cs" />
     <Compile Include="Domain\Entities\MonitorGnre.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaRestrictionItens.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaRestriction.cs" />
     <Compile Include="Domain\Entities\NF_Canhotos.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Action.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Groups.cs" />
@@ -1290,6 +1303,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestritoIqvia.resx">
       <DependentUpon>frmAcessoRestritoIqvia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestritoIqvia_Add.resx">
+      <DependentUpon>frmAcessoRestritoIqvia_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestritoIqvia_AddItens.resx">
+      <DependentUpon>frmAcessoRestritoIqvia_AddItens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestritoIqvia_Edit.resx">
+      <DependentUpon>frmAcessoRestritoIqvia_Edit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.resx">
       <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>

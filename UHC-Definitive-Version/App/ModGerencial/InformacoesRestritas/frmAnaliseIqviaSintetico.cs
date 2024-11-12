@@ -388,9 +388,7 @@ ORDER BY [Qtd. Produto] DESC
             {
                 var sugestoes = await RelatorioAnaliseIqvia.getRelatorioIqviaAnaliticoToDataTableAsync(Convert.ToDateTime(dgvData.CurrentRow.Cells[0].Value));
 
-                string[] grupos = txtGrupos.Text.Split(',');
-                    
-                    //{ "DISTRIBUIDORES", "FARMÁCIAS E DROGARIAS" };
+                string[] grupos = txtGrupos.Text.Split(',');                                        
                 string[] fabricantes = txtFabricantes.Text.Split(',');
                 string[] esfera = txtEsfera.Text.Split(',');
                 frmConsultaGenerica frmConsultaGenerica = new frmConsultaGenerica();

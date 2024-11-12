@@ -102,6 +102,7 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
         {
             dgvData.toDefault();
             dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         private void ConfigureDataGridViewEvents()
         {
