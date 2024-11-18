@@ -47,7 +47,7 @@
             this.abrir_ExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.gpbInformacoes = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblData = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.gpbInformacoes.SuspendLayout();
@@ -211,22 +211,22 @@
             this.gpbInformacoes.TabStop = false;
             this.gpbInformacoes.Text = "informações";
             // 
-            // label1
+            // lblData
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 16);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Selecione a data";
+            this.lblData.AutoSize = true;
+            this.lblData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblData.Location = new System.Drawing.Point(8, 40);
+            this.lblData.Name = "lblData";
+            this.lblData.Size = new System.Drawing.Size(109, 16);
+            this.lblData.TabIndex = 20;
+            this.lblData.Text = "Selecione a data";
             // 
             // frmRankingContasPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(952, 448);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblData);
             this.Controls.Add(this.gpbInformacoes);
             this.Controls.Add(this.btnPesquisar);
             this.Controls.Add(this.menuStrip1);
@@ -276,6 +276,6 @@
         private System.Windows.Forms.ToolStripMenuItem abrir_ExcelToolStripMenuItem;
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.GroupBox gpbInformacoes;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblData;
     }
 }

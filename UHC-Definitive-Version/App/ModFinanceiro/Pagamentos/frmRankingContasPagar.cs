@@ -183,13 +183,13 @@ ORDER BY
 
             // Define o fundo para "Média Top 10 vendas" Cor chamativa para destecar os top 10 valores
             txtMediaTop10.BackColor = Color.DodgerBlue;
+
             //// Define o fundo para "Média Total" cor cinza, para demonstrar a média de valores nada chamativo
             txtMediaTotal.BackColor = Color.DarkGray;
+
             // Define o fundo para "Vlr Total" cor vende representando o dinheiro ou valores
             txtVlrTotal.BackColor = Color.ForestGreen;
-
-            
-
+           
         }
 
         /** Configure StripMenu **/
@@ -205,7 +205,6 @@ ORDER BY
         {
             if (dgvData.Rows.Count > 0)
             {
-
                 //this.Cursor = Cursors.WaitCursor;
                 try
                 {
