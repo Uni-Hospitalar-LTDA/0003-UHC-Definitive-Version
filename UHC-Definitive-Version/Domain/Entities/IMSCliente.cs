@@ -43,7 +43,7 @@ namespace UHC3_Definitive_Version.Domain.IMS
             await writer.WriteLineAsync(await Trailler_IMSCliente.getTraillerAsync(description.Item2));
             writer.Close();
 
-            Console.WriteLine($@"Saved into => {folder}\{archiveName}");
+            
             return $@"{folder}\{archiveName}";
         }
 

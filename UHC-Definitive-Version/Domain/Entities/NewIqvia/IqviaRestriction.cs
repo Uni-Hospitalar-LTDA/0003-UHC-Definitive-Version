@@ -41,9 +41,8 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
                                 FROM [{Connection.dbBase}].dbo.[{getClassName()}] Restriction                                
                                 WHERE 
                                 (CONVERT(VARCHAR,Restriction.Id) = '{filter}' OR Restriction.Description LIKE '%{filter}%') AND Restriction.Status IN ({status})
-                                AND (Restriction.FinalDate >= '{dt2.ToString("yyyyMMdd")}')
-";
-
+                                AND (Restriction.FinalDate >= '{dt2.ToString("yyyyMMdd")}' AND 
+                                     Restriction.InitialDate <= '{dt2.ToString("yyyyMMdd")}') ";
             return await getAllToDataTable(query);
         }
       

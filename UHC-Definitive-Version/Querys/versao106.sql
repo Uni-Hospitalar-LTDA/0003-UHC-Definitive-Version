@@ -27,3 +27,22 @@
 --	idIqviaRestriction INT FOREIGN KEY REFERENCES IqviaRestriction(Id),
 --	idIqviaRestrictionItens INT FOREIGN KEY REFERENCES IqviaRestrictionItens(Id)
 --)
+
+CREATE TABLE LogIqvia 
+(
+	Id INT IDENTITY (1,1) PRIMARY KEY,
+	idFTP INT FOREIGN KEY REFERENCES FTP(Id),
+	Feedback VARCHAR(500),
+	DataArquivo DATE,
+	DataEnvio DATETIME,
+	idUser INT,
+	LayoutProduto SMALLINT,
+	LayoutVendas SMALLINT,
+	LayoutCliente SMALLINT
+)
+
+CREATE TABLE LogIqvia_IqviaRestriction
+(
+	idLogIqvia INT FOREIGN KEY REFERENCES LogIqvia(Id),
+	idIqviaRestriction INT FOREIGN KEY REFERENCES IqviaRestriction(Id)
+)
