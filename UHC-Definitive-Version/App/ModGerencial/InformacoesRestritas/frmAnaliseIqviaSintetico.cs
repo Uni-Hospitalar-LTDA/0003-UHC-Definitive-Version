@@ -14,8 +14,10 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
     public partial class frmAnaliseIqviaSintetico : CustomForm
     {
+        
         /** Instance **/
         CustomMenuStrip menuStrip = new CustomMenuStrip();
+        
         string unidade_Login;
         public class RelatorioAnaliseIqvia : Querys<RelatorioAnaliseIqvia>
         {

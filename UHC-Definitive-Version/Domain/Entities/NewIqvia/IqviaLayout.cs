@@ -34,10 +34,11 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         public string GrupoCliente { get; set; }
         public string Esfera { get; set; }
 
-        private static string getBaseQuery(DateTime dt, int bloqueio = 1)
+        private static string getBaseQuery(DateTime dt, int bloqueio = 1, int id = 0 )
         {
             return $@"  DECLARE @DATE DATE = '{dt.ToString("yyyyMMdd")}';
                         DECLARE @BLOQUEIO INT = {bloqueio};
+                        DECLARE @ID INT ={id};
                         WITH Sellout AS (
                             SELECT
                                 NF_Saida.Num_Nota		AS NotaFiscal,
@@ -126,8 +127,12 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
                             InOut.Esfera
                         FROM InOut
                         LEFT JOIN [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] rest 
-                            ON InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
-                            AND rest.Status = @BLOQUEIO
+                            ON 							
+							(InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
+                            AND rest.Status = @BLOQUEIO AND @BLOQUEIO = 1
+							AND @ID =0
+							) OR 
+							(@ID != 0 AND rest.Id IN (SELECT logi.idIqviaRestriction FROM {Connection.dbBase}.dbo.{LogIqvia_IqviaRestriction.getClassName()} logi WHERE logi.idLogIqvia = @ID))
                         WHERE rest.id IS NULL
                             OR NOT EXISTS (
                                 SELECT 1 
@@ -172,8 +177,12 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
                             InOut.Esfera
                         FROM InOut
                         JOIN [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] rest 
-                            ON InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
-                            AND rest.Status = @BLOQUEIO
+                            ON 							
+							(InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
+                            AND rest.Status = @BLOQUEIO AND @BLOQUEIO = 1
+							AND @ID =0
+							) OR 
+							(@ID != 0 AND rest.Id IN (SELECT logi.idIqviaRestriction FROM {Connection.dbBase}.dbo.{LogIqvia_IqviaRestriction.getClassName()} logi WHERE logi.idLogIqvia = @ID))                        
                         WHERE EXISTS (
                             SELECT 1 
                             FROM [{Connection.dbBase}].DBO.[{IqviaRestrictionItens.getClassName()}] subItem
@@ -194,9 +203,11 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
                         )
                         ORDER BY NotaFiscal ASC;";
         }
-        public static async Task<List<IqviaLayout>> getAllToListAsync(DateTime dt, int bloqueio = 1)
+        public static async Task<List<IqviaLayout>> getAllToListAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            string query = getBaseQuery(dt, bloqueio);
+            string query = getBaseQuery(dt, bloqueio,id);
+            CustomNotification.defaultInformation(id.ToString());
+            Console.WriteLine(query);
             return await getAllToList(query);
         }
 
@@ -247,9 +258,9 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
 
         }
-        public static async Task<DataTable> getLayoutClienteAsync(DateTime dt, int bloqueio = 1)
+        public static async Task<DataTable> getLayoutClienteAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio);           
+            var baseDados = await getAllToListAsync(dt, bloqueio,id);           
 
             //Description
             var clienteData = baseDados.Where(x => string.IsNullOrEmpty(x.bloqueio))

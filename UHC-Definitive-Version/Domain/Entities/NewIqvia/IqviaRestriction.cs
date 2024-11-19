@@ -51,9 +51,33 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
                                 (CONVERT(VARCHAR,Restriction.Id) = '{filter}' OR Restriction.Description LIKE '%{filter}%') AND Restriction.Status IN ({status})
                                 AND (Restriction.FinalDate >= '{dt2.ToString("yyyyMMdd")}' AND 
                                      Restriction.InitialDate <= '{dt2.ToString("yyyyMMdd")}') ";
+            Console.WriteLine(query);
             return await getAllToDataTable(query);
         }
-      
+
+        public static async Task<DataTable> getAllEspecificoToDataTableAsync(string id, DateTime dt2)
+        {
+            string query = $@"SELECT 
+                                	 Restriction.Id
+                                	,Restriction.Description [Descrição]
+                                	,Restriction.InitialDate [Data Inicial]
+                                	,Restriction.FinalDate [Data Final]
+                                    ,[Status] = CASE Restriction.Status WHEN 1 THEN 'Ativo' ELSE 'Inativo' END 
+                                    ,[Vigência] = CASE                                                                                                                 
+                                                        WHEN Restriction.InitialDate > CONVERT(DATE,GETDATE()) THEN 'Vigência futura'
+														WHEN Restriction.InitialDate <= CONVERT(DATE,GETDATE())
+														AND	 Restriction.FinalDate >= CONVERT(DATE,GETDATE()) THEN 'Vigente'
+														ELSE 'Vencido'																												
+                                                   END
+                                FROM [{Connection.dbBase}].dbo.[{getClassName()}] Restriction                                
+                                JOIN [{Connection.dbBase}].dbo.[{LogIqvia_IqviaRestriction.getClassName()}] LI   on li.idIqviaRestriction = Restriction.id
+                                WHERE 
+                                li.idLogIqvia = {id} AND
+                                (Restriction.FinalDate >= '{dt2.ToString("yyyyMMdd")}' AND 
+                                     Restriction.InitialDate <= '{dt2.ToString("yyyyMMdd")}') ";
+            Console.WriteLine(query);
+            return await getAllToDataTable(query);
+        }
     }
 
     public class IqviaRestriction_IqviaRestrictionItens : Querys<IqviaRestriction_IqviaRestrictionItens>

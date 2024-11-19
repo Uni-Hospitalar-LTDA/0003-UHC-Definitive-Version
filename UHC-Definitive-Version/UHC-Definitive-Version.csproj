@@ -582,6 +582,18 @@
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_AddItens.Designer.cs">
       <DependentUpon>frmAcessoRestrito_AddItens.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1329,6 +1341,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_EnviarArquivos.resx">
       <DependentUpon>frmAcessoRestrito_EnviarArquivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Historico.resx">
+      <DependentUpon>frmAcessoRestrito_Historico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.resx">
       <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>

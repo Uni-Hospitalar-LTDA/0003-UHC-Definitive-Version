@@ -1,111 +1,109 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using UHC3_Definitive_Version.App.Telas_Genericas;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities.NewIqvia;
-using static UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas.frmAnaliseIqviaSintetico;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    public partial class frmAcessoRestrito_Historico : CustomForm
+    public partial class frmAcessoRestrito_HistoricoDetalhado : CustomForm
     {
-        /** MenuStrip **/
+        /** Instance **/
         CustomMenuStrip menuStrip = new CustomMenuStrip();
+        internal DateTime dataBase { get; set; } = DateTime.Today;
 
-        public frmAcessoRestrito_Historico()
+        public frmAcessoRestrito_HistoricoDetalhado()
         {
             InitializeComponent();
 
+
             //Properties
             ConfigureMenuStripProperties();
-            ConfigureFormProperties();
-            ConfigureButtonProperties();
+            CustomFormProperties();
+            CustomButtonProperties();
             ConfigureDataGridViewProperties();
 
+
             //Events
-            ConfigureFormEvents();
+            CustomFormEvents();
+
         }
 
         /** Async Tasks **/
         private async Task getData()
         {
-            dgvData.DataSource = await LogIqvia.getToDataTableSinteticoByDateAsync(dtp0.Value,dtpf.Value);
+            dgvData.DataSource = await LogIqvia.getToDataTableByDateAsync(dtp0.Value);
         }
 
 
-        /** Form Configuration **/
-        private void ConfigureFormProperties()
+        /** Form Properties **/
+        private void CustomFormProperties()
         {
             this.defaultMaximableForm();
         }
-        private void ConfigureFormEvents()
+        private void CustomFormEvents()
         {
-            this.Load += frmAcessoRestrito_Historico_Load;
-            this.KeyDown += frmAcessoRestrito_Historico_KeyDown;
+            this.Load += frmAcessoRestrito_HistoricoDetalhado_Load;
         }
-
-        private void frmAcessoRestrito_Historico_KeyDown(object sender, KeyEventArgs e)
+        private void frmAcessoRestrito_HistoricoDetalhado_Load(object sender, EventArgs e)
         {
-            if (Keys.Enter == e.KeyData)
-            {
-                btnFiltrar_Click(null,null);
-            }
-        }
-
-        private void frmAcessoRestrito_Historico_Load(object sender, EventArgs e)
-        {
-            //Pré events
+            /** Pré Load events **/
             ConfigureDateTimePickerAttributes();
-
 
             //Events
             ConfigureButtonEvents();
 
-
             //Post events
-            btnFiltrar_Click(null,null);
+
+            btnFiltrar_Click(null, null);
         }
 
         /** Button Configuration **/
-        private void ConfigureButtonProperties()
+        private void CustomButtonProperties()
         {
             btnFechar.toDefaultCloseButton();
         }
         private void ConfigureButtonEvents()
         {
             btnFiltrar.Click += btnFiltrar_Click;
-            btnDetalhamento.Click += btnDetalhamento_Click;
+            btnRestricoes.Click += btnRestricoes_Click;
+            btnClientes.Click += btnClientes_Click;
         }
-        private void btnDetalhamento_Click(object sender, EventArgs e)
+
+        private void btnClientes_Click(object sender, EventArgs e)
         {
             if (dgvData.CurrentRow != null)
             {
-                frmAcessoRestrito_HistoricoDetalhado hd = new frmAcessoRestrito_HistoricoDetalhado();
-                hd.dataBase = Convert.ToDateTime(dgvData.CurrentRow.Cells[0].Value.ToString());
-                hd.ShowDialog();
+                frmAcessoRestrito_HistoricoDetalhado_LayoutClientes layoutClientes = new frmAcessoRestrito_HistoricoDetalhado_LayoutClientes();
+                layoutClientes.id = Convert.ToInt32(dgvData.CurrentRow.Cells[0].Value);
+                layoutClientes.dt = Convert.ToDateTime(dgvData.CurrentRow.Cells[1].Value);
+                layoutClientes.ShowDialog();
             }
         }
+
+        private async void btnRestricoes_Click(object sender, EventArgs e)
+        {            
+            DataTable consultaGenerica = await IqviaRestriction.getAllEspecificoToDataTableAsync(dgvData.CurrentRow.Cells[0].Value.ToString(),dtp0.Value);
+            frmConsultaGenerica cg = new frmConsultaGenerica();
+            cg.consulta = consultaGenerica;
+            cg.ShowDialog();
+        }
+
         private async void btnFiltrar_Click(object sender, EventArgs e)
         {
             await getData();
         }
 
-        /** Configure DateTimePicker **/
+        /** DateTimePicker Configuratiopn **/
         private void ConfigureDateTimePickerAttributes()
         {
-            DateTime dataAtual = DateTime.Today;
-
-            dtp0.Value = new DateTime (dataAtual.Year, dataAtual.Month, 1);
-            dtpf.Value =dataAtual;
-
+            dtp0.Value = dataBase;
         }
+
 
         /** DataGridView Configuration **/
         private void ConfigureDataGridViewProperties()
@@ -184,6 +182,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
 
 
-
+        
     }
 }

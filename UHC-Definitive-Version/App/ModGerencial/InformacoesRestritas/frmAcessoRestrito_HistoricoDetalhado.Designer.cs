@@ -1,6 +1,6 @@
 ﻿namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    partial class frmAcessoRestrito_Historico
+    partial class frmAcessoRestrito_HistoricoDetalhado
     {
         /// <summary>
         /// Required designer variable.
@@ -28,40 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.dgvData = new System.Windows.Forms.DataGridView();
             this.gpbFiltros = new System.Windows.Forms.GroupBox();
-            this.dtpf = new System.Windows.Forms.DateTimePicker();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.dtp0 = new System.Windows.Forms.DateTimePicker();
-            this.dgvData = new System.Windows.Forms.DataGridView();
             this.btnFechar = new System.Windows.Forms.Button();
-            this.btnDetalhamento = new System.Windows.Forms.Button();
-            this.gpbFiltros.SuspendLayout();
+            this.btnVendas = new System.Windows.Forms.Button();
+            this.btnClientes = new System.Windows.Forms.Button();
+            this.btnProdutos = new System.Windows.Forms.Button();
+            this.btnRestricoes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.gpbFiltros.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dgvData
+            // 
+            this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvData.Location = new System.Drawing.Point(12, 84);
+            this.dgvData.Name = "dgvData";
+            this.dgvData.Size = new System.Drawing.Size(776, 332);
+            this.dgvData.TabIndex = 2;
             // 
             // gpbFiltros
             // 
-            this.gpbFiltros.Controls.Add(this.dtpf);
             this.gpbFiltros.Controls.Add(this.btnFiltrar);
             this.gpbFiltros.Controls.Add(this.dtp0);
-            this.gpbFiltros.Location = new System.Drawing.Point(12, 32);
+            this.gpbFiltros.Location = new System.Drawing.Point(12, 24);
             this.gpbFiltros.Name = "gpbFiltros";
-            this.gpbFiltros.Size = new System.Drawing.Size(217, 80);
-            this.gpbFiltros.TabIndex = 0;
+            this.gpbFiltros.Size = new System.Drawing.Size(197, 54);
+            this.gpbFiltros.TabIndex = 3;
             this.gpbFiltros.TabStop = false;
             this.gpbFiltros.Text = "Filtros";
             // 
-            // dtpf
-            // 
-            this.dtpf.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpf.Location = new System.Drawing.Point(107, 19);
-            this.dtpf.Name = "dtpf";
-            this.dtpf.Size = new System.Drawing.Size(95, 20);
-            this.dtpf.TabIndex = 4;
-            // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(131, 45);
+            this.btnFiltrar.Location = new System.Drawing.Point(107, 18);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
             this.btnFiltrar.TabIndex = 3;
@@ -76,45 +80,64 @@
             this.dtp0.Size = new System.Drawing.Size(95, 20);
             this.dtp0.TabIndex = 2;
             // 
-            // dgvData
-            // 
-            this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Location = new System.Drawing.Point(12, 118);
-            this.dgvData.Name = "dgvData";
-            this.dgvData.Size = new System.Drawing.Size(986, 361);
-            this.dgvData.TabIndex = 1;
-            // 
             // btnFechar
             // 
-            this.btnFechar.Location = new System.Drawing.Point(923, 485);
+            this.btnFechar.Location = new System.Drawing.Point(713, 422);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
-            this.btnFechar.TabIndex = 5;
+            this.btnFechar.TabIndex = 4;
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = true;
             // 
-            // btnDetalhamento
+            // btnVendas
             // 
-            this.btnDetalhamento.Location = new System.Drawing.Point(864, 89);
-            this.btnDetalhamento.Name = "btnDetalhamento";
-            this.btnDetalhamento.Size = new System.Drawing.Size(134, 23);
-            this.btnDetalhamento.TabIndex = 6;
-            this.btnDetalhamento.Text = "Detalhamento";
-            this.btnDetalhamento.UseVisualStyleBackColor = true;
+            this.btnVendas.Location = new System.Drawing.Point(652, 55);
+            this.btnVendas.Name = "btnVendas";
+            this.btnVendas.Size = new System.Drawing.Size(136, 23);
+            this.btnVendas.TabIndex = 5;
+            this.btnVendas.Text = "Vendas";
+            this.btnVendas.UseVisualStyleBackColor = true;
             // 
-            // frmAcessoRestrito_Historico
+            // btnClientes
+            // 
+            this.btnClientes.Location = new System.Drawing.Point(510, 55);
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Size = new System.Drawing.Size(136, 23);
+            this.btnClientes.TabIndex = 6;
+            this.btnClientes.Text = "Clientes";
+            this.btnClientes.UseVisualStyleBackColor = true;
+            // 
+            // btnProdutos
+            // 
+            this.btnProdutos.Location = new System.Drawing.Point(368, 55);
+            this.btnProdutos.Name = "btnProdutos";
+            this.btnProdutos.Size = new System.Drawing.Size(136, 23);
+            this.btnProdutos.TabIndex = 7;
+            this.btnProdutos.Text = "Produtos";
+            this.btnProdutos.UseVisualStyleBackColor = true;
+            // 
+            // btnRestricoes
+            // 
+            this.btnRestricoes.Location = new System.Drawing.Point(226, 55);
+            this.btnRestricoes.Name = "btnRestricoes";
+            this.btnRestricoes.Size = new System.Drawing.Size(136, 23);
+            this.btnRestricoes.TabIndex = 8;
+            this.btnRestricoes.Text = "Restrições";
+            this.btnRestricoes.UseVisualStyleBackColor = true;
+            // 
+            // frmAcessoRestrito_HistoricoDetalhado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 521);
-            this.Controls.Add(this.btnDetalhamento);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnRestricoes);
+            this.Controls.Add(this.btnProdutos);
+            this.Controls.Add(this.btnClientes);
+            this.Controls.Add(this.btnVendas);
             this.Controls.Add(this.btnFechar);
-            this.Controls.Add(this.dgvData);
             this.Controls.Add(this.gpbFiltros);
-            this.Name = "frmAcessoRestrito_Historico";
+            this.Controls.Add(this.dgvData);
+            this.Name = "frmAcessoRestrito_HistoricoDetalhado";
             this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -127,21 +150,23 @@
             this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.Text = "Histórico de Envio";
-            this.gpbFiltros.ResumeLayout(false);
+            this.Text = "Histórico Detalhado";
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.gpbFiltros.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.GroupBox gpbFiltros;
-        private System.Windows.Forms.DateTimePicker dtpf;
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.DateTimePicker dtp0;
-        private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.Button btnFechar;
-        private System.Windows.Forms.Button btnDetalhamento;
+        private System.Windows.Forms.Button btnVendas;
+        private System.Windows.Forms.Button btnClientes;
+        private System.Windows.Forms.Button btnProdutos;
+        private System.Windows.Forms.Button btnRestricoes;
     }
 }

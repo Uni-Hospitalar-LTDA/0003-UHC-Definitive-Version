@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,23 +11,25 @@ using System.Windows.Forms;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities.NewIqvia;
-using static UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas.frmAnaliseIqviaSintetico;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    public partial class frmAcessoRestrito_Historico : CustomForm
+    public partial class frmAcessoRestrito_HistoricoDetalhado_LayoutClientes : CustomForm
     {
-        /** MenuStrip **/
+        /** Instance **/
         CustomMenuStrip menuStrip = new CustomMenuStrip();
+        internal int id { get; set; }
+        internal DateTime dt { get; set; }
 
-        public frmAcessoRestrito_Historico()
+        public frmAcessoRestrito_HistoricoDetalhado_LayoutClientes()
         {
             InitializeComponent();
 
-            //Properties
+            //Properties 
             ConfigureMenuStripProperties();
-            ConfigureFormProperties();
             ConfigureButtonProperties();
+            ConfigureFormProperties();
+            ConfigureTextBoxProperties();
             ConfigureDataGridViewProperties();
 
             //Events
@@ -35,10 +38,12 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 
         /** Async Tasks **/
         private async Task getData()
-        {
-            dgvData.DataSource = await LogIqvia.getToDataTableSinteticoByDateAsync(dtp0.Value,dtpf.Value);
-        }
 
+        {            
+            dgvData.DataSource = await IqviaLayout.getLayoutClienteAsync(dt, 1,id);
+            txtQtdLinhas.Text = dgvData.Rows.Count.ToString();
+            dgvData.AutoResizeColumns();
+        }
 
         /** Form Configuration **/
         private void ConfigureFormProperties()
@@ -47,30 +52,15 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
         private void ConfigureFormEvents()
         {
-            this.Load += frmAcessoRestrito_Historico_Load;
-            this.KeyDown += frmAcessoRestrito_Historico_KeyDown;
+            this.Load += frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos_Load;
         }
-
-        private void frmAcessoRestrito_Historico_KeyDown(object sender, KeyEventArgs e)
+        private async void frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos_Load(object sender, EventArgs e)
         {
-            if (Keys.Enter == e.KeyData)
-            {
-                btnFiltrar_Click(null,null);
-            }
-        }
+            //Pré load
+            await getData();
 
-        private void frmAcessoRestrito_Historico_Load(object sender, EventArgs e)
-        {
-            //Pré events
-            ConfigureDateTimePickerAttributes();
-
-
-            //Events
+            //Enviados
             ConfigureButtonEvents();
-
-
-            //Post events
-            btnFiltrar_Click(null,null);
         }
 
         /** Button Configuration **/
@@ -81,36 +71,42 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         private void ConfigureButtonEvents()
         {
             btnFiltrar.Click += btnFiltrar_Click;
-            btnDetalhamento.Click += btnDetalhamento_Click;
+            
+
         }
-        private void btnDetalhamento_Click(object sender, EventArgs e)
+
+      
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            if (dgvData.CurrentRow != null)
+            string filtro = txtFiltroGenerico.Text.Trim().ToLower(); // Texto digitado no TextBox
+            foreach (DataGridViewRow row in dgvData.Rows)
             {
-                frmAcessoRestrito_HistoricoDetalhado hd = new frmAcessoRestrito_HistoricoDetalhado();
-                hd.dataBase = Convert.ToDateTime(dgvData.CurrentRow.Cells[0].Value.ToString());
-                hd.ShowDialog();
+                bool visivel = false;
+
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.Value != null && cell.Value.ToString().ToLower().Contains(filtro))
+                    {
+                        visivel = true; // Encontrou um valor que corresponde ao filtro
+                        break;
+                    }
+                }
+
+                row.Visible = visivel; // Mostra ou oculta a linha
             }
         }
-        private async void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            await getData();
-        }
-
-        /** Configure DateTimePicker **/
-        private void ConfigureDateTimePickerAttributes()
-        {
-            DateTime dataAtual = DateTime.Today;
-
-            dtp0.Value = new DateTime (dataAtual.Year, dataAtual.Month, 1);
-            dtpf.Value =dataAtual;
-
-        }
-
+     
         /** DataGridView Configuration **/
         private void ConfigureDataGridViewProperties()
         {
             dgvData.toDefault();
+        }
+
+        /** TextBox Configuration **/
+        private void ConfigureTextBoxProperties()
+        {
+            txtQtdLinhas.ReadOnly();
         }
 
         /** Menu Strip Configuration **/
@@ -182,8 +178,5 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                 }
             }
         }
-
-
-
     }
 }

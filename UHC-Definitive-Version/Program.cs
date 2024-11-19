@@ -18,7 +18,8 @@ namespace UHC3_Definitive_Version
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new frmUpdateScreen());
-            Application.Run(new frmMainMenu());
+            Application.Run(new frmAcessoRestrito_Historico());
+            //Application.Run(new frmAcessoRestrito());
         }
     }
 }
