@@ -53,68 +53,73 @@ namespace UHC3_Definitive_Version.Domain.Entities
                               	,address
                                 ,observation
                                 ,enabled
-                              FROM [UHCDB].dbo.[Ftp]";
+                              FROM [UHCDB].dbo.[Ftp]
+                              WHERE enabled = 1";
             return await getAllToList(query);
         }
         // ** Update ** //
-        public async static Task<bool> updateAsync(FTP ftp, List<string> fields)
+
+        public async static Task<string> sendAsync(FTP ftp, string filePath)
         {
+            FtpWebRequest ftpRequest;
+            FtpWebResponse ftpResponse;
+
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create($@"ftp://{ftp.address}");
-                request.Credentials = new NetworkCredential(ftp.login, ftp.password);
-                request.UseBinary = true;
-                request.UsePassive = true;
-                request.KeepAlive = false; // useful when only to check the connection.
-                request.Method = WebRequestMethods.Ftp.ListDirectory;
-                FtpWebResponse response = (FtpWebResponse)await request.GetResponseAsync();
-
-
-                if (response.StatusCode == FtpStatusCode.OpeningData)
+                // Verificar se os parâmetros são válidos
+                if (ftp == null || string.IsNullOrEmpty(filePath))
                 {
-                    using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
-                    {
-                        SqlTransaction transaction = null;
-                        try
-                        {
-                            await conn.OpenAsync();
-                            SqlCommand command = conn.CreateCommand();
-                            transaction = conn.BeginTransaction();
-                            command.Connection = conn;
-                            command.Transaction = transaction;
-                            command.CommandText = $@"UPDATE [UHCDB].dbo.[Ftp]
-                                             SET [description] = '{ftp.description}'
-                                                ,[login] = '{ftp.login}'
-                                                ,[password] = '{ftp.password}'
-                                                ,[address] = '{ftp.address}'
-                                                ,[observation] =    '{ftp.observation}'
-                                                ,[enabled] = {ftp.enabled}
-                                         WHERE id = {ftp.id}";
-                            await command.ExecuteNonQueryAsync();
-
-                        }
-                        catch (Exception ex)
-                        {
-                            CustomNotification.defaultError(ex.Message);
-                            transaction.Rollback();
-                            conn.Close();
-
-                        }
-                        finally
-                        {
-
-                            transaction.Commit();
-                            conn.Close();
-                            
-                            CustomNotification.defaultInformation();
-                        }
-                    }
+                    return "Parâmetros inválidos para o envio FTP.";
                 }
-                return true;
+
+                // Seleciona o nome do arquivo a partir do caminho completo
+                string archiveName = Path.GetFileName(filePath);
+
+                // Define os requisitos para se conectar com o servidor FTP
+                ftpRequest = (FtpWebRequest)WebRequest.Create($@"ftp://{ftp.address}/{archiveName}");
+                ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+                ftpRequest.Proxy = null;
+                ftpRequest.UseBinary = true;
+                ftpRequest.Credentials = new NetworkCredential(ftp.login, ftp.password);
+
+                // Seleção do arquivo a ser enviado
+                FileInfo arquivo = new FileInfo(filePath);
+                byte[] fileContents = new byte[arquivo.Length];
+
+                using (FileStream fr = arquivo.OpenRead())
+                {
+                    await fr.ReadAsync(fileContents, 0, Convert.ToInt32(arquivo.Length));
+                }
+
+                using (Stream writer = await ftpRequest.GetRequestStreamAsync())
+                {
+                    await writer.WriteAsync(fileContents, 0, fileContents.Length);
+                }
+
+                // Obtém o FtpWebResponse da operação de upload
+                ftpResponse = (FtpWebResponse)await ftpRequest.GetResponseAsync();
+
+                // Retorna a descrição de status da operação de upload
+                return $"Arquivo '{archiveName}' enviado com sucesso. Status: {ftpResponse.StatusDescription}";
             }
-            catch (Exception)
+            catch (WebException ex)
             {
-                return false;
+                if (ex.Response is FtpWebResponse ftpExResponse)
+                {
+                    return $"Erro ao enviar arquivo via FTP: {ftpExResponse.StatusDescription}";
+                }
+                else
+                {
+                    return $"Erro ao enviar arquivo via FTP: {ex.Message}";
+                }
+            }
+            catch (IOException ex)
+            {
+                return $"Erro ao ler o arquivo: {ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                return $"Erro inesperado: {ex.Message}";
             }
         }
 

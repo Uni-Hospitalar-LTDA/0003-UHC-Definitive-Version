@@ -13,9 +13,9 @@ using UHC3_Definitive_Version.Domain.Entities.NewIqvia;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    public partial class frmAcessoRestritoIqvia : CustomForm
+    public partial class frmAcessoRestrito : CustomForm
     {
-        public frmAcessoRestritoIqvia()
+        public frmAcessoRestrito()
         {
             InitializeComponent();
 
@@ -88,7 +88,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         {
             if (dgvData.CurrentRow  != null) 
             {
-                frmAcessoRestritoIqvia_Edit frmAcessoRestritoIqvia_Edit = new frmAcessoRestritoIqvia_Edit();
+                frmAcessoRestrito_Edit frmAcessoRestritoIqvia_Edit = new frmAcessoRestrito_Edit();
                 frmAcessoRestritoIqvia_Edit.iqviaRestriction = await IqviaRestriction.getToClassAsync(dgvData.CurrentRow.Cells[0]?.Value.ToString());
                 frmAcessoRestritoIqvia_Edit.iqviaRestrictionItens = await IqviaRestrictionItens.getByCodeToListAsync(dgvData.CurrentRow.Cells[0]?.Value.ToString());
                 frmAcessoRestritoIqvia_Edit.ShowDialog();
@@ -100,7 +100,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
         private async void btnAdicionar_Click(object sender, EventArgs e)
         {
-            frmAcessoRestritoIqvia_Add frmAcessoRestritoIqvia_Add = new frmAcessoRestritoIqvia_Add();
+            frmAcessoRestrito_Add frmAcessoRestritoIqvia_Add = new frmAcessoRestrito_Add();
             frmAcessoRestritoIqvia_Add.ShowDialog();
             await getDados();
         }

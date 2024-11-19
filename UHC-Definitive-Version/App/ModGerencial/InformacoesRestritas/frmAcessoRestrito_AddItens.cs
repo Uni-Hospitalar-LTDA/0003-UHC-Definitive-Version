@@ -11,15 +11,16 @@ using UHC3_Definitive_Version.Domain.Entities.NewIqvia;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    public partial class frmAcessoRestritoIqvia_AddItens : CustomForm
+    public partial class frmAcessoRestrito_AddItens : CustomForm
     {
         /** Instance **/
         public IqviaRestrictionItens item = new IqviaRestrictionItens();
+        public DateTime dt1 { get; set; }
+        public DateTime dt2 { get; set; }
 
-        
 
 
-        public frmAcessoRestritoIqvia_AddItens()
+        public frmAcessoRestrito_AddItens()
         {
             InitializeComponent();
 
@@ -210,7 +211,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             else if (cbxType.SelectedItem.ToString().Contains("Nota"))
             {
                 frmGeneric_ConsultaComSelecao frmGeneric_ConsultaComSelecao = new frmGeneric_ConsultaComSelecao();
-                frmGeneric_ConsultaComSelecao.consulta = await NotaFiscalInnmed.getAllToDataTableAsync();
+                frmGeneric_ConsultaComSelecao.consulta = await NotaFiscalInnmed.getAllToDataTableAsync(dt1,dt2);
                 frmGeneric_ConsultaComSelecao.ShowDialog();
                 txtItemId.Text = frmGeneric_ConsultaComSelecao.extendedCode;
             }

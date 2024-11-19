@@ -1,6 +1,6 @@
 ﻿namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    partial class frmAcessoRestritoIqvia_Historico
+    partial class frmAcessoRestrito_Historico
     {
         /// <summary>
         /// Required designer variable.

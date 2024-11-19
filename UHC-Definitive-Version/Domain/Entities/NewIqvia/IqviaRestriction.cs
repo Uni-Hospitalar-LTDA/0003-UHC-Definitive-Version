@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using UHC3_Definitive_Version.Configuration;
@@ -23,6 +24,13 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         {
             string query = $@"SELECT * FROM [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] WHERE id = {id}";
             return await getToClass(query);
+        }
+
+        public static async Task<List<IqviaRestriction>> getAllToListAsync(DateTime dt)
+        {
+            string query = $@"SELECT * FROM [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] where '{dt.ToString("yyyyMMdd")}' between InitialDate and FinalDate";
+            Console.WriteLine(query);
+            return await getAllToList(query);
         }
         public static async Task<DataTable> getAllToDataTableAsync(string filter, string status, DateTime dt2)
         {

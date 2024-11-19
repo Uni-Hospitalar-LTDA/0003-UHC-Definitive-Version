@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    public partial class frmAcessoRestritoIqvia_Historico : Form
+    public partial class frmAcessoRestrito_Historico : Form
     {
-        public frmAcessoRestritoIqvia_Historico()
+        public frmAcessoRestrito_Historico()
         {
             InitializeComponent();
         }

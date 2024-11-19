@@ -8,62 +8,57 @@ using UHC3_Definitive_Version.Domain.Entities.NewIqvia;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    public partial class frmAcessoRestritoIqvia_Edit : CustomForm
+    public partial class frmAcessoRestrito_Add : CustomForm
     {
-        public IqviaRestriction iqviaRestriction { get; set; } = new IqviaRestriction();
-        public List<IqviaRestrictionItens> iqviaRestrictionItens { get; set; } = new List<IqviaRestrictionItens>();
-
-        public frmAcessoRestritoIqvia_Edit()
+        List<IqviaRestrictionItens> itens = new List<IqviaRestrictionItens>();
+        public frmAcessoRestrito_Add()
         {
             InitializeComponent();
 
-
             //Properties
             ConfigureFormProperties();
-            ConfigureButtonProperties();
             ConfigureTextBoxProperties();
             ConfigureDataGridViewProperties();
+            ConfigureButtonProperties();
+
 
             //Events
             ConfigureFormEvents();
 
-
         }
 
-        /** Async Methods **/
+        /** Async Task **/
         private async Task saveAsync()
         {
             try
             {
 
                 //inserindo cabeçalho da restrição
-                await IqviaRestriction.updateAsync(new IqviaRestriction
+                await IqviaRestriction.insertAsync(new IqviaRestriction
                 {
-                    Id = txtId.Text,
                     Description = txtDescription.Text,
                     Observation = txtObservation.Text,
-                    Status = Convert.ToInt16(chkStatus.Checked).ToString(),
-                    EditedAt = DateTime.Now.ToString(),
+                    Status = "1",
+                    CreatedAt = DateTime.Now.ToString(),
                     lastUser = Section.idUsuario,
                     InitialDate = dtpInitialDate.Value.ToString(),
                     FinalDate = dtpFinalDate.Value.ToString()
                 });
-                
+
+                Task.WaitAll();
+                int lastRestriction = await IqviaRestriction.getLastCodeAsync();
 
                 //Inserindo detalhamento da restrição
-                await IqviaRestriction_IqviaRestrictionItens.deleteAsync("idIqviaRestriction", iqviaRestriction.Id);
-
-                await IqviaRestrictionItens.deleteAsync(iqviaRestriction.Id);
                 int nextItemRestriction = await IqviaRestrictionItens.getNextCodeAsync();
-                await IqviaRestrictionItens.insertAsync(iqviaRestrictionItens);
+                await IqviaRestrictionItens.insertAsync(itens);
 
                 //Criando vínculo
 
-                foreach (var item in iqviaRestrictionItens)
+                foreach (var item in itens)
                 {
                     await IqviaRestriction_IqviaRestrictionItens.insertAsync(new IqviaRestriction_IqviaRestrictionItens
                     {
-                        idIqviaRestriction = iqviaRestriction.Id,
+                        idIqviaRestriction = lastRestriction.ToString(),
                         idIqviaRestrictionItens = (nextItemRestriction++).ToString()
                     });
 
@@ -71,61 +66,38 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 
                 CustomNotification.defaultInformation();
                 this.Close();
-
+                    
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 CustomNotification.defaultError(ex.Message);
             }
 
 
         }
-        /** Sync Methods **/
-        private void getInitialAttributes()
-        {
-            txtId.Text = iqviaRestriction.Id;
-            txtDescription.Text = iqviaRestriction.Description;
-            dtpInitialDate.Value = Convert.ToDateTime(iqviaRestriction.InitialDate);
-            dtpFinalDate.Value = Convert.ToDateTime(iqviaRestriction.FinalDate);
-            chkStatus.Checked = Convert.ToBoolean(Convert.ToInt16(iqviaRestriction.Status));
-            txtObservation.Text = iqviaRestriction.Observation;
-
-
-            foreach (var item in iqviaRestrictionItens)
-            {
-                dgvData.Rows.Add(item.Id,item.Type,item.KeyItem);
-            }
-        }
-
 
         /** Form Configuration **/
         private void ConfigureFormProperties()
         {
-            this.defaultFixedForm();   
+            this.defaultFixedForm();
         }
         private void ConfigureFormEvents()
         {
-            this.Load += frmAcessoRestritoIqvia_Edit_Load;
+            this.Load += frmAcessoRestritoIqvia_Add_Load;
         }
-        private void frmAcessoRestritoIqvia_Edit_Load(object sender, EventArgs e)
+        private void frmAcessoRestritoIqvia_Add_Load(object sender, EventArgs e)
         {
-            //Attributes
-            getInitialAttributes();
+            //Pré events
+            ConfigureDateTimePickersAttributes();
 
             //Events
             ConfigureButtonEvents();
         }
 
-        /** TextBox Configuration **/
-        private void ConfigureTextBoxProperties()
-        {
-            txtId.ReadOnly();            
-        }
-
         /** Button Configuration **/
         private void ConfigureButtonProperties()
         {
-            btnCancelar.toDefaultCloseButton();
+            btnCancelar.toDefaultQuestionCloseButton();
         }
         private void ConfigureButtonEvents()
         {
@@ -133,18 +105,12 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             btnAdicionar.Click += btnAdicionar_Click;
             btnRemover.Click += btnRemover_Click;
         }
-
-        private async void btnSalvar_Click(object sender, EventArgs e)
-        {
-            await saveAsync();
-        }
-
         private void btnRemover_Click(object sender, EventArgs e)
         {
             try
             {
-                Console.WriteLine("Removerei " + iqviaRestrictionItens[dgvData.CurrentRow.Index].KeyItem);
-                iqviaRestrictionItens.Remove(iqviaRestrictionItens[dgvData.CurrentRow.Index]);
+                Console.WriteLine("Removerei " + itens[dgvData.CurrentRow.Index].KeyItem);
+                itens.Remove(itens[dgvData.CurrentRow.Index]);
                 dgvData.Rows.Remove(dgvData.CurrentRow);
 
             }
@@ -155,11 +121,13 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
         private async void btnAdicionar_Click(object sender, EventArgs e)
         {
-            frmAcessoRestritoIqvia_AddItens frmAcessoRestrito_AddItens = new frmAcessoRestritoIqvia_AddItens();
+            frmAcessoRestrito_AddItens frmAcessoRestrito_AddItens = new frmAcessoRestrito_AddItens();
+            frmAcessoRestrito_AddItens.dt1 = dtpInitialDate.Value;
+            frmAcessoRestrito_AddItens.dt2 = dtpFinalDate.Value;
             frmAcessoRestrito_AddItens.ShowDialog();
 
             var item = frmAcessoRestrito_AddItens.item;
-            iqviaRestrictionItens.Add(item);
+            itens.Add(item);
 
             if (item.Type == "Fabricante")
             {
@@ -205,6 +173,26 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             dgvData.AutoResizeColumns();
 
         }
+        private async void btnSalvar_Click(object sender, EventArgs e)
+        {
+            await saveAsync();
+        }
+
+
+        /** TextBox Configuration **/
+        private void ConfigureTextBoxProperties()
+        {
+            txtDescription.MaxLength = 100;
+            txtObservation.MaxLength = 500;
+        }
+
+        /** DateTimePicker Configuration **/
+        private void ConfigureDateTimePickersAttributes()
+        {
+            dtpInitialDate.Value = DateTime.Now;
+            dtpFinalDate.Value = DateTime.Now;
+        }
+
         /** DataGridView Configuration **/
         private void ConfigureDataGridViewProperties()
         {
@@ -214,5 +202,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             dgvData.Columns.Add("Descricao", "Descricao");
             dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
         }
+
+
     }
 }
