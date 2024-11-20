@@ -1,139 +1,135 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
-using UHC3_Definitive_Version.App.Telas_Genericas;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
 using UHC3_Definitive_Version.Domain.Entities.NewIqvia;
 
 namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
-    public partial class frmAcessoRestrito_HistoricoDetalhado : CustomForm
+    public partial class frmAcessoRestrito_HistoricoDetalhado_LayoutVendas : CustomForm
     {
+
         /** Instance **/
         CustomMenuStrip menuStrip = new CustomMenuStrip();
-        internal DateTime dataBase { get; set; } = DateTime.Today;
+        internal int id { get; set; }
+        internal DateTime dt { get; set; }
 
-        public frmAcessoRestrito_HistoricoDetalhado()
+        public frmAcessoRestrito_HistoricoDetalhado_LayoutVendas()
         {
             InitializeComponent();
 
-
-            //Properties
+            //Properties 
             ConfigureMenuStripProperties();
-            CustomFormProperties();
-            CustomButtonProperties();
+            ConfigureButtonProperties();
+            ConfigureFormProperties();
+            ConfigureTextBoxProperties();
             ConfigureDataGridViewProperties();
 
-
             //Events
-            CustomFormEvents();
-
+            ConfigureFormEvents();
         }
-
         /** Async Tasks **/
         private async Task getData()
+
         {
-            dgvData.DataSource = await LogIqvia.getToDataTableByDateAsync(dtp0.Value);
+            dgvData.DataSource = await IqviaLayout.getLayoutVendasAsync(dt, 1, id);
+            txtQtdLinhas.Text = dgvData.Rows.Count.ToString();
+            dgvData.AutoResizeColumns();
+            int sum = 0;
+            int sumBloq = 0;
+            foreach (DataGridViewRow _row in dgvData.Rows)
+            {
+                
+                    sum += Convert.ToInt32(_row.Cells["qtd"].Value);
+                if (string.IsNullOrEmpty(_row.Cells["bloqueio"].Value?.ToString()))
+                {
+                    sumBloq += Convert.ToInt32(_row.Cells["qtd"].Value); 
+                }
+            }
+            txtTotalVendas.Text = sum.ToString("N0");
+            txtVendasSemBloq.Text = sumBloq.ToString("N0");
         }
 
-
-        /** Form Properties **/
-        private void CustomFormProperties()
+        /** Form Configuration **/
+        private void ConfigureFormProperties()
         {
             this.defaultMaximableForm();
         }
-        private void CustomFormEvents()
+        private void ConfigureFormEvents()
         {
-            this.Load += frmAcessoRestrito_HistoricoDetalhado_Load;
+            this.Load += frmAcessoRestrito_HistoricoDetalhado_LayoutVendas_Load; ;
         }
-        private void frmAcessoRestrito_HistoricoDetalhado_Load(object sender, EventArgs e)
-        {
-            /** Pré Load events **/
-            ConfigureDateTimePickerAttributes();
 
-            //Events
+        private async void frmAcessoRestrito_HistoricoDetalhado_LayoutVendas_Load(object sender, EventArgs e)
+        {
+            //Pré load
+            await getData();
+
+            //Enviados
             ConfigureButtonEvents();
-
-            //Post events
-
-            btnFiltrar_Click(null, null);
         }
+
+       
 
         /** Button Configuration **/
-        private void CustomButtonProperties()
+        private void ConfigureButtonProperties()
         {
             btnFechar.toDefaultCloseButton();
         }
         private void ConfigureButtonEvents()
         {
             btnFiltrar.Click += btnFiltrar_Click;
-            btnRestricoes.Click += btnRestricoes_Click;
-            btnClientes.Click += btnClientes_Click;
-            btnProdutos.Click += btnProdutos_Click;
-            btnVendas.Click += btnVendas_Click;
+            btnReenviar.Click += btnReenviar_Click;
+
+
         }
 
-        private void btnVendas_Click(object sender, EventArgs e)
+        private async void btnReenviar_Click(object sender, EventArgs e)
         {
-            if (dgvData.CurrentRow != null)
+            frmAcessoRestrito_PainelReenvio reenvio = new frmAcessoRestrito_PainelReenvio();
+            reenvio.log = await LogIqvia.getToClassAsync(id);
+            reenvio.ShowDialog();
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            string filtro = txtFiltroGenerico.Text.Trim().ToLower(); // Texto digitado no TextBox
+            foreach (DataGridViewRow row in dgvData.Rows)
             {
-                frmAcessoRestrito_HistoricoDetalhado_LayoutVendas layoutVendas = new frmAcessoRestrito_HistoricoDetalhado_LayoutVendas();
-                layoutVendas.id = Convert.ToInt32(dgvData.CurrentRow.Cells[0].Value);
-                layoutVendas.dt = Convert.ToDateTime(dgvData.CurrentRow.Cells[1].Value);
-                layoutVendas.ShowDialog();
+                bool visivel = false;
+
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.Value != null && cell.Value.ToString().ToLower().Contains(filtro))
+                    {
+                        visivel = true; // Encontrou um valor que corresponde ao filtro
+                        break;
+                    }
+                }
+
+                row.Visible = visivel; // Mostra ou oculta a linha
             }
         }
-
-        private void btnProdutos_Click(object sender, EventArgs e)
-        {
-            if (dgvData.CurrentRow != null)
-            {
-                frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos layoutProdutos = new frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos();
-                layoutProdutos.id = Convert.ToInt32(dgvData.CurrentRow.Cells[0].Value);
-                layoutProdutos.dt = Convert.ToDateTime(dgvData.CurrentRow.Cells[1].Value);
-                layoutProdutos.ShowDialog();
-            }
-        }
-
-        private void btnClientes_Click(object sender, EventArgs e)
-        {
-            if (dgvData.CurrentRow != null)
-            {
-                frmAcessoRestrito_HistoricoDetalhado_LayoutClientes layoutClientes = new frmAcessoRestrito_HistoricoDetalhado_LayoutClientes();
-                layoutClientes.id = Convert.ToInt32(dgvData.CurrentRow.Cells[0].Value);
-                layoutClientes.dt = Convert.ToDateTime(dgvData.CurrentRow.Cells[1].Value);
-                layoutClientes.ShowDialog();
-            }
-        }
-
-        private async void btnRestricoes_Click(object sender, EventArgs e)
-        {            
-            DataTable consultaGenerica = await IqviaRestriction.getAllEspecificoToDataTableAsync(dgvData.CurrentRow.Cells[0].Value.ToString(),dtp0.Value);
-            frmConsultaGenerica cg = new frmConsultaGenerica();
-            cg.consulta = consultaGenerica;
-            cg.ShowDialog();
-        }
-
-        private async void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            await getData();
-        }
-
-        /** DateTimePicker Configuratiopn **/
-        private void ConfigureDateTimePickerAttributes()
-        {
-            dtp0.Value = dataBase;
-        }
-
 
         /** DataGridView Configuration **/
         private void ConfigureDataGridViewProperties()
         {
             dgvData.toDefault();
-            dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+
+        /** TextBox Configuration **/
+        private void ConfigureTextBoxProperties()
+        {
+            txtQtdLinhas.ReadOnly();
+            txtTotalVendas.ReadOnly();
+            txtVendasSemBloq.ReadOnly();
         }
 
         /** Menu Strip Configuration **/
@@ -205,8 +201,5 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                 }
             }
         }
-
-
-        
     }
 }

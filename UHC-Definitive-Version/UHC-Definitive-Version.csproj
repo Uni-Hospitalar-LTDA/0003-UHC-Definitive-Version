@@ -595,6 +595,24 @@
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.Designer.cs">
       <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_PainelReenvio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_PainelReenvio.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_PainelReenvio.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1351,6 +1369,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.resx">
       <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_PainelReenvio.resx">
+      <DependentUpon>frmAcessoRestrito_PainelReenvio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.resx">
       <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>

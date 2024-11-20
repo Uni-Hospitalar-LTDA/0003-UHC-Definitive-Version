@@ -52,9 +52,9 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
         private void ConfigureFormEvents()
         {
-            this.Load += frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos_Load;
+            this.Load += frmAcessoRestrito_HistoricoDetalhado_LayoutClientes_Load;
         }
-        private async void frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos_Load(object sender, EventArgs e)
+        private async void frmAcessoRestrito_HistoricoDetalhado_LayoutClientes_Load(object sender, EventArgs e)
         {
             //Pré load
             await getData();
@@ -71,11 +71,17 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         private void ConfigureButtonEvents()
         {
             btnFiltrar.Click += btnFiltrar_Click;
+            btnReenviar.Click += btnReenviar_Click;
             
 
         }
 
-      
+        private async void btnReenviar_Click(object sender, EventArgs e)
+        {
+            frmAcessoRestrito_PainelReenvio reenvio = new frmAcessoRestrito_PainelReenvio();
+            reenvio.log = await LogIqvia.getToClassAsync(id);
+            reenvio.ShowDialog();
+        }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {

@@ -28,7 +28,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
         public static async Task<List<IqviaRestriction>> getAllToListAsync(DateTime dt)
         {
-            string query = $@"SELECT * FROM [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] where '{dt.ToString("yyyyMMdd")}' between InitialDate and FinalDate";
+            string query = $@"SELECT * FROM [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] where '{dt.ToString("yyyyMMdd")}' between InitialDate and FinalDate and status = 1";
             //Console.WriteLine(query);
             return await getAllToList(query);
         }

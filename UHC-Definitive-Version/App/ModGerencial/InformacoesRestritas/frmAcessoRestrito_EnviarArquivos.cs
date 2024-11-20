@@ -120,11 +120,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             }
         }
 
-
-
-
-
-
         // Método auxiliar para processar e registrar os envios
         private async Task ProcessAndLogAsync(FTP ftp, DateTime date, string unidade, string layoutProduto, string layoutCliente, string layoutVendas, double stepIncrement)
         {
@@ -300,8 +295,9 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
         private async void btnEnviar_Click(object sender, EventArgs e)
         {
-            
+            btnEnviar.Enabled = false;
             await sendFTP();
+            btnEnviar.Enabled = true;
         }
 
         /** DataGridView Configuration **/

@@ -159,7 +159,7 @@
             this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.Text = "IMS - Layout de Produtos";
+            this.Text = "IMS - Layout de Clientes";
             this.gpbFiltros.ResumeLayout(false);
             this.gpbFiltros.PerformLayout();
             this.gpbSomadores.ResumeLayout(false);

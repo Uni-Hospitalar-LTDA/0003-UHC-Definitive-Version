@@ -24,10 +24,10 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         public string LayoutCliente { get; set; }
 
 
-        public static Task<LogIqvia> getToClassAsync(DateTime dt)
+        public static Task<LogIqvia> getToClassAsync(int id)
         {
             string query = $@"SELECT top 1 * FROM LogIqvia
-WHERE DataArquivo = '{dt.ToString("yyyyMMdd")}'
+WHERE Id = '{id}'
 ORDER BY DataEnvio DESC";
             return getToClass(query);
         }

@@ -23,14 +23,14 @@ namespace UHC3_Definitive_Version.App.ModGerencial
 
         private void blocks()
         {
-            ////SubModules            
-            //gpbInformacoesRestritas.Enabled = false;
-            //gpbEnvioDados.Enabled = false;
+            //SubModules            
+            gpbControladoriaDeDados.Enabled = false;
+            btnEnvioDeDados.Enabled = false;
 
 
-            ////Screens
-            //btnControladoriaDaInformacao.Enabled = false;
-            //btnArquivosIqvia.Enabled = false;
+            //Screens
+            btnAuditoriaDeDados.Enabled = false;
+            btnValidacaoIntegridade.Enabled = false;
 
 
 
@@ -39,19 +39,19 @@ namespace UHC3_Definitive_Version.App.ModGerencial
         private void allows()
         {
             //SubModules
-            //if (PermissionsAllowed.subModules?.Find(m => m.Name == "Informações Restridas") != null)
-            //    gpbInformacoesRestritas.Enabled = true;
-            //if (PermissionsAllowed.subModules?.Find(m => m.Name == "Envio de Dados") != null)
-            //    gpbEnvioDados.Enabled = true;
-          
+            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Informações Restridas") != null)
+                btnAuditoriaDeDados.Enabled = true;
+            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Envio de Dados") != null)
+                btnEnvioDeDados.Enabled = true;
 
 
-            ////Screens
-            //if (PermissionsAllowed.screens?.Find(m => m.Name == "Controladoria da Informação") != null)
-            //    btnControladoriaDaInformacao.Enabled = true;
-            //if (PermissionsAllowed.screens?.Find(m => m.Name == "Arquivos IQVIA") != null)
-            //    btnArquivosIqvia.Enabled = true;
-           
+
+            //Screens
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Controladoria da Informação") != null)
+                btnAuditoriaDeDados.Enabled = true;
+            if (PermissionsAllowed.screens?.Find(m => m.Name == "Arquivos IQVIA") != null)
+                btnValidacaoIntegridade.Enabled = true;
+
         }
 
         /** Configure Form **/
@@ -61,8 +61,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial
         }
         private void ConfigureFormEvents()
         {
-            //blocks();
-            //allows();
+            blocks();
+            allows();
 
 
             //Events
@@ -82,10 +82,16 @@ namespace UHC3_Definitive_Version.App.ModGerencial
             btnRestricaoDeDados.Click += btnRestricaoDeDados_Click;
             btnEnvioDeDados.Click += btnEnvioDeDados_Click;
             btnAuditoriaDeDados.Click += btnAuditoriaDeDados_Click;
+            btnValidacaoIntegridade.Click += btnValidacaoIntegridade_Click;
             //Informativo
             btnMargemCompraVenda.Click += btnMargemCompraVenda_Click;
             
 
+        }
+
+        private void btnValidacaoIntegridade_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateForm<frmAnaliseIqviaSintetico>();
         }
 
         private void btnAuditoriaDeDados_Click(object sender, EventArgs e)

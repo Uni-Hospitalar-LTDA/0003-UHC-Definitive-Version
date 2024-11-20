@@ -31,7 +31,7 @@
             this.lblGerencial = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.gpbControladoriaDeDados = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnValidacaoIntegridade = new System.Windows.Forms.Button();
             this.btnAuditoriaDeDados = new System.Windows.Forms.Button();
             this.btnEnvioDeDados = new System.Windows.Forms.Button();
             this.btnRestricaoDeDados = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             // 
             // gpbControladoriaDeDados
             // 
-            this.gpbControladoriaDeDados.Controls.Add(this.button4);
+            this.gpbControladoriaDeDados.Controls.Add(this.btnValidacaoIntegridade);
             this.gpbControladoriaDeDados.Controls.Add(this.btnAuditoriaDeDados);
             this.gpbControladoriaDeDados.Controls.Add(this.btnEnvioDeDados);
             this.gpbControladoriaDeDados.Controls.Add(this.btnRestricaoDeDados);
@@ -82,15 +82,15 @@
             this.gpbControladoriaDeDados.TabStop = false;
             this.gpbControladoriaDeDados.Text = "Relatórios";
             // 
-            // button4
+            // btnValidacaoIntegridade
             // 
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Location = new System.Drawing.Point(6, 154);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(170, 39);
-            this.button4.TabIndex = 16;
-            this.button4.Text = "Margem de Compra / Venda";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnValidacaoIntegridade.ForeColor = System.Drawing.Color.Black;
+            this.btnValidacaoIntegridade.Location = new System.Drawing.Point(6, 154);
+            this.btnValidacaoIntegridade.Name = "btnValidacaoIntegridade";
+            this.btnValidacaoIntegridade.Size = new System.Drawing.Size(170, 39);
+            this.btnValidacaoIntegridade.TabIndex = 16;
+            this.btnValidacaoIntegridade.Text = "4. Validação de Integridade";
+            this.btnValidacaoIntegridade.UseVisualStyleBackColor = true;
             // 
             // btnAuditoriaDeDados
             // 
@@ -205,7 +205,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnMargemCompraVenda;
         private System.Windows.Forms.GroupBox gpbControladoriaDeDados;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnValidacaoIntegridade;
         private System.Windows.Forms.Button btnAuditoriaDeDados;
         private System.Windows.Forms.Button btnEnvioDeDados;
         private System.Windows.Forms.Button btnRestricaoDeDados;

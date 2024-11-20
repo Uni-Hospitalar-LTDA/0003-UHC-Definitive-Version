@@ -304,9 +304,9 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
 
         /** Exports **/
-        public static async Task<string> exportarLayoutClienteAsync(DateTime dt, int bloqueio = 1)
+        public static async Task<string> exportarLayoutClienteAsync(DateTime dt, int bloqueio = 1,int id =0)
         {
-            var baseDados = await getAllToListAsync(dt,bloqueio);            
+            var baseDados = await getAllToListAsync(dt,bloqueio,id);            
 
 
             //Header
@@ -445,9 +445,9 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
             return salvarArquivo(arquivo, archiveName);
 
         }        
-        public static async Task<string> exportarLayoutVendasAsync(DateTime dt, int bloqueio = 1)
+        public static async Task<string> exportarLayoutVendasAsync(DateTime dt, int bloqueio = 1,int id =0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio);
+            var baseDados = await getAllToListAsync(dt, bloqueio,id);
 
             IqviaLayout_Venda_Header header_Venda = new IqviaLayout_Venda_Header();
             header_Venda._040Data_inicio = $"{dt.ToString("yyyyMMdd")}";
