@@ -65,10 +65,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D658F5E43F80ADF066F4C60DEE86B4CBB2EFDAEF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F4DDFE7A6BB3C93F3C00829C658A41A8BE5D27E8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>UHC-Definitive-Version_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
