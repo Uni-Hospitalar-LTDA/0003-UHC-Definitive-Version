@@ -35,6 +35,14 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         {
             try
             {
+                if (!this.requiredInformationValidation())
+                    return;
+
+                if (dgvData.Rows.Count == 0)
+                {
+                    CustomNotification.defaultAlert("Impossível salvar restrição sem condições.");
+                    return;
+                }
 
                 //inserindo cabeçalho da restrição
                 await IqviaRestriction.updateAsync(new IqviaRestriction
@@ -161,7 +169,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             frmAcessoRestrito_AddItens.ShowDialog();
 
             var item = frmAcessoRestrito_AddItens.item;
-            iqviaRestrictionItens.Add(item);
+            if (!string.IsNullOrEmpty(item.KeyItem))
+                iqviaRestrictionItens.Add(item);
 
             if (item.Type == "Fabricante")
             {

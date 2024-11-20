@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UHC3_Definitive_Version.App.ModGerencial;
 using UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas;
 using UHC3_Definitive_Version.Configuration;
 
@@ -18,7 +19,7 @@ namespace UHC3_Definitive_Version
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new frmUpdateScreen());
-            Application.Run(new frmAcessoRestrito_Historico());
+            Application.Run(new frmModGerencial());
             //Application.Run(new frmAcessoRestrito());
         }
     }

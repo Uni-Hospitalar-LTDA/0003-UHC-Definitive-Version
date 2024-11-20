@@ -15,6 +15,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 {
     public partial class frmAcessoRestrito : CustomForm
     {
+
         public frmAcessoRestrito()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         /** Async Tasks **/
         private async Task getDados()
         {
+
             string filter = txtPesquisar.Text;
             List<string> vStatus = new List<string>();
             if (chkAtivos.Checked)
@@ -42,12 +44,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             dgvData.DataSource = await IqviaRestriction.getAllToDataTableAsync(filter, (string.IsNullOrEmpty(status) ? "3" : status),dtpDataFinal.Value);            
             dgvData.AutoResizeColumns();
         }
-
        
-
-
-
-
         /** Form Configuration **/
         private void ConfigureFormProperties()
         {
@@ -57,6 +54,9 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         {
             this.Load += frmAcessoRestritoIqvia_Load;
         }
+
+      
+
         private void frmAcessoRestritoIqvia_Load(object sender, EventArgs e)
         {
             //Pr[e events
@@ -65,7 +65,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 
             //Events
             ConfigureButtonEvents();
-
 
 
             //Pos events
@@ -105,10 +104,13 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             await getDados();
         }
 
+      
+
         /** Configure DataGridView **/
         private void ConfigureDataGridViewProperties()
         {
             dgvData.toDefault();
+            dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         /** Configure DateTimePicker**/ 

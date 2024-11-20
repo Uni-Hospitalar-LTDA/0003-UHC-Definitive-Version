@@ -50,7 +50,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             this.Load += frmAcessoRestrito_Historico_Load;
             this.KeyDown += frmAcessoRestrito_Historico_KeyDown;
         }
-
         private void frmAcessoRestrito_Historico_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keys.Enter == e.KeyData)
@@ -58,7 +57,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                 btnFiltrar_Click(null,null);
             }
         }
-
         private void frmAcessoRestrito_Historico_Load(object sender, EventArgs e)
         {
             //Pré events
@@ -111,6 +109,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         private void ConfigureDataGridViewProperties()
         {
             dgvData.toDefault();
+            dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         /** Menu Strip Configuration **/

@@ -29,7 +29,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         public static async Task<List<IqviaRestriction>> getAllToListAsync(DateTime dt)
         {
             string query = $@"SELECT * FROM [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] where '{dt.ToString("yyyyMMdd")}' between InitialDate and FinalDate";
-            Console.WriteLine(query);
+            //Console.WriteLine(query);
             return await getAllToList(query);
         }
         public static async Task<DataTable> getAllToDataTableAsync(string filter, string status, DateTime dt2)
@@ -51,7 +51,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
                                 (CONVERT(VARCHAR,Restriction.Id) = '{filter}' OR Restriction.Description LIKE '%{filter}%') AND Restriction.Status IN ({status})
                                 AND (Restriction.FinalDate >= '{dt2.ToString("yyyyMMdd")}' AND 
                                      Restriction.InitialDate <= '{dt2.ToString("yyyyMMdd")}') ";
-            Console.WriteLine(query);
+            //Console.WriteLine(query);
             return await getAllToDataTable(query);
         }
 
@@ -75,7 +75,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
                                 li.idLogIqvia = {id} AND
                                 (Restriction.FinalDate >= '{dt2.ToString("yyyyMMdd")}' AND 
                                      Restriction.InitialDate <= '{dt2.ToString("yyyyMMdd")}') ";
-            Console.WriteLine(query);
+            //Console.WriteLine(query);
             return await getAllToDataTable(query);
         }
     }

@@ -206,7 +206,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         public static async Task<List<IqviaLayout>> getAllToListAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
             string query = getBaseQuery(dt, bloqueio,id);
-            CustomNotification.defaultInformation(id.ToString());
+            //CustomNotification.defaultInformation(id.ToString());
             Console.WriteLine(query);
             return await getAllToList(query);
         }
@@ -214,9 +214,9 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
 
         /** GETS **/
-        public static async Task<DataTable> getLayoutVendasAsync(DateTime dt, int bloqueio = 1)
+        public static async Task<DataTable> getLayoutVendasAsync(DateTime dt, int bloqueio = 1,int id =0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio);
+            var baseDados = await getAllToListAsync(dt, bloqueio,id);
 
             //Description
             var produtoData = baseDados;
@@ -278,9 +278,9 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
             return clienteData.AsDataTable();
         }
-        public static async Task<DataTable> getLayoutProdutoAsync(DateTime dt, int bloqueio = 1)
+        public static async Task<DataTable> getLayoutProdutoAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio);
+            var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
             //Description
             var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.bloqueio))
@@ -389,9 +389,9 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
             return salvarArquivo(arquivo, archiveName);
 
         }
-        public static async Task<string> exportarLayoutProdutoAsync(DateTime dt, int bloqueio = 1)
+        public static async Task<string> exportarLayoutProdutoAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio);
+            var baseDados = await getAllToListAsync(dt, bloqueio,id);
 
             IqviaLayout_Produto_Header header_Produto = new IqviaLayout_Produto_Header();
             header_Produto._060Data_inicial = $"{dt.ToString("yyyyMMdd")}";

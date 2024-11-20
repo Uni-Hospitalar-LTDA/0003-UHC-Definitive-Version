@@ -85,15 +85,15 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                             {
                                 var ftp = Ftps[index];
 
-                                // Processa o envio consolidado
+                                //Processa o envio consolidado
                                 await ProcessAndLogAsync(
                                     ftp,
                                     currentDate,
                                     unidade,
-                                    await IqviaLayout.exportarLayoutProdutoAsync(currentDate),
-                                    await IqviaLayout.exportarLayoutClienteAsync(currentDate),
-                                    await IqviaLayout.exportarLayoutVendasAsync(currentDate),
-                                    stepIncrement
+                                await IqviaLayout.exportarLayoutProdutoAsync(currentDate),
+                                await IqviaLayout.exportarLayoutClienteAsync(currentDate),
+                                await IqviaLayout.exportarLayoutVendasAsync(currentDate),
+                                stepIncrement
                                 );
                             }
                         }

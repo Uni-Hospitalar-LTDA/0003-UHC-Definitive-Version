@@ -18,7 +18,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         /** Instance **/
         CustomMenuStrip menuStrip = new CustomMenuStrip();
         
-        string unidade_Login;
+        string unidade_Login = null;
         public class RelatorioAnaliseIqvia : Querys<RelatorioAnaliseIqvia>
         {
 

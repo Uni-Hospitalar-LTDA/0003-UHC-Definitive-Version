@@ -101,8 +101,6 @@
             // chkInativos
             // 
             this.chkInativos.AutoSize = true;
-            this.chkInativos.Checked = true;
-            this.chkInativos.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkInativos.Location = new System.Drawing.Point(67, 19);
             this.chkInativos.Name = "chkInativos";
             this.chkInativos.Size = new System.Drawing.Size(63, 17);
@@ -173,7 +171,7 @@
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
             // 
-            // frmAcessoRestritoIqvia
+            // frmAcessoRestrito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -183,7 +181,7 @@
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.gpbFilters);
-            this.Name = "frmAcessoRestritoIqvia";
+            this.Name = "frmAcessoRestrito";
             this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
