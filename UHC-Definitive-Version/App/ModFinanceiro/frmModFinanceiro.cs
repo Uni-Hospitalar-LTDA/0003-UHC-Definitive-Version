@@ -46,7 +46,9 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro
             btnParametrosCobranca.Enabled = false;
             btnMonitorGnre.Enabled = false;
             btnContasPagarAnalitico.Enabled = false;
+            btnContasPagarRanking.Enabled = false;
             btnContasReceberAnalitico.Enabled = false;
+            btnContasReceberRanking.Enabled = false;
             btnContasRecebidas.Enabled = false;
             btnRecPublicoPrivado.Enabled = false;
 
@@ -95,16 +97,24 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro
 
             //6
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Contas a Pagar") != null)
+            {
                 btnContasPagarAnalitico.Enabled = true;
+                btnContasPagarRanking.Enabled = true;
+            }
 
             //7
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Contas a Receber") != null)
+            {
                 btnContasReceberAnalitico.Enabled = true;
+                btnContasReceberRanking.Enabled = true;
+            }
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Contas Recebidas") != null)
                 btnContasRecebidas.Enabled = true;
             if (PermissionsAllowed.screens?.Find(m => m.Name == "Recebimento Público e Privado") != null)
                 btnRecPublicoPrivado.Enabled = true;          
         }
+
+      
 
 
         /** Configure Form **/
@@ -114,8 +124,8 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro
         }
         private void ConfigureFormEvents()
         {
-            //blocks();
-            //allows();
+            blocks();
+            allows();
 
 
             //Events
@@ -150,16 +160,27 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro
 
             //Pagamentos
             btnContasPagarAnalitico.Click += btnContasPagarAnalitico_Click;
-
+            btnContasPagarRanking.Click += BtnContasPagarRanking_Click;
 
             //Recebimento
             btnContasReceberAnalitico.Click += btnContasReceberAnalitico_Click;
             btnContasRecebidas.Click += btnContasRecebidas_Click;
             btnRecPublicoPrivado.Click += btnRecPublicoPrivado_Click;
-            
+            btnContasReceberRanking.Click += btnContasReceberRanking_Click;
+
+
 
         }
 
+        private void btnContasReceberRanking_Click(object sender, System.EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateForm<frmRecebimento_CarRanking>();
+        }
+
+        private void BtnContasPagarRanking_Click(object sender, System.EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateForm<frmRecPublicoPrivado>();
+        }
         private void btnRecPublicoPrivado_Click(object sender, System.EventArgs e)
         {
             FormConfiguration.ShowOrActivateForm<frmRecPublicoPrivado>();
