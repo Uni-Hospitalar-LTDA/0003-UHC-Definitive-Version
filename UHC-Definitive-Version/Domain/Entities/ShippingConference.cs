@@ -58,7 +58,7 @@ WITH PercentagesCTE_Saida AS (
 		THEN
 				iif (pCity.cityPercentage * NF_Saida.Vlr_TotalNota < pCity.cityMinValue
 				,'Percentual aplicado: '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pCity.cityPercentage*100,2))) + ' % Valor: R$ '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),ROUND(pCity.cityMinValue,2)))
-				,'Percentual aplicado: '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pCity.cityPercentage*100,2)))) +' %'
+				,'Percentual aplicado: '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pCity.cityPercentage*100,2))) +' %')
 		ELSE
 		CASE 
                     WHEN pState.UF = CONVERT(VARCHAR, NF_Saida.Estado) COLLATE SQL_Latin1_General_CP1_CI_AS 
@@ -68,14 +68,12 @@ WITH PercentagesCTE_Saida AS (
 					then
 					iif ((pState.capitalPercentage * NF_Saida.Vlr_TotalNota) < pState.capitalMinPrice
 					     ,'Percentual capital aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2)))+ ' % Valor: R$ ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),ROUND(pState.capitalMinPrice,2)))
-						 ,'Percentual capital aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2))) + ' %'
-						 )                    
+						 ,'Percentual capital aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2))) + ' %')                    
 					when city.capital = 0
 					then
 					iif ((pState.inlandPercentage * NF_Saida.Vlr_TotalNota) < pState.inlandMinPrice
 					     ,'Percentual interior aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2)))+ ' % Valor: R$ ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),ROUND(pState.capitalMinPrice,2)))
-						 ,'Percentual interior aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2))) + ' %'
-						 )                    
+						 ,'Percentual interior aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2))) + ' %')                    
 					END
                 END
 		end
@@ -129,7 +127,7 @@ PercentagesCTE_Entrada AS (
 		THEN
 				iif (pCity.cityPercentage * NF_Entrada.Vlr_Nota < pCity.cityMinValue
 				,'Percentual aplicado: '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pCity.cityPercentage*100,2))) + ' % Valor: R$ '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),ROUND(pCity.cityMinValue,2)))
-				,'Percentual aplicado: '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pCity.cityPercentage*100,2)))) +' %'
+				,'Percentual aplicado: '+CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pCity.cityPercentage*100,2)))+' %') 
 		ELSE
 		CASE 
                     WHEN pState.UF = CONVERT(VARCHAR, NF_Entrada.Cod_UfOrigem) COLLATE SQL_Latin1_General_CP1_CI_AS 
@@ -139,14 +137,12 @@ PercentagesCTE_Entrada AS (
 					then
 					iif ((pState.capitalPercentage * NF_Entrada.Vlr_Nota) < pState.capitalMinPrice
 					     ,'Percentual capital aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2)))+ ' % Valor: R$ ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),ROUND(pState.capitalMinPrice,2)))
-						 ,'Percentual capital aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2))) + ' %'
-						 )                    
+						 ,'Percentual capital aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2)))+ ' %')                    
 					when city.capital = 0
 					then
 					iif ((pState.inlandPercentage * NF_Entrada.Vlr_Nota) < pState.inlandMinPrice
 					     ,'Percentual interior aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2)))+ ' % Valor: R$ ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),ROUND(pState.capitalMinPrice,2)))
-						 ,'Percentual interior aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2))) + ' %'
-						 )                    
+						 ,'Percentual interior aplicado: ' +CONVERT(VARCHAR,CONVERT(NUMERIC(12,2),round(pState.CapitalPercentage*100,2))) + ' %')                    
 					END
                 END
 		end

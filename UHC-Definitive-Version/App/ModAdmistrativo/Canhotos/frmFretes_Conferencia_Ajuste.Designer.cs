@@ -40,6 +40,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.gpbFilters = new System.Windows.Forms.GroupBox();
+            this.btnMoreTransporter = new System.Windows.Forms.Button();
             this.dtpFinalDate = new System.Windows.Forms.DateTimePicker();
             this.dtpInitialDate = new System.Windows.Forms.DateTimePicker();
             this.lblFinalDate = new System.Windows.Forms.Label();
@@ -67,7 +68,7 @@
             this.gpbEdit.Controls.Add(this.btnSave);
             this.gpbEdit.Controls.Add(this.txtEditObservation);
             this.gpbEdit.Controls.Add(this.label3);
-            this.gpbEdit.Location = new System.Drawing.Point(517, 22);
+            this.gpbEdit.Location = new System.Drawing.Point(565, 22);
             this.gpbEdit.Name = "gpbEdit";
             this.gpbEdit.Size = new System.Drawing.Size(274, 181);
             this.gpbEdit.TabIndex = 5;
@@ -143,7 +144,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(717, 413);
+            this.btnClose.Location = new System.Drawing.Point(764, 413);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 6;
@@ -155,11 +156,12 @@
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Location = new System.Drawing.Point(8, 209);
             this.dgvData.Name = "dgvData";
-            this.dgvData.Size = new System.Drawing.Size(783, 198);
+            this.dgvData.Size = new System.Drawing.Size(831, 198);
             this.dgvData.TabIndex = 7;
             // 
             // gpbFilters
             // 
+            this.gpbFilters.Controls.Add(this.btnMoreTransporter);
             this.gpbFilters.Controls.Add(this.dtpFinalDate);
             this.gpbFilters.Controls.Add(this.dtpInitialDate);
             this.gpbFilters.Controls.Add(this.lblFinalDate);
@@ -172,12 +174,22 @@
             this.gpbFilters.Controls.Add(this.lblNF);
             this.gpbFilters.Controls.Add(this.lblTransporter);
             this.gpbFilters.Controls.Add(this.txtTransporterId);
-            this.gpbFilters.Location = new System.Drawing.Point(8, 15);
+            this.gpbFilters.Location = new System.Drawing.Point(8, 22);
             this.gpbFilters.Name = "gpbFilters";
-            this.gpbFilters.Size = new System.Drawing.Size(503, 102);
+            this.gpbFilters.Size = new System.Drawing.Size(551, 102);
             this.gpbFilters.TabIndex = 4;
             this.gpbFilters.TabStop = false;
             this.gpbFilters.Text = "Filtros";
+            // 
+            // btnMoreTransporter
+            // 
+            this.btnMoreTransporter.Location = new System.Drawing.Point(503, 30);
+            this.btnMoreTransporter.Name = "btnMoreTransporter";
+            this.btnMoreTransporter.Size = new System.Drawing.Size(24, 23);
+            this.btnMoreTransporter.TabIndex = 67;
+            this.btnMoreTransporter.Text = "...";
+            this.btnMoreTransporter.UseVisualStyleBackColor = true;
+            this.btnMoreTransporter.Click += new System.EventHandler(this.btnMoreTransporter_Click);
             // 
             // dtpFinalDate
             // 
@@ -285,12 +297,24 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 441);
+            this.ClientSize = new System.Drawing.Size(851, 441);
             this.Controls.Add(this.gpbEdit);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.gpbFilters);
             this.Name = "frmFretes_Conferencia_Ajuste";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Manutenção de Frete";
             this.gpbEdit.ResumeLayout(false);
             this.gpbEdit.PerformLayout();
@@ -327,5 +351,6 @@
         private System.Windows.Forms.Label lblNF;
         private System.Windows.Forms.Label lblTransporter;
         private System.Windows.Forms.TextBox txtTransporterId;
+        private System.Windows.Forms.Button btnMoreTransporter;
     }
 }

@@ -22,10 +22,11 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             InitializeComponent();
 
             //Events
-            ConfigureFormProperties();            
+            ConfigureFormProperties();
             ConfigureButtonsProperties();
             ConfigureTextBoxProperties();
-            this.defaultMainMenu();
+            
+
             //Properties
             ConfigureFormEvents();
         }
@@ -69,7 +70,8 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         {
             try
             {
-                lsbContatcs.Items.Clear();
+                if (lsbContatcs.Items.Count > 0)
+                    lsbContatcs.Items.Clear();
                 foreach (var cntc in contacts)
                     lsbContatcs.Items.Add($"{cntc.idContact} - {cntc.name}");
             }
@@ -80,7 +82,6 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         }
 
         /** Configure Form **/
-
         private void ConfigureFormProperties()
         {
             this.defaultFixedForm();
@@ -91,6 +92,8 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         }
         private void frmCadastroTransportador_Load(object sender, EventArgs e)
         {
+
+            //Events
             ConfigureTextBoxEvents();
             ConfigureButtonsEvents();
         }
@@ -107,7 +110,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             btnRemove.BackColor = Color.FromArgb(230, 135, 142); // Rosa suave
             btnRemove.ForeColor = Color.White; // Texto branco
 
-            btnSave.Visible = false;
+            btnSave.Enabled = false;
 
 
             // btnFechar
@@ -122,6 +125,7 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
 
             btnConfigureStatePercents.Click += btnConfigureStatePercents_Click;
             btnConfigureCityPercents.Click += btnConfigureCityPercents_Click;
+            btnMoreTransporter.Click += btnMoreTransporter_Click;
 
         }
         private void btnConfigureCityPercents_Click(object sender, EventArgs e)
@@ -148,6 +152,12 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             listContacts();
 
         }
+        private void btnMoreTransporter_Click(object sender, EventArgs e)
+        {
+            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
+            frmConsultarTransportador.ShowDialog();
+            txtTransprotador_Codigo.Text = frmConsultarTransportador.extendedCode;
+        }
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             frmGeneric_ConsultaComSelecao consultarContatos = new frmGeneric_ConsultaComSelecao();
@@ -155,16 +165,22 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             consultarContatos.elemento = "Contato";
             consultarContatos.ShowDialog();
             var contact = await Contact.getToClassAsync(consultarContatos.extendedCode);
-            lsbContatcs.Items.Add($"{contact.idContact} - {contact.name}");
-            contacts.Add(contact);
+            if (!string.IsNullOrEmpty(contact.idContact))
+            {
+                lsbContatcs.Items.Add($"{contact.idContact} - {contact.name}");
+                contacts.Add(contact);
+            }
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
             if (CustomNotification.defaultQuestionAlert() == DialogResult.Yes)
             {
-                var contact = contacts.Find(x => x.idContact == lsbContatcs.SelectedItem.ToString().Split('-')[0].Trim().ToString());
-                contacts.Remove(contact);
-                lsbContatcs.Items.Remove(lsbContatcs.SelectedItem);
+                if (contacts.Count > 0 && lsbContatcs.SelectedItem != null)
+                {
+                    var contact = contacts.Find(x => x.idContact == lsbContatcs.SelectedItem.ToString().Split('-')[0].Trim().ToString());
+                    contacts.Remove(contact);
+                    lsbContatcs.Items.Remove(lsbContatcs.SelectedItem);
+                }
             };
 
         }
@@ -211,13 +227,13 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             var txt = (TextBox)sender;
             if (!string.IsNullOrEmpty(txt.Text.Trim()))
             {
-                btnSave.Visible = true;
+                btnSave.Enabled = true;
                 await getContacts();
                 listContacts();
             }
             else
             {
-                btnSave.Visible = false;
+                btnSave.Enabled = false;
                 lsbContatcs.Items.Clear();
             }
         }

@@ -272,7 +272,7 @@ ORDER BY shipping.dat_register DESC";
                         saveFileDialog.FileName = $"{this.Text.substituirCaracteresEspeciais()}_{DateTime.Now.ToString("ddMMyyyy_HHmm")}";
                         saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                         saveFileDialog.RestoreDirectory = true;
-
+                          
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             RunMethodWithProgressBar((progress, cancellationToken) => Exportacao.exportarExcelComContaLinhas(dgvData, saveFileDialog.FileName, progress, cancellationToken));
@@ -285,5 +285,14 @@ ORDER BY shipping.dat_register DESC";
                 }
             }
         }
+
+        private void btnMoreTransporter_Click(object sender, EventArgs e)
+        {
+            frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
+            frmConsultarTransportador.ShowDialog();
+            txtTransporterId.Text = frmConsultarTransportador.extendedCode;
+        }
+
+
     }
 }
