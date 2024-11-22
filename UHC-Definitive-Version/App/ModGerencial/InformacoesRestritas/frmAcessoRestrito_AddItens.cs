@@ -18,8 +18,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         public DateTime dt1 { get; set; }
         public DateTime dt2 { get; set; }
 
-
-
         public frmAcessoRestrito_AddItens()
         {
             InitializeComponent();
@@ -109,13 +107,11 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             txtItemId.TextChanged += txtItemId_TextChanged;
             txtIdCliente.TextChanged += txtIdCliente_TextChanged;
         }
-
         private async void txtIdCliente_TextChanged(object sender, EventArgs e)
         {
             ClienteInnmed ci = await ClienteInnmed.getToClassAsync(txtIdCliente.Text);
             txtCliente.Text = !string.IsNullOrEmpty(ci?.description) ? $@"{ci?.description} ({ci.cnpj.ConvertToCNPJ()})" : string.Empty;
         }
-
         private async void txtItemId_TextChanged(object sender, EventArgs e)
         {
             if (cbxType.SelectedItem.ToString().Contains("Fabricante"))
@@ -172,7 +168,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             frmGeneric_ConsultaComSelecao.ShowDialog();
             txtItemId.Text = frmGeneric_ConsultaComSelecao.extendedCode;
         }
-
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             item = new IqviaRestrictionItens();
@@ -182,7 +177,6 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             Console.WriteLine("Observation: " + item.observation);
             this.Close();
         }
-
         private async void btnMore_Click(object sender, EventArgs e)
         {
             
