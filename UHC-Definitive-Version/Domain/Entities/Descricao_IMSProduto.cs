@@ -70,7 +70,7 @@ namespace UHC3_Definitive_Version.Domain.IMS
                             AND 
 
                               /*Bloqueio secundário por Clientes*/
-                              0 = (IIF(EXISTS(
+                              0 = (IIF(NOT EXISTS(
                                   SELECT 1
                                   FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
                                   JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota
@@ -138,7 +138,7 @@ namespace UHC3_Definitive_Version.Domain.IMS
                             OR 
 
                               /*Bloqueio secundário por Clientes*/
-                              1 = (IIF(EXISTS(
+                              1 = (IIF(NOT EXISTS(
                                   SELECT 1
                                   FROM [DMD].dbo.[NFSIT] iNF_Saida_Itens
                                   JOIN [DMD].dbo.[NFSCB] iNF_Saida ON iNF_Saida.Num_Nota = iNF_Saida_Itens.Num_Nota

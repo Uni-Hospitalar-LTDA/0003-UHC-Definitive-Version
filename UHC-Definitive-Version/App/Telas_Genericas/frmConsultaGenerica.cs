@@ -13,6 +13,7 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
         internal DataTable consulta { get; set; } //Consulta externa                
         BindingSource bindingSource1 = new BindingSource();
 
+        public string extendedCode;
         public frmConsultaGenerica()
         {
             InitializeComponent();
@@ -57,6 +58,49 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
             }
         }
 
+
+        /**Funções dos componentes internos**/
+        private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                pesquisarElementos(txtPesquisar.Text.ToUpper());
+            }
+        }
+        private void dgvData_DoubleClick(object sender, EventArgs e)
+        {
+            if (dgvData.CurrentRow != null)
+            {
+                extendedCode = dgvData.CurrentRow.Cells[0].Value.ToString();
+                //CustomApplication.closeForm();
+            }
+        }
+        private void dgvData_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dgvData.CurrentRow != null)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    extendedCode = dgvData.CurrentRow.Cells[0].Value.ToString();
+                   
+                }
+            }
+        }
+
+        /** Buttons **/
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (dgvData.CurrentRow != null)
+            {
+                extendedCode = dgvData.CurrentRow.Cells[0].Value.ToString();
+            }
+            
+        }
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            pesquisarElementos(txtPesquisar.Text.ToUpper());
+        }
+
         /** Configure Form **/
         private void ConfigureFormProperties()
         {
@@ -74,23 +118,23 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
 
 
             //Events 
-            ConfigureButtonEvents();
-            ConfigureTextBoxEvents();
+            //ConfigureButtonEvents();
+            //ConfigureTextBoxEvents();
         }     
 
         /** TextBox Configuration **/
 
-        private void ConfigureTextBoxEvents()
-        {
-            txtPesquisar.KeyDown += txtPesquisar_KeyDown;
-        }
-        private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                pesquisarElementos(txtPesquisar.Text.ToUpper());
-            }
-        }
+        //private void ConfigureTextBoxEvents()
+        //{
+        //    txtPesquisar.KeyDown += txtPesquisar_KeyDown;
+        //}
+        //private void txtPesquisar_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyData == Keys.Enter)
+        //    {
+        //        pesquisarElementos(txtPesquisar.Text.ToUpper());
+        //    }
+        //}
 
 
         /** DataGridView Configuration **/
@@ -101,18 +145,19 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
         }      
 
         /** Button Configuration **/
-        private void ConfigureButtonEvents()
-        {            
-            btnPesquisar.Click += btnPesquisar_Click;
-        }
+        //private void ConfigureButtonEvents()
+        //{            
+        //    btnPesquisar.Click += btnPesquisar_Click;
+        //}
         private void ConfigureButtonProperties()
         {
             btnFechar.toDefaultCloseButton();
         }
-        private void btnPesquisar_Click(object sender, EventArgs e)
-        {
-            pesquisarElementos(txtPesquisar.Text.ToUpper());
-        }
+        
+        //private void btnPesquisar_Click(object sender, EventArgs e)
+        //{
+        //    pesquisarElementos(txtPesquisar.Text.ToUpper());
+        //}
 
         /** Menu Strip Configuration **/
         private void ConfigureMenuStripProperties()
