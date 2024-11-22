@@ -14,6 +14,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.Pagamentos
     public partial class frmRankingContasPagar : CustomForm
     {
         /** Instance **/
+        CustomMenuStrip menuStrip = new CustomMenuStrip();
         List<Consulta> rankingContasPagar = new List<Consulta>();
         internal class Consulta : Querys<Consulta>
         {
@@ -63,17 +64,20 @@ ORDER BY
         }
 
 
-
-
         public frmRankingContasPagar()
         {
             InitializeComponent();
+
+            //Properties 
             ConfigureFormProperties();
             ConfigureDateTimePickerProperties();
             ConfigureTextBoxProperties();
-            ConfigureFormEvents();
+            ConfigureMenuStripProperties();
             ConfiguraPropriedadesGrid(dgvData);
-            ConfigureButtonsEvents();
+
+            //Events
+            ConfigureFormEvents();
+            
 
             //btnFechar.toDefaultCloseButton();
         }
@@ -126,8 +130,7 @@ ORDER BY
                 dgvData.Rows.Add(++x, Convert.ToInt32(item.codigoEntidade), item.descricaoEntidade, item.tipoEntidade, $"{Convert.ToDouble(item.valorPrincipal):C2}");
             }
             dgvData.AutoResizeColumns();
-        }
-       
+        }       
         private void adicionarItensNaBox(List<Consulta> consulta)
         {
             var values = new ChartValues<ObservableValue>();
@@ -155,23 +158,31 @@ ORDER BY
         /** Form Configuration **/
         private void ConfigureFormProperties()
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.defaultMaximableForm();
         }
         private void ConfigureFormEvents()
         {
-            this.Load += this.frmRankingContasPagar_Load;
+            this.Load += frmRankingContasPagar_Load;
+            this.KeyDown += frmRankingContasPagar_KeyDown;
         }
-        private async void frmRankingContasPagar_Load(object sender, EventArgs e)
+        private void frmRankingContasPagar_KeyDown(object sender, KeyEventArgs e)
         {
-            ConfigureDateTimePickerAttributes();
-            await filter();
-
-
-
-            ConfigureStripMenuEvents();
+            if (Keys.Enter == e.KeyData)
+            {
+                btnPesquisar_Click(null, null);
+            }
         }
+        private void frmRankingContasPagar_Load(object sender, EventArgs e)
+        {
+            //Pre events
+            ConfigureDateTimePickerAttributes();
+            
+            //Events
+            ConfigureButtonsEvents();
 
+            //Post events
+            btnPesquisar_Click(null,null);
+        }
 
         /** Configure TextBox **/
         private void ConfigureTextBoxProperties()
@@ -191,62 +202,7 @@ ORDER BY
             txtVlrTotal.BackColor = Color.ForestGreen;
            
         }
-
-        /** Configure StripMenu **/
-        private void ConfigureStripMenuEvents()
-        {
-            exportar_excelToolStripMenuItem.Click += exportar_excelToolStripMenuItem_Click;
-            exportar_jsonToolStripMenuItem1.Click += exportar_jsonToolStripmenuItem_Click;            
-            exportar_xmlToolStripMenuItem.Click += exportar_xmlToolStripMenuItem_Click;
-            abrir_ExcelToolStripMenuItem.Click += abrir_excelToolStripMenuItem_Click;
-        }
-
-        private void exportar_excelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dgvData.Rows.Count > 0)
-            {
-                //this.Cursor = Cursors.WaitCursor;
-                try
-                {
-                    if (dgvData.Rows.Count > 0)
-                    {
-                        SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.Filter = "Excel File|*.xlsx";
-                        saveFileDialog.Title = "Save Excel File";
-                        saveFileDialog.FileName = $"_{DateTime.Now.ToString("ddMMyyyy_HHmm")}";
-                        saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                        saveFileDialog.RestoreDirectory = true;
-
-                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            RunMethodWithProgressBar((progress, cancellationToken) => Exportacao.exportarExcelComSoma(dgvData, saveFileDialog.FileName, progress, cancellationToken));
-                        }
-                    }
-                }
-                catch (OperationCanceledException)
-                {
-
-                }
-            }
-        }
-
-        private void exportar_jsonToolStripmenuItem_Click(object sender, EventArgs e)
-        {
-            Exportacao.toJson(dgvData, $"_{DateTime.Now.ToString("ddMMyyyy_HHmm")}");
-        }
-        private void exportar_xmlToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Exportacao.toXml(dgvData, $"_{DateTime.Now.ToString("ddMMyyyy_HHmm")}");
-        }
-
-
-        private void abrir_excelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (dgvData.Rows.Count > 0)
-                Exportacao.abrirDataGridViewEmExcel(dgvData);
-        }
-        
-
+                       
         /** Configure DateTimePicker **/
         private void ConfigureDateTimePickerProperties()
         {
@@ -262,15 +218,73 @@ ORDER BY
         }
 
 
+        /** Button Configuration **/                
+        private void ConfigureButtonsEvents()
+        {
+            btnPesquisar.Click += btnPesquisar_Click;
+        }
         private async void btnPesquisar_Click(object sender, EventArgs e)
         {
             await filter();
         }
-
-        
-        private void ConfigureButtonsEvents()
+       
+        /** Menu Strip Configuration **/
+        private void ConfigureMenuStripProperties()
         {
-            btnPesquisar.Click += btnPesquisar_Click;
+            CustomToolStripMenuItem menuArquivo = new CustomToolStripMenuItem("Arquivo");
+            CustomToolStripMenuItem itemArquivoAbrir = new CustomToolStripMenuItem("Abrir");
+            CustomToolStripMenuItem itemArquivoAbrirExcel = new CustomToolStripMenuItem("Excel");
+            CustomToolStripMenuItem itemArquivoExportar = new CustomToolStripMenuItem("Exportar");
+            CustomToolStripMenuItem itemArquivoExportarExcel = new CustomToolStripMenuItem("Excel");
+
+
+            itemArquivoAbrirExcel.Click += ItemArquivoAbrirExcel_Click;
+            itemArquivoExportarExcel.Click += ItemArquivoExportarExcel_Click;
+
+            // Adicionando o item 'Empresa' e seu evento de clique
+
+            menuArquivo.DropDownItems.Add(itemArquivoAbrir);
+            menuArquivo.DropDownItems.Add(itemArquivoExportar);
+            itemArquivoAbrir.DropDownItems.Add(itemArquivoAbrirExcel);
+            itemArquivoExportar.DropDownItems.Add(itemArquivoExportarExcel);
+
+            // Adiciona o menuConfiguracao ao menu principal
+            menuStrip.Items.Add(menuArquivo);
+            this.Controls.Add(menuStrip);
+
+        }
+        private void ItemArquivoAbrirExcel_Click(object sender, EventArgs e)
+        {
+            Exportacao.abrirDataGridViewEmExcel(dgvData);
+        }
+        private void ItemArquivoExportarExcel_Click(object sender, EventArgs e)
+        {
+            if (dgvData.Rows.Count > 0)
+            {
+
+                //this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    if (dgvData.Rows.Count > 0)
+                    {
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "Excel File|*.xlsx";
+                        saveFileDialog.Title = "Save Excel File";
+                        saveFileDialog.FileName = $"{this.Text.substituirCaracteresEspeciais()}_{DateTime.Now.ToString("ddMMyyyy_HHmm")}";
+                        saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        saveFileDialog.RestoreDirectory = true;
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            RunMethodWithProgressBar((progress, cancellationToken) => Exportacao.exportarExcelComContaLinhas(dgvData, saveFileDialog.FileName, progress, cancellationToken));
+                        }
+                    }
+                }
+                catch (OperationCanceledException)
+                {
+
+                }
+            }
         }
     }
 }

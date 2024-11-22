@@ -528,6 +528,12 @@
     <Compile Include="App\ModFinanceiro\Pagamentos\frmContasPagar.Designer.cs">
       <DependentUpon>frmContasPagar.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModFinanceiro\Pagamentos\frmRankingContasPagar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Pagamentos\frmRankingContasPagar.Designer.cs">
+      <DependentUpon>frmRankingContasPagar.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModFinanceiro\Recebimento\frmContasReceber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1233,6 +1239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModFinanceiro\Pagamentos\frmContasPagar.resx">
       <DependentUpon>frmContasPagar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Pagamentos\frmRankingContasPagar.resx">
+      <DependentUpon>frmRankingContasPagar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmContasReceber.resx">
       <DependentUpon>frmContasReceber.cs</DependentUpon>
