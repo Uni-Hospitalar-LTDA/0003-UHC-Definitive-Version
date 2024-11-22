@@ -164,7 +164,11 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             }
             else if (item.Type == "Nota")
             {
-                dgvData.Rows.Add("x", item.Type, (await NotaFiscalInnmed.getToClassAsync(item.KeyItem)).numero);
+                dgvData.Rows.Add("x", item.Type, (await NotaFiscalInnmed.getToClassAsync(item.KeyItem,dtpInitialDate.Value,dtpFinalDate.Value)).numero);
+            }
+            else if (item.Type == "Cfop")
+            {
+                dgvData.Rows.Add("x", item.Type, (await CfopInnmed.getToClassAsync(item.KeyItem)).codigo);
             }
             else if (item.Type == "Grupo de Cliente")
             {

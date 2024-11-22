@@ -61,9 +61,16 @@ namespace UHC3_Definitive_Version.App.ModGerencial
         }
         private void ConfigureFormEvents()
         {
-            blocks();
-            allows();
+            this.Load += frmModGerencial_Load;
 
+
+            
+        }
+
+        private void frmModGerencial_Load(object sender, EventArgs e)
+        {
+            //blocks();
+            //allows();
 
             //Events
             ConfigureButtonsEvents();

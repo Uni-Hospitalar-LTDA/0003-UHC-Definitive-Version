@@ -1142,6 +1142,7 @@
     <Compile Include="Domain\Entities\IMSCliente.cs" />
     <Compile Include="Domain\Entities\IMSProduto.cs" />
     <Compile Include="Domain\Entities\IMSVendas.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\CfopInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\ClienteInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Clientes_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\FabricanteInnmed.cs" />

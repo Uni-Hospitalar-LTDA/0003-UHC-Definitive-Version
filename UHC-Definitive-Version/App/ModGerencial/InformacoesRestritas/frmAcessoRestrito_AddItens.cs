@@ -141,10 +141,16 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             }
             else if (cbxType.SelectedItem.ToString().Contains("Nota"))
             {
-                NotaFiscalInnmed nfi = await NotaFiscalInnmed.getToClassAsync(txtItemId.Text);
+                NotaFiscalInnmed nfi = await NotaFiscalInnmed.getToClassAsync(txtItemId.Text,dt1,dt2);
                 ClienteInnmed nfci = await ClienteInnmed.getToClassAsync(nfi.idCliente);
                 txtItemDescription.Text = !string.IsNullOrEmpty(nfci.description) ? $@"{nfci.description} ({nfci.cnpj.ConvertToCNPJ()})" : string.Empty;
-            }           
+            }
+            else if (cbxType.SelectedItem.ToString().ToUpper().Contains("Cfop".ToUpper()))
+            {
+                CfopInnmed CFOP = await CfopInnmed.getToClassAsync(txtItemId.Text);
+                
+                txtItemDescription.Text = !string.IsNullOrEmpty(CFOP.description) ? $@"{CFOP.description}" : string.Empty;
+            }
         }
 
         /** Button Configuration **/
@@ -215,15 +221,23 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                 frmGeneric_ConsultaComSelecao.ShowDialog();
                 txtItemId.Text = frmGeneric_ConsultaComSelecao.extendedCode;
             }
-            
+            else if (cbxType.SelectedItem.ToString().ToUpper().Contains("Cfop".ToUpper()))
+            {
+                frmGeneric_ConsultaComSelecao frmGeneric_ConsultaComSelecao = new frmGeneric_ConsultaComSelecao();
+                frmGeneric_ConsultaComSelecao.consulta = await CfopInnmed.getAllToDataTableAsync();
+                frmGeneric_ConsultaComSelecao.ShowDialog();
+                txtItemId.Text = frmGeneric_ConsultaComSelecao.extendedCode;
+            }
+
 
         }
 
         /** ComboBox Configuration **/
         private void ConfigureComboBoxAttributes()
         {
-            cbxType.Items.AddRange(new object[] {"Fabricante","Fabricante + Esfera","Produto","Produto + Esfera","Produto + Cliente","Cliente","Nota","Grupo de Cliente", "Grupo de Cliente + Esfera", "Esfera" });
+            cbxType.Items.AddRange(new object[] {"Fabricante","Fabricante + Esfera","Produto","Produto + Esfera","Produto + Cliente","Cliente","Nota","Cfop","Grupo de Cliente", "Grupo de Cliente + Esfera", "Esfera" });
             cbxEsfera.Items.AddRange(new object[] { "Público", "Privado" });
+            cbxType.SelectedIndex = 0;
         }
         private void ConfigureComboBoxProperties()
         {
