@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC3_Definitive_Version.Configuration;
@@ -14,6 +16,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         CustomMenuStrip menuStrip = new CustomMenuStrip();
         internal int id { get; set; }
         internal DateTime dt { get; set; }
+        BindingSource bindingSource1 = new BindingSource();
+
 
         public frmAcessoRestrito_HistoricoDetalhado_LayoutVendas()
         {
@@ -31,25 +35,51 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
         /** Async Tasks **/
         private async Task getData()
-
         {
-            dgvData.DataSource = await IqviaLayout.getLayoutVendasAsync(dt, 1, id);
-            txtQtdLinhas.Text = dgvData.Rows.Count.ToString();
+            // Obter os dados
+            DataTable dta = await IqviaLayout.getLayoutVendasAsync(dt, 1, id);
+
+            // Configurar o BindingSource
+            bindingSource1.DataSource = dta;
+
+            // Vincular o BindingSource ao DataGridView
+            dgvData.DataSource = bindingSource1;
+
+            // Atualizar a contagem de linhas
+            txtQtdLinhas.Text = dta.Rows.Count.ToString();
+
+            // Ajustar as colunas automaticamente
             dgvData.AutoResizeColumns();
+
+            // Atualizar os totais
+            UpdateSums();
+        }
+        private void UpdateSums()
+        {
             int sum = 0;
             int sumBloq = 0;
-            foreach (DataGridViewRow _row in dgvData.Rows)
+
+            // Acessa os dados visíveis no BindingSource
+            foreach (DataRowView rowView in bindingSource1.List)
             {
-                
-                    sum += Convert.ToInt32(_row.Cells["qtd"].Value);
-                if (string.IsNullOrEmpty(_row.Cells["bloqueio"].Value?.ToString()))
+                DataRow row = rowView.Row;
+
+                if (int.TryParse(row["qtd"]?.ToString(), out int qtd))
                 {
-                    sumBloq += Convert.ToInt32(_row.Cells["qtd"].Value); 
+                    sum += qtd;
+
+                    if (string.IsNullOrEmpty(row["bloqueio"]?.ToString()))
+                    {
+                        sumBloq += qtd;
+                    }
                 }
             }
+
+            // Atualiza os valores nos TextBoxes
             txtTotalVendas.Text = sum.ToString("N0");
             txtVendasSemBloq.Text = sumBloq.ToString("N0");
         }
+
 
         /** Form Configuration **/
         private void ConfigureFormProperties()
@@ -94,23 +124,36 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string filtro = txtFiltroGenerico.Text.Trim().ToLower(); // Texto digitado no TextBox
-            foreach (DataGridViewRow row in dgvData.Rows)
-            {
-                bool visivel = false;
+            string filtro = txtFiltroGenerico.Text.Trim();
 
-                foreach (DataGridViewCell cell in row.Cells)
+            if (string.IsNullOrWhiteSpace(filtro))
+            {
+                // Remove o filtro caso o texto esteja vazio
+                bindingSource1.RemoveFilter();
+            }
+            else
+            {
+                // Constrói o filtro para o BindingSource
+                StringBuilder filter = new StringBuilder();
+
+                // Obtém o DataTable vinculado ao BindingSource
+                DataTable dt = (DataTable)bindingSource1.DataSource;
+
+                for (int i = 0; i < dt.Columns.Count; i++)
                 {
-                    if (cell.Value != null && cell.Value.ToString().ToLower().Contains(filtro))
-                    {
-                        visivel = true; // Encontrou um valor que corresponde ao filtro
-                        break;
-                    }
+                    if (filter.Length > 0) filter.Append(" OR ");
+                    // Adiciona a condição para cada coluna
+                    filter.AppendFormat("Convert([{0}], 'System.String') LIKE '%{1}%'", dt.Columns[i].ColumnName, filtro.Replace("'", "''"));
                 }
 
-                row.Visible = visivel; // Mostra ou oculta a linha
+                // Aplica o filtro
+                bindingSource1.Filter = filter.ToString();
             }
+
+            // Atualiza os cálculos após aplicar o filtro
+            UpdateSums();
         }
+
 
         /** DataGridView Configuration **/
         private void ConfigureDataGridViewProperties()

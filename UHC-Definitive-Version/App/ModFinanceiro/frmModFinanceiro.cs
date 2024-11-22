@@ -179,7 +179,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro
 
         private void BtnContasPagarRanking_Click(object sender, System.EventArgs e)
         {
-            FormConfiguration.ShowOrActivateForm<frmRecPublicoPrivado>();
+            FormConfiguration.ShowOrActivateForm<frmRankingContasPagar>();
         }
         private void btnRecPublicoPrivado_Click(object sender, System.EventArgs e)
         {

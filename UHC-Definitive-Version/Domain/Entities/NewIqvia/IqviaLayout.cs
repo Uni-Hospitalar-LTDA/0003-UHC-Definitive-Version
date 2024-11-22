@@ -16,7 +16,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
     public class IqviaLayout : Querys<IqviaLayout>
     {
         public string NotaFiscal { get; set; }
-        public string bloqueio { get; set; }
+        public string Bloqueio { get; set; }
         public string DatEmissao { get; set; }
         public string CFOP { get; set; }
         public string EntSai { get; set; }
@@ -37,171 +37,183 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         private static string getBaseQuery(DateTime dt, int bloqueio = 1, int id = 0 )
         {
             return $@"  DECLARE @DATE DATE = '{dt.ToString("yyyyMMdd")}';
-                        DECLARE @BLOQUEIO INT = {bloqueio};
-                        DECLARE @ID INT ={id};
-                        WITH Sellout AS (
-                            SELECT
-                                NF_Saida.Num_Nota		AS NotaFiscal,
-                                NF_Saida.Dat_Emissao	AS DatEmissao,
-                                Cfop.Codigo				AS CFOP,
-                                Cfop.Tip_EntSai			AS EntSai,
-                                Cfop.Tip_NotFis			AS Tip_NotFis,
-                                Fabricante.Codigo		AS idFabricante,
-                                Fabricante.Fantasia		AS Fabricante,
-                                Produto.Codigo			AS idProduto,
-                                Produto.Descricao		AS Produto,
-                                Produto.Cod_EAN			AS eanProduto,
-                                NF_Saida_Itens.Qtd_Produto AS Qtd,
-                                Cliente.Codigo			AS idCliente,
-                                Cliente.Razao_Social	AS Cliente,
-                                Cliente.Cgc_Cpf			AS Cnpj,
-                                GrupoCliente.Cod_GrpCli AS idGrupoCliente,
-                                GrupoCliente.Des_GrpCli AS GrupoCliente,
-                                IIF(Cliente.Tipo_Consumidor IN ('P','E','M'), 'Público', 'Privado') AS Esfera
-                            FROM [{Connection.dbDMD}].dbo.[NFSCB] NF_Saida
-                            JOIN [{Connection.dbDMD}].dbo.[NFSIT] NF_Saida_Itens ON NF_Saida.Num_Nota = NF_Saida_Itens.Num_Nota
-                            JOIN [{Connection.dbDMD}].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
-                            JOIN [{Connection.dbDMD}].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
-                            JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente	
-                            JOIN [{Connection.dbDMD}].dbo.[GRCLI] GrupoCliente ON GrupoCliente.Cod_GrpCli = Cliente.Cod_GrpCli 
-                            JOIN [{Connection.dbDMD}].dbo.[TBCFO] Cfop ON Cfop.Codigo = NF_Saida.Cod_Cfo1
-                            WHERE NF_Saida.STATUS = 'F'
-                              AND NF_Saida.Dat_Emissao = @DATE
-                        ),
-                        
-                        Sellin AS (
-                            SELECT
-                                NF_Entrada.Numero		AS NotaFiscal,
-                                NF_Entrada.Dat_Emissao	AS DatEmissao,
-                                Cfop.Codigo				AS CFOP,
-                                Cfop.Tip_EntSai			AS EntSai,
-                                Cfop.Tip_NotFis			AS Tip_NotFis,
-                                Fabricante.Codigo		AS idFabricante,
-                                Fabricante.Fantasia		AS Fabricante,
-                                Produto.Codigo			AS idProduto,
-                                Produto.Descricao		AS Produto,
-                                Produto.Cod_EAN			AS eanProduto,
-                                NF_Entrada_Itens.Qtd_Pedido AS Qtd,
-                                Cliente.Codigo			AS idCliente,
-                                Cliente.Razao_Social	AS Cliente,
-                                Cliente.Cgc_Cpf			AS Cnpj,
-                                GrupoCliente.Cod_GrpCli AS idGrupoCliente,
-                                GrupoCliente.Des_GrpCli AS GrupoCliente,
-                                IIF(ISNULL(Cliente.Tipo_Consumidor,'F') IN ('P','E','M'), 'Público', 'Privado') AS Esfera
-                            FROM [{Connection.dbDMD}].dbo.[NFECB] NF_Entrada
-                            JOIN [{Connection.dbDMD}].dbo.[NFEIT] NF_Entrada_Itens ON NF_Entrada.Protocolo = NF_Entrada_Itens.Protocolo
-                            JOIN [{Connection.dbDMD}].dbo.[PRODU] Produto ON Produto.Codigo = NF_Entrada_Itens.Cod_Produto
-                            JOIN [{Connection.dbDMD}].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
-                            JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Entrada.Cod_EmiCliente
-                            JOIN [{Connection.dbDMD}].dbo.[GRCLI] GrupoCliente ON GrupoCliente.Cod_GrpCli = Cliente.Cod_GrpCli
-                            JOIN [{Connection.dbDMD}].dbo.[TBCFO] Cfop ON Cfop.Codigo = NF_Entrada.Cod_Cfo
-                            WHERE NF_Entrada.STATUS = 'F'
-                              AND NF_Entrada.Dat_Emissao = @DATE
-                        ),
-                        
-                        InOut AS (
-                            SELECT * FROM Sellin
-                            UNION ALL
-                            SELECT * FROM Sellout
-                        )
-                        
-                        /** Consulta para registros sem bloqueio **/
-                        SELECT 
-                            InOut.NotaFiscal,
-                            NULL AS Bloqueio,
-                            CONVERT(DATE, InOut.DatEmissao) AS DatEmissao,
-                            InOut.CFOP,
-                            InOut.EntSai,
-                            InOut.Tip_NotFis,
-                            InOut.idFabricante,
-                            InOut.Fabricante,
-                            InOut.idProduto,
-                            InOut.Produto,
-                            InOut.eanProduto,
-                            InOut.Qtd,
-                            InOut.idCliente,
-                            InOut.Cliente,
-                            InOut.Cnpj,
-                            InOut.idGrupoCliente,
-                            InOut.GrupoCliente,
-                            InOut.Esfera
-                        FROM InOut
-                        LEFT JOIN [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] rest 
-                            ON 							
-							(InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
-                            AND rest.Status = @BLOQUEIO AND @BLOQUEIO = 1
-							AND @ID =0
-							) OR 
-							(@ID != 0 AND rest.Id IN (SELECT logi.idIqviaRestriction FROM {Connection.dbBase}.dbo.{LogIqvia_IqviaRestriction.getClassName()} logi WHERE logi.idLogIqvia = @ID))
-                        WHERE rest.id IS NULL
-                            OR NOT EXISTS (
-                                SELECT 1 
-                                FROM [{Connection.dbBase}].dbo.[{IqviaRestrictionItens.getClassName()}] subItem
-                                JOIN [{Connection.dbBase}].dbo.[{IqviaRestriction_IqviaRestrictionItens.getClassName()}] RI ON RI.idIqviaRestrictionItens = subItem.Id
-                                WHERE ri.idIqviaRestriction = rest.id
-                                  AND (
-                                    (subItem.type = 'Fabricante' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante)) OR
-                                    (subItem.type = 'Fabricante + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante) + ',' + InOut.Esfera) OR
-                                    (subItem.type = 'Produto' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto)) OR
-                                    (subItem.type = 'Produto + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + InOut.Esfera) OR
-                                    (subItem.type = 'Produto + Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + CONVERT(NVARCHAR(100), InOut.idCliente)) OR
-                                    (subItem.type = 'Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idCliente)) OR
-                                    (subItem.type = 'Nota' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.NotaFiscal)) OR
-                                    (subItem.type = 'Grupo de Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente)) OR
-                                    (subItem.type = 'Grupo de Cliente + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente) + ',' + InOut.Esfera) OR
-                                    (subItem.type = 'CFOP' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.CFOP))
-                                  )
-                            )
-                        
-                        UNION ALL
-                        
-                        /** Consulta para registros com bloqueio **/
-                        SELECT 
-                            InOut.NotaFiscal,
-                            'Restrição: ' + rest.Description AS Bloqueio,
-                            CONVERT(DATE, InOut.DatEmissao) AS DatEmissao,
-                            InOut.CFOP,
-                            InOut.EntSai,
-                            InOut.Tip_NotFis,
-                            InOut.idFabricante,
-                            InOut.Fabricante,
-                            InOut.idProduto,
-                            InOut.Produto,
-                            InOut.eanProduto,
-                            InOut.Qtd,
-                            InOut.idCliente,
-                            InOut.Cliente,
-                            InOut.Cnpj,
-                            InOut.idGrupoCliente,
-                            InOut.GrupoCliente,
-                            InOut.Esfera
-                        FROM InOut
-                        JOIN [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] rest 
-                            ON 							
-							(InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
-                            AND rest.Status = @BLOQUEIO AND @BLOQUEIO = 1
-							AND @ID =0
-							) OR 
-							(@ID != 0 AND rest.Id IN (SELECT logi.idIqviaRestriction FROM {Connection.dbBase}.dbo.{LogIqvia_IqviaRestriction.getClassName()} logi WHERE logi.idLogIqvia = @ID))                        
-                        WHERE EXISTS (
-                            SELECT 1 
-                            FROM [{Connection.dbBase}].DBO.[{IqviaRestrictionItens.getClassName()}] subItem
-                            JOIN [{Connection.dbBase}].DBO.[{IqviaRestriction_IqviaRestrictionItens.getClassName()}] RI ON RI.idIqviaRestrictionItens = subItem.Id
-                            WHERE ri.idIqviaRestriction = rest.id
-                              AND (
-                                (subItem.type = 'Fabricante' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante)) OR
-                                (subItem.type = 'Fabricante + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante) + ',' + InOut.Esfera) OR
-                                (subItem.type = 'Produto' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto)) OR
-                                (subItem.type = 'Produto + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + InOut.Esfera) OR
-                                (subItem.type = 'Produto + Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + CONVERT(NVARCHAR(100), InOut.idCliente)) OR
-                                (subItem.type = 'Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idCliente)) OR
-                                (subItem.type = 'Nota' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.NotaFiscal)) OR
-                                (subItem.type = 'Grupo de Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente)) OR
-                                (subItem.type = 'Grupo de Cliente + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente) + ',' + InOut.Esfera) OR
-                                (subItem.type = 'CFOP' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.CFOP))
-                              )
-                        )
-                        ORDER BY NotaFiscal ASC;";
+DECLARE @BLOQUEIO INT = {bloqueio};
+DECLARE @ID INT = {id};
+
+WITH Sellout AS (
+    SELECT
+        NF_Saida.Num_Nota AS NotaFiscal,
+        NF_Saida.Dat_Emissao AS DatEmissao,
+        Cfop.Codigo AS CFOP,
+        Cfop.Tip_EntSai AS EntSai,
+        Cfop.Tip_NotFis AS Tip_NotFis,
+        Fabricante.Codigo AS idFabricante,
+        Fabricante.Fantasia AS Fabricante,
+        Produto.Codigo AS idProduto,
+        Produto.Descricao AS Produto,
+        Produto.Cod_EAN AS eanProduto,
+        NF_Saida_Itens.Qtd_Produto AS Qtd,
+        Cliente.Codigo AS idCliente,
+        Cliente.Razao_Social AS Cliente,
+        Cliente.Cgc_Cpf AS Cnpj,
+        GrupoCliente.Cod_GrpCli AS idGrupoCliente,
+        GrupoCliente.Des_GrpCli AS GrupoCliente,
+        IIF(Cliente.Tipo_Consumidor IN ('P','E','M'), 'Público', 'Privado') AS Esfera
+    FROM [{Connection.dbDMD}].dbo.[NFSCB] NF_Saida
+    JOIN [{Connection.dbDMD}].dbo.[NFSIT] NF_Saida_Itens ON NF_Saida.Num_Nota = NF_Saida_Itens.Num_Nota
+    JOIN [{Connection.dbDMD}].dbo.[PRODU] Produto ON Produto.Codigo = NF_Saida_Itens.Cod_Produto
+    JOIN [{Connection.dbDMD}].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
+    JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
+    JOIN [{Connection.dbDMD}].dbo.[GRCLI] GrupoCliente ON GrupoCliente.Cod_GrpCli = Cliente.Cod_GrpCli
+    JOIN [{Connection.dbDMD}].dbo.[TBCFO] Cfop ON Cfop.Codigo = NF_Saida.Cod_Cfo1
+    WHERE NF_Saida.STATUS = 'F'
+      AND NF_Saida.Dat_Emissao = @DATE
+),
+
+Sellin AS (
+    SELECT
+        NF_Entrada.Numero AS NotaFiscal,
+        NF_Entrada.Dat_Emissao AS DatEmissao,
+        Cfop.Codigo AS CFOP,
+        Cfop.Tip_EntSai AS EntSai,
+        Cfop.Tip_NotFis AS Tip_NotFis,
+        Fabricante.Codigo AS idFabricante,
+        Fabricante.Fantasia AS Fabricante,
+        Produto.Codigo AS idProduto,
+        Produto.Descricao AS Produto,
+        Produto.Cod_EAN AS eanProduto,
+        NF_Entrada_Itens.Qtd_Pedido AS Qtd,
+        Cliente.Codigo AS idCliente,
+        Cliente.Razao_Social AS Cliente,
+        Cliente.Cgc_Cpf AS Cnpj,
+        GrupoCliente.Cod_GrpCli AS idGrupoCliente,
+        GrupoCliente.Des_GrpCli AS GrupoCliente,
+        IIF(ISNULL(Cliente.Tipo_Consumidor,'F') IN ('P','E','M'), 'Público', 'Privado') AS Esfera
+    FROM [{Connection.dbDMD}].dbo.[NFECB] NF_Entrada
+    JOIN [{Connection.dbDMD}].dbo.[NFEIT] NF_Entrada_Itens ON NF_Entrada.Protocolo = NF_Entrada_Itens.Protocolo
+    JOIN [{Connection.dbDMD}].dbo.[PRODU] Produto ON Produto.Codigo = NF_Entrada_Itens.Cod_Produto
+    JOIN [{Connection.dbDMD}].dbo.[FABRI] Fabricante ON Fabricante.Codigo = Produto.Cod_Fabricante
+    JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Entrada.Cod_EmiCliente
+    JOIN [{Connection.dbDMD}].dbo.[GRCLI] GrupoCliente ON GrupoCliente.Cod_GrpCli = Cliente.Cod_GrpCli
+    JOIN [{Connection.dbDMD}].dbo.[TBCFO] Cfop ON Cfop.Codigo = NF_Entrada.Cod_Cfo
+    WHERE NF_Entrada.STATUS = 'F'
+      AND NF_Entrada.Dat_Emissao = @DATE
+),
+
+InOut AS (
+    SELECT * FROM Sellin
+    UNION ALL
+    SELECT * FROM Sellout
+)
+
+SELECT DISTINCT
+    InOut.NotaFiscal,
+    NULL AS Bloqueio,
+    CONVERT(DATE, InOut.DatEmissao) AS DatEmissao,
+    InOut.CFOP,
+    InOut.EntSai,
+    InOut.Tip_NotFis,
+    InOut.idFabricante,
+    InOut.Fabricante,
+    InOut.idProduto,
+    InOut.Produto,
+    InOut.eanProduto,
+    InOut.Qtd,
+    InOut.idCliente,
+    InOut.Cliente,
+    InOut.Cnpj,
+    InOut.idGrupoCliente,
+    InOut.GrupoCliente,
+    InOut.Esfera
+FROM InOut
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] rest
+    JOIN [{Connection.dbBase}].dbo.[{IqviaRestrictionItens.getClassName()}] subItem ON subItem.Id IN (
+        SELECT RI.idIqviaRestrictionItens
+        FROM [{Connection.dbBase}].dbo.[{IqviaRestriction_IqviaRestrictionItens.getClassName()}] RI
+        WHERE RI.idIqviaRestriction = rest.Id
+    )
+    WHERE (
+        (InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
+        AND rest.Status = @BLOQUEIO AND @BLOQUEIO = 1
+        AND @ID = 0)
+        OR
+        (rest.Id IN (
+            SELECT logi.idIqviaRestriction
+            FROM [{Connection.dbBase}].dbo.[{LogIqvia_IqviaRestriction.getClassName()}] logi
+            WHERE logi.idLogIqvia = @ID
+        ))
+    )
+    AND (
+        (subItem.type = 'Fabricante' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante)) OR
+        (subItem.type = 'Fabricante + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante) + ',' + InOut.Esfera) OR
+        (subItem.type = 'Produto' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto)) OR
+        (subItem.type = 'Produto + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + InOut.Esfera) OR
+        (subItem.type = 'Produto + Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + CONVERT(NVARCHAR(100), InOut.idCliente)) OR
+        (subItem.type = 'Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idCliente)) OR
+        (subItem.type = 'Nota' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.NotaFiscal)) OR
+        (subItem.type = 'Grupo de Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente)) OR
+        (subItem.type = 'Grupo de Cliente + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente) + ',' + InOut.Esfera) OR
+        (subItem.type = 'CFOP' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.CFOP))
+    )
+)
+
+UNION ALL
+
+SELECT DISTINCT
+    InOut.NotaFiscal,
+    'Restrição: ' + rest.Description AS Bloqueio,
+    CONVERT(DATE, InOut.DatEmissao) AS DatEmissao,
+    InOut.CFOP,
+    InOut.EntSai,
+    InOut.Tip_NotFis,
+    InOut.idFabricante,
+    InOut.Fabricante,
+    InOut.idProduto,
+    InOut.Produto,
+    InOut.eanProduto,
+    InOut.Qtd,
+    InOut.idCliente,
+    InOut.Cliente,
+    InOut.Cnpj,
+    InOut.idGrupoCliente,
+    InOut.GrupoCliente,
+    InOut.Esfera
+FROM InOut
+JOIN [{Connection.dbBase}].dbo.[{IqviaRestriction.getClassName()}] rest
+    ON (
+        (InOut.DatEmissao BETWEEN rest.InitialDate AND rest.FinalDate
+        AND rest.Status = @BLOQUEIO AND @BLOQUEIO = 1
+        AND @ID = 0)
+        OR
+        (rest.Id IN (
+            SELECT logi.idIqviaRestriction
+            FROM [{Connection.dbBase}].dbo.[{LogIqvia_IqviaRestriction.getClassName()}] logi
+            WHERE logi.idLogIqvia = @ID
+        ))
+    )
+WHERE EXISTS (
+    SELECT 1
+    FROM [{Connection.dbBase}].dbo.[{IqviaRestrictionItens.getClassName()}] subItem
+    JOIN [{Connection.dbBase}].dbo.[{IqviaRestriction_IqviaRestrictionItens.getClassName()}] RI ON RI.idIqviaRestrictionItens = subItem.Id
+    WHERE RI.idIqviaRestriction = rest.Id
+      AND (
+          (subItem.type = 'Fabricante' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante)) OR
+          (subItem.type = 'Fabricante + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idFabricante) + ',' + InOut.Esfera) OR
+          (subItem.type = 'Produto' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto)) OR
+          (subItem.type = 'Produto + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + InOut.Esfera) OR
+          (subItem.type = 'Produto + Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idProduto) + ',' + CONVERT(NVARCHAR(100), InOut.idCliente)) OR
+          (subItem.type = 'Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idCliente)) OR
+          (subItem.type = 'Nota' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.NotaFiscal)) OR
+          (subItem.type = 'Grupo de Cliente' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente)) OR
+          (subItem.type = 'Grupo de Cliente + Esfera' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.idGrupoCliente) + ',' + InOut.Esfera) OR
+          (subItem.type = 'CFOP' AND subItem.KeyItem = CONVERT(NVARCHAR(100), InOut.CFOP))
+      )
+)
+ORDER BY NotaFiscal ASC;
+";
+            
         }
         public static async Task<List<IqviaLayout>> getAllToListAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
@@ -214,12 +226,12 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
 
         /** GETS **/
-        public static async Task<DataTable> getLayoutVendasAsync(DateTime dt, int bloqueio = 1,int id =0)
+        public static async Task<DataTable> getLayoutVendasAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio,id);
+            var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
             //Description
-            var produtoData = baseDados;
+            var produtoData = baseDados.Where(x=> string.IsNullOrEmpty(x.Bloqueio));
 
             List<IqviaLayout_Venda_Description> description_Venda = new List<IqviaLayout_Venda_Description>();
             foreach (var venda in produtoData)
@@ -237,7 +249,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
             var resultado = produtoData.Select(v => new
             {
                 v.NotaFiscal,
-                v.bloqueio,
+                v.Bloqueio,
                 v.DatEmissao,
                 v.CFOP,
                 v.EntSai,
@@ -253,37 +265,38 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
             return resultado.AsDataTable();
 
-
-
-
-
         }
+
+
+
         public static async Task<DataTable> getLayoutClienteAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio,id);           
+            // Obtenha todos os registros
+            var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
-            //Description
-            var clienteData = baseDados.Where(x => string.IsNullOrEmpty(x.bloqueio))
-           .GroupBy(n => new { n.idCliente, n.Cliente, n.Cnpj })
-           .Select(g => new
-           {
-               idCliente = g.Key.idCliente,
-               Cliente = g.Key.Cliente,
-               Cnpj = g.Key.Cnpj
-           })
-           .ToList();
-            
+            // Certifique-se de filtrar considerando valores consistentes em Bloqueio
+            var clienteData = baseDados
+                .Where(x => string.IsNullOrEmpty(x.Bloqueio?.Trim())) // Garante tratamento completo
+                .GroupBy(n => new { n.idCliente, n.Cliente, n.Cnpj }) // Agrupa por cliente
+                .Select(g => new
+                {
+                    idCliente = g.Key.idCliente,
+                    Cliente = g.Key.Cliente,
+                    Cnpj = g.Key.Cnpj
+                })
+                .ToList();
 
-         
-
+            // Converte para DataTable e retorna
             return clienteData.AsDataTable();
         }
+
+
         public static async Task<DataTable> getLayoutProdutoAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
             var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
             //Description
-            var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.bloqueio))
+            var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.Bloqueio))
            .GroupBy(n => new { n.idProduto, n.Produto, n.eanProduto })
            .Select(g => new
            {
@@ -327,7 +340,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
             string header = cliente_Header.getHeader();
 
             //Description
-            var clienteData = baseDados.Where(x=>string.IsNullOrEmpty(x.bloqueio))
+            var clienteData = baseDados.Where(x=>string.IsNullOrEmpty(x.Bloqueio))
            .GroupBy(n => new { n.idCliente, n.Cliente, n.Cnpj })
            .Select(g => new
            {
@@ -400,7 +413,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
 
             //Description
-            var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.bloqueio))
+            var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.Bloqueio))
            .GroupBy(n => new { n.idProduto, n.Produto, n.eanProduto })
            .Select(g => new
            {
@@ -458,7 +471,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
 
 
             //Description
-            var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.bloqueio));
+            var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.Bloqueio));
 
             List<IqviaLayout_Venda_Description> description_Venda = new List<IqviaLayout_Venda_Description>();
             foreach (var venda in produtoData)

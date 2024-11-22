@@ -10,7 +10,7 @@ namespace UHC3_Definitive_Version.Configuration
 {
     public static class Empresa
     {
-        public static List<string> empresas = new List<string>() { "UNI HOSPITALAR", "UNI HOSPITALAR CEARÁ","SP HOSPITALAR"};
+        public static List<string> empresas = new List<string>() { "UNI HOSPITALAR", "UNI CEARÁ","SP HOSPITALAR"};
 
         public static void toDefaultSeletorEmpresa(this ComboBox cbx)
         {

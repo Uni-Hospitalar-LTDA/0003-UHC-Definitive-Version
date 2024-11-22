@@ -89,7 +89,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                                 await ProcessAndLogAsync(
                                     ftp,
                                     currentDate,
-                                    unidade,
+                                    Section.Unidade,
                                 await IqviaLayout.exportarLayoutProdutoAsync(currentDate),
                                 await IqviaLayout.exportarLayoutClienteAsync(currentDate),
                                 await IqviaLayout.exportarLayoutVendasAsync(currentDate),

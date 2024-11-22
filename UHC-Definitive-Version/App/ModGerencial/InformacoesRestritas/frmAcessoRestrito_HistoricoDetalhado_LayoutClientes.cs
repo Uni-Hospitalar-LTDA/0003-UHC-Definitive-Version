@@ -20,6 +20,7 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         CustomMenuStrip menuStrip = new CustomMenuStrip();
         internal int id { get; set; }
         internal DateTime dt { get; set; }
+        BindingSource bindingSource1 = new BindingSource();
 
         public frmAcessoRestrito_HistoricoDetalhado_LayoutClientes()
         {
@@ -36,14 +37,49 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
             ConfigureFormEvents();
         }
 
-        /** Async Tasks **/
         private async Task getData()
+        {
+            // Obter os dados
+            DataTable dta = await IqviaLayout.getLayoutClienteAsync(dt,1, id);
 
-        {            
-            dgvData.DataSource = await IqviaLayout.getLayoutClienteAsync(dt, 1,id);
-            txtQtdLinhas.Text = dgvData.Rows.Count.ToString();
+            // Configurar o BindingSource
+            bindingSource1.DataSource = dta;
+
+            // Vincular o BindingSource ao DataGridView
+            dgvData.DataSource = bindingSource1;
+
+            // Atualizar a contagem de linhas
+            txtQtdLinhas.Text = dta.Rows.Count.ToString();
+
+            // Ajustar as colunas automaticamente
             dgvData.AutoResizeColumns();
         }
+
+        private void pesquisarElementos(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                // Remove o filtro
+                bindingSource1.RemoveFilter();
+            }
+            else
+            {
+                // Cria uma expressão de filtro para o BindingSource
+                StringBuilder filter = new StringBuilder();
+
+                DataTable dt = (DataTable)bindingSource1.DataSource;
+
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    if (filter.Length > 0) filter.Append(" OR ");
+                    filter.AppendFormat("Convert([{0}], 'System.String') LIKE '%{1}%'", dt.Columns[i].ColumnName, text.Replace("'", "''"));
+                }
+
+                // Aplica o filtro ao BindingSource
+                bindingSource1.Filter = filter.ToString();
+            }
+        }
+
 
         /** Form Configuration **/
         private void ConfigureFormProperties()
@@ -84,23 +120,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            string filtro = txtFiltroGenerico.Text.Trim().ToLower(); // Texto digitado no TextBox
-            foreach (DataGridViewRow row in dgvData.Rows)
-            {
-                bool visivel = false;
-
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    if (cell.Value != null && cell.Value.ToString().ToLower().Contains(filtro))
-                    {
-                        visivel = true; // Encontrou um valor que corresponde ao filtro
-                        break;
-                    }
-                }
-
-                row.Visible = visivel; // Mostra ou oculta a linha
-            }
+        {            
+            pesquisarElementos(txtFiltroGenerico.Text);
         }
      
         /** DataGridView Configuration **/
