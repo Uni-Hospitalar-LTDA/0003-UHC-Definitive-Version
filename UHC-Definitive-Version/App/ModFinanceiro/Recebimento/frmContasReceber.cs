@@ -43,7 +43,7 @@ DECLARE @dat_inicial DATETIME = '{cutDate.ToString("yyyyMMdd")}';
 WITH CTE_BXREC_LIMIT AS (
     SELECT 
 		   BX.Cod_Documento,                      
-		   [Vlr. Recebido] = sum((ISNULL(BX.Vlr_Principal,0))) - SUM(ISNULL(BX.Vlr_Deducoes,0) + ISNULL(BX.Vlr_Desconto,0))
+		   [Vlr. Recebido] = sum((ISNULL(BX.Vlr_Principal,0))) /** - SUM(ISNULL(BX.Vlr_Deducoes,0) + ISNULL(BX.Vlr_Desconto,0) ) **/
     FROM [DMD].dbo.[BXREC] BX
     WHERE BX.Dat_Caixa <= @DAT_INICIAL
 	GROUP BY 

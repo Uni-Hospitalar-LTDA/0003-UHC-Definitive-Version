@@ -35,19 +35,19 @@
             this.btnConsultarPedidoOL = new System.Windows.Forms.Button();
             this.btnConsultarPedidoCliente = new System.Windows.Forms.Button();
             this.btnConsultaPrecos = new System.Windows.Forms.Button();
+            this.gpbPedidos = new System.Windows.Forms.GroupBox();
+            this.btnPedidoPfizerInterplayers = new System.Windows.Forms.Button();
             this.gpbIngestaoDados = new System.Windows.Forms.GroupBox();
             this.btnDataIngestion = new System.Windows.Forms.Button();
             this.gpbProgramasAuxiliares = new System.Windows.Forms.GroupBox();
             this.btnKairos = new System.Windows.Forms.Button();
             this.btnDeslogar = new System.Windows.Forms.Button();
             this.btnSair = new System.Windows.Forms.Button();
-            this.gpbPedidos = new System.Windows.Forms.GroupBox();
-            this.btnPedidoPfizerInterplayers = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.gpbAnaliseVendas.SuspendLayout();
+            this.gpbPedidos.SuspendLayout();
             this.gpbIngestaoDados.SuspendLayout();
             this.gpbProgramasAuxiliares.SuspendLayout();
-            this.gpbPedidos.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblVendas
@@ -129,6 +129,27 @@
             this.btnConsultaPrecos.Text = "Consulta de Preços";
             this.btnConsultaPrecos.UseVisualStyleBackColor = true;
             // 
+            // gpbPedidos
+            // 
+            this.gpbPedidos.Controls.Add(this.btnPedidoPfizerInterplayers);
+            this.gpbPedidos.ForeColor = System.Drawing.Color.White;
+            this.gpbPedidos.Location = new System.Drawing.Point(197, 3);
+            this.gpbPedidos.Name = "gpbPedidos";
+            this.gpbPedidos.Size = new System.Drawing.Size(188, 258);
+            this.gpbPedidos.TabIndex = 14;
+            this.gpbPedidos.TabStop = false;
+            this.gpbPedidos.Text = "Pedidos";
+            // 
+            // btnPedidoPfizerInterplayers
+            // 
+            this.btnPedidoPfizerInterplayers.ForeColor = System.Drawing.Color.Black;
+            this.btnPedidoPfizerInterplayers.Location = new System.Drawing.Point(6, 19);
+            this.btnPedidoPfizerInterplayers.Name = "btnPedidoPfizerInterplayers";
+            this.btnPedidoPfizerInterplayers.Size = new System.Drawing.Size(170, 39);
+            this.btnPedidoPfizerInterplayers.TabIndex = 13;
+            this.btnPedidoPfizerInterplayers.Text = "Pedido Pfizer Interplayers";
+            this.btnPedidoPfizerInterplayers.UseVisualStyleBackColor = true;
+            // 
             // gpbIngestaoDados
             // 
             this.gpbIngestaoDados.Controls.Add(this.btnDataIngestion);
@@ -191,27 +212,6 @@
             this.btnSair.Text = "Sair";
             this.btnSair.UseVisualStyleBackColor = true;
             // 
-            // gpbPedidos
-            // 
-            this.gpbPedidos.Controls.Add(this.btnPedidoPfizerInterplayers);
-            this.gpbPedidos.ForeColor = System.Drawing.Color.White;
-            this.gpbPedidos.Location = new System.Drawing.Point(197, 3);
-            this.gpbPedidos.Name = "gpbPedidos";
-            this.gpbPedidos.Size = new System.Drawing.Size(188, 258);
-            this.gpbPedidos.TabIndex = 14;
-            this.gpbPedidos.TabStop = false;
-            this.gpbPedidos.Text = "Pedidos";
-            // 
-            // btnPedidoPfizerInterplayers
-            // 
-            this.btnPedidoPfizerInterplayers.ForeColor = System.Drawing.Color.Black;
-            this.btnPedidoPfizerInterplayers.Location = new System.Drawing.Point(6, 19);
-            this.btnPedidoPfizerInterplayers.Name = "btnPedidoPfizerInterplayers";
-            this.btnPedidoPfizerInterplayers.Size = new System.Drawing.Size(170, 39);
-            this.btnPedidoPfizerInterplayers.TabIndex = 13;
-            this.btnPedidoPfizerInterplayers.Text = "Pedido Pfizer Interplayers";
-            this.btnPedidoPfizerInterplayers.UseVisualStyleBackColor = true;
-            // 
             // frmModVendas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -237,9 +237,9 @@
             this.Text = "Módulo Vendas";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.gpbAnaliseVendas.ResumeLayout(false);
+            this.gpbPedidos.ResumeLayout(false);
             this.gpbIngestaoDados.ResumeLayout(false);
             this.gpbProgramasAuxiliares.ResumeLayout(false);
-            this.gpbPedidos.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

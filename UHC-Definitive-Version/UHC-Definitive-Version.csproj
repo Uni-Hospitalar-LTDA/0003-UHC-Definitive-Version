@@ -65,10 +65,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D658F5E43F80ADF066F4C60DEE86B4CBB2EFDAEF</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F4DDFE7A6BB3C93F3C00829C658A41A8BE5D27E8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>UHC-Definitive-Version_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -564,6 +565,84 @@
     <Compile Include="App\ModFinanceiro\Recebimento\frmRecPublicoPrivado.Designer.cs">
       <DependentUpon>frmRecPublicoPrivado.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito.Designer.cs">
+      <DependentUpon>frmAcessoRestrito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Add.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Edit.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_Edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_EnviarArquivos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_EnviarArquivos.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_EnviarArquivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Historico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Historico.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_Historico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_AddItens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_AddItens.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_AddItens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_PainelReenvio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_PainelReenvio.Designer.cs">
+      <DependentUpon>frmAcessoRestrito_PainelReenvio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.Designer.cs">
+      <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico_Parametrizacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico_Parametrizacao.Designer.cs">
+      <DependentUpon>frmAnaliseIqviaSintetico_Parametrizacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModGerencial\InformacoesRestritas\frmControladoria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1009,6 +1088,7 @@
     <Compile Include="Configuration\CustomSerialization.cs" />
     <Compile Include="Configuration\Email.cs" />
     <Compile Include="Configuration\EmailAttributes.cs" />
+    <Compile Include="Configuration\Empresa.cs" />
     <Compile Include="Configuration\Exportacao.cs" />
     <Compile Include="Configuration\FormConfiguration.cs" />
     <Compile Include="Configuration\IEnumerableExtensions.cs" />
@@ -1080,10 +1160,16 @@
     <Compile Include="Domain\Entities\IMSCliente.cs" />
     <Compile Include="Domain\Entities\IMSProduto.cs" />
     <Compile Include="Domain\Entities\IMSVendas.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\CfopInnmed.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\ClienteInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Clientes_Externos.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\FabricanteInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Fabricantes_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Favorecidos_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Fornecedores_Externos.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\GrupoClienteInnmed.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\NotaFiscalInnmed.cs" />
+    <Compile Include="Domain\Entities\InnmedEntities\ProdutoInnmed.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Produtos_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Transportadores_Externos.cs" />
     <Compile Include="Domain\Entities\InnmedEntities\Vendedores_Externos.cs" />
@@ -1093,6 +1179,21 @@
     <Compile Include="Domain\Entities\Kairos.cs" />
     <Compile Include="Domain\Entities\logProcess_Scheduler.cs" />
     <Compile Include="Domain\Entities\MonitorGnre.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayoutVendas.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Cliente_Descricao.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Cliente_Header.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Cliente_Trailer.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Produto_Descricao.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Produto_Header.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Produto_Trailer.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Venda_Description.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Venda_Header.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaLayout_Venda_Trailer.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaRestrictionItens.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\IqviaRestriction.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\LogIqvia.cs" />
+    <Compile Include="Domain\Entities\NewIqvia\LogIqvia_IqviaRestriction.cs" />
     <Compile Include="Domain\Entities\NF_Canhotos.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Action.cs" />
     <Compile Include="Domain\Entities\Permissionamento\Groups.cs" />
@@ -1272,6 +1373,45 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\frmModGerencial.resx">
       <DependentUpon>frmModGerencial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito.resx">
+      <DependentUpon>frmAcessoRestrito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Add.resx">
+      <DependentUpon>frmAcessoRestrito_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_AddItens.resx">
+      <DependentUpon>frmAcessoRestrito_AddItens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Edit.resx">
+      <DependentUpon>frmAcessoRestrito_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_EnviarArquivos.resx">
+      <DependentUpon>frmAcessoRestrito_EnviarArquivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_Historico.resx">
+      <DependentUpon>frmAcessoRestrito_Historico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.resx">
+      <DependentUpon>frmAcessoRestrito_HistoricoDetalhado_LayoutVendas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAcessoRestrito_PainelReenvio.resx">
+      <DependentUpon>frmAcessoRestrito_PainelReenvio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico.resx">
+      <DependentUpon>frmAnaliseIqviaSintetico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmAnaliseIqviaSintetico_Parametrizacao.resx">
+      <DependentUpon>frmAnaliseIqviaSintetico_Parametrizacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModGerencial\InformacoesRestritas\frmBloqueioDetalhado_IQVIA.resx">
       <DependentUpon>frmBloqueioDetalhado_IQVIA.cs</DependentUpon>

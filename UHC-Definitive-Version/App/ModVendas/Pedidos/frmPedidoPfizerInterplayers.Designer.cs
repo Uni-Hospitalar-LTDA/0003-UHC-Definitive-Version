@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnMoreCustomers = new System.Windows.Forms.Button();
-            this.txtCustomer = new System.Windows.Forms.TextBox();
-            this.txtCustomerId = new System.Windows.Forms.TextBox();
+            this.btnMoreFornecedores = new System.Windows.Forms.Button();
+            this.txtFornecedor = new System.Windows.Forms.TextBox();
+            this.txtFornecedorId = new System.Windows.Forms.TextBox();
             this.lblCustomer = new System.Windows.Forms.Label();
             this.dtpDataProgramada = new System.Windows.Forms.DateTimePicker();
             this.lblDataProgramada = new System.Windows.Forms.Label();
@@ -45,37 +45,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnMoreCustomers
+            // btnMoreFornecedores
             // 
-            this.btnMoreCustomers.Location = new System.Drawing.Point(577, 24);
-            this.btnMoreCustomers.Name = "btnMoreCustomers";
-            this.btnMoreCustomers.Size = new System.Drawing.Size(24, 23);
-            this.btnMoreCustomers.TabIndex = 2;
-            this.btnMoreCustomers.Text = "...";
-            this.btnMoreCustomers.UseVisualStyleBackColor = true;
+            this.btnMoreFornecedores.Location = new System.Drawing.Point(577, 24);
+            this.btnMoreFornecedores.Name = "btnMoreFornecedores";
+            this.btnMoreFornecedores.Size = new System.Drawing.Size(24, 23);
+            this.btnMoreFornecedores.TabIndex = 2;
+            this.btnMoreFornecedores.Text = "...";
+            this.btnMoreFornecedores.UseVisualStyleBackColor = true;
             // 
-            // txtCustomer
+            // txtFornecedor
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(86, 25);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(485, 20);
-            this.txtCustomer.TabIndex = 1;
+            this.txtFornecedor.Location = new System.Drawing.Point(86, 25);
+            this.txtFornecedor.Name = "txtFornecedor";
+            this.txtFornecedor.Size = new System.Drawing.Size(485, 20);
+            this.txtFornecedor.TabIndex = 1;
             // 
-            // txtCustomerId
+            // txtFornecedorId
             // 
-            this.txtCustomerId.Location = new System.Drawing.Point(15, 25);
-            this.txtCustomerId.Name = "txtCustomerId";
-            this.txtCustomerId.Size = new System.Drawing.Size(65, 20);
-            this.txtCustomerId.TabIndex = 0;
+            this.txtFornecedorId.Location = new System.Drawing.Point(15, 25);
+            this.txtFornecedorId.Name = "txtFornecedorId";
+            this.txtFornecedorId.Size = new System.Drawing.Size(65, 20);
+            this.txtFornecedorId.TabIndex = 0;
             // 
             // lblCustomer
             // 
             this.lblCustomer.AutoSize = true;
             this.lblCustomer.Location = new System.Drawing.Point(12, 9);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(46, 13);
+            this.lblCustomer.Size = new System.Drawing.Size(68, 13);
             this.lblCustomer.TabIndex = 8;
-            this.lblCustomer.Text = "Cliente *";
+            this.lblCustomer.Text = "Fornecedor *";
             // 
             // dtpDataProgramada
             // 
@@ -180,9 +180,9 @@
             this.Controls.Add(this.txtPedidoCliente);
             this.Controls.Add(this.lblDataProgramada);
             this.Controls.Add(this.dtpDataProgramada);
-            this.Controls.Add(this.btnMoreCustomers);
-            this.Controls.Add(this.txtCustomer);
-            this.Controls.Add(this.txtCustomerId);
+            this.Controls.Add(this.btnMoreFornecedores);
+            this.Controls.Add(this.txtFornecedor);
+            this.Controls.Add(this.txtFornecedorId);
             this.Controls.Add(this.lblCustomer);
             this.Name = "frmPedidoPfizerInterplayers";
             this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -206,9 +206,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnMoreCustomers;
-        private System.Windows.Forms.TextBox txtCustomer;
-        private System.Windows.Forms.TextBox txtCustomerId;
+        private System.Windows.Forms.Button btnMoreFornecedores;
+        private System.Windows.Forms.TextBox txtFornecedor;
+        private System.Windows.Forms.TextBox txtFornecedorId;
         private System.Windows.Forms.Label lblCustomer;
         private System.Windows.Forms.DateTimePicker dtpDataProgramada;
         private System.Windows.Forms.Label lblDataProgramada;

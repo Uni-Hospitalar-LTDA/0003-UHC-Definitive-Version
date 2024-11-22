@@ -20,7 +20,8 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
 
             //Properties
             ConfigureFormProperties();
-            ConfigureLabelProperties();
+            
+
             //Events
             ConfigureFormEvents();            
         }
@@ -31,9 +32,9 @@ namespace UHC3_Definitive_Version.App.Telas_Genericas
         }
 
         private void ConfigureFormEvents()
-        {            
-            
-            
+        {
+
+            ConfigureLabelProperties();
 
             //Events
             ConfigureButtonEvents();

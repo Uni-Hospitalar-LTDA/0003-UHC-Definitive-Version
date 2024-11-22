@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using UHC3_Definitive_Version.Configuration;
 
@@ -19,6 +20,26 @@ namespace UHC3_Definitive_Version.Domain.Entities.InnmedEntities
                               WHERE (Razao_Social LIKE '%{text}%' 
                                      OR CAST(Cgc_Cpf AS VARCHAR) LIKE '%{text}%')";
             return await getAllToDataTable(query);
+        }
+
+        public async static Task<List<Fornecedores_Externos>> getToListAsync()
+        {
+            string query = $@"SELECT
+                                     Codigo [codigo]
+                              	    ,Razao_Social [razaoSocial]	
+                              	    ,Cgc_Cpf [cnpj]
+                              FROM [DMD].dbo.[FORNE] Fornecedor";                                                                 
+            return await getAllToList(query);
+        }
+
+        public async static Task<Fornecedores_Externos> getFornecedorByCodeAsync(string code)
+        {
+            string query = $@"SELECT
+                                     Codigo [codigo]
+                              	    ,Razao_Social [razaoSocial]	
+                              	    ,Cgc_Cpf [cnpj]      
+                              FROM [DMD].dbo.[FORNE] Fornecedor where codigo = {code}";
+            return await getToClass(query);
         }
 
         public async static Task<string> getDescriptionByCode(string codigoFornecedor)

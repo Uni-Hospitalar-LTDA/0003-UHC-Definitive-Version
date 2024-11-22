@@ -13,8 +13,8 @@ namespace UHC3_Definitive_Version.Configuration
         public static DateTime HoraLogin { get; set; } = DateTime.Now;
         public static string Unidade { get; set; } = "UNI HOSPITALAR";
         public static string Cnpj { get; set; } = "07484373000124";
-        public static string CodIqvia { get; set; } = "XXXX";
-        public static string Empresa { get; set; } = "Uni Hospitalar";
+        public static string CodIqvia { get; set; } = "5295";
+        public static string Empresa { get; set; } = "UNI HOSPITALAR LTDA";
         public static string pdfLogo { get; set; } = "";
         public static string logoEmail { get; set; } = "";
 
@@ -38,7 +38,7 @@ namespace UHC3_Definitive_Version.Configuration
             if (unidade == "UNI HOSPITALAR")
             {
                 CodIqvia = "5295";
-                Empresa = "Uni Hospitalar LTDA";
+                Empresa = "UNI HOSPITALAR LTDA";
                 pdfLogo = "logo_UNI_Hospitalar";
                 Cnpj = "07484373000124";
                 logoEmail = "https://i.imgur.com/CTeGKCP.png";
@@ -46,7 +46,7 @@ namespace UHC3_Definitive_Version.Configuration
             else if (unidade == "UNI CEARÁ")
             {
                 CodIqvia = "0638";
-                Empresa = "Uni Hospitalar Ceará";
+                Empresa = "UNI HOSPITALAR CEARÁ";
                 pdfLogo = "logo_UNI_Ceara";
                 Cnpj = "21595464000168";
                 logoEmail = "https://i.imgur.com/Sz2NLr3.png";
@@ -54,7 +54,7 @@ namespace UHC3_Definitive_Version.Configuration
             else if (unidade == "SP HOSPITALAR")
             {
                 CodIqvia = "9894";
-                Empresa = "SP Hospitalar";
+                Empresa = "SP HOSPITALAR";
                 pdfLogo = "logo_SP_Hospitalar";
                 Cnpj = "27817504000155";
                 logoEmail = "https://i.imgur.com/cp5UGaO.png";
