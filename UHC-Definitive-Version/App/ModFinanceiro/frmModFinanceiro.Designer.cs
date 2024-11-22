@@ -42,8 +42,10 @@
             this.gpbMonitoresFinanceiros = new System.Windows.Forms.GroupBox();
             this.btnMonitorGnre = new System.Windows.Forms.Button();
             this.gpbPagamento = new System.Windows.Forms.GroupBox();
+            this.btnContasPagarRanking = new System.Windows.Forms.Button();
             this.btnContasPagarAnalitico = new System.Windows.Forms.Button();
             this.gpbRecebimento = new System.Windows.Forms.GroupBox();
+            this.btnContasReceberRanking = new System.Windows.Forms.Button();
             this.btnRecPublicoPrivado = new System.Windows.Forms.Button();
             this.btnContasRecebidas = new System.Windows.Forms.Button();
             this.btnContasReceberAnalitico = new System.Windows.Forms.Button();
@@ -204,6 +206,7 @@
             // 
             // gpbPagamento
             // 
+            this.gpbPagamento.Controls.Add(this.btnContasPagarRanking);
             this.gpbPagamento.Controls.Add(this.btnContasPagarAnalitico);
             this.gpbPagamento.ForeColor = System.Drawing.Color.White;
             this.gpbPagamento.Location = new System.Drawing.Point(3, 267);
@@ -212,6 +215,16 @@
             this.gpbPagamento.TabIndex = 9;
             this.gpbPagamento.TabStop = false;
             this.gpbPagamento.Text = "Pagamento";
+            // 
+            // btnContasPagarRanking
+            // 
+            this.btnContasPagarRanking.ForeColor = System.Drawing.Color.Black;
+            this.btnContasPagarRanking.Location = new System.Drawing.Point(6, 64);
+            this.btnContasPagarRanking.Name = "btnContasPagarRanking";
+            this.btnContasPagarRanking.Size = new System.Drawing.Size(170, 39);
+            this.btnContasPagarRanking.TabIndex = 18;
+            this.btnContasPagarRanking.Text = "Contas a Pagar Ranking";
+            this.btnContasPagarRanking.UseVisualStyleBackColor = true;
             // 
             // btnContasPagarAnalitico
             // 
@@ -225,6 +238,7 @@
             // 
             // gpbRecebimento
             // 
+            this.gpbRecebimento.Controls.Add(this.btnContasReceberRanking);
             this.gpbRecebimento.Controls.Add(this.btnRecPublicoPrivado);
             this.gpbRecebimento.Controls.Add(this.btnContasRecebidas);
             this.gpbRecebimento.Controls.Add(this.btnContasReceberAnalitico);
@@ -236,10 +250,20 @@
             this.gpbRecebimento.TabStop = false;
             this.gpbRecebimento.Text = "Recebimento";
             // 
+            // btnContasReceberRanking
+            // 
+            this.btnContasReceberRanking.ForeColor = System.Drawing.Color.Black;
+            this.btnContasReceberRanking.Location = new System.Drawing.Point(6, 64);
+            this.btnContasReceberRanking.Name = "btnContasReceberRanking";
+            this.btnContasReceberRanking.Size = new System.Drawing.Size(170, 39);
+            this.btnContasReceberRanking.TabIndex = 23;
+            this.btnContasReceberRanking.Text = "Contas a Receber Ranking";
+            this.btnContasReceberRanking.UseVisualStyleBackColor = true;
+            // 
             // btnRecPublicoPrivado
             // 
             this.btnRecPublicoPrivado.ForeColor = System.Drawing.Color.Black;
-            this.btnRecPublicoPrivado.Location = new System.Drawing.Point(6, 109);
+            this.btnRecPublicoPrivado.Location = new System.Drawing.Point(6, 154);
             this.btnRecPublicoPrivado.Name = "btnRecPublicoPrivado";
             this.btnRecPublicoPrivado.Size = new System.Drawing.Size(170, 39);
             this.btnRecPublicoPrivado.TabIndex = 22;
@@ -249,7 +273,7 @@
             // btnContasRecebidas
             // 
             this.btnContasRecebidas.ForeColor = System.Drawing.Color.Black;
-            this.btnContasRecebidas.Location = new System.Drawing.Point(6, 64);
+            this.btnContasRecebidas.Location = new System.Drawing.Point(6, 109);
             this.btnContasRecebidas.Name = "btnContasRecebidas";
             this.btnContasRecebidas.Size = new System.Drawing.Size(170, 39);
             this.btnContasRecebidas.TabIndex = 21;
@@ -359,5 +383,7 @@
         private System.Windows.Forms.Button btnRecPublicoPrivado;
         private System.Windows.Forms.Button btnContasRecebidas;
         private System.Windows.Forms.Button btnContasReceberAnalitico;
+        private System.Windows.Forms.Button btnContasPagarRanking;
+        private System.Windows.Forms.Button btnContasReceberRanking;
     }
 }

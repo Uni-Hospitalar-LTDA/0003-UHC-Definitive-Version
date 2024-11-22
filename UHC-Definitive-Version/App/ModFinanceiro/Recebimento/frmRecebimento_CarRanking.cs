@@ -21,6 +21,8 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.Recebimento
     public partial class frmRecebimento_CarRanking : CustomForm
     {
         /** Instance **/
+        
+        CustomMenuStrip menuStrip = new CustomMenuStrip();
         public class Report : Querys<Report>
         {
             public string sphere { get; set; }
@@ -142,11 +144,14 @@ SUM(DISTINCT CT.Vlr_ParTit) - ISNULL(SUM(BX.Vlr_Principal), 0) - ISNULL(SUM(BX.V
             ConfigureDataGridViewProperties();
             ConfigureGroupBoxProperties();
             ConfigureTextBoxProperties();
-            //ConfigureButtonProperties();
+            ConfigureMenuStripProperties();
+            ConfigureButtonProperties();
             ConfigureComboBoxProperties();
             ConfigureFormEvents();
 
         }
+
+        
 
         /** Async Task **/
         private async Task getAllBilsToReceive(DateTime date, string customerGroupId, string customerSphere)
@@ -297,8 +302,7 @@ SUM(DISTINCT CT.Vlr_ParTit) - ISNULL(SUM(BX.Vlr_Principal), 0) - ISNULL(SUM(BX.V
         /** Configure Form **/
         private void ConfigureFormProperties()
         {
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.defaultMaximableForm();
         }
         private void ConfigureFormEvents()
         {
@@ -311,8 +315,7 @@ SUM(DISTINCT CT.Vlr_ParTit) - ISNULL(SUM(BX.Vlr_Principal), 0) - ISNULL(SUM(BX.V
 
             ConfigureComboBoxAttributes();
             UpdateDataGridView(dgvData, rep);
-            ConfigureButtonEvents();
-            ConfigureMenuStripEvents();
+            ConfigureButtonEvents();            
             ConfigureTextBoxEvents();
 
         }
@@ -397,10 +400,10 @@ SUM(DISTINCT CT.Vlr_ParTit) - ISNULL(SUM(BX.Vlr_Principal), 0) - ISNULL(SUM(BX.V
         }
 
         /** Configure Button **/
-        //private void ConfigureButtonProperties()
-        //{
-        //    btnClose.toDefaultCloseButton();
-        //}
+        private void ConfigureButtonProperties()
+        {
+            btnFechar.toDefaultCloseButton();
+        }
 
         private void ConfigureButtonEvents()
         {
@@ -448,30 +451,54 @@ SUM(DISTINCT CT.Vlr_ParTit) - ISNULL(SUM(BX.Vlr_Principal), 0) - ISNULL(SUM(BX.V
 
 
         /** Menu Strip Configuration **/
-        private void ConfigureMenuStripEvents()
+        private void ConfigureMenuStripProperties()
         {
-            menuStripAbrirExcel.Click += menuStripAbrirExcel_Click;
-            menuStripExportarExcel.Click += menuStripExportarExcel_Click;
-        }
-        private void menuStripExportarExcel_Click(object sender, EventArgs e)
-        {
+            CustomToolStripMenuItem menuArquivo = new CustomToolStripMenuItem("Arquivo");
+            CustomToolStripMenuItem itemArquivoAbrir = new CustomToolStripMenuItem("Abrir");
+            CustomToolStripMenuItem itemArquivoAbrirExcel = new CustomToolStripMenuItem("Excel");
+            CustomToolStripMenuItem itemArquivoExportar = new CustomToolStripMenuItem("Exportar");
+            CustomToolStripMenuItem itemArquivoExportarExcel = new CustomToolStripMenuItem("Excel");
 
+
+            itemArquivoAbrirExcel.Click += ItemArquivoAbrirExcel_Click;
+            itemArquivoExportarExcel.Click += ItemArquivoExportarExcel_Click;
+
+            // Adicionando o item 'Empresa' e seu evento de clique
+
+            menuArquivo.DropDownItems.Add(itemArquivoAbrir);
+            menuArquivo.DropDownItems.Add(itemArquivoExportar);
+            itemArquivoAbrir.DropDownItems.Add(itemArquivoAbrirExcel);
+            itemArquivoExportar.DropDownItems.Add(itemArquivoExportarExcel);
+
+            // Adiciona o menuConfiguracao ao menu principal
+            menuStrip.Items.Add(menuArquivo);
+            this.Controls.Add(menuStrip);
+
+        }
+        private void ItemArquivoAbrirExcel_Click(object sender, EventArgs e)
+        {
+            Exportacao.abrirDataGridViewEmExcel(dgvData);
+        }
+        private void ItemArquivoExportarExcel_Click(object sender, EventArgs e)
+        {
             if (dgvData.Rows.Count > 0)
             {
+
+                //this.Cursor = Cursors.WaitCursor;
                 try
                 {
                     if (dgvData.Rows.Count > 0)
                     {
-                        System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "Excel File|*.xlsx";
                         saveFileDialog.Title = "Save Excel File";
-                        saveFileDialog.FileName = $"_BoletoVsQuantidade_{DateTime.Now.ToString("ddMMyyyy_HHmm")}";
+                        saveFileDialog.FileName = $"{this.Text.substituirCaracteresEspeciais()}_{DateTime.Now.ToString("ddMMyyyy_HHmm")}";
                         saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                         saveFileDialog.RestoreDirectory = true;
 
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
-                            RunMethodWithProgressBar((progress, cancellationToken) => Exportacao.exportarExcelComSoma(dgvData, saveFileDialog.FileName, progress, cancellationToken));
+                            RunMethodWithProgressBar((progress, cancellationToken) => Exportacao.exportarExcelComContaLinhas(dgvData, saveFileDialog.FileName, progress, cancellationToken));
                         }
                     }
                 }
@@ -479,17 +506,6 @@ SUM(DISTINCT CT.Vlr_ParTit) - ISNULL(SUM(BX.Vlr_Principal), 0) - ISNULL(SUM(BX.V
                 {
 
                 }
-            }
-        }
-        private void menuStripAbrirExcel_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Exportacao.abrirDataGridViewEmExcel(dgvData);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
     }

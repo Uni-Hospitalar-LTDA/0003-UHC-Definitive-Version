@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStripAbrirExcel = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStripExportarExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.txtTotalValue = new System.Windows.Forms.TextBox();
             this.lblTotalValue = new System.Windows.Forms.Label();
@@ -52,60 +46,12 @@
             this.pieChart1 = new LiveCharts.WinForms.PieChart();
             this.btnTop10 = new System.Windows.Forms.Button();
             this.btnTotal = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
+            this.btnFechar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.gpbFilters.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.arquivoToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1318, 24);
-            this.menuStrip1.TabIndex = 53;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // arquivoToolStripMenuItem
-            // 
-            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirToolStripMenuItem,
-            this.exportarToolStripMenuItem});
-            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.arquivoToolStripMenuItem.Text = "Arquivo";
-            // 
-            // abrirToolStripMenuItem
-            // 
-            this.abrirToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuStripAbrirExcel});
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.abrirToolStripMenuItem.Text = "Abrir";
-            // 
-            // menuStripAbrirExcel
-            // 
-            this.menuStripAbrirExcel.Name = "menuStripAbrirExcel";
-            this.menuStripAbrirExcel.Size = new System.Drawing.Size(101, 22);
-            this.menuStripAbrirExcel.Text = "Excel";
-            // 
-            // exportarToolStripMenuItem
-            // 
-            this.exportarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuStripExportarExcel});
-            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.exportarToolStripMenuItem.Text = "Exportar";
-            // 
-            // menuStripExportarExcel
-            // 
-            this.menuStripExportarExcel.Name = "menuStripExportarExcel";
-            this.menuStripExportarExcel.Size = new System.Drawing.Size(101, 22);
-            this.menuStripExportarExcel.Text = "Excel";
             // 
             // dgvData
             // 
@@ -277,11 +223,22 @@
             this.btnTotal.Text = "Visualizar Gráfico R. Total";
             this.btnTotal.UseVisualStyleBackColor = true;
             // 
+            // btnFechar
+            // 
+            this.btnFechar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnFechar.Location = new System.Drawing.Point(1210, 597);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(96, 23);
+            this.btnFechar.TabIndex = 62;
+            this.btnFechar.Text = "Fechar";
+            this.btnFechar.UseVisualStyleBackColor = true;
+            // 
             // frmRecebimento_CarRanking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1318, 632);
+            this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.btnTotal);
             this.Controls.Add(this.btnTop10);
             this.Controls.Add(this.groupBox2);
@@ -290,7 +247,6 @@
             this.Controls.Add(this.lblTotalValue);
             this.Controls.Add(this.gpbFilters);
             this.Controls.Add(this.dgvData);
-            this.Controls.Add(this.menuStrip1);
             this.Name = "frmRecebimento_CarRanking";
             this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -304,9 +260,7 @@
             this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.Text = "frmRecebimento_CarRanking";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Text = "Ranking a Receber";
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.gpbFilters.ResumeLayout(false);
             this.gpbFilters.PerformLayout();
@@ -318,13 +272,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem menuStripAbrirExcel;
-        private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem menuStripExportarExcel;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.TextBox txtTotalValue;
         private System.Windows.Forms.Label lblTotalValue;
@@ -343,5 +290,6 @@
         private LiveCharts.WinForms.PieChart pieChart1;
         private System.Windows.Forms.Button btnTop10;
         private System.Windows.Forms.Button btnTotal;
+        private System.Windows.Forms.Button btnFechar;
     }
 }

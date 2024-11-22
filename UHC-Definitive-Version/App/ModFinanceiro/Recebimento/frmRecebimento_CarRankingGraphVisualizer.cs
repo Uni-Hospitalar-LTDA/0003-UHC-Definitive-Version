@@ -35,7 +35,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.Recebimento
         /** Configure Form **/
         private void ConfigureFormProperties()
         {
-           
+            this.defaultMaximableForm();  
         }
         private void ConfigureFormEvents()
         {

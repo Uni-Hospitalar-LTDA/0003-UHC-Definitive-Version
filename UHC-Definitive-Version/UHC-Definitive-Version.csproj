@@ -546,6 +546,18 @@
     <Compile Include="App\ModFinanceiro\Recebimento\frmContasRecebidas.Designer.cs">
       <DependentUpon>frmContasRecebidas.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmRecebimento_CarRanking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmRecebimento_CarRanking.Designer.cs">
+      <DependentUpon>frmRecebimento_CarRanking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmRecebimento_CarRankingGraphVisualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModFinanceiro\Recebimento\frmRecebimento_CarRankingGraphVisualizer.Designer.cs">
+      <DependentUpon>frmRecebimento_CarRankingGraphVisualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModFinanceiro\Recebimento\frmRecPublicoPrivado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1248,6 +1260,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmContasRecebidas.resx">
       <DependentUpon>frmContasRecebidas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmRecebimento_CarRanking.resx">
+      <DependentUpon>frmRecebimento_CarRanking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmRecebimento_CarRankingGraphVisualizer.resx">
+      <DependentUpon>frmRecebimento_CarRankingGraphVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModFinanceiro\Recebimento\frmRecPublicoPrivado.resx">
       <DependentUpon>frmRecPublicoPrivado.cs</DependentUpon>

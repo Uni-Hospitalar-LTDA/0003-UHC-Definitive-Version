@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC_DEFINITIVE_VERSION.App;
 using UHC3_Definitive_Version.App.ModFinanceiro.Pagamentos;
+using UHC3_Definitive_Version.App.ModFinanceiro.Recebimento;
 using UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas;
 using UHC3_Definitive_Version.App.ModVendas.AnaliseVendas;
 using UHC3_Definitive_Version.App.ModVendas.Pedidos;
@@ -22,8 +23,8 @@ namespace UHC3_Definitive_Version
             Task.Factory.StartNew(() => Section.carregar_Dependencias());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmUpdateScreen());
-            Application.Run(new frmRankingContasPagar());
+            Application.Run(new frmUpdateScreen());
+            //Application.Run(new frmRecebimento_CarRanking());
         }
     }
 }
