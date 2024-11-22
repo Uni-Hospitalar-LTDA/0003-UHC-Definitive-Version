@@ -149,14 +149,12 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             listContacts();
 
         }
-
         private void btnMoreTransporter_Click(object sender, EventArgs e)
         {
             frmConsultarTransportador frmConsultarTransportador = new frmConsultarTransportador();
             frmConsultarTransportador.ShowDialog();
             txtTransprotador_Codigo.Text = frmConsultarTransportador.extendedCode;
         }
-
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             frmGeneric_ConsultaComSelecao consultarContatos = new frmGeneric_ConsultaComSelecao();
@@ -164,16 +162,22 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             consultarContatos.elemento = "Contato";
             consultarContatos.ShowDialog();
             var contact = await Contact.getToClassAsync(consultarContatos.extendedCode);
-            lsbContatcs.Items.Add($"{contact.idContact} - {contact.name}");
-            contacts.Add(contact);
+            if (!string.IsNullOrEmpty(contact.idContact))
+            {
+                lsbContatcs.Items.Add($"{contact.idContact} - {contact.name}");
+                contacts.Add(contact);
+            }
         }
         private void btnRemove_Click(object sender, EventArgs e)
         {
             if (CustomNotification.defaultQuestionAlert() == DialogResult.Yes)
             {
-                var contact = contacts.Find(x => x.idContact == lsbContatcs.SelectedItem.ToString().Split('-')[0].Trim().ToString());
-                contacts.Remove(contact);
-                lsbContatcs.Items.Remove(lsbContatcs.SelectedItem);
+                if (contacts.Count > 0 && lsbContatcs.SelectedItem != null)
+                {
+                    var contact = contacts.Find(x => x.idContact == lsbContatcs.SelectedItem.ToString().Split('-')[0].Trim().ToString());
+                    contacts.Remove(contact);
+                    lsbContatcs.Items.Remove(lsbContatcs.SelectedItem);
+                }
             };
 
         }
