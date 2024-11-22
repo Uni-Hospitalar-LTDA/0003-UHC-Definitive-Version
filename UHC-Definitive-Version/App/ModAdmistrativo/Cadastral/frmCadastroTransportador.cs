@@ -25,7 +25,8 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
             ConfigureFormProperties();
             ConfigureButtonsProperties();
             ConfigureTextBoxProperties();
-            this.defaultMainMenu();
+            
+
             //Properties
             ConfigureFormEvents();
         }
@@ -69,7 +70,8 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         {
             try
             {
-                lsbContatcs.Items.Clear();
+                if (lsbContatcs.Items.Count > 0)
+                    lsbContatcs.Items.Clear();
                 foreach (var cntc in contacts)
                     lsbContatcs.Items.Add($"{cntc.idContact} - {cntc.name}");
             }
@@ -80,7 +82,6 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         }
 
         /** Configure Form **/
-
         private void ConfigureFormProperties()
         {
             this.defaultFixedForm();
@@ -91,6 +92,8 @@ namespace UHC3_Definitive_Version.App.ModAdmistrativo.Cadastral
         }
         private void frmCadastroTransportador_Load(object sender, EventArgs e)
         {
+
+            //Events
             ConfigureTextBoxEvents();
             ConfigureButtonsEvents();
         }
