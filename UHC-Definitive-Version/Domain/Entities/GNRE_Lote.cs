@@ -70,214 +70,228 @@ namespace UHC3_Definitive_Version.Domain.Entities
                         Item item = new Item();
                         DocumentoOrigem documentoOrigem = new DocumentoOrigem();
                         Referencia referencia = new Referencia();
+                        Valor valor = new Valor();
                         CamposExtras camposExtras = new CamposExtras();
                         List<CampoExtra> campoExtra = new List<CampoExtra>();
                         ContribuinteDestinatario contribuinteDestinatario = new ContribuinteDestinatario();
-
+                        //MessageBox.Show(Session.Unidade + " " + nf);
                         conn.Open();
                         SqlCommand command = conn.CreateCommand();
-                        command.CommandText = $@"SELECT 
-  [ufFavorecida] = NF_Saida.Estado
- ,[tipoGnre] = '0'
- ,[receita] = '100102'
- ,[cnpjEmitente] = Empresa.CGC
- ,[razaoSocialEmitente] = Empresa.Razao_Social
- ,[enderecoEmitente] = Empresa.Endereco +', '+ Empresa.Numero 
- ,[municipioEmitente] = municipioEmitente.idCounty
- ,[ufEmitente] = Empresa.Estado
- ,[cepEmitente] = Empresa.CEP
- ,[telefoneEmitente] = Empresa.Cod_DDD + empresa.Fone
- ,[documentoOrigem_Tipo_Text] = 
- CASE
- 	WHEN NF_Saida.Estado ='RJ' THEN '24'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='PE' THEN '24'+','+NF_Saida.Chv_Acesso
-	WHEN NF_Saida.Estado ='AM' THEN '22'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='MT' THEN '22'+','+NF_Saida.Chv_Acesso    
-    WHEN NF_Saida.Estado ='RN' THEN '22'+','+NF_Saida.Chv_Acesso 
-    WHEN NF_Saida.Estado ='RS' THEN '22'+','+NF_Saida.Chv_Acesso 
-    WHEN NF_Saida.Estado ='SC' THEN '24'+','+NF_Saida.Chv_Acesso      
-    ELSE '10'+','+CONVERT(VARCHAR,NF_Saida.Num_Nota)
- END		
- ,[dataVencimento] = CONVERT(DATE,GETDATE())
- ,[valor_Tipo_Text] = 
- '11'+','+convert(varchar,CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmIntUfDes))
- ,[cnpjDestinatario] = Cliente.Cgc_Cpf
- ,[razaoSocialDestinatario] = Cliente.Razao_Social		
- ,[municipioDestinatario] = municipioDestinatario.idCounty
- ,[camposExta_campoExtra1_codigo_valor]= 
- CASE
- 	WHEN NF_Saida.Estado ='RJ' THEN '117'+','+CONVERT(VARCHAR,CONVERT(DATE,GETDATE()))
-	WHEN NF_Saida.Estado ='AC' THEN '120'+','+NF_Saida.Chv_Acesso
-	WHEN NF_Saida.Estado ='AL' THEN '90'+','+NF_Saida.Chv_Acesso
-	WHEN NF_Saida.Estado ='AP' THEN '47'+','+NF_Saida.Chv_Acesso
-	WHEN NF_Saida.Estado ='BA' THEN '86'+','+NF_Saida.Chv_Acesso
-	WHEN NF_Saida.Estado ='GO' THEN '102'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='MA' THEN '94'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='MS' THEN '88'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='PA' THEN '101'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='PB' THEN '99'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='PR' THEN '107'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='RO' THEN '83'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='RR' THEN '36'+','+NF_Saida.Chv_Acesso
-    WHEN NF_Saida.Estado ='SE' THEN '77'+','+NF_Saida.Chv_Acesso    
-    WHEN NF_Saida.Estado ='TO' THEN '80'+','+NF_Saida.Chv_Acesso
- END	
- ,[referencia] = CASE			
-					WHEN NF_Saida.Estado = 'AC' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-					WHEN NF_Saida.Estado = 'AL' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-					WHEN NF_Saida.Estado = 'AM' THEN '0,'+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-					WHEN NF_Saida.Estado = 'AP' THEN '0,'+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-					WHEN NF_Saida.Estado = 'BA' THEN '0,'+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-					WHEN NF_Saida.Estado = 'DF' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-					WHEN NF_Saida.Estado = 'GO' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'MA' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'MT' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'PA' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'PB' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'RN' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'RO' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'RR' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'SE' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    WHEN NF_Saida.Estado = 'TO' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
-                    
-				END
-,[DetalhamentoReceita] = 
-                    CASE
-                        WHEN NF_Saida.Estado = 'MT' THEN '000055'
-                    END
-                ,[Produto] = CASE 
-				    WHEN NF_Saida.Estado = 'MA' THEN '23'
-			    END
+                        command.CommandText = $@" SELECT 
+          [ufFavorecida] = NF_Saida.Estado
+         ,[tipoGnre] = '0'
+         ,[receita] = '100102'
+         ,[cnpjEmitente] = Empresa.CGC
+         ,[razaoSocialEmitente] = Empresa.Razao_Social
+         ,[enderecoEmitente] = Empresa.Endereco +', '+ Empresa.Numero 
+         ,[municipioEmitente] = municipioEmitente.idCounty
+         ,[ufEmitente] = Empresa.Estado
+         ,[cepEmitente] = Empresa.CEP
+         ,[telefoneEmitente] = Empresa.Cod_DDD + empresa.Fone
+         ,[documentoOrigem_Tipo_Text] = 
+         CASE
+         	WHEN NF_Saida.Estado ='RJ' THEN '24'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='PE' THEN '24'+','+NF_Saida.Chv_Acesso
+        	WHEN NF_Saida.Estado ='AM' THEN '22'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='MT' THEN '22'+','+NF_Saida.Chv_Acesso    
+            WHEN NF_Saida.Estado ='RN' THEN '22'+','+NF_Saida.Chv_Acesso 
+            WHEN NF_Saida.Estado ='RS' THEN '22'+','+NF_Saida.Chv_Acesso 
+            WHEN NF_Saida.Estado ='SC' THEN '24'+','+NF_Saida.Chv_Acesso      
+            ELSE '10'+','+CONVERT(VARCHAR,NF_Saida.Num_Nota)
+         END		
+         ,[dataVencimento] = CONVERT(DATE,GETDATE())
+         ,[valor_Tipo_Text] = 
+         '11'+','+convert(varchar,CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmIntUfDes))
+         ,[cnpjDestinatario] = Cliente.Cgc_Cpf
+         ,[razaoSocialDestinatario] = Cliente.Razao_Social		
+         ,[municipioDestinatario] = municipioDestinatario.idCounty
+         ,[camposExta_campoExtra1_codigo_valor]= 
+         CASE
+         	WHEN NF_Saida.Estado ='RJ' THEN '117'+','+CONVERT(VARCHAR,CONVERT(DATE,GETDATE()))
+        	WHEN NF_Saida.Estado ='AC' THEN '120'+','+NF_Saida.Chv_Acesso
+        	WHEN NF_Saida.Estado ='AL' THEN '90'+','+NF_Saida.Chv_Acesso
+        	WHEN NF_Saida.Estado ='AP' THEN '47'+','+NF_Saida.Chv_Acesso
+        	WHEN NF_Saida.Estado ='BA' THEN '86'+','+NF_Saida.Chv_Acesso
+        	WHEN NF_Saida.Estado ='GO' THEN '102'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='MA' THEN '94'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='MS' THEN '88'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='PA' THEN '101'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='PB' THEN '99'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='PR' THEN '107'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='RO' THEN '83'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='RR' THEN '36'+','+NF_Saida.Chv_Acesso
+            WHEN NF_Saida.Estado ='SE' THEN '77'+','+NF_Saida.Chv_Acesso    
+            WHEN NF_Saida.Estado ='TO' THEN '80'+','+NF_Saida.Chv_Acesso
+         END	
+         ,[referencia] = CASE			
+        					WHEN NF_Saida.Estado = 'AC' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+        					WHEN NF_Saida.Estado = 'AL' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+        					WHEN NF_Saida.Estado = 'AM' THEN '0,'+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+        					WHEN NF_Saida.Estado = 'AP' THEN '0,'+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+        					WHEN NF_Saida.Estado = 'BA' THEN '0,'+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+        					WHEN NF_Saida.Estado = 'DF' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+        					WHEN NF_Saida.Estado = 'GO' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+        WHEN NF_Saida.Estado = 'MA' THEN ','+CONVERT(VARCHAR, MONTH(GETDATE()))+','+CONVERT(VARCHAR, YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'MT' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'PA' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'PB' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'RN' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'RO' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'RR' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'SE' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
+                            WHEN NF_Saida.Estado = 'TO' THEN ','+CONVERT(VARCHAR,MONTH(GETDATE()))+','+CONVERT(VARCHAR,YEAR(GETDATE()))+','
 
- ,[valor] = CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmIntUfDes)
-,[valorFCP] = CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmFcpUfDes) 
-,[valorFCP_Principal] = '11'+','+convert(varchar,CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmFcpUfDes))
+        				END
+        ,[DetalhamentoReceita] = 
+                            CASE
+                                WHEN NF_Saida.Estado = 'MT' THEN '000055'
+                            END
+                        ,[Produto] = CASE 
+        				    WHEN NF_Saida.Estado = 'MA' THEN '23'
+        			    END
 
-FROM [{Connection.dbDMD}].dbo.[NFSCB] NF_Saida
-CROSS JOIN [{Connection.dbDMD}].dbo.[EMPRE] Empresa
-JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
-INNER JOIN [{Connection.dbBase}].dbo.City municipioEmitente ON municipioEmitente.description = Empresa.Cidade  collate Latin1_General_CI_AS
-INNER JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
-INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinatario.idIBGE = municipioDestinatario.idIBGE_State AND estadoDestinatario.uf = Cliente.Cod_Estado collate Latin1_General_CI_AS
-                                           WHERE NUM_NOTA = {nf}";
+         ,[valor] = CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmIntUfDes)
+        ,[valorFCP] = CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmFcpUfDes) 
+        ,[valorFCP_Principal] = '11'+','+convert(varchar,CONVERT(NUMERIC(18,2),NF_SAIDA.Vlr_IcmFcpUfDes))
 
-                        SqlDataReader reader = command.ExecuteReader();
-
+        FROM [{Connection.dbDMD}].dbo.[NFSCB] NF_Saida
+        CROSS JOIN [{Connection.dbDMD}].dbo.[EMPRE] Empresa
+        JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
+        LEFT JOIN [{Connection.dbBase}].dbo.City municipioEmitente ON municipioEmitente.description = Empresa.Cidade  collate Latin1_General_CI_AS
+        LEFT JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
+                                                   WHERE NUM_NOTA = {nf}";
+                        Console.WriteLine(command.CommandText);
+                        SqlDataReader reader;
+                        reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            // Preencher o emitente
-                            dadosGNRE.UfFavorecida = reader["ufFavorecida"].ToString();
-                            dadosGNRE.TipoGnre = reader["tipoGnre"].ToString();
-                            contribuinteEmitente.Identificacao = identificacaoEmitente;
-                            identificacaoEmitente.CNPJ = reader["cnpjEmitente"].ToString();
-                            contribuinteEmitente.RazaoSocial = reader["razaoSocialEmitente"].ToString();
-                            contribuinteEmitente.Endereco = reader["enderecoEmitente"].ToString();
-                            contribuinteEmitente.Municipio = reader["municipioEmitente"].ToString().Trim();
-                            contribuinteEmitente.Uf = reader["ufEmitente"].ToString();
-                            contribuinteEmitente.Cep = reader["cepEmitente"].ToString();
-                            contribuinteEmitente.Telefone = reader["telefoneEmitente"].ToString();
-                            dadosGNRE.ContribuinteEmitente = contribuinteEmitente;
-
-                            // Preencher o documento de origem
-                            string[] doc = reader["documentoOrigem_Tipo_Text"].ToString().Split(',');
-                            documentoOrigem.Tipo = doc[0];
-                            documentoOrigem.Text = doc[1];
-                            item.DocumentoOrigem = documentoOrigem;
-
-                            item.Receita = reader["receita"].ToString();
-                            item.DataVencimento = DateTime.Now.ToString("yyyy-MM-dd");
-
-                            string[] val = reader["valor_Tipo_Text"].ToString().Split(',');
-                            Valor valor = new Valor { Tipo = val[0], Text = val[1] };
-
-
-                            //if (!string.IsNullOrEmpty(reader["referencia"].ToString()))
-                            //{
-                            //    string[] refer = reader["referencia"].ToString().Split(',');
-                            //    if (!string.IsNullOrEmpty(refer[0]))
-                            //        referencia.Periodo = refer[0];
-
-                            //    referencia.Mes = Convert.ToInt32(refer[1]).ToString("D2");
-                            //    referencia.Ano = refer[2];
-                            //    if (!string.IsNullOrEmpty(refer[3]))
-                            //        referencia.parcela = refer[3];
-
-                            //    item.Referencia = referencia;
-                            //}
-
-                            // Preenche destinatário
-                            string cnpjDestinatario = reader["cnpjDestinatario"].ToString();
-                            identificacaoDestinatario.CNPJ = cnpjDestinatario;
-                            contribuinteDestinatario.Identificacao = identificacaoDestinatario;
-                            contribuinteDestinatario.RazaoSocial = reader["razaoSocialDestinatario"].ToString();
-                            contribuinteDestinatario.Municipio = reader["municipioDestinatario"].ToString().Trim();
-                            item.ContribuinteDestinatario = contribuinteDestinatario;
-
-                            // Preencher campos extras
-                            string[] campo1 = reader["camposExta_campoExtra1_codigo_valor"].ToString().Split(',');
-                            campoExtra.Add(new CampoExtra { Codigo = campo1[0], Valor = campo1[1] });
-                            camposExtras.CampoExtra = campoExtra;
-                            item.CamposExtras = camposExtras;
-
-                            // Lógica para RJ
-                            if (reader["ufFavorecida"].ToString() == "RJ")
+                            if (reader["ufFavorecida"] != null)
                             {
-                                // Criar valor tipo 12
-                                Valor valorTipo12 = new Valor
-                                {
-                                    Tipo = "12",
-                                    Text = reader["valorFCP_Principal"].ToString().Split(',')[1]
-                                };
+                                dadosGNRE.UfFavorecida = reader["ufFavorecida"].ToString();
+                                dadosGNRE.TipoGnre = reader["tipoGnre"].ToString();
 
-                                // Adiciona ambos os valores ao item
-                                item.Valores = new List<Valor> { valor, valorTipo12 };
-
-                                // Adiciona o item ao GNRE
-                                itensGNRE.Item = item;
+                                dadosGNRE.ContribuinteEmitente = contribuinteEmitente;
+                                contribuinteEmitente.Identificacao = identificacaoEmitente;
+                                identificacaoEmitente.CNPJ = reader["cnpjEmitente"].ToString();
+                                contribuinteEmitente.RazaoSocial = reader["razaoSocialEmitente"].ToString();
+                                contribuinteEmitente.Endereco = reader["enderecoEmitente"].ToString();
+                                contribuinteEmitente.Municipio = reader["municipioEmitente"].ToString().Trim();
+                                contribuinteEmitente.Uf = reader["ufEmitente"].ToString();
+                                contribuinteEmitente.Cep = reader["cepEmitente"].ToString();
+                                contribuinteEmitente.Telefone = reader["telefoneEmitente"].ToString();
                                 dadosGNRE.ItensGNRE = itensGNRE;
-
-                                
-                                dadosGNRE.ValorGNRE = (Convert.ToDecimal(valor.Text.Replace(".",",")) + Convert.ToDecimal(valorTipo12.Text.Replace(".",","))).ToString("N2").Replace(".","").Replace(",",".");
-                                dadosGNRE.DataPagamento = DateTime.Now.ToString("yyyy-MM-dd");
-
-                                dadosGNREs.Add(dadosGNRE);  // Apenas uma guia para RJ com ambos os valores
-                            }
-                            else
-                            {
-                                // Lógica para outros estados
-                                item.Valores = new List<Valor> { valor };  // Usa apenas um valor para outros estados
-
                                 itensGNRE.Item = item;
-                                dadosGNRE.ItensGNRE = itensGNRE;
-                                dadosGNRE.ValorGNRE = valor.Text;
-                                dadosGNRE.DataPagamento = DateTime.Now.ToString("yyyy-MM-dd");
+                                item.Receita = reader["receita"].ToString();
 
-                                // Clona e adiciona os dados para FCP se aplicável
-                                if (!string.IsNullOrEmpty(reader["valorFCP"].ToString()) && Convert.ToDouble(reader["valorFCP"].ToString()) != 0)
+                                if (!string.IsNullOrEmpty(reader["DetalhamentoReceita"].ToString()))
+                                    item.DetalhamentoReceita = reader["DetalhamentoReceita"].ToString();
+
+                                item.DocumentoOrigem = documentoOrigem;
+
+                                if (!string.IsNullOrEmpty(reader["Produto"].ToString()))
                                 {
-                                    TDadosGNRE dadosClone = dadosGNRE.Clone();
-                                    dadosClone.ValorGNRE = reader["valorFCP"].ToString().Replace(",", ".");
-                                    Valor valorFCP = valor.Clone();
-                                    valorFCP.Text = reader["valorFCP"].ToString();
-                                    dadosClone.ItensGNRE.Item.Valores = new List<Valor> { valorFCP };
-                                    dadosClone.ItensGNRE.Item.Receita = "100129";
-                                    dadosClone.ItensGNRE.Item.DetalhamentoReceita = "000079";
-                                    dadosGNREs.Add(dadosClone);
+                                    item.Produto = reader["Produto"].ToString();
                                 }
+
+                                if (!string.IsNullOrEmpty(reader["documentoOrigem_Tipo_Text"].ToString()))
+                                {
+                                    string[] doc = reader["documentoOrigem_Tipo_Text"].ToString().Split(',');
+                                    documentoOrigem.Tipo = doc[0];
+                                    documentoOrigem.Text = doc[1];
+                                }
+
+                                if (!string.IsNullOrEmpty(reader["referencia"].ToString()))
+                                {
+                                    string[] refer = reader["referencia"].ToString().Split(',');
+                                    if (!string.IsNullOrEmpty(refer[0]))
+                                        referencia.Periodo = refer[0];
+
+                                    referencia.Mes = Convert.ToInt32(refer[1]).ToString("D2");
+                                    referencia.Ano = refer[2];
+                                    if (!string.IsNullOrEmpty(refer[3]))
+                                        referencia.parcela = refer[3];
+
+                                    item.Referencia = referencia;
+                                }
+
+                                item.DataVencimento = DateTime.Now.ToString("yyyy-MM-dd");
+
+                                // Inicializar lista de valores
+                                item.Valores = new List<Valor>();
+
+                                // Adicionar o valor principal
+                                string[] val = reader["valor_Tipo_Text"].ToString().Split(',');
+                                item.Valores.Add(new Valor
+                                {
+                                    Tipo = val[0],
+                                    Text = val[1]
+                                });
+
+                                // Adicionar o valor FCP, se aplicável
+                                if (!string.IsNullOrEmpty(reader["valorFCP"].ToString()))
+                                {
+                                    item.Valores.Add(new Valor
+                                    {
+                                        Tipo = "12", // Código para o FCP
+                                        Text = reader["valorFCP"].ToString().Replace(",", ".")
+                                    });
+                                }
+
+                                // Verifica se o CNPJ do destinatário tem 9 caracteres
+                                string cnpjDestinatario = reader["cnpjDestinatario"].ToString();
+                                if (cnpjDestinatario.Length == 9)
+                                {
+                                    // CNPJ possui 9 caracteres, os campos do contribuinte destinatário são mantidos vazios
+                                    contribuinteDestinatario = new ContribuinteDestinatario(); // Recria vazio
+                                    identificacaoDestinatario = new Identificacao(); // Recria vazio
+                                }
+                                else
+                                {
+                                    // CNPJ não possui 9 caracteres, preenche normalmente os dados do destinatário
+                                    item.ContribuinteDestinatario = contribuinteDestinatario;
+                                    contribuinteDestinatario.Identificacao = identificacaoDestinatario;
+                                    identificacaoDestinatario.CNPJ = cnpjDestinatario;
+                                    contribuinteDestinatario.RazaoSocial = reader["razaoSocialDestinatario"].ToString();
+                                    contribuinteDestinatario.Municipio = reader["municipioDestinatario"].ToString().Trim();
+                                }
+
+                                if (!string.IsNullOrEmpty(reader["camposExta_campoExtra1_codigo_valor"].ToString()))
+                                {
+                                    item.CamposExtras = camposExtras;
+                                    camposExtras.CampoExtra = campoExtra;
+                                    string[] campo1 = reader["camposExta_campoExtra1_codigo_valor"].ToString().Split(',');
+                                    campoExtra.Add(new CampoExtra { Codigo = campo1[0], Valor = campo1[1] });
+                                }
+
+                                // Calcula o valor total somando todos os valores na lista
+                                decimal valorTotal = item.Valores.Sum(v => Convert.ToDecimal(v.Text.Replace(".", ",")));
+                                dadosGNRE.ValorGNRE = valorTotal.ToString().Replace(",", ".");
+                                dadosGNRE.DataPagamento = DateTime.Now.ToString("yyyy-MM-dd");
 
                                 dadosGNREs.Add(dadosGNRE);
                             }
                         }
+
                     }
                 }
                 return dadosGNREs;
             }
             catch (Exception ex)
             {
+
                 CustomNotification.defaultError("Erro na função " + ex.Message);
                 return null;
             }
+            finally
+            {
+                //CustomMessage.Sucess();
+            }
         }
+
+
+
+
+
 
 
 
@@ -446,11 +460,14 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
             [XmlElement(ElementName = "campoExtra", Namespace = "http://www.gnre.pe.gov.br")]
             public List<CampoExtra> CampoExtra { get; set; }
         }
-        
+
         [XmlRoot(ElementName = "item", Namespace = "http://www.gnre.pe.gov.br")]
         public class Item
         {
-            public Item() { }
+            public Item()
+            {
+                Valores = new List<Valor>(); // Inicializa a lista de valores
+            }
 
             [XmlElement(ElementName = "receita", Namespace = "http://www.gnre.pe.gov.br")]
             public string Receita { get; set; }
@@ -470,8 +487,9 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
             [XmlElement(ElementName = "dataVencimento", Namespace = "http://www.gnre.pe.gov.br")]
             public string DataVencimento { get; set; }
 
+            // Alteração: Lista de Valores
             [XmlElement(ElementName = "valor", Namespace = "http://www.gnre.pe.gov.br")]
-            public List<Valor> Valores { get; set; }  // Propriedade que falta e está causando o erro
+            public List<Valor> Valores { get; set; } // Agora é uma lista de valores
 
             [XmlElement(ElementName = "contribuinteDestinatario", Namespace = "http://www.gnre.pe.gov.br")]
             public ContribuinteDestinatario ContribuinteDestinatario { get; set; }
@@ -481,7 +499,7 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
 
             public Item Clone()
             {
-                return new Item
+                var clone = new Item
                 {
                     Receita = this.Receita,
                     DetalhamentoReceita = this.DetalhamentoReceita,
@@ -489,10 +507,12 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
                     Produto = this.Produto,
                     Referencia = this.Referencia,
                     DataVencimento = this.DataVencimento,
-                    Valores = this.Valores?.Select(v => v.Clone()).ToList(),  // Clona a lista de valores
+                    Valores = this.Valores.Select(v => v.Clone()).ToList(), // Clona a lista de valores
                     ContribuinteDestinatario = this.ContribuinteDestinatario,
                     CamposExtras = this.CamposExtras
                 };
+
+                return clone;
             }
         }
 
