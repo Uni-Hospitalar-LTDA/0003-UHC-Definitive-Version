@@ -1,0 +1,141 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using UHC3_Definitive_Version.Configuration;
+using UHC3_Definitive_Version.Customization;
+using UHC3_Definitive_Version.Domain.Entities.CI;
+
+namespace UHC3_Definitive_Version.App.ModFinanceiro.CI
+{
+    public partial class frmCI_Responsavel : CustomForm
+    {
+        public frmCI_Responsavel()
+        {
+            InitializeComponent();
+
+
+            //Properties
+            ConfigureFormProperties();
+            ConfigureButtonProperties();
+            ConfigureDataGridViewProperties();
+
+            //Events
+            ConfigureFormEvents();
+        }
+
+        /** Async Tasks **/
+        private async Task filterAsync()
+        {
+
+            List<string> vstatus = new List<string>();
+            string status = null;
+            if (chkActive.Checked)
+                vstatus.Add("1");
+            if (chkInactive.Checked)
+                vstatus.Add("0");
+
+            if (vstatus.Count > 0)
+                status = string.Join(",", vstatus);
+            else
+                status = "3";
+            try
+            {
+                dgvData.DataSource = await CI_Responsible.getAllToDataTableAsync(txtGenericFilter.Text, status);
+                dgvData.AutoResizeColumns();
+            }
+            catch (Exception ex)
+            {
+                CustomNotification.defaultError(ex.Message);
+            }
+        }
+
+        /** Configure Form **/
+        private void ConfigureFormProperties()
+        {
+            this.defaultFixedForm();
+        }
+        private void ConfigureFormEvents()
+        {
+            this.Load += frmCI_Responsavel_Load; ;
+        }
+        private void frmCI_Responsavel_Load(object sender, EventArgs e)
+        {
+            //Attributes
+            btnFilter_Click(sender, e);
+
+
+
+            ConfigureButtonEvents();
+            ConfigureTextBoxEvents();
+            ConfigureDataGridViewEvents();
+        }
+        /** Configure Buttons **/
+        private void ConfigureButtonProperties()
+        {
+            btnClose.toDefaultCloseButton();
+        }
+        private void ConfigureButtonEvents()
+        {
+            btnAdd.Click += btnAdd_Click;
+            btnEdit.Click += btnEdit_Click;
+            btnFilter.Click += btnFilter_Click;
+        }
+        private async void btnFilter_Click(object sender, EventArgs e)
+        {
+            await filterAsync();
+        }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvData.CurrentRow != null)
+            {
+                frmCI_Responsavel_Edit frmCI_Responsavel_Edit = new frmCI_Responsavel_Edit();
+                frmCI_Responsavel_Edit.responsibleId = dgvData.CurrentRow.Cells[0].Value.ToString();
+                frmCI_Responsavel_Edit.ShowDialog();
+                btnFilter_Click(sender, e);
+            }
+        }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmCI_Responsavel_Add frmCI_Responsavel_Add = new frmCI_Responsavel_Add();
+            frmCI_Responsavel_Add.ShowDialog();
+            btnFilter_Click(sender, e);
+        }
+
+        /** Configure DataGridView **/
+        private void ConfigureDataGridViewProperties()
+        {
+            dgvData.toDefault();
+            dgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+        }
+        private void ConfigureDataGridViewEvents()
+        {
+            dgvData.DoubleClick += dgvData_DoubleClick;
+        }
+
+        private void dgvData_DoubleClick(object sender, EventArgs e)
+        {
+            dgvData.DoubleClick += dgvData_DoubleClick;
+        }
+
+
+
+        /** Configure TextBox **/
+        private void ConfigureTextBoxEvents()
+        {
+            txtGenericFilter.KeyDown += txtGenericFilter_KeyDown;
+        }
+        private void txtGenericFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            btnFilter_Click(sender, e);
+        }
+
+    }
+}
