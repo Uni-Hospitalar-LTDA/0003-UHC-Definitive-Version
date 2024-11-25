@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC_DEFINITIVE_VERSION.App;
+using UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros;
 using UHC3_Definitive_Version.App.ModGerencial;
 using UHC3_Definitive_Version.Configuration;
 
@@ -18,7 +19,8 @@ namespace UHC3_Definitive_Version
             Task.Factory.StartNew(() => Section.carregar_Dependencias());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmUpdateScreen());
+            //Application.Run(new frmUpdateScreen());
+            Application.Run(new frmMonitores_ExpXmlGnre());
 
         }
     }

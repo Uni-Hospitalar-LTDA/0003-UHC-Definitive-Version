@@ -190,6 +190,21 @@ INNER JOIN [{Connection.dbBase}].dbo.State estadoDestinatario on estadoDestinata
                             string[] val = reader["valor_Tipo_Text"].ToString().Split(',');
                             Valor valor = new Valor { Tipo = val[0], Text = val[1] };
 
+
+                            //if (!string.IsNullOrEmpty(reader["referencia"].ToString()))
+                            //{
+                            //    string[] refer = reader["referencia"].ToString().Split(',');
+                            //    if (!string.IsNullOrEmpty(refer[0]))
+                            //        referencia.Periodo = refer[0];
+
+                            //    referencia.Mes = Convert.ToInt32(refer[1]).ToString("D2");
+                            //    referencia.Ano = refer[2];
+                            //    if (!string.IsNullOrEmpty(refer[3]))
+                            //        referencia.parcela = refer[3];
+
+                            //    item.Referencia = referencia;
+                            //}
+
                             // Preenche destinatário
                             string cnpjDestinatario = reader["cnpjDestinatario"].ToString();
                             identificacaoDestinatario.CNPJ = cnpjDestinatario;

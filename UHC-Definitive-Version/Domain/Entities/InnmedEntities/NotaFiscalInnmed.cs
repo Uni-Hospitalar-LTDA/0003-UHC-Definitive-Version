@@ -23,7 +23,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.InnmedEntities
                                      ,NF_Saida.dat_emissao [dataEmissao]
                                      ,NF_Saida.Vlr_TotalNota [valorTotal]
                                      ,NF_Saida.cod_cliente [idCliente]
-                                FROM {Connection.dbDMD}.dbo.[NFSCB] WHERE Status = 'F' and num_nota = {nf}
+                                FROM {Connection.dbDMD}.dbo.[NFSCB] NF_Saida WHERE Status = 'F' and num_nota = {nf}
                                 and NF_Saida.Dat_Emissao BETWEEN '{dt1.ToString("yyyyMMdd")}' AND '{dt2.ToString("yyyyMMdd")}'
                              ";
             return await getToClass(query);

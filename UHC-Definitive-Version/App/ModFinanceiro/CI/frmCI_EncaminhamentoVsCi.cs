@@ -104,6 +104,17 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.CI
             btnMoreFollowUpers.Click += btnMoreFollowUpers_Click;
             btnSetPendent.Click += btnSetPendent_Click;
             btnSetComplete.Click += btnSetComplete_Click;
+            btnAguardandoFinanceiro.Click += btnAguardandoFinanceiro_Click;
+        }
+
+        private async void btnAguardandoFinanceiro_Click(object sender, EventArgs e)
+        {
+
+            if (CustomNotification.defaultQuestionAlert("O status será alterado para Aguardando Financeiro, deseja prosseguir?") == System.Windows.Forms.DialogResult.Yes)
+            {
+                await CI_Header.setStatusAsync(header);
+                txtStatus.Text = "Aguardando Financeiro";
+            }
         }
 
         private async void btnSetComplete_Click(object sender, EventArgs e)

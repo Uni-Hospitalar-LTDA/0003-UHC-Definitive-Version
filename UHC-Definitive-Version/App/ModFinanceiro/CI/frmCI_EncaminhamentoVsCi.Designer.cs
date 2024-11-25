@@ -41,6 +41,7 @@
             this.btnSetComplete = new System.Windows.Forms.Button();
             this.btnSetPendent = new System.Windows.Forms.Button();
             this.lblIdCi = new System.Windows.Forms.Label();
+            this.btnAguardandoFinanceiro = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnMoreFollowUpers
@@ -129,7 +130,7 @@
             // btnSetComplete
             // 
             this.btnSetComplete.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnSetComplete.Location = new System.Drawing.Point(187, 412);
+            this.btnSetComplete.Location = new System.Drawing.Point(358, 412);
             this.btnSetComplete.Name = "btnSetComplete";
             this.btnSetComplete.Size = new System.Drawing.Size(165, 23);
             this.btnSetComplete.TabIndex = 84;
@@ -156,11 +157,22 @@
             this.lblIdCi.TabIndex = 82;
             this.lblIdCi.Text = "Id: 0000";
             // 
+            // btnAguardandoFinanceiro
+            // 
+            this.btnAguardandoFinanceiro.BackColor = System.Drawing.Color.IndianRed;
+            this.btnAguardandoFinanceiro.Location = new System.Drawing.Point(187, 412);
+            this.btnAguardandoFinanceiro.Name = "btnAguardandoFinanceiro";
+            this.btnAguardandoFinanceiro.Size = new System.Drawing.Size(165, 23);
+            this.btnAguardandoFinanceiro.TabIndex = 95;
+            this.btnAguardandoFinanceiro.Text = "Aguardando Financeiro";
+            this.btnAguardandoFinanceiro.UseVisualStyleBackColor = false;
+            // 
             // frmCI_EncaminhamentoVsCi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(841, 440);
+            this.Controls.Add(this.btnAguardandoFinanceiro);
             this.Controls.Add(this.btnMoreFollowUpers);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.txtStatus);
@@ -175,6 +187,18 @@
             this.Controls.Add(this.btnSetPendent);
             this.Controls.Add(this.lblIdCi);
             this.Name = "frmCI_EncaminhamentoVsCi";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Status da C.I.";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,5 +220,6 @@
         private System.Windows.Forms.Button btnSetComplete;
         private System.Windows.Forms.Button btnSetPendent;
         private System.Windows.Forms.Label lblIdCi;
+        private System.Windows.Forms.Button btnAguardandoFinanceiro;
     }
 }
