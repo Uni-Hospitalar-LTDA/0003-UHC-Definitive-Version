@@ -1,0 +1,99 @@
+# Arquivos de compilação do Visual Studio
+*.obj
+*.bin
+*.suo
+*.user
+*.suo
+*.cache
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.opensdf
+*.vs
+
+# Arquivos de compilação do Visual Studio Code
+.vscode/
+bin/
+obj/
+
+# Arquivos de saída de build
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb][Ii][Nn]/
+[Oo][Bb][Jj]/
+[Ll][Oo][Gg]s/
+
+# Arquivos e pastas gerados pelo Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Arquivos de projeto e solução do Visual Studio
+*.sln
+*.suo
+*.user
+*.suo
+*.cache
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.opensdf
+
+# Pasta de saída padrão (geralmente bin/)
+[Bb]in/
+[Oo]bj/
+
+# Arquivos de log e dados
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.db3
+
+# Arquivos temporários
+[Tt]emp/
+[Tt]empTest/
+
+# Arquivos de compilação do Windows
+*.pdb
+*.exe
+
+# Arquivos de pacotes NuGet
+
+
+# Arquivos de projeto específicos
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs de erros
+logs/
+*.log
+
+# Visual Studio 2019 config folder
+.vs2019/
+
+# Rider
+.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/misc.xml
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
