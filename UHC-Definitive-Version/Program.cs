@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC_DEFINITIVE_VERSION.App;
+using UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros;
 using UHC3_Definitive_Version.Configuration;
 
 namespace UHC3_Definitive_Version

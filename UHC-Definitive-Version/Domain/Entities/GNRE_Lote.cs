@@ -31,13 +31,38 @@ namespace UHC3_Definitive_Version.Domain.Entities
                 Directory.CreateDirectory(path);
             }
 
+            // Gera o nome do arquivo
+            string fileName = path + gerarNomeArquivoLoteGnre();
+
             // Serializa o objeto para XML com o namespace correto
             XmlSerializer serializer = new XmlSerializer(typeof(TLote_GNRE));
-            using (StreamWriter writer = new StreamWriter(path + gerarNomeArquivoLoteGnre()))
+            using (StreamWriter writer = new StreamWriter(fileName))
             {
                 serializer.Serialize(writer, lote, ns);
             }
+
+            // Altera diretamente no arquivo XML
+            AjustarCNPJparaCPF(fileName);
         }
+
+        /// <summary>
+        /// Ajusta o CNPJ para CPF no arquivo XML se o valor tiver 9 dígitos.
+        /// </summary>
+        /// <param name="filePath">Caminho do arquivo XML a ser ajustado.</param>
+        private static void AjustarCNPJparaCPF(string filePath)
+        {
+            // Lê todo o conteúdo do arquivo XML
+            string xmlContent = File.ReadAllText(filePath);
+
+            // Usa Regex para localizar e ajustar os valores de CNPJ com 9 dígitos
+            string pattern = @"<CNPJ>(\d{11})</CNPJ>";
+            string replacement = @"<CPF>$1</CPF>";
+            string adjustedXml = System.Text.RegularExpressions.Regex.Replace(xmlContent, pattern, replacement);
+
+            // Reescreve o arquivo com as alterações
+            File.WriteAllText(filePath, adjustedXml);
+        }
+
 
         public static string gerarNomeArquivoLoteGnre()
         {
@@ -77,7 +102,7 @@ namespace UHC3_Definitive_Version.Domain.Entities
                         //MessageBox.Show(Session.Unidade + " " + nf);
                         conn.Open();
                         SqlCommand command = conn.CreateCommand();
-                        command.CommandText = $@" SELECT 
+                        command.CommandText = $@" SELECT distinct
           [ufFavorecida] = NF_Saida.Estado
          ,[tipoGnre] = '0'
          ,[receita] = '100102'
@@ -157,8 +182,10 @@ namespace UHC3_Definitive_Version.Domain.Entities
         FROM [{Connection.dbDMD}].dbo.[NFSCB] NF_Saida
         CROSS JOIN [{Connection.dbDMD}].dbo.[EMPRE] Empresa
         JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
+        JOIN [{Connection.dbDMD}].dbo.[ESTAD] Estado ON Estado.Codigo = NF_Saida.Estado
         LEFT JOIN [{Connection.dbBase}].dbo.City municipioEmitente ON municipioEmitente.description = Empresa.Cidade  collate Latin1_General_CI_AS
-        LEFT JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
+        LEFT JOIN [{Connection.dbBase}].dbo.City municipioDestinatario ON (municipioDestinatario.description = NF_Saida.Cidade  collate Latin1_General_CI_AS
+                                                  AND municipioDestinatario.idIBGE_State = Estado.Cod_Ibge collate Latin1_General_CI_AS) 
                                                    WHERE NUM_NOTA = {nf}";
                         Console.WriteLine(command.CommandText);
                         SqlDataReader reader;

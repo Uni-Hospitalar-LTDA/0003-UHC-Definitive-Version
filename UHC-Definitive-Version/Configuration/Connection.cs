@@ -20,8 +20,8 @@ namespace UHC3_Definitive_Version.Configuration
             if (unidade == "UNI HOSPITALAR")
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-                ($@"Server=10.5.1.42;Database={dbBase}");
-                //($@"Server=10.5.1.34;Database={dbBase}");
+                //($@"Server=10.5.1.42;Database={dbBase}");
+                ($@"Server=10.5.1.34;Database={dbBase}");
                 builder.UserID = "sa";
                 builder.Password = "vls021130";
                 //builder.Password = "rfds3142365.";
@@ -29,9 +29,9 @@ namespace UHC3_Definitive_Version.Configuration
                 return new SqlConnection(conn);
             }
             else if (unidade == "UNI CEARÁ")
-                {
-                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
-                    ($@"Server=10.5.1.23;Database={dbBase}");
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
+                ($@"Server=10.5.1.23;Database={dbBase}");
                 builder.UserID = "sa";
                 builder.Password = "vls021130";
                 //builder.Password = "rfds3142365.";
@@ -48,6 +48,8 @@ namespace UHC3_Definitive_Version.Configuration
                 conn = builder.ConnectionString;
                 return new SqlConnection(conn);
             }
+
+
 
             return null;
         }

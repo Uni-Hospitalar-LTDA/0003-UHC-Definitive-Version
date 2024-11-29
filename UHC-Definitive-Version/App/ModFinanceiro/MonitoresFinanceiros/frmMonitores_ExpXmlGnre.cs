@@ -693,32 +693,44 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
         }
         private async void btnExportar_Click(object sender, EventArgs e)
         {
-
             if (lsbExportar.Items.Count > 0)
             {
                 try
                 {
+                    // Ordena o dicionário apenas por Value (string) ascendente
+                    var sortedEntries = NFtoExportDictionary
+                        .OrderBy(entry => entry.Key); // Ordena pelo valor (string)
+
                     List<string> nfs = new List<string>();
-                    foreach (var item in NFtoExportDictionary)
+
+                    // Processa os itens ordenados diretamente
+                    foreach (var entry in sortedEntries)
                     {
-                        //MessageBox.Show(item.Value);
-                        nfs.Add(item.Value.Trim());
-
-                        List<GNRE_Observation> obs = new List<GNRE_Observation>();
-                        foreach (var nf in nfs)
-                        {
-                            obs.Add(new GNRE_Observation { NF = nf });
-                        }
-                        await GNRE_Observation.manualAsync(obs, null);
+                        nfs.Add(entry.Value.Trim());
+                        
                     }
-                    GNRE_Lote.exportar(@"c:\XML_lote\", nfs);
-                }
-                catch
-                {
 
+                    List<GNRE_Observation> obs = new List<GNRE_Observation>();
+                    foreach (var nf in nfs)
+                    {
+                        obs.Add(new GNRE_Observation { NF = nf });
+                    }
+
+                    //Chama o método manualAsync com as observações criadas
+                   await GNRE_Observation.manualAsync(obs, null);
+
+                    //Exporta o lote para o local especificado
+                    GNRE_Lote.exportar(@"c:\XML_lote\", nfs);
+
+                }
+                catch (Exception ex)
+                {
+                    // Trate exceções aqui (exemplo: log de erro)
+                    CustomNotification.defaultAlert($"Erro ao exportar: {ex.Message}");
                 }
                 finally
                 {
+                    // Realiza ações de limpeza e notificação
                     btnPesquisar_Click(sender, e);
                     limparDados();
                     CustomNotification.defaultInformation();
@@ -729,6 +741,8 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
                 CustomNotification.defaultAlert("Selecione alguma nota.");
             }
         }
+
+
 
 
         /** Links externos **/
