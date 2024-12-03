@@ -19,17 +19,7 @@ namespace UHC3_Definitive_Version.Configuration.Update
         {
             CustomNotification.defaultAlert("Rollback detectado! A aplicação passará por reparos automáticos. Aguarde a tela de login.");
             string url = _updateUrlWeb + $@"/releases/download/{rollbackTag}/Setup.exe";
-            string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MyApp", "Setup.exe");
-
-
-
-
-            //var updates = await CheckVersionAsync();
-            //if (updates == Application.ProductVersion)
-            //{
-            //CustomNotification.defaultInformation(updates);
-            //return;
-            //}
+            string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MyApp", "Setup.exe");         
 
             try
             {
@@ -50,9 +40,7 @@ namespace UHC3_Definitive_Version.Configuration.Update
 
                         // Escreve o arquivo na pasta de destino
                         File.WriteAllBytes(outputPath, fileBytes);
-                        Console.WriteLine(outputPath);
-                        // Verifica integridade do arquivo (opcional)
-                        // string checksum = CalculateSHA256(outputPath); // Implemente essa função se necessário.
+                        Console.WriteLine(outputPath);                        
 
                         // Executa o arquivo baixado
                         var process = new Process

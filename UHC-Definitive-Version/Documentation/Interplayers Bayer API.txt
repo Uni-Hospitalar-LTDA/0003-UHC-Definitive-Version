@@ -4,6 +4,6 @@ Troca de Arquivo: WebApi
 Client de API “SWAGGER” 
  
 DADOS HOMOLOGAÇÃO:
-URL: https://homologacaoesp.interplayers.com.br/INT/Especialidades/WebAPI/index.html
-Login: dist.unihospitalar
-Senha: dist.Uni@168
+URL: https://homologacaoesp.interplayers.com.br/bayer/Especialidades/WebAPI/index.html
+Login: dist.UniHosp_bayer
+Senha: dist.Uni@66

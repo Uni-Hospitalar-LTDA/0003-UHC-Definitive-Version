@@ -877,6 +877,12 @@
     <Compile Include="App\ModVendas\Pedidos\frmInstanciaDePedidos.Designer.cs">
       <DependentUpon>frmInstanciaDePedidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmPedidoBayerInterplayers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\ModVendas\Pedidos\frmPedidoBayerInterplayers.Designer.cs">
+      <DependentUpon>frmPedidoBayerInterplayers.cs</DependentUpon>
+    </Compile>
     <Compile Include="App\ModVendas\Pedidos\frmPedidoPfizerInterplayers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1526,6 +1532,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModVendas\Pedidos\frmInstanciaDePedidos.resx">
       <DependentUpon>frmInstanciaDePedidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\ModVendas\Pedidos\frmPedidoBayerInterplayers.resx">
+      <DependentUpon>frmPedidoBayerInterplayers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ModVendas\Pedidos\frmPedidoPfizerInterplayers.resx">
       <DependentUpon>frmPedidoPfizerInterplayers.cs</DependentUpon>
