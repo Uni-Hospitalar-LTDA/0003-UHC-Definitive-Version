@@ -47,6 +47,9 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
             cbxStatus.SelectedIndexChanged += pesquisar;
             txtGiroFinal.TextChanged += pesquisar;
             txtFiltroPregao.TextChanged += pesquisar;
+            rdbDatInicial.CheckedChanged += pesquisar;
+            rdbDatFinal.CheckedChanged += pesquisar;
+            rdbDatInicioFinal.CheckedChanged += pesquisar;
 
             txtGiroInicial.Text = 0.ToString();
             txtGiroFinal.Text = 100.ToString();
@@ -185,9 +188,7 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
                 var select = from contrato in Contratos
                              join produto in Produtos_Externos.produtos on contrato.cod_produto equals produto.codigo
                              join fabricante in Fabricantes_Externos.fabricantes on produto.Cod_Fabricante equals fabricante.codigo
-                             where                               
-                                
-                                //(Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
+                             where                                                           
                                  (rdbDatInicial.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
                                  || (rdbDatFinal.Checked && Convert.ToDateTime(contrato.data_Final) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
                                  || (rdbDatInicioFinal.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
@@ -278,6 +279,8 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
         {
             this.Load += frmDetalhamentoDeContratos_Load;
             this.FormClosing += frmDetalhamentoDeContratos_FormClosing;
+
+
         }
         private async void frmDetalhamentoDeContratos_Load(object sender, EventArgs e)
         {
