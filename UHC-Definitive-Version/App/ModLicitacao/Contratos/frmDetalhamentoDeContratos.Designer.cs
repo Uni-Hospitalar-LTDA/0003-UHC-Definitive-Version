@@ -60,11 +60,9 @@
             this.rdbDatInicioFinal = new System.Windows.Forms.RadioButton();
             this.rdbDatFinal = new System.Windows.Forms.RadioButton();
             this.rdbDatInicial = new System.Windows.Forms.RadioButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.gpboxFiltro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -349,23 +347,11 @@
             this.rdbDatInicial.Text = "Intervalo de Início do Contrato\n";
             this.rdbDatInicial.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox1.Image = global::UHC3_Definitive_Version.Properties.Resources.court;
-            this.pictureBox1.Location = new System.Drawing.Point(607, 204);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(265, 180);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 65;
-            this.pictureBox1.TabStop = false;
-            // 
             // frmDetalhamentoDeContratos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1111, 651);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.gpboxFiltro);
             this.Controls.Add(this.btnSalvarPrecosCompra);
             this.Controls.Add(this.label2);
@@ -411,7 +397,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.gpboxFiltro.ResumeLayout(false);
             this.gpboxFiltro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -451,6 +436,5 @@
         private System.Windows.Forms.RadioButton rdbDatInicioFinal;
         private System.Windows.Forms.RadioButton rdbDatFinal;
         private System.Windows.Forms.RadioButton rdbDatInicial;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
