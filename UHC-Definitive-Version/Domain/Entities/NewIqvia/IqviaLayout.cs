@@ -407,8 +407,8 @@ ORDER BY NotaFiscal ASC;
             var baseDados = await getAllToListAsync(dt, bloqueio,id);
 
             IqviaLayout_Produto_Header header_Produto = new IqviaLayout_Produto_Header();
-            header_Produto._060Data_inicial = $"{dt.ToString("yyyyMMdd")}";
-            header_Produto._070Data_final = $"{dt.ToString("yyyyMMdd")}";
+            header_Produto._060Data_inicial = $"{dt.ToString("ddMMyyyy")}";
+            header_Produto._070Data_final = $"{dt.ToString("ddMMyyyy")}";
             string header = header_Produto.getHeader();
 
 
@@ -463,8 +463,8 @@ ORDER BY NotaFiscal ASC;
             var baseDados = await getAllToListAsync(dt, bloqueio,id);
 
             IqviaLayout_Venda_Header header_Venda = new IqviaLayout_Venda_Header();
-            header_Venda._040Data_inicio = $"{dt.ToString("yyyyMMdd")}";
-            header_Venda._050Data_final = $"{dt.ToString("yyyyMMdd")}";
+            header_Venda._040Data_inicio = $"{dt.ToString("ddMMyyyy")}";
+            header_Venda._050Data_final = $"{dt.ToString("ddMMyyyy")}";
 
             string header = header_Venda.getHeader();
 
