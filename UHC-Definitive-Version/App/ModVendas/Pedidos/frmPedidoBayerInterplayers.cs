@@ -188,7 +188,7 @@ namespace UHC3_Definitive_Version.App.ModVendas.Pedidos
                     });
 
                     CustomNotification.defaultInformation($"Pedido enviado com sucesso!\nNúmero do Pedido: {pedidoPortal}\nStatus: {statusPedido}");
-                    this.Close();
+                    //this.Close();
                 }
                 else
                 {
