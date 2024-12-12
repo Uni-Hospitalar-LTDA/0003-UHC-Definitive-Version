@@ -152,8 +152,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                 {
                     idFtp = ftp.id,
                     Feedback = feedback,
-                    DataArquivo = date.ToString("yyyy-MM-dd"),
-                    DataEnvio = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    DataArquivo = date.ToString("dd-MM-yyyy"),
+                    DataEnvio = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"),
                     idUser = Section.idUsuario,
                     LayoutProduto = resultadoProduto.Contains("sucesso") ? "1" : "0",
                     LayoutCliente = resultadoCliente.Contains("sucesso") ? "1" : "0",
@@ -187,8 +187,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial.InformacoesRestritas
                 {
                     idFtp = ftp.id,
                     Feedback = $"Erro ao enviar: {ex.Message}",
-                    DataArquivo = date.ToString("yyyy-MM-dd"),
-                    DataEnvio = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    DataArquivo = date.ToString("dd-MM-yyyy"),
+                    DataEnvio = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"),
                     idUser = Section.idUsuario,
                     LayoutProduto = "0",
                     LayoutCliente = "0",

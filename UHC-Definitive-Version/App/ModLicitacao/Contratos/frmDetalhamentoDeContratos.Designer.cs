@@ -40,7 +40,6 @@
             this.cbxStatus = new System.Windows.Forms.ComboBox();
             this.lblEstado = new System.Windows.Forms.Label();
             this.txtEstado = new System.Windows.Forms.TextBox();
-            this.lblFiltroPorData = new System.Windows.Forms.Label();
             this.txtCodFabricante = new System.Windows.Forms.TextBox();
             this.lblFabricante = new System.Windows.Forms.Label();
             this.lblCliente = new System.Windows.Forms.Label();
@@ -57,14 +56,19 @@
             this.btnFechar = new System.Windows.Forms.Button();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.btnSalvarPrecosCompra = new System.Windows.Forms.Button();
+            this.gpboxFiltro = new System.Windows.Forms.GroupBox();
+            this.rdbDatInicioFinal = new System.Windows.Forms.RadioButton();
+            this.rdbDatFinal = new System.Windows.Forms.RadioButton();
+            this.rdbDatInicial = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            this.gpboxFiltro.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 289);
+            this.label2.Location = new System.Drawing.Point(63, 395);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 62;
@@ -72,7 +76,7 @@
             // 
             // txtGiroInicial
             // 
-            this.txtGiroInicial.Location = new System.Drawing.Point(13, 286);
+            this.txtGiroInicial.Location = new System.Drawing.Point(13, 392);
             this.txtGiroInicial.Name = "txtGiroInicial";
             this.txtGiroInicial.Size = new System.Drawing.Size(47, 20);
             this.txtGiroInicial.TabIndex = 61;
@@ -89,7 +93,7 @@
             // lblFiltroPorPregao
             // 
             this.lblFiltroPorPregao.AutoSize = true;
-            this.lblFiltroPorPregao.Location = new System.Drawing.Point(221, 186);
+            this.lblFiltroPorPregao.Location = new System.Drawing.Point(14, 294);
             this.lblFiltroPorPregao.Name = "lblFiltroPorPregao";
             this.lblFiltroPorPregao.Size = new System.Drawing.Size(133, 13);
             this.lblFiltroPorPregao.TabIndex = 59;
@@ -97,14 +101,14 @@
             // 
             // txtFiltroPregao
             // 
-            this.txtFiltroPregao.Location = new System.Drawing.Point(220, 202);
+            this.txtFiltroPregao.Location = new System.Drawing.Point(13, 310);
             this.txtFiltroPregao.Name = "txtFiltroPregao";
-            this.txtFiltroPregao.Size = new System.Drawing.Size(254, 20);
+            this.txtFiltroPregao.Size = new System.Drawing.Size(558, 20);
             this.txtFiltroPregao.TabIndex = 58;
             // 
             // txtGiroFinal
             // 
-            this.txtGiroFinal.Location = new System.Drawing.Point(91, 286);
+            this.txtGiroFinal.Location = new System.Drawing.Point(91, 392);
             this.txtGiroFinal.Name = "txtGiroFinal";
             this.txtGiroFinal.Size = new System.Drawing.Size(47, 20);
             this.txtGiroFinal.TabIndex = 57;
@@ -112,7 +116,7 @@
             // lblFiltroPorGiro
             // 
             this.lblFiltroPorGiro.AutoSize = true;
-            this.lblFiltroPorGiro.Location = new System.Drawing.Point(10, 266);
+            this.lblFiltroPorGiro.Location = new System.Drawing.Point(10, 372);
             this.lblFiltroPorGiro.Name = "lblFiltroPorGiro";
             this.lblFiltroPorGiro.Size = new System.Drawing.Size(102, 13);
             this.lblFiltroPorGiro.TabIndex = 56;
@@ -121,7 +125,7 @@
             // lblContadorDeLinhas
             // 
             this.lblContadorDeLinhas.AutoSize = true;
-            this.lblContadorDeLinhas.Location = new System.Drawing.Point(10, 330);
+            this.lblContadorDeLinhas.Location = new System.Drawing.Point(10, 415);
             this.lblContadorDeLinhas.Name = "lblContadorDeLinhas";
             this.lblContadorDeLinhas.Size = new System.Drawing.Size(74, 13);
             this.lblContadorDeLinhas.TabIndex = 55;
@@ -130,7 +134,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(272, 225);
+            this.label1.Location = new System.Drawing.Point(272, 333);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 54;
@@ -140,15 +144,15 @@
             // 
             this.cbxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxStatus.FormattingEnabled = true;
-            this.cbxStatus.Location = new System.Drawing.Point(272, 240);
+            this.cbxStatus.Location = new System.Drawing.Point(272, 348);
             this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Size = new System.Drawing.Size(202, 21);
+            this.cbxStatus.Size = new System.Drawing.Size(299, 21);
             this.cbxStatus.TabIndex = 53;
             // 
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(10, 225);
+            this.lblEstado.Location = new System.Drawing.Point(10, 333);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(83, 13);
             this.lblEstado.TabIndex = 52;
@@ -156,20 +160,11 @@
             // 
             // txtEstado
             // 
-            this.txtEstado.Location = new System.Drawing.Point(13, 241);
+            this.txtEstado.Location = new System.Drawing.Point(13, 349);
             this.txtEstado.MaxLength = 40;
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.Size = new System.Drawing.Size(253, 20);
             this.txtEstado.TabIndex = 51;
-            // 
-            // lblFiltroPorData
-            // 
-            this.lblFiltroPorData.AutoSize = true;
-            this.lblFiltroPorData.Location = new System.Drawing.Point(10, 186);
-            this.lblFiltroPorData.Name = "lblFiltroPorData";
-            this.lblFiltroPorData.Size = new System.Drawing.Size(161, 13);
-            this.lblFiltroPorData.TabIndex = 50;
-            this.lblFiltroPorData.Text = "Filtro por Data Inicial do Contrato";
             // 
             // txtCodFabricante
             // 
@@ -252,7 +247,7 @@
             // dtpInicial
             // 
             this.dtpInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInicial.Location = new System.Drawing.Point(13, 202);
+            this.dtpInicial.Location = new System.Drawing.Point(13, 32);
             this.dtpInicial.Name = "dtpInicial";
             this.dtpInicial.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dtpInicial.Size = new System.Drawing.Size(96, 20);
@@ -261,7 +256,7 @@
             // dtpFinal
             // 
             this.dtpFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFinal.Location = new System.Drawing.Point(115, 202);
+            this.dtpFinal.Location = new System.Drawing.Point(115, 32);
             this.dtpFinal.Name = "dtpFinal";
             this.dtpFinal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dtpFinal.Size = new System.Drawing.Size(99, 20);
@@ -276,7 +271,7 @@
             // 
             // btnFechar
             // 
-            this.btnFechar.Location = new System.Drawing.Point(987, 487);
+            this.btnFechar.Location = new System.Drawing.Point(1024, 624);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
             this.btnFechar.TabIndex = 44;
@@ -289,26 +284,75 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvData.Location = new System.Drawing.Point(12, 346);
+            this.dgvData.Location = new System.Drawing.Point(12, 435);
             this.dgvData.Name = "dgvData";
             this.dgvData.RowHeadersWidth = 51;
-            this.dgvData.Size = new System.Drawing.Size(1049, 135);
+            this.dgvData.Size = new System.Drawing.Size(1087, 183);
             this.dgvData.TabIndex = 43;
             // 
             // btnSalvarPrecosCompra
             // 
-            this.btnSalvarPrecosCompra.Location = new System.Drawing.Point(900, 320);
+            this.btnSalvarPrecosCompra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalvarPrecosCompra.Location = new System.Drawing.Point(938, 405);
             this.btnSalvarPrecosCompra.Name = "btnSalvarPrecosCompra";
             this.btnSalvarPrecosCompra.Size = new System.Drawing.Size(161, 23);
             this.btnSalvarPrecosCompra.TabIndex = 63;
             this.btnSalvarPrecosCompra.Text = "Salvar preços de compra";
             this.btnSalvarPrecosCompra.UseVisualStyleBackColor = true;
             // 
+            // gpboxFiltro
+            // 
+            this.gpboxFiltro.Controls.Add(this.rdbDatInicioFinal);
+            this.gpboxFiltro.Controls.Add(this.dtpFinal);
+            this.gpboxFiltro.Controls.Add(this.rdbDatFinal);
+            this.gpboxFiltro.Controls.Add(this.dtpInicial);
+            this.gpboxFiltro.Controls.Add(this.rdbDatInicial);
+            this.gpboxFiltro.Location = new System.Drawing.Point(13, 204);
+            this.gpboxFiltro.Name = "gpboxFiltro";
+            this.gpboxFiltro.Size = new System.Drawing.Size(558, 82);
+            this.gpboxFiltro.TabIndex = 64;
+            this.gpboxFiltro.TabStop = false;
+            this.gpboxFiltro.Text = "Filtro por Data do Contrato";
+            // 
+            // rdbDatInicioFinal
+            // 
+            this.rdbDatInicioFinal.AutoSize = true;
+            this.rdbDatInicioFinal.Location = new System.Drawing.Point(255, 59);
+            this.rdbDatInicioFinal.Name = "rdbDatInicioFinal";
+            this.rdbDatInicioFinal.Size = new System.Drawing.Size(279, 17);
+            this.rdbDatInicioFinal.TabIndex = 66;
+            this.rdbDatInicioFinal.TabStop = true;
+            this.rdbDatInicioFinal.Text = "Intervalo Geral do Contrato (Data de Início e Término)\n";
+            this.rdbDatInicioFinal.UseVisualStyleBackColor = true;
+            // 
+            // rdbDatFinal
+            // 
+            this.rdbDatFinal.AutoSize = true;
+            this.rdbDatFinal.Location = new System.Drawing.Point(255, 36);
+            this.rdbDatFinal.Name = "rdbDatFinal";
+            this.rdbDatFinal.Size = new System.Drawing.Size(180, 17);
+            this.rdbDatFinal.TabIndex = 65;
+            this.rdbDatFinal.TabStop = true;
+            this.rdbDatFinal.Text = "Intervalo de Término do Contrato\n";
+            this.rdbDatFinal.UseVisualStyleBackColor = true;
+            // 
+            // rdbDatInicial
+            // 
+            this.rdbDatInicial.AutoSize = true;
+            this.rdbDatInicial.Location = new System.Drawing.Point(255, 13);
+            this.rdbDatInicial.Name = "rdbDatInicial";
+            this.rdbDatInicial.Size = new System.Drawing.Size(169, 17);
+            this.rdbDatInicial.TabIndex = 42;
+            this.rdbDatInicial.TabStop = true;
+            this.rdbDatInicial.Text = "Intervalo de Início do Contrato\n";
+            this.rdbDatInicial.UseVisualStyleBackColor = true;
+            // 
             // frmDetalhamentoDeContratos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 514);
+            this.ClientSize = new System.Drawing.Size(1111, 651);
+            this.Controls.Add(this.gpboxFiltro);
             this.Controls.Add(this.btnSalvarPrecosCompra);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtGiroInicial);
@@ -322,7 +366,6 @@
             this.Controls.Add(this.cbxStatus);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.txtEstado);
-            this.Controls.Add(this.lblFiltroPorData);
             this.Controls.Add(this.txtCodFabricante);
             this.Controls.Add(this.lblFabricante);
             this.Controls.Add(this.lblCliente);
@@ -333,8 +376,6 @@
             this.Controls.Add(this.txtProdutoGenerico);
             this.Controls.Add(this.txtCodCliente);
             this.Controls.Add(this.txtDescricaoCliente);
-            this.Controls.Add(this.dtpInicial);
-            this.Controls.Add(this.dtpFinal);
             this.Controls.Add(this.txtDescricaoFabricante);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.dgvData);
@@ -354,6 +395,8 @@
             this.Text = "Detalhamento de Contratos";
             ((System.ComponentModel.ISupportInitialize)(this.dgvColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            this.gpboxFiltro.ResumeLayout(false);
+            this.gpboxFiltro.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,7 +416,6 @@
         private System.Windows.Forms.ComboBox cbxStatus;
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.TextBox txtEstado;
-        private System.Windows.Forms.Label lblFiltroPorData;
         private System.Windows.Forms.TextBox txtCodFabricante;
         private System.Windows.Forms.Label lblFabricante;
         private System.Windows.Forms.Label lblCliente;
@@ -390,5 +432,9 @@
         private System.Windows.Forms.Button btnFechar;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.Button btnSalvarPrecosCompra;
+        private System.Windows.Forms.GroupBox gpboxFiltro;
+        private System.Windows.Forms.RadioButton rdbDatInicioFinal;
+        private System.Windows.Forms.RadioButton rdbDatFinal;
+        private System.Windows.Forms.RadioButton rdbDatInicial;
     }
 }

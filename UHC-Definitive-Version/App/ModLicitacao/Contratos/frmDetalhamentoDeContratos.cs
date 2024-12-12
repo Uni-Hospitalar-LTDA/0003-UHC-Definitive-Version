@@ -47,12 +47,16 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
             cbxStatus.SelectedIndexChanged += pesquisar;
             txtGiroFinal.TextChanged += pesquisar;
             txtFiltroPregao.TextChanged += pesquisar;
+            rdbDatInicial.CheckedChanged += pesquisar;
+            rdbDatFinal.CheckedChanged += pesquisar;
+            rdbDatInicioFinal.CheckedChanged += pesquisar;
 
             txtGiroInicial.Text = 0.ToString();
             txtGiroFinal.Text = 100.ToString();
 
 
             ConfigreFormEvents();
+            RadioButtonsProperties();
         }
 
         /** Instância **/
@@ -185,8 +189,11 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
                              join produto in Produtos_Externos.produtos on contrato.cod_produto equals produto.codigo
                              join fabricante in Fabricantes_Externos.fabricantes on produto.Cod_Fabricante equals fabricante.codigo
                              where
-                                (Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value
-                                 && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
+                                 (
+                                 (rdbDatInicial.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
+                                 || (rdbDatFinal.Checked && Convert.ToDateTime(contrato.data_Final) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
+                                 || (rdbDatInicioFinal.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
+                                 )
                                  && contrato.fabricanteFantasia.Contains(txtDescricaoFabricante.Text)
                                  && contrato.rzsocial_cliente.Contains(txtDescricaoCliente.Text)
                                  && contrato.produto.Contains(txtDescricaoProduto.Text)
@@ -274,6 +281,8 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
         {
             this.Load += frmDetalhamentoDeContratos_Load;
             this.FormClosing += frmDetalhamentoDeContratos_FormClosing;
+
+
         }
         private async void frmDetalhamentoDeContratos_Load(object sender, EventArgs e)
         {
@@ -675,7 +684,11 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
             }
         }
 
-
+        private void RadioButtonsProperties()
+        {
+            rdbDatInicial.Checked = true;
+        }
 
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using UHC3_Definitive_Version.Configuration;
 using System;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace UHC3_Definitive_Version.Domain.IMS
 {
@@ -39,7 +40,7 @@ namespace UHC3_Definitive_Version.Domain.IMS
         public static async Task<string> getHeaderAsync(DateTime date)
         {
             string query = $@"SELECT                                                 
-                           _010Tipo_de_Registro = '{4}'
+                           _010Tipo_de_Registro  = '{4}'
                            ,_020Fixo = '{0}'
                            ,_030Seu_codigo_IQVIA = '{Section.CodIqvia}'
                            ,_040Data_inicio = '{date.ToString("ddMMyyyy")}'
