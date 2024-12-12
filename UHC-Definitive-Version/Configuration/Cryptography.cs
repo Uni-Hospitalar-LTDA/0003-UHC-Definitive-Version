@@ -1,114 +1,109 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Integra.Configuration
+namespace UHC3_Definitive_Version.Configuration
 {
-    /// <summary>
-    /// Classe responsável por criptografia e descriptografia de dados.
-    /// </summary>
-    public static class Cryptography
+    public class Cryptography
     {
-        private const int Keysize = 256; // Tamanho da chave em bits
-        private const int DerivationIterations = 1000; // Iterações para derivar a chave
-        private const string MasterKey = "Integra_Key#"; // Chave mestre padrão
-
-        /// <summary>
-        /// Criptografa um texto com base em uma chave fornecida.
-        /// </summary>
-        /// <param name="texto">Texto a ser criptografado.</param>
-        /// <returns>Texto criptografado.</returns>
-        public static string Criptografar(string texto)
+        //Install-Package Criptografias -Version 1.0.0
+        protected const int Keysize = 256;
+        // This constant determines the number of iterations for the password bytes generation function.
+        protected const int DerivationIterations = 1000;
+        protected static string Encrypt(string plainText, string passPhrase)
         {
-            return Encrypt(texto, MasterKey);
-        }
-
-        /// <summary>
-        /// Descriptografa um texto criptografado com base em uma chave fornecida.
-        /// </summary>
-        /// <param name="texto">Texto criptografado.</param>
-        /// <returns>Texto descriptografado.</returns>
-        public static string Descriptografar(string texto)
-        {
-            return Decrypt(texto, MasterKey);
-        }
-
-        /// <summary>
-        /// Criptografa um texto com base em uma chave.
-        /// </summary>
-        private static string Encrypt(string plainText, string passPhrase)
-        {
-            var saltBytes = Generate256BitsOfRandomEntropy();
-            var ivBytes = Generate256BitsOfRandomEntropy();
+            // Salt and IV is randomly generated each time, but is preprended to encrypted cipher text
+            // so that the same Salt and IV values can be used when decrypting.  
+            var saltStringBytes = Generate256BitsOfRandomEntropy();
+            var ivStringBytes = Generate256BitsOfRandomEntropy();
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-
-            using (var password = new Rfc2898DeriveBytes(passPhrase, saltBytes, DerivationIterations))
+            using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations))
             {
                 var keyBytes = password.GetBytes(Keysize / 8);
-
-                using (var symmetricKey = new RijndaelManaged
+                using (var symmetricKey = new RijndaelManaged())
                 {
-                    BlockSize = 256,
-                    Mode = CipherMode.CBC,
-                    Padding = PaddingMode.PKCS7
-                })
-                using (var encryptor = symmetricKey.CreateEncryptor(keyBytes, ivBytes))
-                using (var memoryStream = new MemoryStream())
-                using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
-                {
-                    cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
-                    cryptoStream.FlushFinalBlock();
-
-                    // Concatena salt, IV e texto cifrado
-                    var cipherTextBytes = saltBytes.Concat(ivBytes).Concat(memoryStream.ToArray()).ToArray();
-                    return Convert.ToBase64String(cipherTextBytes);
+                    symmetricKey.BlockSize = 256;
+                    symmetricKey.Mode = CipherMode.CBC;
+                    symmetricKey.Padding = PaddingMode.PKCS7;
+                    using (var encryptor = symmetricKey.CreateEncryptor(keyBytes, ivStringBytes))
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                            {
+                                cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+                                cryptoStream.FlushFinalBlock();
+                                // Create the final bytes as a concatenation of the random salt bytes, the random iv bytes and the cipher bytes.
+                                var cipherTextBytes = saltStringBytes;
+                                cipherTextBytes = cipherTextBytes.Concat(ivStringBytes).ToArray();
+                                cipherTextBytes = cipherTextBytes.Concat(memoryStream.ToArray()).ToArray();
+                                memoryStream.Close();
+                                cryptoStream.Close();
+                                return Convert.ToBase64String(cipherTextBytes);
+                            }
+                        }
+                    }
                 }
             }
         }
-
-        /// <summary>
-        /// Descriptografa um texto criptografado.
-        /// </summary>
-        private static string Decrypt(string cipherText, string passPhrase)
+        protected static string Decrypt(string cipherText, string passPhrase)
         {
+            // Get the complete stream of bytes that represent:
+            // [32 bytes of Salt] + [32 bytes of IV] + [n bytes of CipherText]
             var cipherTextBytesWithSaltAndIv = Convert.FromBase64String(cipherText);
-            var saltBytes = cipherTextBytesWithSaltAndIv.Take(Keysize / 8).ToArray();
-            var ivBytes = cipherTextBytesWithSaltAndIv.Skip(Keysize / 8).Take(Keysize / 8).ToArray();
-            var cipherTextBytes = cipherTextBytesWithSaltAndIv.Skip((Keysize / 8) * 2).ToArray();
+            // Get the saltbytes by extracting the first 32 bytes from the supplied cipherText bytes.
+            var saltStringBytes = cipherTextBytesWithSaltAndIv.Take(Keysize / 8).ToArray();
+            // Get the IV bytes by extracting the next 32 bytes from the supplied cipherText bytes.
+            var ivStringBytes = cipherTextBytesWithSaltAndIv.Skip(Keysize / 8).Take(Keysize / 8).ToArray();
+            // Get the actual cipher text bytes by removing the first 64 bytes from the cipherText string.
+            var cipherTextBytes = cipherTextBytesWithSaltAndIv.Skip((Keysize / 8) * 2).Take(cipherTextBytesWithSaltAndIv.Length - ((Keysize / 8) * 2)).ToArray();
 
-            using (var password = new Rfc2898DeriveBytes(passPhrase, saltBytes, DerivationIterations))
+            using (var password = new Rfc2898DeriveBytes(passPhrase, saltStringBytes, DerivationIterations))
             {
                 var keyBytes = password.GetBytes(Keysize / 8);
-
-                using (var symmetricKey = new RijndaelManaged
+                using (var symmetricKey = new RijndaelManaged())
                 {
-                    BlockSize = 256,
-                    Mode = CipherMode.CBC,
-                    Padding = PaddingMode.PKCS7
-                })
-                using (var decryptor = symmetricKey.CreateDecryptor(keyBytes, ivBytes))
-                using (var memoryStream = new MemoryStream(cipherTextBytes))
-                using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-                using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8))
-                {
-                    return streamReader.ReadToEnd();
+                    symmetricKey.BlockSize = 256;
+                    symmetricKey.Mode = CipherMode.CBC;
+                    symmetricKey.Padding = PaddingMode.PKCS7;
+                    using (var decryptor = symmetricKey.CreateDecryptor(keyBytes, ivStringBytes))
+                    {
+                        using (var memoryStream = new MemoryStream(cipherTextBytes))
+                        {
+                            using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                            using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8))
+                            {
+                                return streamReader.ReadToEnd();
+                            }
+                        }
+                    }
                 }
             }
         }
-
-        /// <summary>
-        /// Gera 256 bits de entropia aleatória.
-        /// </summary>
-        private static byte[] Generate256BitsOfRandomEntropy()
+        protected static byte[] Generate256BitsOfRandomEntropy()
         {
-            var randomBytes = new byte[32];
+            var randomBytes = new byte[32]; // 32 Bytes will give us 256 bits.
             using (var rngCsp = new RNGCryptoServiceProvider())
             {
+                // Fill the array with cryptographically secure random bytes.
                 rngCsp.GetBytes(randomBytes);
             }
             return randomBytes;
+        }
+
+        protected const string key = "K3yP/##$s3Nh4..2022:Un1H0sp1t4l4r..Pr02j";
+
+        public static string crypt(string password)
+        {
+            return Criptografia.MD5.Criptografar(key, Encrypt(password, key));
+        }
+        public static string decrypt(string password)
+        {
+            return Decrypt(Criptografia.MD5.Descriptografar(key, password), key);
         }
     }
 }
