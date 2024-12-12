@@ -188,10 +188,12 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
                 var select = from contrato in Contratos
                              join produto in Produtos_Externos.produtos on contrato.cod_produto equals produto.codigo
                              join fabricante in Fabricantes_Externos.fabricantes on produto.Cod_Fabricante equals fabricante.codigo
-                             where                                                           
+                             where
+                                 (
                                  (rdbDatInicial.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
                                  || (rdbDatFinal.Checked && Convert.ToDateTime(contrato.data_Final) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
                                  || (rdbDatInicioFinal.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
+                                 )
                                  && contrato.fabricanteFantasia.Contains(txtDescricaoFabricante.Text)
                                  && contrato.rzsocial_cliente.Contains(txtDescricaoCliente.Text)
                                  && contrato.produto.Contains(txtDescricaoProduto.Text)
