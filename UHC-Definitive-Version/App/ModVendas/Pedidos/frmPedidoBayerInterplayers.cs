@@ -99,6 +99,7 @@ namespace UHC3_Definitive_Version.App.ModVendas.Pedidos
                 // Atribui outras informações do pedido
                 pedido.Data = DateTime.Now;
                 pedido.DataProgramada = dtpDataProgramada.Value;
+                pedido.NumeroPedidoErp = txtPedidoCliente.Text;
                 pedido.NumeroPedidoCliente = txtPedidoCliente.Text;
                 Console.WriteLine($"Data do pedido: {pedido.Data}, Data Programada: {pedido.DataProgramada}, Número Pedido Cliente: {pedido.NumeroPedidoCliente}");
 
