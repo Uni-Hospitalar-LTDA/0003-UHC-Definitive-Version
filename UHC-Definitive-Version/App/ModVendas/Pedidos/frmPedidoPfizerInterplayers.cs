@@ -134,7 +134,7 @@ namespace UHC3_Definitive_Version.App.ModVendas.AnaliseVendas
                 var token = await Token.POST(new Credentials
                 {
                     UserLogin = cc_swagger.LoginSwagger,
-                    Password = Cryptography.decrypt(cc_swagger.SenhaSwagger)
+                    Password = UHC3_Definitive_Version.Configuration.Cryptography.decrypt(cc_swagger.SenhaSwagger)
                 }, cc_swagger.RotaSwagger);
 
                 pedido.NumeroPedidoErp = (await Interplayers_Pfizer_Pedido.getNextCodeAsync()).ToString();

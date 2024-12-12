@@ -9,7 +9,7 @@ namespace Integra.Configuration
     /// <summary>
     /// Classe responsável por criptografia e descriptografia de dados.
     /// </summary>
-    public static class Criptografia
+    public static class Cryptography
     {
         private const int Keysize = 256; // Tamanho da chave em bits
         private const int DerivationIterations = 1000; // Iterações para derivar a chave
