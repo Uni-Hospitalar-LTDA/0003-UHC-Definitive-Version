@@ -15,7 +15,7 @@ namespace UHC3_Definitive_Version.Configuration
         }
         public SqlConnection getConnectionApp(string unidade)
         {
-            string conn = null;
+            string conn = null;  
 
             if (unidade == "UNI HOSPITALAR")
             {

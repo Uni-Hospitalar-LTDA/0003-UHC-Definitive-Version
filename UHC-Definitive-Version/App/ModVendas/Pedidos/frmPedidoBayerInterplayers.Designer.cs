@@ -161,9 +161,9 @@
             this.lblCustomer.AutoSize = true;
             this.lblCustomer.Location = new System.Drawing.Point(12, 7);
             this.lblCustomer.Name = "lblCustomer";
-            this.lblCustomer.Size = new System.Drawing.Size(68, 13);
+            this.lblCustomer.Size = new System.Drawing.Size(46, 13);
             this.lblCustomer.TabIndex = 26;
-            this.lblCustomer.Text = "Fornecedor *";
+            this.lblCustomer.Text = "Cliente *";
             // 
             // frmPedidoBayerInterplayers
             // 
@@ -185,6 +185,18 @@
             this.Controls.Add(this.txtFornecedorId);
             this.Controls.Add(this.lblCustomer);
             this.Name = "frmPedidoBayerInterplayers";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Postar Pedido Bayer na Interplayers";
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.ResumeLayout(false);

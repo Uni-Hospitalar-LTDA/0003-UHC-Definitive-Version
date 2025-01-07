@@ -10,7 +10,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         public string _030Seu_codigo_IQVIA { get; set; } = $"{Section.CodIqvia}";
         public string _040Data_inicio { get; set; } 
         public string _050Data_final { get; set; }
-        public string _060Data_arquivo { get; set; } = $"{DateTime.Now.ToString("yyyyMMdd")}";
+        public string _060Data_arquivo { get; set; } = $"{DateTime.Now.ToString("ddMMyyyy")}";
         public string _070FLAG_periodicidade { get; set; } = "D";
         public string _080Filler { get; set; } = "";
         public string _090Controle_interno_IQVIA { get; set; } = "imsbrven4";
