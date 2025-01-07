@@ -20,7 +20,7 @@ namespace UHC3_Definitive_Version
             Task.Factory.StartNew(() => Section.carregar_Dependencias());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPedidoBayerInterplayers());
+            Application.Run(new frmUpdateScreen());
             //Application.Run(new frmBasesSwagger());
             //Application.Run(new frmMonitores_ExpXmlGnre());
 

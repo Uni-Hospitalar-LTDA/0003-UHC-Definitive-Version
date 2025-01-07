@@ -63,6 +63,7 @@ namespace UHC3_Definitive_Version.App.ModVendas
         private void ConfigureFormProperties()
         {
             this.defaultModuleScreen();
+            btnPedidoPfizerInterplayers.Enabled = false;
         }
         private void ConfigureFormEvents()
         {
