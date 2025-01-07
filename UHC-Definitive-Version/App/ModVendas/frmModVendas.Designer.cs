@@ -43,6 +43,7 @@
             this.btnKairos = new System.Windows.Forms.Button();
             this.btnDeslogar = new System.Windows.Forms.Button();
             this.btnSair = new System.Windows.Forms.Button();
+            this.btnBayerInterplayers = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.gpbAnaliseVendas.SuspendLayout();
             this.gpbPedidos.SuspendLayout();
@@ -131,6 +132,7 @@
             // 
             // gpbPedidos
             // 
+            this.gpbPedidos.Controls.Add(this.btnBayerInterplayers);
             this.gpbPedidos.Controls.Add(this.btnPedidoPfizerInterplayers);
             this.gpbPedidos.ForeColor = System.Drawing.Color.White;
             this.gpbPedidos.Location = new System.Drawing.Point(197, 3);
@@ -212,6 +214,16 @@
             this.btnSair.Text = "Sair";
             this.btnSair.UseVisualStyleBackColor = true;
             // 
+            // btnBayerInterplayers
+            // 
+            this.btnBayerInterplayers.ForeColor = System.Drawing.Color.Black;
+            this.btnBayerInterplayers.Location = new System.Drawing.Point(6, 64);
+            this.btnBayerInterplayers.Name = "btnBayerInterplayers";
+            this.btnBayerInterplayers.Size = new System.Drawing.Size(170, 39);
+            this.btnBayerInterplayers.TabIndex = 14;
+            this.btnBayerInterplayers.Text = "Pedido Bayer Interplayers";
+            this.btnBayerInterplayers.UseVisualStyleBackColor = true;
+            // 
             // frmModVendas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,5 +274,6 @@
         private System.Windows.Forms.Button btnKairos;
         private System.Windows.Forms.GroupBox gpbPedidos;
         private System.Windows.Forms.Button btnPedidoPfizerInterplayers;
+        private System.Windows.Forms.Button btnBayerInterplayers;
     }
 }

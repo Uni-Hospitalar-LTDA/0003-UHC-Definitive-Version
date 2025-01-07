@@ -20,14 +20,58 @@ namespace UHC3_Definitive_Version.Configuration.InterplayersWebApi
         public string NumeroPedidoCliente { get; set; }
         public List<Item> Itens { get; set; }
         
-        public async Task<Token> getToken(Credentials cc)
+        public async Task<Token> getToken(Credentials cc,string rota)
         {
-            return await Token.POST(cc);
+            return await Token.POST(cc,rota);
         }
 
-        public async static Task<string> PostPedidoAsync(List<Pedido> pedidos, Token token,CredenciaisSwagger cc)
+        public async static Task<string> PostPedidoPfizerAsync(List<Pedido> pedidos, Token token,CredenciaisSwagger cc)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{cc.RotaSwagger}/api/v1/pre-pedidos-v2");
+
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            httpWebRequest.PreAuthenticate = true;
+            httpWebRequest.Headers.Add("Authorization", "Bearer " + token.data.token);
+            httpWebRequest.Accept = "application/json";
+
+            // Serializa a lista de pedidos em vez de apenas um único pedido
+            var pedidoSerialization = JsonConvert.SerializeObject(pedidos, Formatting.Indented);
+            Console.WriteLine(pedidoSerialization);
+
+            // Salvando o JSON em um arquivo
+            string filePath = SaveJsonToFile(pedidoSerialization, "pedidos");
+
+            using (var streamWriter = new StreamWriter(await httpWebRequest.GetRequestStreamAsync()))
+            {
+                streamWriter.Write(pedidoSerialization);
+                Console.WriteLine(pedidoSerialization);
+            }
+
+            string httpResponseContent = null;
+            try
+            {
+                using (var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync())
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    // Captura a resposta HTTP
+                    httpResponseContent = await streamReader.ReadToEndAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Captura qualquer erro de exceção
+                httpResponseContent = ex.Message;
+            }
+
+            // Unificando o conteúdo enviado e a resposta HTTP em um único arquivo .txt
+            SaveRequestAndResponseToFile(filePath, pedidoSerialization, httpResponseContent);
+
+            return httpResponseContent;
+        }
+        public async static Task<string> PostPedidoBayerAsync(List<Pedido> pedidos, Token token, CredenciaisSwagger cc)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{cc.RotaSwagger}/api/v2/pre-pedidos");
 
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";

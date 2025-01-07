@@ -3,6 +3,7 @@ using UHC3_Definitive_Version.App.AplicacoesParceiras;
 using UHC3_Definitive_Version.App.ModVendas.AnaliseVendas;
 using UHC3_Definitive_Version.App.ModVendas.Cadastros;
 using UHC3_Definitive_Version.App.ModVendas.Consultas;
+using UHC3_Definitive_Version.App.ModVendas.Pedidos;
 using UHC3_Definitive_Version.App.ModVendas.Precificacao;
 using UHC3_Definitive_Version.Configuration;
 using UHC3_Definitive_Version.Customization;
@@ -88,6 +89,12 @@ namespace UHC3_Definitive_Version.App.ModVendas
             btnAnaliseDebCredAche.Click += btnCreditDebitAnalysis_Click;
             btnDataIngestion.Click += btnDataIngestion_Click;
             btnPedidoPfizerInterplayers.Click += btnPedidoPfizerInterplayers_Click;
+            btnBayerInterplayers.Click += btnBayerInterplayers_Click;
+        }
+
+        private void btnBayerInterplayers_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateForm<frmPedidoBayerInterplayers>();
         }
 
         private void btnPedidoPfizerInterplayers_Click(object sender, EventArgs e)

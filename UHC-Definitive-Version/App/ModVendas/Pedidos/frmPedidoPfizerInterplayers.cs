@@ -130,16 +130,17 @@ namespace UHC3_Definitive_Version.App.ModVendas.AnaliseVendas
                 CredenciaisSwagger cc_swagger = await CredenciaisSwagger.getToClassAsync("1");
 
                 // Obtém o token de autenticação
-                Token token = await pedido.getToken(new Credentials
+                // Obtém o token de autenticação
+                var token = await Token.POST(new Credentials
                 {
                     UserLogin = cc_swagger.LoginSwagger,
-                    Password = Cryptography.decrypt(cc_swagger.SenhaSwagger)
-                });
+                    Password = UHC3_Definitive_Version.Configuration.Cryptography.decrypt(cc_swagger.SenhaSwagger)
+                }, cc_swagger.RotaSwagger);
 
                 pedido.NumeroPedidoErp = (await Interplayers_Pfizer_Pedido.getNextCodeAsync()).ToString();
 
                 // Faz o POST da lista de pedidos utilizando o token obtido
-                string respostaJson = await Pedido.PostPedidoAsync(listaPedidos, token, cc_swagger);
+                string respostaJson = await Pedido.PostPedidoPfizerAsync(listaPedidos, token, cc_swagger);
 
                 // Serializa o JSON enviado (a lista de pedidos)
                 string jsonEnviado = JsonConvert.SerializeObject(listaPedidos, Formatting.Indented);

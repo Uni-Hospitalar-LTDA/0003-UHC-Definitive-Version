@@ -26,14 +26,13 @@ namespace UHC3_Definitive_Version.Configuration
         {
             form.MinimumSize = new Size(form.Width, form.Height);
             form.Text = $"{Section.Unidade}: " + form.Text;
+            form.WindowState = FormWindowState.Maximized;
         }
         public static void defaultMainMenu(this Form form)
         {
-
             form.MinimumSize = new Size(form.Width, form.Height);
             form.Text = $"UHC: " + form.Text;
         }
-
         public static void defaultModuleScreen(this Form form)
         {
             form.MinimumSize = new Size(form.Width, form.Height);

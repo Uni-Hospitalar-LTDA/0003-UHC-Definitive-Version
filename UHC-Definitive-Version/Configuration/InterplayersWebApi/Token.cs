@@ -16,9 +16,9 @@ namespace UHC3_Definitive_Version.Configuration.InterplayersWebApi
         public Data data { get; set; }
 
         public const string rota = @"https://homologacaoesp.interplayers.com.br/INT/Pfizer/WebAPI/api/v1/auth";
-        internal async static Task<Token> POST(Credentials cc)
+        internal async static Task<Token> POST(Credentials cc,string rota)
         {                                 
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{rota}");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{rota}api/v1/auth");
 
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -29,6 +29,7 @@ namespace UHC3_Definitive_Version.Configuration.InterplayersWebApi
             using (var streamWriter = new StreamWriter(await httpWebRequest.GetRequestStreamAsync()))
             {
                 streamWriter.Write(tokenSerialization);
+                Console.WriteLine(httpWebRequest.Address);
                 Console.WriteLine(tokenSerialization);
             }
 

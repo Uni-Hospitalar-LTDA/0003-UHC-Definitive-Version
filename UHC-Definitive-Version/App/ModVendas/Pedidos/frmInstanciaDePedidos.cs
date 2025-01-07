@@ -67,7 +67,7 @@ namespace UHC3_Definitive_Version.App.ModVendas.Pedidos
                 {
                     UserLogin = cc_swagger.LoginSwagger,
                     Password = Cryptography.decrypt(cc_swagger.SenhaSwagger)
-                });
+                },cc_swagger.RotaSwagger);
 
                 // Atualiza o progresso após obter o token
                 progressBar1.Value = Math.Min(progressBar1.Value + 10, progressBar1.Maximum);
@@ -250,12 +250,13 @@ namespace UHC3_Definitive_Version.App.ModVendas.Pedidos
                     // Obtém as credenciais para autenticação
                     var cc_swagger = await CredenciaisSwagger.getToClassAsync("1");
 
+                    
                     // Obtém o token de autenticação
                     var token = await Token.POST(new Credentials
                     {
                         UserLogin = cc_swagger.LoginSwagger,
                         Password = Cryptography.decrypt(cc_swagger.SenhaSwagger)
-                    });
+                    }, cc_swagger.RotaSwagger);
 
                     // Valida o token
                     if (token == null || !token.success)
