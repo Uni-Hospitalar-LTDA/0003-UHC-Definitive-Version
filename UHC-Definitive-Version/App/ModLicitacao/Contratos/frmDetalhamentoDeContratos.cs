@@ -205,86 +205,106 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
 
 
                     var select = from contrato in Contratos
-                                 join produto in Produtos_Externos.produtos on contrato.cod_produto equals produto.codigo
-                                 join fabricante in Fabricantes_Externos.fabricantes on produto.Cod_Fabricante equals fabricante.codigo
+                                 join produto in Produtos_Externos.produtos on contrato.cod_produto equals produto.codigo into prodGroup
+                                 from produto in prodGroup.DefaultIfEmpty()
+                                 join fabricante in Fabricantes_Externos.fabricantes on (produto?.Cod_Fabricante ?? "0") equals fabricante.codigo into fabGroup
+                                 from fabricante in fabGroup.DefaultIfEmpty()
                                  where
                                      (
-                                     ( rdbDatInicial.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
-                                     || (rdbDatFinal.Checked && Convert.ToDateTime(contrato.data_Final) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
-                                     || (rdbDatInicioFinal.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
+                                         (rdbDatInicial.Checked && DateTime.TryParse(contrato?.data_inicio?.ToString(), out DateTime dataInicio) && dataInicio >= dtpInicial.Value && dataInicio <= dtpFinal.Value)
+                                         || (rdbDatFinal.Checked && DateTime.TryParse(contrato?.data_Final?.ToString(), out DateTime dataFinal) && dataFinal >= dtpInicial.Value && dataFinal <= dtpFinal.Value)
+                                         || (rdbDatInicioFinal.Checked && DateTime.TryParse(contrato?.data_inicio?.ToString(), out DateTime dataInicio2) && DateTime.TryParse(contrato?.data_Final?.ToString(), out DateTime dataFinal2) && dataInicio2 >= dtpInicial.Value && dataFinal2 <= dtpFinal.Value)
                                      )
-                                     && contrato.fabricanteFantasia.Contains(txtDescricaoFabricante.Text)
-                                     && contrato.rzsocial_cliente.Contains(txtDescricaoCliente.Text)
-                                     && contrato.produto.Contains(txtDescricaoProduto.Text)
-                                     && (contrato.nmgenerico_produto.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()) ||
-                                     contrato.produto.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()))
+                                     && (contrato?.fabricanteFantasia?.Contains(txtDescricaoFabricante.Text) ?? false)
+                                     && (contrato?.rzsocial_cliente?.Contains(txtDescricaoCliente.Text) ?? false)
+                                     && (contrato?.produto?.Contains(txtDescricaoProduto.Text) ?? false)
                                      && (
-                                        (contrato.UF.Contains(estado.Trim().ToUpper()) && (txtEstado.Text.Contains(",") && !string.IsNullOrEmpty(estado.Trim())))
-                                         || (!txtEstado.Text.Contains(",") && string.IsNullOrEmpty(estado.Trim())
-                                         || (!txtEstado.Text.Contains(",") && contrato.UF.Contains(estado.Trim().ToUpper()))
-                                         )
+                                         (contrato?.nmgenerico_produto?.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()) ?? false) ||
+                                         (contrato?.produto?.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()) ?? false)
                                      )
                                      && (
-                                        (!string.IsNullOrEmpty(txtGiroInicial?.Text) && (Convert.ToDouble(txtGiroInicial?.Text) <= Convert.ToDouble(contrato.giro) * 100))
-                                         && (!string.IsNullOrEmpty(txtGiroInicial?.Text) && (Convert.ToDouble(txtGiroFinal?.Text) >= Convert.ToDouble(contrato.giro) * 100))
-                                        )
-                                     && (contrato.contrato.Contains(txtFiltroPregao.Text.ToUpper()))
-                                     && ((contrato.status.ToUpper().Contains(cbxStatus.SelectedItem.ToString().ToUpper()))
-                                         || cbxStatus.SelectedItem.ToString() == "Todos")
+                                         (contrato?.UF?.Contains(estado.Trim().ToUpper()) ?? false) && (txtEstado.Text.Contains(",") && !string.IsNullOrEmpty(estado.Trim()))
+                                         || (!txtEstado.Text.Contains(",") && (string.IsNullOrEmpty(estado.Trim()) || (contrato?.UF?.Contains(estado.Trim().ToUpper()) ?? false)))
+                                     )
+                                     && (
+                                         (!string.IsNullOrEmpty(txtGiroInicial?.Text) &&
+                                          double.TryParse(txtGiroInicial.Text, out double giroInicial) &&
+                                          double.TryParse(contrato?.giro?.ToString(), out double giro) &&
+                                          giroInicial <= giro * 100)
+                                         &&
+                                         (!string.IsNullOrEmpty(txtGiroFinal?.Text) &&
+                                          double.TryParse(txtGiroFinal.Text, out double giroFinal) &&
+                                          giroFinal >= giro * 100)
+                                     )
+                                     && (contrato?.contrato?.Contains(txtFiltroPregao.Text.ToUpper()) ?? false)
+                                     && (
+                                         (contrato?.status?.ToUpper().Contains(cbxStatus.SelectedItem?.ToString()?.ToUpper()) ?? false)
+                                         || (cbxStatus.SelectedItem?.ToString() == "Todos")
+                                     )
                                  select new { contrato, fabricante };
+
 
                     foreach (var contrato in select)
                     {
-                        dgvData.Rows.Add(""
-                        , contrato.contrato.UF
-                        , Convert.ToInt32(contrato.contrato.cod_cliente)
-                        , contrato.contrato.rzsocial_cliente
-                        , contrato.contrato.esfera_cliente
-                        , Convert.ToInt32(contrato.contrato.cod_contrato)
-                        , contrato.contrato.contrato
-                        , Convert.ToInt32(contrato.contrato.cod_produto)
-                        , contrato.contrato.produto
-                        , contrato.contrato.nmgenerico_produto
-                        , Convert.ToDouble(contrato.contrato.Preco_unitario)
-                        , Convert.ToDouble(contrato.contrato.Preco_Compra)
-                        , Convert.ToDouble(contrato.contrato.Preco_Compra) == 0 ? 0 : -1 + (Convert.ToDouble(contrato.contrato.Preco_unitario) / Convert.ToDouble(contrato.contrato.Preco_Compra))
-                        , contrato.fabricante.codigo
-                        , contrato.fabricante.Fantasia
-                        , Convert.ToInt32(contrato.contrato.qtd_pedido).ToString("N0")
-                        , Convert.ToInt32(contrato.contrato.qtd_faturada).ToString("N0")
-                        , Convert.ToInt32(contrato.contrato.saldo).ToString("N0")
-                        , Convert.ToInt32(contrato.contrato.saldo) * Convert.ToDouble(contrato.contrato.Preco_unitario)
-                        , Convert.ToDouble(contrato.contrato.giro) * 100.00
-                        , contrato.contrato.status
-                        , Convert.ToDateTime(contrato?.contrato.data_inicio)
-                        , Convert.ToDateTime(contrato.contrato.data_Final));
+                        dgvData.Rows.Add(
+                            "", // Primeira coluna vazia
+                                contrato.contrato?.UF ?? "N/A",
+                                int.TryParse(contrato.contrato?.cod_cliente?.ToString(), out int codCliente) ? codCliente : 0,
+                                contrato.contrato?.rzsocial_cliente ?? "N/A",
+                                contrato.contrato?.esfera_cliente ?? "N/A",
+                                int.TryParse(contrato.contrato?.cod_contrato?.ToString(), out int codContrato) ? codContrato : 0,
+                                contrato.contrato?.contrato ?? "N/A",
+                                int.TryParse(contrato.contrato?.cod_produto?.ToString(), out int codProduto) ? codProduto : 0,
+                                contrato.contrato?.produto ?? "N/A",
+                                contrato.contrato?.nmgenerico_produto ?? "N/A",
+                                double.TryParse(contrato?.contrato?.Preco_unitario?.ToString(), out double precoUnitario) ? precoUnitario : 0.0,
+                                double.TryParse(contrato?.contrato?.Preco_Compra?.ToString(), out double precoCompra) ? precoCompra : 0.0,
+                                precoCompra == 0 ? 0 : -1 + (precoUnitario / precoCompra),
+                            contrato.fabricante?.codigo ?? "N/A",
+                            contrato.fabricante?.Fantasia ?? "N/A",
+                            int.TryParse(contrato.contrato?.qtd_pedido?.ToString(), out int qtdPedido) ? qtdPedido.ToString("N0") : "0",
+                            int.TryParse(contrato.contrato?.qtd_faturada?.ToString(), out int qtdFaturada) ? qtdFaturada.ToString("N0") : "0",
+                            int.TryParse(contrato.contrato?.saldo?.ToString(), out int saldo) ? saldo.ToString("N0") : "0",
+                            saldo * precoUnitario,
+                            (double.TryParse(contrato.contrato?.giro?.ToString(), out double giro) ? giro : 0.0) * 100.0,
+                            contrato.contrato?.status ?? "N/A",
+                            DateTime.TryParse(contrato.contrato?.data_inicio?.ToString(), out DateTime dataInicio) ? dataInicio : DateTime.MinValue,
+                            DateTime.TryParse(contrato.contrato?.data_Final?.ToString(), out DateTime dataFinal) ? dataFinal : DateTime.MinValue
+                        );
 
-                 
+                        // Definir a cor da célula conforme o status
+                        string status = contrato.contrato?.status ?? "";
+                        DataGridViewCellStyle style = new DataGridViewCellStyle();
 
-                        if (contrato.contrato.status.Equals("Finalizado"))
+                        switch (status)
                         {
-                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Green;
+                            case "Finalizado":
+                                style.BackColor = Color.Green;
+                                break;
+                            case "Em Andamento":
+                                style.BackColor = Color.Blue;
+                                break;
+                            case "Vencido":
+                                style.BackColor = Color.Red;
+                                break;
+                            case "Em Aberto":
+                                style.BackColor = Color.Black;
+                                break;
+                            case "Cancelado":
+                                style.BackColor = Color.Purple;
+                                break;
+                            default:
+                                style.BackColor = Color.Gray; // Cor padrão para status desconhecido
+                                break;
                         }
-                        else if (contrato.contrato.status.Equals("Em Andamento"))
-                        {
-                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Blue;
-                        }
-                        else if (contrato.contrato.status.Equals("Vencido"))
-                        {
-                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Red;
-                        }
-                        else if (contrato.contrato.status.Equals("Em Aberto"))
-                        {
-                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Black;
-                        }
-                        else if (contrato.contrato.status.Equals("Cancelado"))
-                        {
-                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Purple;
-                        }
+
+                        dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style = style;
                     }
-                }catch(NullReferenceException err)
+
+                }
+                catch (NullReferenceException err)
                 {
-                    Console.WriteLine(err.Message);
+                    MessageBox.Show(err.Message);
                 }
 
                 dgvData.AutoResizeColumns();
@@ -710,7 +730,7 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
 
         private void RadioButtonsProperties()
         {
-            //rdbDatInicial.Checked = true;
+            rdbDatInicial.Checked = true;
         }
 
     }
