@@ -12,6 +12,7 @@ using UHC3_Definitive_Version.Domain.Entities.InnmedEntities;
 using UHC3_Definitive_Version.Domain.Entities;
 using UHC3_Definitive_Version.App.Telas_Genericas;
 using System.Data.SqlClient;
+using System.Diagnostics.Contracts;
 
 namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
 {
@@ -54,9 +55,9 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
             txtGiroInicial.Text = 0.ToString();
             txtGiroFinal.Text = 100.ToString();
 
+            RadioButtonsProperties();
 
             ConfigreFormEvents();
-            RadioButtonsProperties();
         }
 
         /** Instância **/
@@ -67,57 +68,69 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
         private void configurarGrid(DataGridView dataGridView)
         {
 
-            dataGridView.Columns.Add("Indicador", "Index");
-            dataGridView.Columns[0].Frozen = true;
-            dataGridView.Columns[0].Width = 10;
-            dataGridView.Columns.Add("UF", "UF");
-            dataGridView.Columns.Add("cod_cliente", "Cód. Cliente");
-            dataGridView.Columns.Add("rzsocial_cliente", "Cliente");
-            dataGridView.Columns.Add("esfera_cliente", "Tipo do Orgão");
-            dataGridView.Columns.Add("cod_contrato", "Cód. Pregão (Contrato)");
-            dataGridView.Columns.Add("contrato", "Pregão (Contrato)");
-            dataGridView.Columns.Add("cod_produto", "Cód. Produto");
-            dataGridView.Columns.Add("produto", "Produto");
-            dataGridView.Columns.Add("nmgenerico_produto", "Nome Genérico do Produto");
-            dataGridView.Columns.Add("Preco_unitario", "Preço Unitário");
-            dataGridView.Columns.Add("Preco_Compra", "Preço Compra");
-            dataGridView.Columns.Add("Margem", "Margem");
-            dataGridView.Columns.Add("codFabricante", "Cód. Fabricante");
-            dataGridView.Columns.Add("fabricanteFantasia", "Fabricante");
-            dataGridView.Columns.Add("qtd_pedido", "Qtd. Pedido");
-            dataGridView.Columns.Add("qtd_faturada", "Qtd. Faturada");
-            dataGridView.Columns.Add("saldo", "Qtd. Saldo");
-            dataGridView.Columns.Add("giro", "Giro (%)");
-            //dataGridView.Columns["Giro"].ValueType = typeof(double);
-            //dataGridView.Columns["Giro"].DefaultCellStyle.Format = "##0.#0";
-            dataGridView.Columns.Add("status", "Status");
-            dataGridView.Columns.Add("data_inicio", "Data Início");
-            dataGridView.Columns["data_inicio"].ValueType = typeof(DateTime);
-            dataGridView.Columns["data_inicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
-
-
-            dataGridView.Columns["Preco_unitario"].ValueType = typeof(double);
-            dataGridView.Columns["Preco_unitario"].DefaultCellStyle.Format = "C2";
-
-            dataGridView.Columns["Preco_Compra"].ValueType = typeof(double);
-            dataGridView.Columns["Preco_Compra"].DefaultCellStyle.Format = "C2";
-
-            dataGridView.Columns["Margem"].ValueType = typeof(double);
-            dataGridView.Columns["Margem"].DefaultCellStyle.Format = "P2";
-
-            dataGridView.Columns.Add("data_Final", "Data Fim");
-            dataGridView.Columns["data_Final"].ValueType = typeof(DateTime);
-            dataGridView.Columns["data_Final"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dataGridView.toDefault();
-            dataGridView.MultiSelect = true;
-            dataGridView.ReadOnly = false;
-            //dataGridView.Columns["Preco_Compra"].ReadOnly = false;
-            //dgvColor.ClearSelection();
-
-            foreach (DataGridViewColumn column in dataGridView.Columns)
+            try
             {
-                if (column.Name != "Preco_Compra")
-                    column.ReadOnly = true;
+                dataGridView.Columns.Add("Indicador", "Index");
+                dataGridView.Columns[0].Frozen = true;
+                dataGridView.Columns[0].Width = 10;
+                dataGridView.Columns.Add("UF", "UF");
+                dataGridView.Columns.Add("cod_cliente", "Cód. Cliente");
+                dataGridView.Columns.Add("rzsocial_cliente", "Cliente");
+                dataGridView.Columns.Add("esfera_cliente", "Tipo do Orgão");
+                dataGridView.Columns.Add("cod_contrato", "Cód. Pregão (Contrato)");
+                dataGridView.Columns.Add("contrato", "Pregão (Contrato)");
+                dataGridView.Columns.Add("cod_produto", "Cód. Produto");
+                dataGridView.Columns.Add("produto", "Produto");
+                dataGridView.Columns.Add("nmgenerico_produto", "Nome Genérico do Produto");
+                dataGridView.Columns.Add("Preco_unitario", "Preço Unitário");
+                dataGridView.Columns.Add("Preco_Compra", "Preço Compra");
+                dataGridView.Columns.Add("Margem", "Margem");
+                dataGridView.Columns.Add("codFabricante", "Cód. Fabricante");
+                dataGridView.Columns.Add("fabricanteFantasia", "Fabricante");
+                dataGridView.Columns.Add("qtd_pedido", "Qtd. Pedido");
+                dataGridView.Columns.Add("qtd_faturada", "Qtd. Faturada");
+                dataGridView.Columns.Add("saldo", "Qtd. Saldo");
+                dataGridView.Columns.Add("SaldoTotal", "Vlr. Saldo");
+                dataGridView.Columns.Add("giro", "Giro (%)");
+                //dataGridView.Columns["Giro"].ValueType = typeof(double);
+                //dataGridView.Columns["Giro"].DefaultCellStyle.Format = "##0.#0";
+                dataGridView.Columns.Add("status", "Status");
+                dataGridView.Columns.Add("data_inicio", "Data Início");
+                dataGridView.Columns["data_inicio"].ValueType = typeof(DateTime);
+                dataGridView.Columns["data_inicio"].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+
+                dataGridView.Columns["Preco_unitario"].ValueType = typeof(double);
+                dataGridView.Columns["Preco_unitario"].DefaultCellStyle.Format = "C2";
+
+                dataGridView.Columns["Preco_Compra"].ValueType = typeof(double);
+                dataGridView.Columns["Preco_Compra"].DefaultCellStyle.Format = "C2";
+
+
+                dataGridView.Columns["SaldoTotal"].ValueType = typeof(double);
+                dataGridView.Columns["SaldoTotal"].DefaultCellStyle.Format = "C2";
+
+
+                dataGridView.Columns["Margem"].ValueType = typeof(double);
+                dataGridView.Columns["Margem"].DefaultCellStyle.Format = "P2";
+
+                dataGridView.Columns.Add("data_Final", "Data Fim");
+                dataGridView.Columns["data_Final"].ValueType = typeof(DateTime);
+                dataGridView.Columns["data_Final"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                dataGridView.toDefault();
+                dataGridView.MultiSelect = true;
+                dataGridView.ReadOnly = false;
+                //dataGridView.Columns["Preco_Compra"].ReadOnly = false;
+                //dgvColor.ClearSelection();
+
+                foreach (DataGridViewColumn column in dataGridView.Columns)
+                {
+                    if (column.Name != "Preco_Compra")
+                        column.ReadOnly = true;
+                }
+            }catch(Exception err)
+            {
+                MessageBox.Show(err.Message);
             }
         }
         private void configurarGridCor()
@@ -182,87 +195,97 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
 
             foreach (var estado in estados)
             {
-
-
-
-                var select = from contrato in Contratos
-                             join produto in Produtos_Externos.produtos on contrato.cod_produto equals produto.codigo
-                             join fabricante in Fabricantes_Externos.fabricantes on produto.Cod_Fabricante equals fabricante.codigo
-                             where
-                                 (
-                                 (rdbDatInicial.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
-                                 || (rdbDatFinal.Checked && Convert.ToDateTime(contrato.data_Final) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
-                                 || (rdbDatInicioFinal.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
-                                 )
-                                 && contrato.fabricanteFantasia.Contains(txtDescricaoFabricante.Text)
-                                 && contrato.rzsocial_cliente.Contains(txtDescricaoCliente.Text)
-                                 && contrato.produto.Contains(txtDescricaoProduto.Text)
-                                 && (contrato.nmgenerico_produto.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()) ||
-                                 contrato.produto.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()))
-                                 && (
-                                    (contrato.UF.Contains(estado.Trim().ToUpper()) && (txtEstado.Text.Contains(",") && !string.IsNullOrEmpty(estado.Trim())))
-                                     || (!txtEstado.Text.Contains(",") && string.IsNullOrEmpty(estado.Trim())
-                                     || (!txtEstado.Text.Contains(",") && contrato.UF.Contains(estado.Trim().ToUpper()))
-                                     )
-                                 )
-                                 && (
-                                    (!string.IsNullOrEmpty(txtGiroInicial?.Text) && (Convert.ToDouble(txtGiroInicial?.Text) <= Convert.ToDouble(contrato.giro) * 100))
-                                     && (!string.IsNullOrEmpty(txtGiroInicial?.Text) && (Convert.ToDouble(txtGiroFinal?.Text) >= Convert.ToDouble(contrato.giro) * 100))
-                                    )
-                                 && (contrato.contrato.Contains(txtFiltroPregao.Text.ToUpper()))
-                                 && ((contrato.status.ToUpper().Contains(cbxStatus.SelectedItem.ToString().ToUpper()))
-                                     || cbxStatus.SelectedItem.ToString() == "Todos")
-                             select new { contrato, fabricante };
-
-                foreach (var contrato in select)
+                try
                 {
-
-                    dgvData.Rows.Add(""
-                     , contrato.contrato.UF
-                    , Convert.ToInt32(contrato.contrato.cod_cliente)
-                    , contrato.contrato.rzsocial_cliente
-                    , contrato.contrato.esfera_cliente
-                    , Convert.ToInt32(contrato.contrato.cod_contrato)
-                    , contrato.contrato.contrato
-                    , Convert.ToInt32(contrato.contrato.cod_produto)
-                    , contrato.contrato.produto
-                    , contrato.contrato.nmgenerico_produto
-                    , Convert.ToDouble(contrato.contrato.Preco_unitario)
-                    , Convert.ToDouble(contrato.contrato.Preco_Compra)
-                    , Convert.ToDouble(contrato.contrato.Preco_Compra) == 0 ? 0 : -1 + (Convert.ToDouble(contrato.contrato.Preco_unitario) / Convert.ToDouble(contrato.contrato.Preco_Compra))
-                    , contrato.fabricante.codigo
-                    , contrato.fabricante.Fantasia
-                    , Convert.ToInt32(contrato.contrato.qtd_pedido).ToString("N0")
-                    , Convert.ToInt32(contrato.contrato.qtd_faturada).ToString("N0")
-                    , Convert.ToInt32(contrato.contrato.saldo).ToString("N0")
-                    , Convert.ToDouble(contrato.contrato.giro) * 100.00
-                    , contrato.contrato.status
-                    , Convert.ToDateTime(contrato.contrato.data_inicio)
-                    , Convert.ToDateTime(contrato.contrato.data_Final));
-
-                    if (contrato.contrato.status.Equals("Finalizado"))
+                    if (rdbDatInicial == null || rdbDatFinal == null || rdbDatInicioFinal == null)
                     {
-                        dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Green;
-                    }
-                    else if (contrato.contrato.status.Equals("Em Andamento"))
-                    {
-                        dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Blue;
-                    }
-                    else if (contrato.contrato.status.Equals("Vencido"))
-                    {
-                        dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Red;
-                    }
-                    else if (contrato.contrato.status.Equals("Em Aberto"))
-                    {
-                        dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Black;
-                    }
-                    else if (contrato.contrato.status.Equals("Cancelado"))
-                    {
-                        dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Purple;
+                        Console.WriteLine("Um ou mais RadioButtons estão nulos.");
+                        return;
                     }
 
+
+                    var select = from contrato in Contratos
+                                 join produto in Produtos_Externos.produtos on contrato.cod_produto equals produto.codigo
+                                 join fabricante in Fabricantes_Externos.fabricantes on produto.Cod_Fabricante equals fabricante.codigo
+                                 where
+                                     (
+                                     ( rdbDatInicial.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_inicio) <= dtpFinal.Value)
+                                     || (rdbDatFinal.Checked && Convert.ToDateTime(contrato.data_Final) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
+                                     || (rdbDatInicioFinal.Checked && Convert.ToDateTime(contrato.data_inicio) >= dtpInicial.Value && Convert.ToDateTime(contrato.data_Final) <= dtpFinal.Value)
+                                     )
+                                     && contrato.fabricanteFantasia.Contains(txtDescricaoFabricante.Text)
+                                     && contrato.rzsocial_cliente.Contains(txtDescricaoCliente.Text)
+                                     && contrato.produto.Contains(txtDescricaoProduto.Text)
+                                     && (contrato.nmgenerico_produto.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()) ||
+                                     contrato.produto.ToUpper().Contains(txtProdutoGenerico.Text.ToUpper()))
+                                     && (
+                                        (contrato.UF.Contains(estado.Trim().ToUpper()) && (txtEstado.Text.Contains(",") && !string.IsNullOrEmpty(estado.Trim())))
+                                         || (!txtEstado.Text.Contains(",") && string.IsNullOrEmpty(estado.Trim())
+                                         || (!txtEstado.Text.Contains(",") && contrato.UF.Contains(estado.Trim().ToUpper()))
+                                         )
+                                     )
+                                     && (
+                                        (!string.IsNullOrEmpty(txtGiroInicial?.Text) && (Convert.ToDouble(txtGiroInicial?.Text) <= Convert.ToDouble(contrato.giro) * 100))
+                                         && (!string.IsNullOrEmpty(txtGiroInicial?.Text) && (Convert.ToDouble(txtGiroFinal?.Text) >= Convert.ToDouble(contrato.giro) * 100))
+                                        )
+                                     && (contrato.contrato.Contains(txtFiltroPregao.Text.ToUpper()))
+                                     && ((contrato.status.ToUpper().Contains(cbxStatus.SelectedItem.ToString().ToUpper()))
+                                         || cbxStatus.SelectedItem.ToString() == "Todos")
+                                 select new { contrato, fabricante };
+
+                    foreach (var contrato in select)
+                    {
+                        dgvData.Rows.Add(""
+                        , contrato.contrato.UF
+                        , Convert.ToInt32(contrato.contrato.cod_cliente)
+                        , contrato.contrato.rzsocial_cliente
+                        , contrato.contrato.esfera_cliente
+                        , Convert.ToInt32(contrato.contrato.cod_contrato)
+                        , contrato.contrato.contrato
+                        , Convert.ToInt32(contrato.contrato.cod_produto)
+                        , contrato.contrato.produto
+                        , contrato.contrato.nmgenerico_produto
+                        , Convert.ToDouble(contrato.contrato.Preco_unitario)
+                        , Convert.ToDouble(contrato.contrato.Preco_Compra)
+                        , Convert.ToDouble(contrato.contrato.Preco_Compra) == 0 ? 0 : -1 + (Convert.ToDouble(contrato.contrato.Preco_unitario) / Convert.ToDouble(contrato.contrato.Preco_Compra))
+                        , contrato.fabricante.codigo
+                        , contrato.fabricante.Fantasia
+                        , Convert.ToInt32(contrato.contrato.qtd_pedido).ToString("N0")
+                        , Convert.ToInt32(contrato.contrato.qtd_faturada).ToString("N0")
+                        , Convert.ToInt32(contrato.contrato.saldo).ToString("N0")
+                        , Convert.ToInt32(contrato.contrato.saldo) * Convert.ToDouble(contrato.contrato.Preco_unitario)
+                        , Convert.ToDouble(contrato.contrato.giro) * 100.00
+                        , contrato.contrato.status
+                        , Convert.ToDateTime(contrato?.contrato.data_inicio)
+                        , Convert.ToDateTime(contrato.contrato.data_Final));
+
+                 
+
+                        if (contrato.contrato.status.Equals("Finalizado"))
+                        {
+                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Green;
+                        }
+                        else if (contrato.contrato.status.Equals("Em Andamento"))
+                        {
+                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Blue;
+                        }
+                        else if (contrato.contrato.status.Equals("Vencido"))
+                        {
+                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Red;
+                        }
+                        else if (contrato.contrato.status.Equals("Em Aberto"))
+                        {
+                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Black;
+                        }
+                        else if (contrato.contrato.status.Equals("Cancelado"))
+                        {
+                            dgvData.Rows[dgvData.Rows.Count - 1].Cells[0].Style.BackColor = Color.Purple;
+                        }
+                    }
+                }catch(NullReferenceException err)
+                {
+                    Console.WriteLine(err.Message);
                 }
-
 
                 dgvData.AutoResizeColumns();
                 dgvData.ResumeLayout();
@@ -281,6 +304,7 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
         {
             this.Load += frmDetalhamentoDeContratos_Load;
             this.FormClosing += frmDetalhamentoDeContratos_FormClosing;
+
 
 
         }
@@ -686,7 +710,7 @@ namespace UHC3_Definitive_Version.App.ModLicitacao.AnaliseVendas
 
         private void RadioButtonsProperties()
         {
-            rdbDatInicial.Checked = true;
+            //rdbDatInicial.Checked = true;
         }
 
     }
