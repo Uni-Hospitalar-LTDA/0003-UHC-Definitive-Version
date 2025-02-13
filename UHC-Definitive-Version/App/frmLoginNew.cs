@@ -182,6 +182,8 @@ namespace UHC3_Definitive_Version.App
         /** Async Tasks **/        
         private async Task login()
         {
+
+            
             for (double opacity = 1.0; opacity <= 1.0; opacity -= 0.1)
             {
                 DateTime start = DateTime.Now;
@@ -515,6 +517,7 @@ namespace UHC3_Definitive_Version.App
                 
                 if (resultado.Contains("ACCESS_APPROVED"))
                 {
+                   
                     string[] name = resultado.Split(' ');
                     Users user = await Users.getToClassByLoginAsync(txtLogin.Text,unidade);
                     Section.add(user.id, unidade);
@@ -536,16 +539,29 @@ namespace UHC3_Definitive_Version.App
                 {
                     frmRedefinirSenha frmRedefinirSenha = new frmRedefinirSenha();
                     frmRedefinirSenha.ShowDialog();
+
                     
-                    Users user = new Users { login = txtLogin.Text, password = frmRedefinirSenha.senha };
-                    
-                    await Users.changePasswordAsync(user, unidade);
-                    Section.add(user.id, unidade);
-                    txtSenha.Text = user.password;
-                    string[] name = resultado.Split(' ');
-                    
-                    CustomNotification.defaultInformation($"Senha alterada com sucesso: Seja bem vindo ao {Application.ProductName}, {name[1]}. Tenha um bom trabalho!", "Boas vindas!");
-                    await login();
+                    Users user = await Users.getToClassByLoginAsync(txtLogin.Text, unidade);
+
+                    if (user != null) 
+                    {
+                        user.password = frmRedefinirSenha.senha;
+                        await Users.changePasswordAsync(user, unidade);
+
+                        Section.add(user.id, unidade);
+                        Console.WriteLine("ID do usuário após a mudança de senha: " + user.id);
+
+                        txtSenha.Text = user.password.ToString();
+                        string[] name = resultado.Split(' ');
+
+                        CustomNotification.defaultInformation($"Senha alterada com sucesso: Seja bem-vindo ao {Application.ProductName}, {name[1]}. Tenha um bom trabalho!", "Boas-vindas!");
+
+                        await login();
+                    }
+                    else
+                    {
+                        CustomNotification.defaultError("Erro: Usuário não encontrado para redefinição de senha.");
+                    }
                 }
                 else
                 {
