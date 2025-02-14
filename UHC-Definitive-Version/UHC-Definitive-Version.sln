@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UHC-Definitive-Version", "UHC-Definitive-Version.csproj", "{315986A5-BAE3-444E-BA39-3ABF666D756F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Debug|x64.ActiveCfg = Debug|x64
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Debug|x64.Build.0 = Debug|x64
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Release|x64.ActiveCfg = Release|x64
+		{315986A5-BAE3-444E-BA39-3ABF666D756F}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A103BB18-EF84-4396-BB7E-A49D8A505069}
+	EndGlobalSection
+EndGlobal
