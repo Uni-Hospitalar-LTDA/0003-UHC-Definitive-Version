@@ -50,6 +50,10 @@
             this.btnModAdministrativo = new System.Windows.Forms.Button();
             this.pcbLogo = new System.Windows.Forms.PictureBox();
             this.panel = new System.Windows.Forms.Panel();
+            this.lDeslogar = new System.Windows.Forms.LinkLabel();
+            this.lblSair = new System.Windows.Forms.LinkLabel();
+            this.lblOQueHaDeNovo = new System.Windows.Forms.LinkLabel();
+            this.lblVersao = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +78,10 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lDeslogar);
+            this.splitContainer1.Panel1.Controls.Add(this.lblSair);
+            this.splitContainer1.Panel1.Controls.Add(this.lblOQueHaDeNovo);
+            this.splitContainer1.Panel1.Controls.Add(this.lblVersao);
             this.splitContainer1.Panel1.Controls.Add(this.pcbOpces);
             this.splitContainer1.Panel1.Controls.Add(this.lblEmpresa);
             this.splitContainer1.Panel1.Controls.Add(this.lblSessao);
@@ -149,7 +157,7 @@
             // 
             this.llblINeedHelp.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.llblINeedHelp.AutoSize = true;
-            this.llblINeedHelp.Location = new System.Drawing.Point(201, 626);
+            this.llblINeedHelp.Location = new System.Drawing.Point(165, 162);
             this.llblINeedHelp.Name = "llblINeedHelp";
             this.llblINeedHelp.Size = new System.Drawing.Size(97, 13);
             this.llblINeedHelp.TabIndex = 33;
@@ -326,6 +334,49 @@
             this.panel.Size = new System.Drawing.Size(922, 648);
             this.panel.TabIndex = 7;
             // 
+            // lDeslogar
+            // 
+            this.lDeslogar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lDeslogar.AutoSize = true;
+            this.lDeslogar.Location = new System.Drawing.Point(231, 627);
+            this.lDeslogar.Name = "lDeslogar";
+            this.lDeslogar.Size = new System.Drawing.Size(49, 13);
+            this.lDeslogar.TabIndex = 41;
+            this.lDeslogar.TabStop = true;
+            this.lDeslogar.Text = "Deslogar";
+            // 
+            // lblSair
+            // 
+            this.lblSair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSair.AutoSize = true;
+            this.lblSair.Location = new System.Drawing.Point(286, 627);
+            this.lblSair.Name = "lblSair";
+            this.lblSair.Size = new System.Drawing.Size(25, 13);
+            this.lblSair.TabIndex = 40;
+            this.lblSair.TabStop = true;
+            this.lblSair.Text = "Sair";
+            // 
+            // lblOQueHaDeNovo
+            // 
+            this.lblOQueHaDeNovo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblOQueHaDeNovo.AutoSize = true;
+            this.lblOQueHaDeNovo.Location = new System.Drawing.Point(16, 626);
+            this.lblOQueHaDeNovo.Name = "lblOQueHaDeNovo";
+            this.lblOQueHaDeNovo.Size = new System.Drawing.Size(99, 13);
+            this.lblOQueHaDeNovo.TabIndex = 38;
+            this.lblOQueHaDeNovo.TabStop = true;
+            this.lblOQueHaDeNovo.Text = "O que há de novo?";
+            // 
+            // lblVersao
+            // 
+            this.lblVersao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblVersao.AutoSize = true;
+            this.lblVersao.Location = new System.Drawing.Point(120, 627);
+            this.lblVersao.Name = "lblVersao";
+            this.lblVersao.Size = new System.Drawing.Size(37, 13);
+            this.lblVersao.TabIndex = 39;
+            this.lblVersao.Text = "v1.0.0";
+            // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,6 +443,10 @@
         private System.Windows.Forms.Label lblEmpresa;
         private System.Windows.Forms.Label lblSessao;
         private System.Windows.Forms.PictureBox pcbOpces;
+        private System.Windows.Forms.LinkLabel lDeslogar;
+        private System.Windows.Forms.LinkLabel lblSair;
+        private System.Windows.Forms.LinkLabel lblOQueHaDeNovo;
+        private System.Windows.Forms.Label lblVersao;
     }
 }
 

@@ -32,8 +32,6 @@
             this.lblTextoMissao = new System.Windows.Forms.Label();
             this.lblMissao = new System.Windows.Forms.Label();
             this.picMainDesign = new System.Windows.Forms.PictureBox();
-            this.btnDeslogar = new System.Windows.Forms.Button();
-            this.btnSair = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picMainDesign)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,33 +81,11 @@
             this.picMainDesign.TabIndex = 13;
             this.picMainDesign.TabStop = false;
             // 
-            // btnDeslogar
-            // 
-            this.btnDeslogar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeslogar.Location = new System.Drawing.Point(756, 539);
-            this.btnDeslogar.Name = "btnDeslogar";
-            this.btnDeslogar.Size = new System.Drawing.Size(75, 23);
-            this.btnDeslogar.TabIndex = 15;
-            this.btnDeslogar.Text = "Deslogar";
-            this.btnDeslogar.UseVisualStyleBackColor = true;
-            // 
-            // btnSair
-            // 
-            this.btnSair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSair.Location = new System.Drawing.Point(837, 539);
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(75, 23);
-            this.btnSair.TabIndex = 14;
-            this.btnSair.Text = "Sair";
-            this.btnSair.UseVisualStyleBackColor = true;
-            // 
             // frmModTelaInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 574);
-            this.Controls.Add(this.btnDeslogar);
-            this.Controls.Add(this.btnSair);
             this.Controls.Add(this.lblTextoMissao);
             this.Controls.Add(this.lblMissao);
             this.Controls.Add(this.picMainDesign);
@@ -138,7 +114,5 @@
         private System.Windows.Forms.Label lblTextoMissao;
         private System.Windows.Forms.Label lblMissao;
         private System.Windows.Forms.PictureBox picMainDesign;
-        private System.Windows.Forms.Button btnDeslogar;
-        private System.Windows.Forms.Button btnSair;
     }
 }

@@ -40,8 +40,6 @@
             this.btnManutencaoFretes = new System.Windows.Forms.Button();
             this.btnRelatorioAnaliticoFretes = new System.Windows.Forms.Button();
             this.btnConferenciaFretes = new System.Windows.Forms.Button();
-            this.btnDeslogar = new System.Windows.Forms.Button();
-            this.btnSair = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.gpbCadastral.SuspendLayout();
             this.gpbCanhotos.SuspendLayout();
@@ -179,33 +177,11 @@
             this.btnConferenciaFretes.Text = "Conferência de Fretes";
             this.btnConferenciaFretes.UseVisualStyleBackColor = true;
             // 
-            // btnDeslogar
-            // 
-            this.btnDeslogar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeslogar.Location = new System.Drawing.Point(632, 415);
-            this.btnDeslogar.Name = "btnDeslogar";
-            this.btnDeslogar.Size = new System.Drawing.Size(75, 23);
-            this.btnDeslogar.TabIndex = 68;
-            this.btnDeslogar.Text = "Deslogar";
-            this.btnDeslogar.UseVisualStyleBackColor = true;
-            // 
-            // btnSair
-            // 
-            this.btnSair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSair.Location = new System.Drawing.Point(713, 415);
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(75, 23);
-            this.btnSair.TabIndex = 67;
-            this.btnSair.Text = "Sair";
-            this.btnSair.UseVisualStyleBackColor = true;
-            // 
             // frmModAdministrativo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnDeslogar);
-            this.Controls.Add(this.btnSair);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.lblTitle);
             this.FormTitleAlign = Krypton.Toolkit.PaletteRelativeAlign.Inherit;
@@ -239,8 +215,6 @@
         private System.Windows.Forms.GroupBox gpbCanhotos;
         private System.Windows.Forms.Button btnRelatorioAusencias;
         private System.Windows.Forms.Button btnControleCanhotos;
-        private System.Windows.Forms.Button btnDeslogar;
-        private System.Windows.Forms.Button btnSair;
         private System.Windows.Forms.GroupBox gpbCadastral;
         private System.Windows.Forms.Button btnInformacoesTransportadora;
         private System.Windows.Forms.GroupBox gpbFretes;
