@@ -79,8 +79,8 @@ namespace UHC3_Definitive_Version.App
         /** Configure Button **/
         private void ConfigureButtonProperties()
         {
-            btnDeslogar.toDefaultRestartButton();
-            btnSair.toDefaultExitButton();
+            //btnDeslogar.toDefaultRestartButton();
+            //btnSair.toDefaultExitButton();
         }
         private void ConfigureButtonsEvents()
         {
@@ -102,22 +102,18 @@ namespace UHC3_Definitive_Version.App
         {
             FormConfiguration.ShowOrActivateForm<frmKairos>();
         }
-
         private void btnRelatoriosGerenciaisSintetico_Click(object sender, EventArgs e)
         {
             FormConfiguration.ShowOrActivateForm<frmProcGenDashboardPorResponsavel>();
         }
-
         private void btnRelatoriosGerenciaisAnaliticos_Click(object sender, EventArgs e)
         {
             FormConfiguration.ShowOrActivateForm<frmProcGenDashboardPorTempo>();
         }
-
         private void btnAgendaProcessos_Click(object sender, EventArgs e)
         {
             FormConfiguration.ShowOrActivateForm<frmListaAgenda>();
         }
-
         private void btnJustificativaAgenda_Click(object sender, EventArgs e)
         {
             FormConfiguration.ShowOrActivateForm<frmCadastrarJustificativasDeParticipacao>();

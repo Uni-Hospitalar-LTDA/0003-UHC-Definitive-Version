@@ -132,6 +132,9 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Markdig, Version=0.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Markdig.0.40.0\lib\net462\Markdig.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -306,6 +309,12 @@
     </Compile>
     <Compile Include="App\frmRedefinirSenha.Designer.cs">
       <DependentUpon>frmRedefinirSenha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\frmUpdateInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\frmUpdateInfo.Designer.cs">
+      <DependentUpon>frmUpdateInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="App\frmUpdateScreen.cs">
       <SubType>Form</SubType>
@@ -1119,6 +1128,7 @@
     <Compile Include="Configuration\UhcEvents.cs" />
     <Compile Include="Configuration\UhcValidation.cs" />
     <Compile Include="Configuration\Update\WebUpdateSquirrel.cs" />
+    <Compile Include="Configuration\WebSquirrelUpdate.cs" />
     <Compile Include="Customization\CustomComboBox.cs" />
     <Compile Include="Customization\CustomDataGridView.cs" />
     <Compile Include="Customization\CustomForm.cs">
@@ -1231,6 +1241,7 @@
     <Compile Include="Domain\Entities\LicUser.cs" />
     <Compile Include="Domain\Log\Logs.cs" />
     <Compile Include="Domain\Entities\ProcessScheduler.cs" />
+    <Compile Include="Configuration\GitHubUtilities.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="App\AplicacoesParceiras\frmKairos.resx">
@@ -1247,6 +1258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="App\frmRedefinirSenha.resx">
       <DependentUpon>frmRedefinirSenha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\frmUpdateInfo.resx">
+      <DependentUpon>frmUpdateInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\frmUpdateScreen.resx">
       <DependentUpon>frmUpdateScreen.cs</DependentUpon>
@@ -1863,6 +1877,9 @@
   <ItemGroup>
     <None Include="Resources\danger.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -1872,4 +1889,12 @@
     <Error Condition="!Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets'))" />
   </Target>
   <Import Project="packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets" Condition="Exists('packages\Microsoft.NETFramework.ReferenceAssemblies.net48.1.0.2\build\Microsoft.NETFramework.ReferenceAssemblies.net48.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>if not exist "$(SolutionDir).build_flag" (
+    echo Executando restauracao do NuGet...
+    "$(SolutionDir)nuget.exe" restore "$(SolutionDir)UHC-Definitive-Version.sln"
+    echo &gt; "$(SolutionDir).build_flag"
+)
+</PreBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -60,6 +60,7 @@ namespace UHC3_Definitive_Version
 
             /** Events **/
             ConfigureButtonEvents();
+            ConfigureLabelEvents();
         }
 
         /** Screen Permissions Methods **/
@@ -218,12 +219,42 @@ namespace UHC3_Definitive_Version
         {
             Users user = await Users.getToClassByIdAsync(Section.idUsuario);
             lblSessao.Text = $"Sessão: {user.name}";
+            lblVersao.Text = $"v{Application.ProductVersion}";
             lblEmpresa.Text = Section.Empresa;
         }
+            private void ConfigureLabelEvents()
+        {
+            lblOQueHaDeNovo.Click += lblOQueHaDeNovo_Click;
+            lblSair.Click += lblSair_Click;
+            lDeslogar.Click += lDeslogar_Click;
+        }
+        private void lblOQueHaDeNovo_Click(object sender, EventArgs e)
+        {
+            FormConfiguration.ShowOrActivateForm<frmUpdateInfo>();
+        }
+
+        private void lDeslogar_Click(object sender, EventArgs e)
+        {
+            if (CustomNotification.defaultQuestionAlert("Deseja deslogar do sistema?") == DialogResult.Yes)
+            {
+                Application.Restart();
+            }
+        }
+
+        private void lblSair_Click(object sender, EventArgs e)
+        {
+            if (CustomNotification.defaultQuestionAlert("Deseja sair do sistema?") == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
 
         /** Configure Panel **/
         private void ConfigurePanelProperties()
         {
         }
+       
+        
     }
 }

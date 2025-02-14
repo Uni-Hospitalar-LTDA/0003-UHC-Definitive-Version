@@ -36,14 +36,12 @@
             this.btnConsultarPedidoCliente = new System.Windows.Forms.Button();
             this.btnConsultaPrecos = new System.Windows.Forms.Button();
             this.gpbPedidos = new System.Windows.Forms.GroupBox();
+            this.btnBayerInterplayers = new System.Windows.Forms.Button();
             this.btnPedidoPfizerInterplayers = new System.Windows.Forms.Button();
             this.gpbIngestaoDados = new System.Windows.Forms.GroupBox();
             this.btnDataIngestion = new System.Windows.Forms.Button();
             this.gpbProgramasAuxiliares = new System.Windows.Forms.GroupBox();
             this.btnKairos = new System.Windows.Forms.Button();
-            this.btnDeslogar = new System.Windows.Forms.Button();
-            this.btnSair = new System.Windows.Forms.Button();
-            this.btnBayerInterplayers = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.gpbAnaliseVendas.SuspendLayout();
             this.gpbPedidos.SuspendLayout();
@@ -142,6 +140,16 @@
             this.gpbPedidos.TabStop = false;
             this.gpbPedidos.Text = "Pedidos";
             // 
+            // btnBayerInterplayers
+            // 
+            this.btnBayerInterplayers.ForeColor = System.Drawing.Color.Black;
+            this.btnBayerInterplayers.Location = new System.Drawing.Point(6, 64);
+            this.btnBayerInterplayers.Name = "btnBayerInterplayers";
+            this.btnBayerInterplayers.Size = new System.Drawing.Size(170, 39);
+            this.btnBayerInterplayers.TabIndex = 14;
+            this.btnBayerInterplayers.Text = "Pedido Bayer Interplayers";
+            this.btnBayerInterplayers.UseVisualStyleBackColor = true;
+            // 
             // btnPedidoPfizerInterplayers
             // 
             this.btnPedidoPfizerInterplayers.ForeColor = System.Drawing.Color.Black;
@@ -194,43 +202,11 @@
             this.btnKairos.Text = "Kairos";
             this.btnKairos.UseVisualStyleBackColor = true;
             // 
-            // btnDeslogar
-            // 
-            this.btnDeslogar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeslogar.Location = new System.Drawing.Point(728, 447);
-            this.btnDeslogar.Name = "btnDeslogar";
-            this.btnDeslogar.Size = new System.Drawing.Size(75, 23);
-            this.btnDeslogar.TabIndex = 84;
-            this.btnDeslogar.Text = "Deslogar";
-            this.btnDeslogar.UseVisualStyleBackColor = true;
-            // 
-            // btnSair
-            // 
-            this.btnSair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSair.Location = new System.Drawing.Point(809, 447);
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(75, 23);
-            this.btnSair.TabIndex = 83;
-            this.btnSair.Text = "Sair";
-            this.btnSair.UseVisualStyleBackColor = true;
-            // 
-            // btnBayerInterplayers
-            // 
-            this.btnBayerInterplayers.ForeColor = System.Drawing.Color.Black;
-            this.btnBayerInterplayers.Location = new System.Drawing.Point(6, 64);
-            this.btnBayerInterplayers.Name = "btnBayerInterplayers";
-            this.btnBayerInterplayers.Size = new System.Drawing.Size(170, 39);
-            this.btnBayerInterplayers.TabIndex = 14;
-            this.btnBayerInterplayers.Text = "Pedido Bayer Interplayers";
-            this.btnBayerInterplayers.UseVisualStyleBackColor = true;
-            // 
             // frmModVendas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 482);
-            this.Controls.Add(this.btnDeslogar);
-            this.Controls.Add(this.btnSair);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.lblVendas);
             this.Name = "frmModVendas";
@@ -266,8 +242,6 @@
         private System.Windows.Forms.Button btnConsultaPrecos;
         private System.Windows.Forms.GroupBox gpbIngestaoDados;
         private System.Windows.Forms.Button btnDataIngestion;
-        private System.Windows.Forms.Button btnDeslogar;
-        private System.Windows.Forms.Button btnSair;
         private System.Windows.Forms.Button btnAnaliseDebCredAche;
         private System.Windows.Forms.Button btnConsultarPedidoOL;
         private System.Windows.Forms.GroupBox gpbProgramasAuxiliares;

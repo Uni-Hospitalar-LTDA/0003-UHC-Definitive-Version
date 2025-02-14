@@ -79,8 +79,8 @@ namespace UHC3_Definitive_Version.App.ModGerencial
         /** Configure Button **/
         private void ConfigureButtonProperties()
         {
-            btnDeslogar.toDefaultRestartButton();
-            btnSair.toDefaultExitButton();
+            //btnDeslogar.toDefaultRestartButton();
+            //btnSair.toDefaultExitButton();
         }
 
         private void ConfigureButtonsEvents()

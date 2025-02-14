@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDeslogar = new System.Windows.Forms.Button();
-            this.btnSair = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.gpbCI = new System.Windows.Forms.GroupBox();
             this.btnMotivosCI = new System.Windows.Forms.Button();
@@ -38,26 +36,6 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.gpbCI.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnDeslogar
-            // 
-            this.btnDeslogar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeslogar.Location = new System.Drawing.Point(627, 417);
-            this.btnDeslogar.Name = "btnDeslogar";
-            this.btnDeslogar.Size = new System.Drawing.Size(75, 23);
-            this.btnDeslogar.TabIndex = 82;
-            this.btnDeslogar.Text = "Deslogar";
-            this.btnDeslogar.UseVisualStyleBackColor = true;
-            // 
-            // btnSair
-            // 
-            this.btnSair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSair.Location = new System.Drawing.Point(708, 417);
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(75, 23);
-            this.btnSair.TabIndex = 81;
-            this.btnSair.Text = "Sair";
-            this.btnSair.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -118,8 +96,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnDeslogar);
-            this.Controls.Add(this.btnSair);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.lblLogistica);
             this.Name = "frmModLogistica";
@@ -144,9 +120,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnDeslogar;
-        private System.Windows.Forms.Button btnSair;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.GroupBox gpbCI;
         private System.Windows.Forms.Button btnConferenciaCI;

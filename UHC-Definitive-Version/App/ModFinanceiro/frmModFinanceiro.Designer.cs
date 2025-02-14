@@ -50,8 +50,6 @@
             this.btnContasRecebidas = new System.Windows.Forms.Button();
             this.btnContasReceberAnalitico = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnDeslogar = new System.Windows.Forms.Button();
-            this.btnSair = new System.Windows.Forms.Button();
             this.gpbCadastral.SuspendLayout();
             this.gpbAcompanhamento.SuspendLayout();
             this.gpbCI.SuspendLayout();
@@ -303,33 +301,11 @@
             this.lblTitle.TabIndex = 73;
             this.lblTitle.Text = "Módulo Financeiro";
             // 
-            // btnDeslogar
-            // 
-            this.btnDeslogar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeslogar.Location = new System.Drawing.Point(862, 607);
-            this.btnDeslogar.Name = "btnDeslogar";
-            this.btnDeslogar.Size = new System.Drawing.Size(75, 23);
-            this.btnDeslogar.TabIndex = 76;
-            this.btnDeslogar.Text = "Deslogar";
-            this.btnDeslogar.UseVisualStyleBackColor = true;
-            // 
-            // btnSair
-            // 
-            this.btnSair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSair.Location = new System.Drawing.Point(943, 607);
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(75, 23);
-            this.btnSair.TabIndex = 75;
-            this.btnSair.Text = "Sair";
-            this.btnSair.UseVisualStyleBackColor = true;
-            // 
             // frmModFinanceiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 642);
-            this.Controls.Add(this.btnDeslogar);
-            this.Controls.Add(this.btnSair);
             this.Controls.Add(this.gpbCadastral);
             this.Controls.Add(this.lblTitle);
             this.Name = "frmModFinanceiro";
@@ -365,8 +341,6 @@
         private System.Windows.Forms.GroupBox gpbAcompanhamento;
         private System.Windows.Forms.GroupBox gpbCI;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnDeslogar;
-        private System.Windows.Forms.Button btnSair;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox gpbCobranca;
         private System.Windows.Forms.GroupBox gpbMonitoresFinanceiros;
