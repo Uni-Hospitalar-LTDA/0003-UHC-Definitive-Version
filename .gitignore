@@ -22,7 +22,6 @@ obj/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
-[Rr]eleases/
 x64/
 x86/
 [Aa][Rr][Mm]/
@@ -69,8 +68,12 @@ $RECYCLE.BIN/
 *.pdb
 *.exe
 
-# Arquivos de pacotes NuGet
+# Exceção para o nuget.exe
+!nuget.exe
 
+
+# Arquivos de pacotes NuGet
+packages/
 
 # Arquivos de projeto específicos
 *.csproj.user
