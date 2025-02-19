@@ -69,12 +69,14 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
 		 ,isnull(NF_Saida.Vlr_IcmFCPUfDes, 0)	[Vlr_FCP] 
 		 ,Monitor_GNRE.Data_Bloqueio				[Dat_Bloqueio] 
 		 ,Monitor_GNRE.Data_Exportacao			[Dat_Export] 
-		 ,Monitor_GNRE.Observacao					[Observacao]		 
+		 ,Monitor_GNRE.Observacao					[Observacao]	
+         ,IIF(Cidade.Descricao = NF_Saida.Cidade, null ,'NF: '+NF_Saida.Cidade+' / Cliente: '+Cidade.Descricao) AS [Inco]
          ,Estado.Credenciamento [Credenciamento]
 		 FROM       [{Connection.dbDMD}].dbo.[NFSCB] NF_Saida
 		 INNER JOIN [{Connection.dbDMD}].dbo.[CLIEN] Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente 		 
 		 INNER JOIN [{Connection.dbDMD}].dbo.[TBCFO] ON Cod_Cfo1 = TBCFO.Codigo 
          INNER JOIN [{Connection.dbDMD}].dbo.[ESTAD] Estado ON Estado.Codigo = NF_Saida.Estado
+               JOIN [{Connection.dbDMD}].dbo.[CIDAD] Cidade ON Cidade.Codigo = Cliente.Cod_Cidade
          LEFT JOIN [{Connection.dbBase}].dbo.[MonitorGnre] Monitor_GNRE ON Monitor_GNRE.NUM_NOTA = NF_Saida.NUM_NOTA 
 		 WHERE (STATUS = 'F' and Ser_Nota NOT LIKE 'XXX')
 		 AND  (NF_Saida.Dat_Emissao BETWEEN '{inicialDate.ToString("yyyyMMdd")}' AND '{finalDate.ToString("yyyyMMdd")}') 
@@ -180,6 +182,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
                                     , dr["Dat_Bloqueio"].ToString()
                                     , dr["Dat_Export"].ToString()
                                     , dr["Observacao"].ToString()
+                                    , dr["Inco"].ToString()
                                     );
 
 
@@ -226,6 +229,13 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
             }
 
         }
+        //private async Task verificarSeCidadeClienteCondizComCidadeNf(List<int> nfs)
+        //{
+        //    if ()
+        //    {
+
+        //    }
+        //}
 
         /** Sync Tasks **/
         private void limparDados()
@@ -266,7 +276,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
         /** Form Configuration **/
         private void ConfigureFormProperties()
         {
-            this.defaultFixedForm();
+            this.defaultMaximableForm();
         }
         private void ConfigureFormEvents()
         {
@@ -295,11 +305,14 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
             ToolStripMenuItem item2 = new ToolStripMenuItem("Bloquear itens selecionados");
             ToolStripMenuItem item4 = new ToolStripMenuItem("Reiniciar itens selecionados");
             ToolStripMenuItem item3 = new ToolStripMenuItem("Gerar manual itens selecionados");
+            ToolStripMenuItem item5 = new ToolStripMenuItem("Corrigir cidade da nota fiscal e atualizar");
             item1.Click += new EventHandler(itensExportar_Click); // define o evento de clique
             item4.Click += new EventHandler(itensReiniciar_Click);
+            item5.Click += new EventHandler(corrigirItem_Click);
             // Adiciona o item de menu ao ContextMenuStrip
             menu.Items.Add(item1);
             menu.Items.Add(item4);
+            menu.Items.Add(item5);
 
             // Atribui o ContextMenuStrip ao DataGridView
             dgvData.ContextMenuStrip = menu;
@@ -359,6 +372,21 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
 
             ConfigureLinklabelEvents();
         }
+
+        private async void corrigirItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await MonitorGnre.atualizarCidadeAsync(dgvData.CurrentRow.Cells["Num_Nota"].Value.ToString());
+                btnPesquisar_Click(null, null);
+            }
+            catch(Exception ex) 
+            {
+                CustomNotification.defaultError(ex.Message);
+            }
+        }
+
+     
 
         private async void itensReiniciar_Click(object sender, EventArgs e)
         {
@@ -452,6 +480,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
                 dgvData.Columns.Add("Dat_Bloqueio", "Dat. Bloqueio");
                 dgvData.Columns.Add("Dat_Exportacao", "Dat. Exportação");
                 dgvData.Columns.Add("Obs_GNRE", "Observação");
+                dgvData.Columns.Add("InconsCadastral", "Inconsistência Cadastral");
                 //dataGridView.Columns["Obs_GNRE"].Frozen = true;
                 dgvData.toDefault();
                 dgvData.MultiSelect = true;
@@ -718,6 +747,8 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros
 
                     //Chama o método manualAsync com as observações criadas
                    await GNRE_Observation.manualAsync(obs, null);
+
+                    nfs = nfs.OrderBy(nf => int.Parse(nf)).ToList();
 
                     //Exporta o lote para o local especificado
                     GNRE_Lote.exportar(@"c:\XML_lote\", nfs);

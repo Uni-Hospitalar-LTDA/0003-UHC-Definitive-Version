@@ -36,10 +36,59 @@ WHERE Codigo LIKE '{uf}' ";
             return null;
 
         }
+        public static async Task<bool> verificarSeCidadeClienteCondizComCidadeUf(string Nf)
+        {
+           
+                string query = $@"SELECT 
+    IIF(Cidade.Descricao = NF_Saida.Cidade, 1, 0) AS [cityValidator]
+FROM DMD.dbo.NFSCB NF_Saida
+JOIN DMD.dbo.CLIEN Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
+JOIN DMD.dbo.CIDAD Cidade ON Cidade.Codigo = Cliente.Cod_Cidade
+WHERE NF_Saida.num_nota = {Nf}";
+                DataTable dt = await getAllToDataTable(query);
+                return Convert.ToBoolean(Convert.ToInt32(dt.Rows[0][0].ToString()));                        
+        }
 
 
 
         /** Updates **/
+        public static async Task desbloquearAsync(string NF)
+        {
+            using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
+            {
+                SqlTransaction transaction = null;
+                try
+                {
+                    await conn.OpenAsync();
+                    transaction = conn.BeginTransaction();
+                    SqlCommand command = conn.CreateCommand();
+                    command.Transaction = transaction; // associa a transação com o comando
+                    command.CommandText = $@"UPDATE 
+[{Connection.dbBase}].dbo.[{getClassName()}] SET flg_BloqExport = 0
+, Data_Bloqueio = Getdate()
+, idUsers = '{Section.idUsuario}' WHERE num_nota = {NF}";
+                    await command.ExecuteNonQueryAsync();
+                    transaction.Commit(); // commit da transação após sucesso do comando
+                    CustomNotification.defaultInformation();
+                }
+                catch (Exception ex)
+                {
+                    CustomNotification.defaultError(ex.Message);
+                    if (transaction != null)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+                finally
+                {
+                    if (transaction != null)
+                    {
+                        transaction.Dispose(); // libera a transação
+                    }
+                    conn.Close();
+                }
+            }
+        }
 
         public static async Task updateBloqueioAsync(MonitorGnre gnre)
         {
@@ -121,7 +170,7 @@ $@" UPDATE [{Connection.dbBase}].dbo.[{getClassName()}]
             }
         }
 
-        public static async Task desbloquearAsync(string NF)
+        public static async Task atualizarCidadeAsync(string NF)
         {
             using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
             {
@@ -132,10 +181,13 @@ $@" UPDATE [{Connection.dbBase}].dbo.[{getClassName()}]
                     transaction = conn.BeginTransaction();
                     SqlCommand command = conn.CreateCommand();
                     command.Transaction = transaction; // associa a transação com o comando
-                    command.CommandText = $@"UPDATE 
-[{Connection.dbBase}].dbo.[{getClassName()}] SET flg_BloqExport = 0
-, Data_Bloqueio = Getdate()
-, idUsers = '{Section.idUsuario}' WHERE num_nota = {NF}";
+                    command.CommandText = $@"UPDATE NF_Saida
+                                             SET Cidade = Cidade.Descricao
+                                             FROM {Connection.dbDMD}.dbo.NFSCB NF_Saida
+                                             JOIN {Connection.dbDMD}.dbo.CLIEN Cliente ON Cliente.Codigo = NF_Saida.Cod_Cliente
+                                             JOIN {Connection.dbDMD}.dbo.CIDAD Cidade ON Cidade.Codigo = Cliente.Cod_Cidade
+                                             WHERE NF_Saida.num_nota = {NF};
+";
                     await command.ExecuteNonQueryAsync();
                     transaction.Commit(); // commit da transação após sucesso do comando
                     CustomNotification.defaultInformation();
