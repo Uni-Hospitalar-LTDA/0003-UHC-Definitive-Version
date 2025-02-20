@@ -65,6 +65,7 @@
             this.txtReason = new System.Windows.Forms.TextBox();
             this.txtReasonId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnAbrirDocumento = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.gpbPhysicalReturn.SuspendLayout();
             this.gpbOperationType.SuspendLayout();
@@ -131,7 +132,7 @@
             // lblProdutos
             // 
             this.lblProdutos.AutoSize = true;
-            this.lblProdutos.Location = new System.Drawing.Point(13, 192);
+            this.lblProdutos.Location = new System.Drawing.Point(13, 229);
             this.lblProdutos.Name = "lblProdutos";
             this.lblProdutos.Size = new System.Drawing.Size(49, 13);
             this.lblProdutos.TabIndex = 132;
@@ -140,7 +141,7 @@
             // dgvProducts
             // 
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(16, 208);
+            this.dgvProducts.Location = new System.Drawing.Point(16, 245);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(863, 175);
             this.dgvProducts.TabIndex = 131;
@@ -172,7 +173,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(804, 506);
+            this.btnCancel.Location = new System.Drawing.Point(804, 543);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 118;
@@ -331,7 +332,7 @@
             // 
             // txtObservation
             // 
-            this.txtObservation.Location = new System.Drawing.Point(16, 402);
+            this.txtObservation.Location = new System.Drawing.Point(16, 439);
             this.txtObservation.Multiline = true;
             this.txtObservation.Name = "txtObservation";
             this.txtObservation.Size = new System.Drawing.Size(863, 98);
@@ -340,7 +341,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 386);
+            this.label3.Location = new System.Drawing.Point(17, 423);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 121;
@@ -392,11 +393,21 @@
             this.label1.TabIndex = 119;
             this.label1.Text = "Motivo";
             // 
+            // btnAbrirDocumento
+            // 
+            this.btnAbrirDocumento.Location = new System.Drawing.Point(16, 203);
+            this.btnAbrirDocumento.Name = "btnAbrirDocumento";
+            this.btnAbrirDocumento.Size = new System.Drawing.Size(516, 23);
+            this.btnAbrirDocumento.TabIndex = 140;
+            this.btnAbrirDocumento.Text = "Abrir Documento";
+            this.btnAbrirDocumento.UseVisualStyleBackColor = true;
+            // 
             // frmCI_Visualizar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 533);
+            this.ClientSize = new System.Drawing.Size(886, 574);
+            this.Controls.Add(this.btnAbrirDocumento);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.lblEdited);
@@ -430,6 +441,18 @@
             this.Controls.Add(this.txtReasonId);
             this.Controls.Add(this.label1);
             this.Name = "frmCI_Visualizar";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
+            this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
             this.Text = "Visualizar C.I.";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.gpbPhysicalReturn.ResumeLayout(false);
@@ -480,5 +503,6 @@
         private System.Windows.Forms.TextBox txtReason;
         private System.Windows.Forms.TextBox txtReasonId;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAbrirDocumento;
     }
 }

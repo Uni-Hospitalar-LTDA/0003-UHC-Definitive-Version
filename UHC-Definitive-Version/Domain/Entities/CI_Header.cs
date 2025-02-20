@@ -25,8 +25,11 @@ namespace UHC3_Definitive_Version.Domain.Entities.CI
         public string dateCreated { get; set; }
         public string dateEdited { get; set; }
         public string idUser { get; set; }
+
+        public string archiveLink { get; set; }
+
         public static async Task<DataTable> getAllToDataTableAsync(string status, string customer, string transporter
-            , string rebill, string nforigin, string nfreturn, string idCi,string idUHC2)
+            , string rebill, string nforigin, string nfreturn, string idCi, string idUHC2)
         {
 
 
@@ -140,7 +143,7 @@ ORDER BY Id DESC"
             string query = $@"SELECT NUM_NOTA FROM [DMD].dbo.[NFSCB] WHERE NUM_NOTA LIKE '{nf}'";
             return await getAllToDataTable(query);
         }
-        public static async Task setStatusAsync(CI_Header header,string status = "F")
+        public static async Task setStatusAsync(CI_Header header, string status = "F")
         {
 
             using (SqlConnection conn = Connection.getInstancia().getConnectionApp(Section.Unidade))
@@ -166,13 +169,13 @@ ORDER BY Id DESC"
 
 
                     await command.ExecuteNonQueryAsync();
-                    
+
                 }
                 catch (Exception ex)
                 {
                     CustomNotification.defaultError(ex.Message);
                     transaction.Rollback();
-                    conn.Close();                    
+                    conn.Close();
                 }
                 finally
                 {
