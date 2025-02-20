@@ -68,6 +68,8 @@
             this.txtEdited = new System.Windows.Forms.TextBox();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtArquivo = new System.Windows.Forms.TextBox();
             this.gpbPhysicalReturn.SuspendLayout();
             this.gpbOperationType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -92,7 +94,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(719, 514);
+            this.btnSave.Location = new System.Drawing.Point(719, 553);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 13;
@@ -101,7 +103,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(800, 514);
+            this.btnCancel.Location = new System.Drawing.Point(800, 553);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 14;
@@ -260,7 +262,7 @@
             // 
             // txtObservation
             // 
-            this.txtObservation.Location = new System.Drawing.Point(12, 365);
+            this.txtObservation.Location = new System.Drawing.Point(12, 404);
             this.txtObservation.Multiline = true;
             this.txtObservation.Name = "txtObservation";
             this.txtObservation.Size = new System.Drawing.Size(863, 143);
@@ -269,7 +271,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 349);
+            this.label3.Location = new System.Drawing.Point(9, 388);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 45;
@@ -332,7 +334,7 @@
             // dgvProducts
             // 
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(12, 216);
+            this.dgvProducts.Location = new System.Drawing.Point(12, 255);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(863, 130);
             this.dgvProducts.TabIndex = 64;
@@ -340,7 +342,7 @@
             // lblProdutos
             // 
             this.lblProdutos.AutoSize = true;
-            this.lblProdutos.Location = new System.Drawing.Point(9, 200);
+            this.lblProdutos.Location = new System.Drawing.Point(9, 239);
             this.lblProdutos.Name = "lblProdutos";
             this.lblProdutos.Size = new System.Drawing.Size(49, 13);
             this.lblProdutos.TabIndex = 65;
@@ -422,11 +424,29 @@
             this.lblStatus.TabIndex = 72;
             this.lblStatus.Text = "Status";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 200);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 13);
+            this.label4.TabIndex = 74;
+            this.label4.Text = "Link do arquivo";
+            // 
+            // txtArquivo
+            // 
+            this.txtArquivo.Location = new System.Drawing.Point(12, 216);
+            this.txtArquivo.Name = "txtArquivo";
+            this.txtArquivo.Size = new System.Drawing.Size(516, 20);
+            this.txtArquivo.TabIndex = 73;
+            // 
             // frmCI_Conferencia_Editar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 549);
+            this.ClientSize = new System.Drawing.Size(887, 588);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtArquivo);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.lblEdited);
@@ -463,6 +483,15 @@
             this.Controls.Add(this.txtReasonId);
             this.Controls.Add(this.label1);
             this.Name = "frmCI_Conferencia_Editar";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
             this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
@@ -519,5 +548,7 @@
         private System.Windows.Forms.TextBox txtEdited;
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtArquivo;
     }
 }

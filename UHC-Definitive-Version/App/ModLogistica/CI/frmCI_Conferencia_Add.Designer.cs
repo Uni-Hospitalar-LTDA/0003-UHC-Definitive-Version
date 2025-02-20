@@ -63,6 +63,9 @@
             this.clbNFreturn = new System.Windows.Forms.CheckedListBox();
             this.lsbNFOrigin = new System.Windows.Forms.ListBox();
             this.clbProducts = new System.Windows.Forms.CheckedListBox();
+            this.txtArquivo = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnAddArquivo = new System.Windows.Forms.Button();
             this.gpbOperationType.SuspendLayout();
             this.gpbPhysicalReturn.SuspendLayout();
             this.SuspendLayout();
@@ -70,72 +73,64 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 57);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(9, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 16);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Motivo";
             // 
             // txtReasonId
             // 
-            this.txtReasonId.Location = new System.Drawing.Point(16, 76);
-            this.txtReasonId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtReasonId.Location = new System.Drawing.Point(12, 62);
             this.txtReasonId.Name = "txtReasonId";
-            this.txtReasonId.Size = new System.Drawing.Size(64, 22);
+            this.txtReasonId.Size = new System.Drawing.Size(49, 20);
             this.txtReasonId.TabIndex = 2;
             // 
             // txtReason
             // 
-            this.txtReason.Location = new System.Drawing.Point(93, 76);
-            this.txtReason.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtReason.Location = new System.Drawing.Point(70, 62);
             this.txtReason.Name = "txtReason";
-            this.txtReason.Size = new System.Drawing.Size(569, 22);
+            this.txtReason.Size = new System.Drawing.Size(428, 20);
             this.txtReason.TabIndex = 3;
             // 
             // txtResponsible
             // 
-            this.txtResponsible.Location = new System.Drawing.Point(89, 124);
-            this.txtResponsible.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtResponsible.Location = new System.Drawing.Point(67, 101);
             this.txtResponsible.Name = "txtResponsible";
-            this.txtResponsible.Size = new System.Drawing.Size(573, 22);
+            this.txtResponsible.Size = new System.Drawing.Size(431, 20);
             this.txtResponsible.TabIndex = 5;
             // 
             // txtResponsibleId
             // 
-            this.txtResponsibleId.Location = new System.Drawing.Point(16, 124);
-            this.txtResponsibleId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtResponsibleId.Location = new System.Drawing.Point(12, 101);
             this.txtResponsibleId.Name = "txtResponsibleId";
-            this.txtResponsibleId.Size = new System.Drawing.Size(64, 22);
+            this.txtResponsibleId.Size = new System.Drawing.Size(49, 20);
             this.txtResponsibleId.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 105);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(9, 85);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 16);
+            this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Responsável";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 385);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(9, 365);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 16);
+            this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Observação";
             // 
             // txtObservation
             // 
-            this.txtObservation.Location = new System.Drawing.Point(16, 405);
-            this.txtObservation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtObservation.Location = new System.Drawing.Point(12, 381);
             this.txtObservation.Multiline = true;
             this.txtObservation.Name = "txtObservation";
-            this.txtObservation.Size = new System.Drawing.Size(1145, 175);
+            this.txtObservation.Size = new System.Drawing.Size(860, 143);
             this.txtObservation.TabIndex = 15;
             // 
             // gpbOperationType
@@ -143,11 +138,9 @@
             this.gpbOperationType.Controls.Add(this.rdbWithoutDevolution);
             this.gpbOperationType.Controls.Add(this.rdbPartialDevolution);
             this.gpbOperationType.Controls.Add(this.rdbTotalReturn);
-            this.gpbOperationType.Location = new System.Drawing.Point(712, 21);
-            this.gpbOperationType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpbOperationType.Location = new System.Drawing.Point(534, 17);
             this.gpbOperationType.Name = "gpbOperationType";
-            this.gpbOperationType.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gpbOperationType.Size = new System.Drawing.Size(451, 62);
+            this.gpbOperationType.Size = new System.Drawing.Size(338, 50);
             this.gpbOperationType.TabIndex = 13;
             this.gpbOperationType.TabStop = false;
             this.gpbOperationType.Text = "Tipo de Operação";
@@ -155,10 +148,9 @@
             // rdbWithoutDevolution
             // 
             this.rdbWithoutDevolution.AutoSize = true;
-            this.rdbWithoutDevolution.Location = new System.Drawing.Point(300, 23);
-            this.rdbWithoutDevolution.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbWithoutDevolution.Location = new System.Drawing.Point(225, 19);
             this.rdbWithoutDevolution.Name = "rdbWithoutDevolution";
-            this.rdbWithoutDevolution.Size = new System.Drawing.Size(123, 20);
+            this.rdbWithoutDevolution.Size = new System.Drawing.Size(99, 17);
             this.rdbWithoutDevolution.TabIndex = 2;
             this.rdbWithoutDevolution.TabStop = true;
             this.rdbWithoutDevolution.Text = "Sem devolução";
@@ -167,10 +159,9 @@
             // rdbPartialDevolution
             // 
             this.rdbPartialDevolution.AutoSize = true;
-            this.rdbPartialDevolution.Location = new System.Drawing.Point(144, 23);
-            this.rdbPartialDevolution.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbPartialDevolution.Location = new System.Drawing.Point(108, 19);
             this.rdbPartialDevolution.Name = "rdbPartialDevolution";
-            this.rdbPartialDevolution.Size = new System.Drawing.Size(138, 20);
+            this.rdbPartialDevolution.Size = new System.Drawing.Size(111, 17);
             this.rdbPartialDevolution.TabIndex = 1;
             this.rdbPartialDevolution.TabStop = true;
             this.rdbPartialDevolution.Text = "Devolução parcial";
@@ -179,10 +170,9 @@
             // rdbTotalReturn
             // 
             this.rdbTotalReturn.AutoSize = true;
-            this.rdbTotalReturn.Location = new System.Drawing.Point(8, 23);
-            this.rdbTotalReturn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbTotalReturn.Location = new System.Drawing.Point(6, 19);
             this.rdbTotalReturn.Name = "rdbTotalReturn";
-            this.rdbTotalReturn.Size = new System.Drawing.Size(122, 20);
+            this.rdbTotalReturn.Size = new System.Drawing.Size(100, 17);
             this.rdbTotalReturn.TabIndex = 0;
             this.rdbTotalReturn.TabStop = true;
             this.rdbTotalReturn.Text = "Devolução total";
@@ -190,28 +180,25 @@
             // 
             // txtNF_rebill
             // 
-            this.txtNF_rebill.Location = new System.Drawing.Point(439, 249);
-            this.txtNF_rebill.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNF_rebill.Location = new System.Drawing.Point(299, 258);
             this.txtNF_rebill.Name = "txtNF_rebill";
-            this.txtNF_rebill.Size = new System.Drawing.Size(115, 22);
+            this.txtNF_rebill.Size = new System.Drawing.Size(87, 20);
             this.txtNF_rebill.TabIndex = 11;
             // 
             // lblNF_rebill
             // 
             this.lblNF_rebill.AutoSize = true;
-            this.lblNF_rebill.Location = new System.Drawing.Point(435, 230);
-            this.lblNF_rebill.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNF_rebill.Location = new System.Drawing.Point(296, 243);
             this.lblNF_rebill.Name = "lblNF_rebill";
-            this.lblNF_rebill.Size = new System.Drawing.Size(79, 16);
+            this.lblNF_rebill.Size = new System.Drawing.Size(65, 13);
             this.lblNF_rebill.TabIndex = 13;
             this.lblNF_rebill.Text = "NF Refatura";
             // 
             // btnMoreNFs
             // 
-            this.btnMoreNFs.Location = new System.Drawing.Point(561, 247);
-            this.btnMoreNFs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMoreNFs.Location = new System.Drawing.Point(391, 257);
             this.btnMoreNFs.Name = "btnMoreNFs";
-            this.btnMoreNFs.Size = new System.Drawing.Size(32, 28);
+            this.btnMoreNFs.Size = new System.Drawing.Size(24, 23);
             this.btnMoreNFs.TabIndex = 14;
             this.btnMoreNFs.Text = "...";
             this.btnMoreNFs.UseVisualStyleBackColor = true;
@@ -219,62 +206,55 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 206);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(11, 224);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 16);
+            this.label6.Size = new System.Drawing.Size(81, 13);
             this.label6.TabIndex = 18;
             this.label6.Text = "NFs Devolução";
             // 
             // txtCustomer
             // 
-            this.txtCustomer.Location = new System.Drawing.Point(93, 31);
-            this.txtCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCustomer.Location = new System.Drawing.Point(70, 25);
             this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(569, 22);
+            this.txtCustomer.Size = new System.Drawing.Size(428, 20);
             this.txtCustomer.TabIndex = 1;
             // 
             // txtCustomerId
             // 
-            this.txtCustomerId.Location = new System.Drawing.Point(16, 31);
-            this.txtCustomerId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCustomerId.Location = new System.Drawing.Point(12, 25);
             this.txtCustomerId.Name = "txtCustomerId";
-            this.txtCustomerId.Size = new System.Drawing.Size(64, 22);
+            this.txtCustomerId.Size = new System.Drawing.Size(49, 20);
             this.txtCustomerId.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 11);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(9, 9);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(48, 16);
+            this.label7.Size = new System.Drawing.Size(39, 13);
             this.label7.TabIndex = 19;
             this.label7.Text = "Cliente";
             // 
             // txtTransporter
             // 
-            this.txtTransporter.Location = new System.Drawing.Point(89, 172);
-            this.txtTransporter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTransporter.Location = new System.Drawing.Point(67, 140);
             this.txtTransporter.Name = "txtTransporter";
-            this.txtTransporter.Size = new System.Drawing.Size(573, 22);
+            this.txtTransporter.Size = new System.Drawing.Size(431, 20);
             this.txtTransporter.TabIndex = 7;
             // 
             // txtTransporterId
             // 
-            this.txtTransporterId.Location = new System.Drawing.Point(16, 172);
-            this.txtTransporterId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTransporterId.Location = new System.Drawing.Point(12, 140);
             this.txtTransporterId.Name = "txtTransporterId";
-            this.txtTransporterId.Size = new System.Drawing.Size(64, 22);
+            this.txtTransporterId.Size = new System.Drawing.Size(49, 20);
             this.txtTransporterId.TabIndex = 6;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 153);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(9, 124);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(163, 16);
+            this.label8.Size = new System.Drawing.Size(129, 13);
             this.label8.TabIndex = 22;
             this.label8.Text = "Transportador de Retorno";
             // 
@@ -283,11 +263,9 @@
             this.gpbPhysicalReturn.Controls.Add(this.rdbNao);
             this.gpbPhysicalReturn.Controls.Add(this.rdbSim);
             this.gpbPhysicalReturn.Enabled = false;
-            this.gpbPhysicalReturn.Location = new System.Drawing.Point(439, 279);
-            this.gpbPhysicalReturn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gpbPhysicalReturn.Location = new System.Drawing.Point(299, 283);
             this.gpbPhysicalReturn.Name = "gpbPhysicalReturn";
-            this.gpbPhysicalReturn.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gpbPhysicalReturn.Size = new System.Drawing.Size(139, 62);
+            this.gpbPhysicalReturn.Size = new System.Drawing.Size(104, 50);
             this.gpbPhysicalReturn.TabIndex = 12;
             this.gpbPhysicalReturn.TabStop = false;
             this.gpbPhysicalReturn.Text = "Retorno físico";
@@ -295,10 +273,9 @@
             // rdbNao
             // 
             this.rdbNao.AutoSize = true;
-            this.rdbNao.Location = new System.Drawing.Point(72, 23);
-            this.rdbNao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbNao.Location = new System.Drawing.Point(54, 19);
             this.rdbNao.Name = "rdbNao";
-            this.rdbNao.Size = new System.Drawing.Size(54, 20);
+            this.rdbNao.Size = new System.Drawing.Size(45, 17);
             this.rdbNao.TabIndex = 1;
             this.rdbNao.TabStop = true;
             this.rdbNao.Text = "Não";
@@ -307,10 +284,9 @@
             // rdbSim
             // 
             this.rdbSim.AutoSize = true;
-            this.rdbSim.Location = new System.Drawing.Point(8, 23);
-            this.rdbSim.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbSim.Location = new System.Drawing.Point(6, 19);
             this.rdbSim.Name = "rdbSim";
-            this.rdbSim.Size = new System.Drawing.Size(51, 20);
+            this.rdbSim.Size = new System.Drawing.Size(42, 17);
             this.rdbSim.TabIndex = 0;
             this.rdbSim.TabStop = true;
             this.rdbSim.Text = "Sim";
@@ -318,60 +294,54 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(1063, 588);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Location = new System.Drawing.Point(797, 530);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 17;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnMoreReason
             // 
-            this.btnMoreReason.Location = new System.Drawing.Point(672, 75);
-            this.btnMoreReason.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMoreReason.Location = new System.Drawing.Point(504, 61);
             this.btnMoreReason.Name = "btnMoreReason";
-            this.btnMoreReason.Size = new System.Drawing.Size(32, 28);
+            this.btnMoreReason.Size = new System.Drawing.Size(24, 23);
             this.btnMoreReason.TabIndex = 6;
             this.btnMoreReason.Text = "...";
             this.btnMoreReason.UseVisualStyleBackColor = true;
             // 
             // btnMoreResponsible
             // 
-            this.btnMoreResponsible.Location = new System.Drawing.Point(672, 123);
-            this.btnMoreResponsible.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMoreResponsible.Location = new System.Drawing.Point(504, 100);
             this.btnMoreResponsible.Name = "btnMoreResponsible";
-            this.btnMoreResponsible.Size = new System.Drawing.Size(32, 28);
+            this.btnMoreResponsible.Size = new System.Drawing.Size(24, 23);
             this.btnMoreResponsible.TabIndex = 9;
             this.btnMoreResponsible.Text = "...";
             this.btnMoreResponsible.UseVisualStyleBackColor = true;
             // 
             // btnMoreTransporter
             // 
-            this.btnMoreTransporter.Location = new System.Drawing.Point(672, 171);
-            this.btnMoreTransporter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMoreTransporter.Location = new System.Drawing.Point(504, 139);
             this.btnMoreTransporter.Name = "btnMoreTransporter";
-            this.btnMoreTransporter.Size = new System.Drawing.Size(32, 28);
+            this.btnMoreTransporter.Size = new System.Drawing.Size(24, 23);
             this.btnMoreTransporter.TabIndex = 12;
             this.btnMoreTransporter.Text = "...";
             this.btnMoreTransporter.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(955, 588);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Location = new System.Drawing.Point(716, 530);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 28);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 16;
             this.btnSave.Text = "Salvar";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // btnMoreCustomer
             // 
-            this.btnMoreCustomer.Location = new System.Drawing.Point(672, 30);
-            this.btnMoreCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMoreCustomer.Location = new System.Drawing.Point(504, 24);
             this.btnMoreCustomer.Name = "btnMoreCustomer";
-            this.btnMoreCustomer.Size = new System.Drawing.Size(32, 28);
+            this.btnMoreCustomer.Size = new System.Drawing.Size(24, 23);
             this.btnMoreCustomer.TabIndex = 2;
             this.btnMoreCustomer.Text = "...";
             this.btnMoreCustomer.UseVisualStyleBackColor = true;
@@ -379,46 +349,69 @@
             // lbl
             // 
             this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(156, 206);
-            this.lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl.Location = new System.Drawing.Point(119, 224);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(79, 16);
+            this.lbl.Size = new System.Drawing.Size(62, 13);
             this.lbl.TabIndex = 32;
             this.lbl.Text = "NFs Origem";
             // 
             // clbNFreturn
             // 
             this.clbNFreturn.FormattingEnabled = true;
-            this.clbNFreturn.Location = new System.Drawing.Point(16, 225);
-            this.clbNFreturn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clbNFreturn.Location = new System.Drawing.Point(14, 240);
             this.clbNFreturn.Name = "clbNFreturn";
-            this.clbNFreturn.Size = new System.Drawing.Size(129, 123);
+            this.clbNFreturn.Size = new System.Drawing.Size(98, 109);
             this.clbNFreturn.TabIndex = 8;
             // 
             // lsbNFOrigin
             // 
             this.lsbNFOrigin.FormattingEnabled = true;
-            this.lsbNFOrigin.ItemHeight = 16;
-            this.lsbNFOrigin.Location = new System.Drawing.Point(160, 225);
-            this.lsbNFOrigin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lsbNFOrigin.Location = new System.Drawing.Point(122, 240);
             this.lsbNFOrigin.Name = "lsbNFOrigin";
-            this.lsbNFOrigin.Size = new System.Drawing.Size(137, 132);
+            this.lsbNFOrigin.Size = new System.Drawing.Size(104, 108);
             this.lsbNFOrigin.TabIndex = 9;
             // 
             // clbProducts
             // 
             this.clbProducts.FormattingEnabled = true;
-            this.clbProducts.Location = new System.Drawing.Point(712, 100);
-            this.clbProducts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clbProducts.Location = new System.Drawing.Point(534, 81);
             this.clbProducts.Name = "clbProducts";
-            this.clbProducts.Size = new System.Drawing.Size(449, 276);
+            this.clbProducts.Size = new System.Drawing.Size(338, 259);
             this.clbProducts.TabIndex = 14;
+            // 
+            // txtArquivo
+            // 
+            this.txtArquivo.Location = new System.Drawing.Point(11, 184);
+            this.txtArquivo.Name = "txtArquivo";
+            this.txtArquivo.Size = new System.Drawing.Size(404, 20);
+            this.txtArquivo.TabIndex = 33;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 168);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 13);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Link do arquivo";
+            // 
+            // btnAddArquivo
+            // 
+            this.btnAddArquivo.Location = new System.Drawing.Point(421, 184);
+            this.btnAddArquivo.Name = "btnAddArquivo";
+            this.btnAddArquivo.Size = new System.Drawing.Size(106, 20);
+            this.btnAddArquivo.TabIndex = 35;
+            this.btnAddArquivo.Text = "Adicionar Arquivo";
+            this.btnAddArquivo.UseVisualStyleBackColor = true;
             // 
             // frmCI_Conferencia_Add
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1176, 625);
+            this.ClientSize = new System.Drawing.Size(882, 565);
+            this.Controls.Add(this.btnAddArquivo);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtArquivo);
             this.Controls.Add(this.clbProducts);
             this.Controls.Add(this.lsbNFOrigin);
             this.Controls.Add(this.clbNFreturn);
@@ -449,8 +442,16 @@
             this.Controls.Add(this.txtReason);
             this.Controls.Add(this.txtReasonId);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmCI_Conferencia_Add";
+            this.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.StateCommon.Border.ColorAngle = 45F;
+            this.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.StateCommon.Border.Width = 5;
             this.StateCommon.Header.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.StateCommon.Header.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
             this.StateCommon.Header.Content.ShortText.Color1 = System.Drawing.Color.White;
@@ -501,5 +502,8 @@
         private System.Windows.Forms.ListBox lsbNFOrigin;
         private System.Windows.Forms.CheckedListBox clbProducts;
         private System.Windows.Forms.RadioButton rdbWithoutDevolution;
+        private System.Windows.Forms.TextBox txtArquivo;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnAddArquivo;
     }
 }

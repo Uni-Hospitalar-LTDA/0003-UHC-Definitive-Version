@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.CI
     public partial class frmCI_Visualizar : CustomForm
     {
         internal string id { get; set; }
+        internal string archiveLink { get; set; }
         private CI_Header header { get; set; }
 
         public frmCI_Visualizar()
@@ -30,8 +32,21 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.CI
 
             //Events
             ConfigureFormEvents();
+
+            btnAbrirDocumento.Click += abrirDocumento;
         }
 
+        private void abrirDocumento(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(archiveLink))
+            {
+                Process.Start(new ProcessStartInfo(archiveLink) { UseShellExecute = true });
+            }
+            else
+            {
+                CustomNotification.defaultInformation("O link do documento não foi cadastrado, por favor, entre em contato com o setor responsável.");
+            }
+        }
 
         /** Async Tasks **/
         private async Task getCiAsync()
@@ -44,6 +59,7 @@ namespace UHC3_Definitive_Version.App.ModFinanceiro.CI
             txtTransporterId.Text = header.idTransporter;
             txtNF_rebill.Text = header.nfRebill;
             txtObservation.Text = header.observation;
+            archiveLink = header.archiveLink;
             switch (header.operationType)
             {
                 case "P":

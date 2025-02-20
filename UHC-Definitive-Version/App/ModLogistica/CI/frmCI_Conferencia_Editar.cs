@@ -26,6 +26,7 @@ namespace UHC3_Definitive_Version.App.ModLogistica.CI
             txtTransporterId.Text = header.idTransporter;
             txtNF_rebill.Text = header.nfRebill;        
             txtObservation.Text = header.observation;
+            txtArquivo.Text = header.archiveLink;
             switch (header.operationType)
             {
                 case "P":
@@ -89,13 +90,14 @@ namespace UHC3_Definitive_Version.App.ModLogistica.CI
             {
                 CustomNotification.defaultAlert("Transportador não selecionado!");
                 return;
-            }            
+            }           
 
             header.id = id;
             header.idCI_Responsible = txtResponsibleId.Text;
             header.nfRebill = txtNF_rebill.Text;
             header.idTransporter = txtTransporterId.Text;
             header.observation = txtObservation.Text;
+            header.archiveLink = txtArquivo.Text;
             try
             {
                 await CI_Header.updateAsync(header);

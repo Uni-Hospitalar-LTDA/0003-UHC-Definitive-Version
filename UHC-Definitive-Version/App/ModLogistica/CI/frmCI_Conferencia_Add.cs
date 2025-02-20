@@ -246,8 +246,9 @@ FROM [DMD].dbo.[NFECB] NF_Devolucao
             txtResponsibleId.JustNumbers();
             txtTransporterId.JustNumbers();
             
-            txtNF_rebill.JustNumbers();            
-            
+            txtNF_rebill.JustNumbers();
+
+            txtArquivo.ReadOnly();                       
         }
         private void ConfigureTextBoxEvents()
         {
@@ -370,6 +371,8 @@ FROM [DMD].dbo.[NFECB] NF_Devolucao
             btnMoreResponsible.TabStop = false;
             btnMoreTransporter.TabStop = false;
             btnMoreNFs.TabStop = false;
+
+            btnAddArquivo.Click += controlarArquivo;
         }
         private async void btnSave_Click(object sender, EventArgs e)
         {
@@ -398,7 +401,6 @@ FROM [DMD].dbo.[NFECB] NF_Devolucao
                 CustomNotification.defaultAlert("Transportador não selecionado!");
                 return;
             }
-
             if (rdbPartialDevolution.Checked && clbProducts.CheckedItems.Count == 0)
             {
                 CustomNotification.defaultAlert("Não é possível inserir uma devolução parcial sem itens marcados.");
@@ -425,7 +427,8 @@ FROM [DMD].dbo.[NFECB] NF_Devolucao
                 observation = txtObservation.Text,
                 dateCreated = DateTime.Now.ToString(),
                 dateEdited = DateTime.Now.ToString(),
-                idUser = Section.idUsuario                
+                idUser = Section.idUsuario,
+                archiveLink = txtArquivo.Text  
             });
 
             await CI_Header.insertAsync(header);
@@ -638,6 +641,12 @@ FROM [DMD].dbo.[NFECB] NF_Devolucao
             }
         }
 
+
+        private void controlarArquivo(object sender, EventArgs e)
+        {
+            txtArquivo.ReadOnly = false;
+            btnAddArquivo.Enabled = false;
+        }
 
         /** Configure GroupBox **/
         private void ConfigureGroupBoxProperties()
