@@ -64,11 +64,11 @@ namespace UHC3_Definitive_Version.App.ModVendas.Cadastros
 
             List<string> expectedColumns = new List<string>
             {
-                "Cód# EAN",
+                "Cód. EAN",
                 "Apresentação",
                 "CNPJ Distribuidor",
                 "Numero NF",
-                "Qtde# Faturamento",
+                "Qtde. Faturamento",
                 "Valor Bruto",
                 "% Desconto",
                 "% Desconto Padrão",
@@ -228,11 +228,11 @@ namespace UHC3_Definitive_Version.App.ModVendas.Cadastros
                         debitos.Add(new DebitosAche
                         {
                             idDataIngestion = id.ToString(),
-                            Cod_EAN = _row.Cells["Cód# EAN"].Value?.ToString(),
+                            Cod_EAN = _row.Cells["Cód. EAN"].Value?.ToString(),
                             Apresentacao = _row.Cells["Apresentação"].Value?.ToString(),
                             CNPJ_Distribuidor = _row.Cells["CNPJ Distribuidor"].Value?.ToString(),
                             Numero_NF = _row.Cells["Numero NF"].Value?.ToString(),
-                            Qtde_Faturamento = _row.Cells["Qtde# Faturamento"].Value?.ToString(),
+                            Qtde_Faturamento = _row.Cells["Qtde. Faturamento"].Value?.ToString(),
                             Valor_Bruto = _row.Cells["Valor Bruto"].Value?.ToString().Replace(",","."),
                             prct_Desconto = _row.Cells["% Desconto"].Value?.ToString().Replace(",", "."),
                             prct_Desconto_Padrao = _row.Cells["% Desconto Padrão"].Value?.ToString().Replace(",", "."),
