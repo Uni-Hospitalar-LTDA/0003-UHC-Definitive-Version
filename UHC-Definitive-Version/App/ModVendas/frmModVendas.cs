@@ -44,8 +44,8 @@ namespace UHC3_Definitive_Version.App.ModVendas
         private void allows()
         {
             //SubModules
-            if (PermissionsAllowed.subModules?.Find(m => m.Name == "Ingestão de Dados") != null)
-                gpbIngestaoDados.Enabled = true;
+            //if (PermissionsAllowed.subModules?.Find(m => m.Name == "Ingestão de Dados") != null)
+            //    gpbIngestaoDados.Enabled = true;
             //if (PermissionsAllowed.subModules?.Find(m => m.Name == "Envio de Dados") != null)
             //    gpbEnvioDados.Enabled = true;
 

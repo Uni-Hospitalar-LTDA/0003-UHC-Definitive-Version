@@ -440,6 +440,7 @@ order by NF_saida.Num_Nota desc
 
             try
             {
+                this.Cursor = Cursors.WaitCursor;
                 if (index == 0)
                 {
                     System.Data.DataTable dt = await Information.getAllQuantitiesToDataTableAsync();
@@ -467,7 +468,9 @@ order by NF_saida.Num_Nota desc
                     dgvData.Columns["Diferença"].DefaultCellStyle.Format = "C2";
                     createDiferenceByValueGraph(dt);
                     createPieChartByValue(dt);
+                    
                 }
+                this.Cursor = Cursors.Default;
             }
             catch(Exception ex)
             {

@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UHC_DEFINITIVE_VERSION.App;
 using UHC3_Definitive_Version.App.ModFinanceiro.MonitoresFinanceiros;
+using UHC3_Definitive_Version.App.ModVendas;
+using UHC3_Definitive_Version.App.ModVendas.Consultas;
 using UHC3_Definitive_Version.App.ModVendas.Pedidos;
 using UHC3_Definitive_Version.App.Opcoes.OpcoesDeDesenvolvedor;
 using UHC3_Definitive_Version.Configuration;
