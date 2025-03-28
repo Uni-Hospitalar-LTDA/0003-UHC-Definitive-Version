@@ -34,7 +34,7 @@ namespace UHC3_Definitive_Version.Domain.Entities.NewIqvia
         public string GrupoCliente { get; set; }
         public string Esfera { get; set; }
 
-        private static string getBaseQuery(DateTime dt, int bloqueio = 1, int id = 0 )
+        private static string getBaseQuery(DateTime dt, int bloqueio = 1, int id = 0)
         {
             return $@"  DECLARE @DATE DATE = '{dt.ToString("yyyyMMdd")}';
 DECLARE @BLOQUEIO INT = {bloqueio};
@@ -213,11 +213,11 @@ WHERE EXISTS (
 )
 ORDER BY NotaFiscal ASC;
 ";
-            
+
         }
         public static async Task<List<IqviaLayout>> getAllToListAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            string query = getBaseQuery(dt, bloqueio,id);
+            string query = getBaseQuery(dt, bloqueio, id);
             //CustomNotification.defaultInformation(id.ToString());
             Console.WriteLine(query);
             return await getAllToList(query);
@@ -231,7 +231,7 @@ ORDER BY NotaFiscal ASC;
             var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
             //Description
-            var produtoData = baseDados.Where(x=> string.IsNullOrEmpty(x.Bloqueio));
+            var produtoData = baseDados.Where(x => string.IsNullOrEmpty(x.Bloqueio));
 
             List<IqviaLayout_Venda_Description> description_Venda = new List<IqviaLayout_Venda_Description>();
             foreach (var venda in produtoData)
@@ -317,9 +317,9 @@ ORDER BY NotaFiscal ASC;
 
 
         /** Exports **/
-        public static async Task<string> exportarLayoutClienteAsync(DateTime dt, int bloqueio = 1,int id =0)
+        public static async Task<string> exportarLayoutClienteAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt,bloqueio,id);            
+            var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
 
             //Header
@@ -336,11 +336,11 @@ ORDER BY NotaFiscal ASC;
             cliente_Header._100Filler = "";
             cliente_Header._110Filler = "";
             cliente_Header._120Controle_interno_IQVIA = "imsbrcli1";
-            
+
             string header = cliente_Header.getHeader();
 
             //Description
-            var clienteData = baseDados.Where(x=>string.IsNullOrEmpty(x.Bloqueio))
+            var clienteData = baseDados.Where(x => string.IsNullOrEmpty(x.Bloqueio))
            .GroupBy(n => new { n.idCliente, n.Cliente, n.Cnpj })
            .Select(g => new
            {
@@ -356,27 +356,29 @@ ORDER BY NotaFiscal ASC;
                 var clienteInnmed = await ClienteInnmed.getToClassAsync(cliente.idCliente);
                 cliente_Description.Add(new IqviaLayout_Cliente_Descricao
                 {
+
+                    _010Tipo_de_Registro = "2",
+                    _020Codigo_do_cliente = string.IsNullOrEmpty(clienteInnmed.id) ? "" : clienteInnmed.id,
+
+                    _030CNPJ_CRM = (clienteInnmed.cnpj?.Length == 11) ? "" : clienteInnmed.cnpj ?? "",
+                    _040Flag = (clienteInnmed.cnpj?.Length == 11) ? "2" : "1",
                     
-                            _010Tipo_de_Registro = "2",
-                            _020Codigo_do_cliente = string.IsNullOrEmpty(clienteInnmed.id) ? "" : clienteInnmed.id,
-                            _030CNPJ_CRM = string.IsNullOrEmpty(clienteInnmed.cnpj) ? "": clienteInnmed.cnpj,
-                            _040Flag = "1",
-                            _050Nome_fantasia = string.IsNullOrEmpty(clienteInnmed.fantasia) ? "": clienteInnmed.fantasia,
-                            _060Razao_social = string.IsNullOrEmpty(clienteInnmed.description) ? "" : clienteInnmed.description,
-                            _070Flag_endereco = "1",
-                            _080Endereco = string.IsNullOrEmpty(clienteInnmed.endereco) ? "" : clienteInnmed.endereco,
-                            _090Complemento = string.IsNullOrEmpty(clienteInnmed.complemento) ? "" : clienteInnmed.complemento,
-                            _100CEP = string.IsNullOrEmpty(clienteInnmed.cep) ? "" : clienteInnmed.cep,
-                            _110Cidade = string.IsNullOrEmpty(clienteInnmed.cidade) ? "" : clienteInnmed.cidade,
-                            _120Estado = string.IsNullOrEmpty(clienteInnmed.estado) ? "" : clienteInnmed.estado,
-                            _130Telefone = string.IsNullOrEmpty(clienteInnmed.telefone) ? "" : clienteInnmed.telefone,
-                            _140Fax = "",
-                            _150Data_cadastro = string.IsNullOrEmpty(clienteInnmed.dataCadastro) ? "" : clienteInnmed.dataCadastro,
-                            _160email = string.IsNullOrEmpty(clienteInnmed.email) ? "" : clienteInnmed.email,
-                            _170URL = "",
-                            _180Filler = "",
-                            _190Controle_interno_IQVIA = "C",
-            });
+                    _050Nome_fantasia = string.IsNullOrEmpty(clienteInnmed.fantasia) ? "" : clienteInnmed.fantasia,
+                    _060Razao_social = string.IsNullOrEmpty(clienteInnmed.description) ? "" : clienteInnmed.description,
+                    _070Flag_endereco = "1",
+                    _080Endereco = string.IsNullOrEmpty(clienteInnmed.endereco) ? "" : clienteInnmed.endereco,
+                    _090Complemento = string.IsNullOrEmpty(clienteInnmed.complemento) ? "" : clienteInnmed.complemento,
+                    _100CEP = string.IsNullOrEmpty(clienteInnmed.cep) ? "" : clienteInnmed.cep,
+                    _110Cidade = string.IsNullOrEmpty(clienteInnmed.cidade) ? "" : clienteInnmed.cidade,
+                    _120Estado = string.IsNullOrEmpty(clienteInnmed.estado) ? "" : clienteInnmed.estado,
+                    _130Telefone = string.IsNullOrEmpty(clienteInnmed.telefone) ? "" : clienteInnmed.telefone,
+                    _140Fax = "",
+                    _150Data_cadastro = string.IsNullOrEmpty(clienteInnmed.dataCadastro) ? "" : clienteInnmed.dataCadastro,
+                    _160email = string.IsNullOrEmpty(clienteInnmed.email) ? "" : clienteInnmed.email,
+                    _170URL = "",
+                    _180Filler = "",
+                    _190Controle_interno_IQVIA = "C",
+                });
                 //Console.WriteLine(clienteInnmed.cidade);
             }
 
@@ -404,7 +406,7 @@ ORDER BY NotaFiscal ASC;
         }
         public static async Task<string> exportarLayoutProdutoAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio,id);
+            var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
             IqviaLayout_Produto_Header header_Produto = new IqviaLayout_Produto_Header();
             header_Produto._060Data_inicial = $"{dt.ToString("ddMMyyyy")}";
@@ -431,12 +433,18 @@ ORDER BY NotaFiscal ASC;
                 description_Produto.Add(new IqviaLayout_Produto_Descricao
                 {
                     _040Codigo_do_produto = produtoInnmed.id
-                   ,_060Codigo_de_barras = string.IsNullOrEmpty(produtoInnmed.ean) ? "" : produtoInnmed.ean
-                   ,_080Nome_do_produto_Apresentacao = produto.Produto
-                   ,_100Fabricante = fabricanteInnmed.description
-                   ,_110Preco_fabrica = produtoInnmed.precoFabrica
-                   ,_130Classificacao_fiscal = string.IsNullOrEmpty(produtoInnmed.classFiscal) ? "" : produtoInnmed.classFiscal
-                   ,_140Data_do_cadastro = string.IsNullOrEmpty(produtoInnmed.datCadastro) ? "" : produtoInnmed.datCadastro
+                   ,
+                    _060Codigo_de_barras = string.IsNullOrEmpty(produtoInnmed.ean) ? "" : produtoInnmed.ean
+                   ,
+                    _080Nome_do_produto_Apresentacao = produto.Produto
+                   ,
+                    _100Fabricante = fabricanteInnmed.description
+                   ,
+                    _110Preco_fabrica = produtoInnmed.precoFabrica
+                   ,
+                    _130Classificacao_fiscal = string.IsNullOrEmpty(produtoInnmed.classFiscal) ? "" : produtoInnmed.classFiscal
+                   ,
+                    _140Data_do_cadastro = string.IsNullOrEmpty(produtoInnmed.datCadastro) ? "" : produtoInnmed.datCadastro
 
                 });
             }
@@ -444,7 +452,7 @@ ORDER BY NotaFiscal ASC;
             string description = IqviaLayout_Produto_Descricao.getDescricao(description_Produto);
 
             IqviaLayout_Produto_Trailer trailer_Produto = new IqviaLayout_Produto_Trailer();
-            trailer_Produto._040Total_de_registros = (description_Produto.Count()+2).ToString();
+            trailer_Produto._040Total_de_registros = (description_Produto.Count() + 2).ToString();
 
             string trailer = trailer_Produto.getTrailer();
 
@@ -457,10 +465,10 @@ ORDER BY NotaFiscal ASC;
 
             return salvarArquivo(arquivo, archiveName);
 
-        }        
-        public static async Task<string> exportarLayoutVendasAsync(DateTime dt, int bloqueio = 1,int id =0)
+        }
+        public static async Task<string> exportarLayoutVendasAsync(DateTime dt, int bloqueio = 1, int id = 0)
         {
-            var baseDados = await getAllToListAsync(dt, bloqueio,id);
+            var baseDados = await getAllToListAsync(dt, bloqueio, id);
 
             IqviaLayout_Venda_Header header_Venda = new IqviaLayout_Venda_Header();
             header_Venda._040Data_inicio = $"{dt.ToString("ddMMyyyy")}";
@@ -486,10 +494,10 @@ ORDER BY NotaFiscal ASC;
                 });
             }
 
-            string description = IqviaLayout_Venda_Description.getDescricao(description_Venda);             
+            string description = IqviaLayout_Venda_Description.getDescricao(description_Venda);
 
             IqviaLayout_Venda_Trailer trailer_Venda = new IqviaLayout_Venda_Trailer();
-            trailer_Venda._040Total_de_Registros = (description_Venda.Count+2).ToString();
+            trailer_Venda._040Total_de_Registros = (description_Venda.Count + 2).ToString();
             trailer_Venda._050Total_unidades = description_Venda.Where(v => v._080Flag_venda == "N").Sum(v => int.TryParse(v._090Quantidade?.ToString(), out int qtd) ? qtd : 0).ToString();
             trailer_Venda._060Total_de_Unidades_devolucoes = description_Venda.Where(v => v._080Flag_venda == "D").Sum(v => int.TryParse(v._090Quantidade?.ToString(), out int qtd) ? qtd : 0).ToString();
             string trailer = trailer_Venda.getTrailer();

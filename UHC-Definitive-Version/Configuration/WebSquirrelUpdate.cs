@@ -16,7 +16,9 @@ namespace UHC3_Definitive_Version.Configuration
         // Constantes
         private const string repositoryOwner = "Uni-Hospitalar-LTDA";
         private const string repositoryName = "0003-UHC-Definitive-Version";
-        private const string token = "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";
+        //private const string token = ""
+
+        private const string token = "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";
 
 
         public static async Task rollbackAsync(string rollbackTag)
